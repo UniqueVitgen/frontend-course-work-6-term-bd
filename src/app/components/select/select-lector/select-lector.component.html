@@ -1,0 +1,49 @@
+<div class="modal-header">
+  <div class="title-center-container">
+    <h4>Выбор преподователя</h4>
+  </div>
+
+  <button type="button" class="close pull-right" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="lector-staff">
+    <div class="container">
+      <!-- <h1 class="center-text">Преподаватели</h1> -->
+
+      <div *ngFor="let lector of lectors" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div *ngIf="lector" (click)="selectLector(lector)" [ngClass]="{'selected': lector.idPerson == selectedLector?.idPerson }" class="media">
+          <div class="media-left">
+            <a>
+              <img *ngIf="lector.src" src="{{lector.src}}">
+              <img *ngIf="lector.src == null" src="assets/img/students/lector-staff/lector-avt.png">
+            </a>
+          </div>
+          <div class="media-body">
+            <h3>{{formatFullName(lector)}}</h3>
+            <p *ngIf="lector.description" class="font-x1">{{lector.description}} </p>
+            <div class="tegs">
+              <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                  <a *ngIf="lector.post">{{lector.post.name}}</a>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                  <a *ngIf="lector.degree">{{lector.degree.name}}</a>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                  <a *ngIf="lector.title">{{lector.title.name}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+
+</div>

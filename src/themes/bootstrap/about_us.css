@@ -1,0 +1,79 @@
+.contacts img {
+    width: 100%;
+}
+
+.contacts .row {
+    margin-bottom: 20px;
+}
+
+.contacts > .row > div:first-child {
+    background-color: linear-gradient(#333 50%, #fff);
+    height: 100%;
+}
+
+.contacts .thumbnail .caption {
+    color: black;
+    text-align: center;
+}
+
+.staff-container > div {
+    height: 100%;
+    padding: 0;
+}
+
+.staff-container > div:first-child {
+    background-color: #232323;
+}
+
+.staff-container > div:last-child {
+    background-color: #fff;
+}
+
+.statistic, .statistic .thumbnail {
+    background: #171717;
+    background: #1a1a1a;
+    background: #303030;
+}
+
+.statistic .thumbnail {
+    height: 100%;
+    margin:0;
+    border: 1px;
+}
+
+.thumbnail .caption {
+    color: #fff;
+}
+
+.statistic .row > * {
+    height: 100%;
+    text-align:center;
+}
+
+.statistic img {
+    width: 50%;
+}
+
+.staff-list {
+    padding-left: 20px;
+}
+
+.table-stat {
+    color: white;
+    background: #303030;
+    background: #1a1a1a;
+    /* background: #454545; */
+}
+
+.table-stat td, .table-stat th {
+    border-bottom: none !important;
+    border-top: none !important;
+}
+
+.table-stat td,  .table-stat th {
+    text-align: center;
+}
+
+footer {
+    margin-top: -20px;
+}

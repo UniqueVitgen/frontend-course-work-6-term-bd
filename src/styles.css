@@ -1,1 +1,13 @@
+@import "./themes/size.css";
+@import "./themes/button.css";
+@import "./themes/form.scss";
+@import "./themes/media.css";
+@import "./themes/modal.css";
+@import "./themes/modal-custom.css";
+@import "./themes/lector-staff.css";
 /* You can add global styles to this file, and also import other style files */
+.nav li {
+        min-width: 50px;
+        padding-right: 10px;
+        padding-left: 10px;
+}

@@ -1,0 +1,138 @@
+<div class="reg-div">
+  <div class="container"> 
+    <!-- <input [(ngModel)]="login" type="text" class="form-control" placeholder="Логин"> -->
+          
+    <form [formGroup]="lectorForm">
+      <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group form-control-sm">
+            <label for="login">Логин</label>
+            <input [ngClass]="{'invalid-input':isUsernameExist}" [(ngModel)]="lector.username" formControlName="login" type="text" class="form-control" id="login" placeholder="Логин">
+            <div class="alert alert-danger alert-form" *ngIf="isUsernameExist">Пользователь существует</div>
+            <div class="alert alert-danger alert-form" *ngIf="lectorForm.controls.login.touched && lectorForm.controls.login.errors?.pattern">{{PasswordValidators.atLeastOneLetterOfLettersAndNumbersAlert}}</div>
+          </div>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="form-group form-control-sm">
+            <label  for="lastname">Фамилия</label>
+            <input   [(ngModel)]="lector.lastname" formControlName="lastname"  type="text" class="form-control" id="lastname" placeholder="Фамилия">
+            
+            <div class="alert alert-danger alert-form" *ngIf="lectorForm.controls.lastname.touched && lectorForm.controls.lastname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div>
+          </div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="form-group form-control-sm">
+            <label for="firstname">Имя</label>
+            <input  [(ngModel)]="lector.firstname" formControlName="firstname" type="text" class="form-control" id="firstname" placeholder="Имя">
+            
+            <div class="alert alert-danger alert-form" *ngIf="lectorForm.controls.firstname.touched && lectorForm.controls.firstname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div>
+          </div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="form-group form-control-sm">
+            <label for="middlename">Отчество</label>
+            <input  [(ngModel)]="lector.middlename"  formControlName="middlename" type="text" class="form-control" id="middlename" placeholder="Отчество">
+            
+            <div class="alert alert-danger alert-form" *ngIf="lectorForm.controls.middlename.touched && lectorForm.controls.middlename.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="form-group form-control-sm">
+            <label for="degree">Ученная степень</label>
+            <!-- <input [(ngModel)]="lector.degree" formControlName="degree" type="text" class="form-control" id="degree" placeholder="Ученная степень"> -->
+            
+            <select [(ngModel)]="lector.degree"  formControlName="degree" type="text" class="form-control" id="degree" placeholder="Ученная степень">
+              <option *ngFor="let degree of lector.degrees" [ngValue]="degree">
+                {{degree.name}}
+              </option>
+              </select>
+            <div class="alert alert-danger alert-form" *ngIf="lectorForm.controls.degree.touched && lectorForm.controls.degree.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div>
+          </div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="form-group form-control-sm">
+            <label for="post">Должность</label>
+            <!-- <input   [(ngModel)]="lector.post" formControlName="post" type="text" class="form-control" id="post" placeholder="Должность"> -->
+            
+            <select [(ngModel)]="lector.post"  formControlName="post" type="text" class="form-control" id="post" placeholder="Должность">
+              <option *ngFor="let post of lector.posts" [ngValue]="post">
+                {{post.name}}
+              </option>
+            </select>
+            <div class="alert alert-danger alert-form" *ngIf="lectorForm.controls.post.touched && lectorForm.controls.post.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div>
+          </div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="form-group form-control-sm">
+            <label for="title">Ученное звание</label>
+            <select [(ngModel)]="lector.title"  formControlName="title" type="text" class="form-control" id="title" placeholder="Ученное звание">
+              <option *ngFor="let title of lector.titles" [ngValue]="title">
+                {{title.name}}
+              </option>
+            </select>
+            <!-- <input   [(ngModel)]="lector.title" formControlName="title" type="text" class="form-control" id="title" placeholder="Ученное звание"> -->
+            <div class="alert alert-danger alert-form" *ngIf="lectorForm.controls.title.touched && lectorForm.controls.title.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div>
+          
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group form-control-sm">
+            <label for="password">Пароль</label>
+            <input   [(ngModel)]="lector.password" formControlName="password" type="password" class="form-control" id="password" placeholder="Пароль">
+            <div class="alert alert-danger alert-form" *ngIf="lectorForm.controls.password.touched && lectorForm.controls.password.errors?.minlength">Пароль должен содержать 6 символов</div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group form-control-sm">
+            <label for="confirmPassword">Подтвердить пароль</label>
+            <input   [(ngModel)]="lector.confirmPassword" formControlName="confirmPassword" type="password" class="form-control" id="confirmPassword" placeholder="Подтвердить пароль">
+            <div class="alert alert-danger alert-form" *ngIf="lectorForm.controls.confirmPassword.touched && lectorForm.controls.confirmPassword.errors?.MatchPassword">Пароль не совпадает</div>
+         
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="form-group form-control-sm">
+            <label for="description">Пароль</label>
+            <textarea rows="3" [(ngModel)]="lector.description" formControlName="description" type="password" class="form-control" id="description" placeholder="Описание"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <button [disabled]="lectorForm.invalid" (click)="regLector()" class="btn btn-primary full-width">Регистрация</button>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div (click)="loginForm()" class="center-text">
+            <a >У вас уже есть аккоунт?</a>
+          </div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        </div>
+      </div>
+    </form>
+    <!-- <button (click)="regLector()" class="btn btn-primary full-width">Регистрация</button> -->
+  </div>
+</div>

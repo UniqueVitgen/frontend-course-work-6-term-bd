@@ -1,0 +1,100 @@
+<div class="statistic">
+
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let accomplishment of accomplishments" class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+        <div class="thumbnail">
+          <img src="{{accomplishment.src}}">
+          <div class="caption">
+            <h3>{{accomplishment.amount}}</h3>
+            <p class="font-x1">{{accomplishment.title}}</p>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+        <div class="thumbnail">
+          <img src="assets/icon/about-us/student-male.png">
+          <div class="caption">
+            <h3>2000</h3>
+            <p class="font-x1">Пользователей</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="thumbnail">
+          <img src="assets/icon/about-us/diploma.png">
+          <div class="caption">
+            <h3>700</h3>
+            <p class="font-x1">Дипломов</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="thumbnail">
+          <img src="assets/icon/about-us/goal.png">
+          <div class="caption">
+            <h3>100</h3>
+            <p class="font-x1">Красных дипломов</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="thumbnail">
+          <img src="assets/icon/about-us/comments.png">
+          <div class="caption">
+            <h3>500</h3>
+            <p class="font-x1">Положительных отзывов</p>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>
+<div class="table-stat">
+  <div class="container">
+    <table class="table table-dark">
+      <thead>
+
+
+
+
+
+        <tr>
+          <th scope="col">Год</th>
+          <th scope="col">Зарегестрировано</th>
+          <th scope="col">Хоших оценок(7+)</th>
+          <th scope="col">Средняя оценка</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of statistics">
+          <th scope="row">{{item.year}}</th>
+          <td>{{item.registered}}</td>
+          <td>{{item.goodMark}}</td>
+          <td>{{item.average}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<div class="contacts">
+  <div class="container">
+
+
+    <div *ngFor="let contact of contacts" class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <div class="thumbnail">
+        <img src="{{contact.src}}" alt="">
+        <div class="caption">
+          <h3>{{contact.name}}</h3>
+          <p>{{contact.post}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

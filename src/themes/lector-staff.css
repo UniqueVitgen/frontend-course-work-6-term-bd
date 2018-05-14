@@ -1,0 +1,109 @@
+.lector-staff a {
+    border-bottom: none;
+    font-size: 14px;
+    font-family: 'pt_sansitalic';
+    /* color: #29c5f2; */
+    margin-right: 5px;
+    transition: .3s ease-in-out;
+    -webkit-transition: .3s ease-in-out;
+    font-size: 16px;
+    font-family: 'oswaldregular';
+    letter-spacing: 1px;
+    color: #000;
+    border-bottom: 2px solid #000;
+}
+
+.lector-staff a:hover {
+    color: #f00;
+    text-decoration: none;
+}
+
+.lector-staff img {
+    width: 40vw;
+}
+
+.lector-staff .media-body {
+    vertical-align: middle;
+}
+
+.lector-staff h3{
+    text-align: center;
+}
+
+.lector-staff {
+    /* background: #262626; */
+    /* background: #1a1a1a; */
+    /* background: #292929; */
+    /* color: #949494; */
+    /* background: #170B0B; */
+    /* color:#645952; */
+    /* color: #7b6c63; */
+    /* color: #c1bea3; */
+    /* color: #daa82e; */
+    /* background: #262626; */
+    /* color: #919191; */
+    color: #666666;font-family: 'pt_sansitalic';
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.lector-staff h3, .lector-staff h1  {
+    color: black;
+}
+
+.lector-staff .media {
+    margin-bottom: 20px;
+}
+
+.lector-staff p {
+    font-family:pt_sansitalic;
+    font-weight: 300;
+}
+
+.lector-staff .tegs {
+    font-family: 'pt_sansitalic';
+}
+
+.nav li{
+    text-align: center;
+}
+
+.tegs .row > * {
+    text-align: center;
+}

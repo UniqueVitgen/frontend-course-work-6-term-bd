@@ -1,20 +1,92 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="container">
 
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <ul class="nav nav-tabs float-left">
+        <li role="presentation">
+          <a>Дипломные работы</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <ul *ngIf="mode == 'unathored'" class="nav nav-tabs float-right">
+        <li *ngFor="let item of unauthored" role="presentation" class="active">
+          <!-- <a routerLink="/home">Главная</a> -->
+          <a routerLink="/{{item.path}}" >{{item.title}}</a>
+        </li>
+        <li role="presentation">
+          <a (click)="loginForm()">Войти</a>
+        </li>
+      </ul>
+      <ul *ngIf="mode == 'student'" class="nav nav-tabs float-right">
+        <li *ngFor="let item of student" role="presentation" class="active">
+          <!-- <a routerLink="/home">Главная</a> -->
+          <a routerLink="/{{item.path}}" >{{item.title}}</a>
+        </li>
+        <li role="presentation">
+          <a (click)="logout()" routerLink="/home">Выход</a>
+        </li>
+        <!-- <li role="presentation" class="active">
+          <a routerLink="/home">Главная</a>
+        </li>
+        <li role="presentation">
+          <a routerLink="/about-us">О нас</a>
+        </li>
+        <li role="presentation">
+          <a routerLink="/registration">Регистрация</a>
+        </li>
+        <li role="presentation">
+          <a routerLink="/login">Войти</a>
+        </li> -->
+      </ul>
+      <ul *ngIf="mode == 'admin'" class="nav nav-tabs float-right">
+        <li *ngFor="let item of admin" role="presentation" class="active">
+          <!-- <a routerLink="/home">Главная</a> -->
+          <a routerLink="/{{item.path}}" >{{item.title}}</a>
+        </li>
+        <li role="presentation">
+          <a (click)="logout()" routerLink="/home">Выход</a>
+        </li>
+      </ul>
+
+      <!-- <ul *ngIf="mode == 'student'" class="nav nav-tabs float-right">
+        <li role="presentation">
+          <a routerLink="/select-diplom">выбор работы</a>
+        </li>
+        <li role="presentation">
+          <a routerLink="/about-us">О нас</a>
+        </li>
+        <li role="presentation">
+          <a routerLink="/news">Новости</a>
+        </li>
+        <li role="presentation" class="dropdown">
+          <a  class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            Преподователи
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li role="presentation">
+              <a routerLink="/lector-staff">Преподовательский состав</a>
+            </li>
+            <li role="presentation">
+              <a routerLink="/lector-staff">Мои руководители</a>
+            </li>
+          </ul>
+        </li>
+        <li role="presentation">
+          <a (click)="logout()" routerLink="/home">Выход</a>
+        </li>
+      </ul> -->
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+<footer>
+  <div class="container">
+    <div class="text-center">
+      <h3>Copyright © 2016 Diplom</h3>
+    </div>
+  </div>
+</footer>
+<!-- <app-messages></app-messages> -->

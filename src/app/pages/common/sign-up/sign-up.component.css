@@ -1,0 +1,37 @@
+.reg-div {
+	background: #262626;
+	color: #9b9b9b;
+	display: flex;
+	height: 100vh;
+	align-items: center;
+	/* background: url('../images/temno-ochen-temno-f3cbb64.jpg'); */
+	/* background: url('assets/img/reg/1517226261.jpg'); */
+    background: url('assets/img/login/Vipuskniki_tbc7wn3ya9m0imtnv8b4yt.jpg') 100% 100%;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+.reg-div a {
+	text-shadow: 1px 1px black;
+}
+
+.reg-div label {
+	color: #232323;
+	/* color: #9b9b9b; */
+	text-shadow: 1px 1px white;
+}
+
+.reg-div .form-control {
+	border: 1px;
+	color: #9b9b9b;
+	background: #333;
+	/* widows: 60px; */
+}
+
+.reg-div form {
+    margin: auto;
+}
+
+.full-width {
+    width: 100%;
+}

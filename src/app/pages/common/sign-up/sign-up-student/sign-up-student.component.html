@@ -1,0 +1,172 @@
+<div class="reg-div">
+  <div class="container">
+    <form [formGroup]="studentForm">
+      <!-- <div class="row">
+        <div class="col">
+      <div class="form-group">
+        <label for="exampleInputUsername">Username</label>
+        <input type="text" class="form-control" id="exampleInputUsername" placeholder="Username">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="exampleInputFirstName">First name</label>
+        <input type="text" class="form-control" id="exampleInputFirstName" placeholder="First name">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="exampleInputMiddleName">Middle name</label>
+        <input type="text" class="form-control" id="exampleInputMiddleName" placeholder="Middle name">
+      </div>
+    </div>
+      <div class="form-group form-control-sm">
+        <label for="exampleInputLastName">Last name</label>
+        <input type="text" class="form-control" id="exampleInputLastName" placeholder="First name">
+      </div>
+      </div> -->
+      <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group form-control-sm">
+            <label for="exampleInputFirstName">Логин</label>
+            <input [ngClass]="{'invalid-input': isUsernameExist}" [(ngModel)]="student.username" formControlName="login" type="text"
+              class="form-control" id="exampleInputUsername" placeholder="Логин">
+            <div class="alert alert-danger alert-form" *ngIf="isUsernameExist">Пользователь существует</div>  
+            <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.login.touched && studentForm.controls.login.errors?.pattern">{{PasswordValidators.atLeastOneLetterOfLettersAndNumbersAlert}}</div>
+          
+          </div>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="form-group form-control-sm">
+            <label for="exampleInputLastName">Фамилия</label>
+            <input [(ngModel)]="student.lastname" formControlName="lastname" type="text" class="form-control" id="exampleInputLastName"
+              placeholder="Фамилия">
+              <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.lastname.touched && studentForm.controls.lastname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div>
+          </div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="form-group form-control-sm">
+            <label for="exampleInputFirstName">Имя</label>
+            <input [(ngModel)]="student.firstname" formControlName="firstname" type="text" class="form-control" id="exampleInputFirstName"
+              placeholder="Имя">
+              <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.firstname.touched && studentForm.controls.firstname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div>
+          </div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="form-group form-control-sm">
+            <label for="exampleInputMiddleName">Отчество</label>
+            <input [(ngModel)]="student.middlename" formControlName="middlename" type="text" class="form-control" id="exampleInputMiddleName"
+              placeholder="Отчество">
+              <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.middlename.touched && studentForm.controls.middlename.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group form-control-sm">
+            <label for="exampleInputPassword1">Пароль</label>
+            <input [(ngModel)]="student.password" formControlName="password" type="password" class="form-control" id="exampleInputPassword1"
+              placeholder="Пароль">
+            <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.password.touched && studentForm.controls.password.errors?.minlength">Пароль должен содержать 6 символов</div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group form-control-sm">
+            <label for="exampleInputPassword2">Подтвердить пароль</label>
+            <input [(ngModel)]="student.confirmPassword" (ngModelChange)="changeConfirmPassword()" formControlName="confirmPassword"
+              type="password" class="form-control" id="exampleInputPassword2" placeholder="Подтвердить пароль">
+            <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.confirmPassword.touched && studentForm.controls.confirmPassword.errors?.MatchPassword">Пароль не совпадает</div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="form-group form-control-sm">
+            <label for="exampleFormControlSelect1">Faculty</label>
+            <select [(ngModel)]="student.selectedFaculty" (ngModelChange)="changeFaculty()" formControlName="faculty" class="form-control"
+              id="exampleFormControlSelect1">
+              <!-- <option>FITR</option> -->
+              <option *ngFor="let faculty of student.faculties" [ngValue]="faculty">{{faculty.name}}</option>
+              <!-- <option>FMMP</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option> -->
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="form-group form-control-sm">
+            <label for="exampleFormControlSelect1">Специальность</label>
+            <select [(ngModel)]="student.selectedSpecialization" (ngModelChange)="changeSpecialization()" formControlName="department"
+              class="form-control" id="exampleFormControlSelect1">
+              <option *ngFor="let specialization of student.specializations" [ngValue]="specialization">{{specialization.name}}</option>
+              <!-- <option *ngFor="let  group of st>POVT</option> -->
+              <!-- <option *></option> -->
+              <!-- <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option> -->
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="form-group form-control-sm">
+            <label for="exampleFormControlSelect1">Group</label>
+            <select [(ngModel)]="student.group" formControlName="group" class="form-control" id="exampleFormControlSelect1">
+              <!-- <option>1</option> -->
+              <option *ngFor="let group of student.groups" [ngValue]="group">{{group.number}}</option>
+              <!-- <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option> -->
+            </select>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+      <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <button [disabled]="studentForm.invalid" (click)="RegistrationStudent()" type="submit" class="btn btn-primary full-width">Регистрация</button>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="center-text">
+            <a (click)="login">У вас уже есть аккоунт?</a>
+          </div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

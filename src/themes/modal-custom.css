@@ -1,0 +1,48 @@
+.faculty-form.modal-dialog {
+    width: 600px;
+    height: 500px;
+}
+
+.faculty-form .modal-content {
+    height: 100%;
+    width: 600px;
+}
+
+.login-form form {
+    background: #263352;
+    color: whitesmoke;
+    text-shadow: 0.7px 0.5px #6f757b;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.login-form form h4 {
+    text-shadow: 1px 1px #6f757b;
+}
+
+.login-form .modal-content {
+    padding: 0;
+}
+
+.select-lector .media-left {
+    width: 30%;
+}
+
+.select-lector .lector-staff img {
+    width: 80%;
+}
+
+app-faculty-form {
+    height: 80%;
+}
+
+.title-center-container {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.modal-dialog .modal-content {
+    border-radius: 10px;    
+
+}

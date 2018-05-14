@@ -1,0 +1,48 @@
+<div class="container">
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Номер</th>
+          <!-- <th scope="col">Факультет</th> -->
+          <th scope="col">Специальность</th>
+          <th scope="col">Количество студентов</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let group of groups; let i = index">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{group.number}}</td>
+          <td><span *ngIf="group.specialization">{{group.specialization.name}}</span>
+          <span *ngIf="!group.specialization">-</span></td>
+          <td>{{group.amount_student}}</td>
+          <td>
+            <button (click)="openGroupForm(group)" type="button" class="btn btn-info">Редактировать</button>
+          </td>
+          <td>
+            <button (click)="deleteGroup(group)" type="button" class="btn btn-danger">Удалить</button>
+          </td>
+          <!-- <td>@mdo</td> -->
+        </tr>
+        <!-- <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr> -->
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      </div>
+  
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+  
+        <button (click)="openGroupForm()" type="submit" class="btn btn-primary full-width">Добавить группу</button>
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      </div>
+    </div>
+  </div>

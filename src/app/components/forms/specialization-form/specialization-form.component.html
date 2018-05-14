@@ -1,0 +1,87 @@
+<form [hidden]="isShowFaculty" [formGroup]="specializationForm">
+  <div class="modal-header">
+    <div class="title-center-container">
+      <h4>Специальность</h4>
+    </div>
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="cancel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group form-control-sm">
+            <label for="exampleInputFirstName">Название</label>
+            <input [(ngModel)]="specialization.name" formControlName="name" type="text" class="form-control" id="exampleInputFirstName"
+              placeholder="Название">
+            <!-- <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.firstname.touched && studentForm.controls.firstname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div> -->
+          </div>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group form-control-sm">
+            <label for="exampleInputFirstName">Код:</label>
+            <input [(ngModel)]="specialization.code" formControlName="code" type="text" class="form-control" id="exampleInputFirstName"
+              placeholder="Код:">
+            <!-- <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.firstname.touched && studentForm.controls.firstname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div> -->
+          </div>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group form-control-sm">
+            <label for="exampleInputFirstName">Квалификация:</label>
+            <input [(ngModel)]="specialization.qualification" formControlName="qualification" type="text" class="form-control" id="exampleInputFirstName"
+              placeholder="Квалификация">
+            <!-- <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.firstname.touched && studentForm.controls.firstname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div> -->
+          </div>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="form-group form-control-sm">
+            <label for="exampleFormControlSelect1">Факультет:</label>
+            <select  [compareWith]="compareFaculties" [(ngModel)]="specialization.faculty" formControlName="faculty" class="form-control" id="exampleFormControlSelect1">
+              <!-- <option>FITR</option> -->
+              <option *ngFor="let faculty of faculties" [selected]="faculty.idFaculty == specialization.faculty?.idFaculty" [ngValue]="faculty">{{faculty.name}}</option>
+              <!-- <option>FMMP</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option> -->
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <button (click)="openFacultyForm()" type="submit" class="btn btn-warning full-width">Добавить Факультет</button>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button *ngIf="!isEdit" [disabled]="specializationForm.invalid" (click)="saveSpecialization()" type="submit" class="btn btn-primary full-width">Добавить</button>
+    <button *ngIf="isEdit" [disabled]="specializationForm.invalid" (click)="editSpecialization()" type="submit" class="btn btn-primary full-width">Сохранить</button>
+    <button (click)="cancel()" type="submit" class="btn btn-danger full-width">Отмена</button>
+  </div>
+
+</form>
