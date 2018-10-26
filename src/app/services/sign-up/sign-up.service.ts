@@ -18,4 +18,12 @@ export class SignUpService {
     return this.configService.post(prefix + 'lector', lector);
   }
 
+  singUpOrganizer(organizer) {
+    return this.configService.post(prefix + 'organizer', organizer);
+  }
+
+  singUpSecretary(secretary) {
+    return this.configService.post(prefix + 'secretary-sec', secretary);
+  }
+
 }

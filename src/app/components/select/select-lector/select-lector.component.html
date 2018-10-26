@@ -45,5 +45,9 @@
   </div>
 </div>
 <div class="modal-footer">
+  <button [disabled]="selectLector == null" (click)="ok()" type="submit" class="btn btn-primary full-width">Выбрать</button>
+  <!-- </div> -->
+  <!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"> -->
+  <button (click)="cancel()" type="submit" class="btn btn-danger full-width">Отмена</button>
 
 </div>

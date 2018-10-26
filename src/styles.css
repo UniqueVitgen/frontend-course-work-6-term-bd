@@ -5,6 +5,19 @@
 @import "./themes/modal.css";
 @import "./themes/modal-custom.css";
 @import "./themes/lector-staff.css";
+@import "./themes/datePicker.css";
+@import "./themes/lector-staff.css";
+@import "./themes/links.css";
+@import "./themes/admin-menu.css";
+@import "./themes/nav.css";
+@import "./themes/select.css";
+@import "./themes/grid.css";
+@import "./themes/news.css";
+@import "./themes/input.css";
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
 /* You can add global styles to this file, and also import other style files */
 .nav li {
         min-width: 50px;

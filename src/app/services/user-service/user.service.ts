@@ -19,4 +19,13 @@ export class UserService {
       return this.configService.get(prefix+'user-username/'+username);
     }
 
+    getById(id) {
+      return this.configService.get(prefix+'user-' + id);
+    }
+
+    getAll() {
+      return this.configService.get(prefix+'getAll');
+
+    }
+
 }

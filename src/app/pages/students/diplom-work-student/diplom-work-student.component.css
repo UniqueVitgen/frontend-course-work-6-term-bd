@@ -1,0 +1,86 @@
+.select-diplom-theme {
+	background: #262626;
+	color: #9b9b9b;
+	display: flex;
+	height: 100vh;
+    align-items: center;
+    justify-content: center;
+	background: url('assets/img/students/select-diplom/82981cd9cac6fe_b.jpg');
+	background: url('assets/img/students/select-diplom/640728163-conference-table-business-meeting-conference-room-authority.jpg');
+	background-size: 100% 100%;
+}
+
+.select-diplom-theme {
+	
+	color: #232323;
+	/* color: #9b9b9b; */
+	text-shadow: 1px 1px white;
+}
+
+.full {
+	width: 100%;
+}
+
+.center {
+	text-align: center;
+}
+
+.select-diplom-theme .form-control {
+	border: 1px;
+	color: #9b9b9b;
+	background: #333;
+	/* widows: 60px; */
+}
+
+.modal-dialog {
+	width: 80vw;
+}
+
+.select-diplom-theme form {
+    margin: auto;
+}
+
+iframe {
+	width: 100%;
+	height: 70vh;
+}
+
+iframe .media-object {
+	text-align: center;
+}
+
+.modal-header h4 {
+	text-align: center;
+}
+
+
+
+
+.lector-staff h3, .lector-staff h1  {
+    color: black;
+}
+
+.lector-staff .media {
+    margin-bottom: 20px;
+}
+
+.lector-staff p {
+    font-family:pt_sansitalic;
+    font-weight: 300;
+}
+
+.lector-staff .tegs {
+    font-family: 'pt_sansitalic';
+}
+
+.nav li{
+    text-align: center;
+}
+
+.tegs .row > * {
+    text-align: center;
+}
+
+.bottom-align {
+	align-items: baseline;
+}

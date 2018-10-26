@@ -1,117 +1,88 @@
 <div class="news">
-    <div class="container">
-        <h1 class="text-center">Новости связанные со сдачей вашей дипломной работы</h1>
-        <div class="row">
+  <div class="container">
+    <h1 class="text-center" *ngIf="hasTitle">{{titleHeader | translate}}</h1>
+    <div class="row">
 
-            <div *ngFor="let item of news; let i = index" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="media">
-                    <div *ngIf="i % 2 == 0" class="media-left">
-                        <a href="#">
-                            <img src="{{item.src}}">
-                        </a>
-                        <div class="date">
-                            {{item.date}}
-                        </div>
-                    </div>
-                    <div [ngClass]="{'body-right': i % 2 == 1}" class="media-body">
-                        <h3>{{item.title}}</h3>
-                        <p class="paragraph-wrapper font-x1">
-                            {{item.description}}
-                        </p>
-                        <a>Читать далее...</a>
-                    </div>
-                    <div *ngIf="i % 2 == 1" class="media-right">
-                        <a href="#">
-                            <img src="{{item.src}}">
-                        </a>
-                        <div class="date-right">
-                            {{item.date}}
-                        </div>
-                    </div>
-                </div>
+      <div *ngFor="let item of news; let i = index" class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <!-- <div class="media">
+          <div *ngIf="i % 2 == 0" class="media-left">
+            <a href="#">
+              <img *ngIf="item.src != null" src="{{item.src}}">
+              <img *ngIf="item.src == null" src="assets/img/students/news/template.png">
+            </a>
+            <div class="date">
+              {{formatDate(item.created, 'dd MMM')}}
             </div>
-
-            <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img src="assets/img/students/news/template.png">
-                        </a>
-                        <div class="date">
-                            11 apr
-                        </div>
-                    </div>
-                    <div class="media-body">
-                        <h3>Перенос сдачи у Ивановой</h3>
-                        <p class="paragraph-wrapper font-x1">
-                            Связи с болезнью Доцента кафедры ПОВТ факульта ФММП Преподователь Мария Иванова не сможет проводить свои занятии в 1 апреля,
-                            но сможет проводить 3 апреля
-                        </p>
-                        <a>Читать далее...</a>
-                    </div>
-                </div>
+          </div>
+          <div [ngClass]="{'body-right': i % 2 == 1}" class="media-body">
+            <h3></h3>
+            <p class="paragraph-wrapper font-x1 truncate-text">
+              {{item.content}}
+            </p>
+            <a>Читать далее...</a>
+          </div>
+          <div *ngIf="i % 2 == 1" class="media-right">
+            <a href="#">
+              <img *ngIf="item.src != null" src="{{item.src}}">
+              <img *ngIf="item.src == null" src="assets/img/students/news/template.png">
+            </a>
+            <div class="date-right">
+              {{formatDate(item.created, 'dd MMM')}}
             </div>
+          </div>
+        </div> -->
+        <app-news-card (onChange)="getAllNews()" [item]="item" [user]="user" [itemsCSS]="itemsCSS" [hasPossibleAction]="true"></app-news-card>
+        <!-- <mat-card [ngClass]="itemsCSS" class="news-item example-card">
+          <mat-card-header class="example-header-image">
+            <mat-card-title [tooltip]="'Заголовок новости' | translate">{{item.title}}</mat-card-title>
+            <mat-card-subtitle [tooltip]="'Дата публикации' | translate">{{formatDate(item.created, 'dd MMMM yyyy') |
+              translate}}</mat-card-subtitle>
+          </mat-card-header>
+              <img class="" mat-card-image *ngIf="item.src != null" src="{{item.src}}">
+              <img mat-card-image *ngIf="item.src == null" src="assets/img/students/news/template.png">
 
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="media">
-                    <div class="media-body body-right">
-                        <h3>Перенос сдачи у Ивановой</h3>
-                        <p class="paragraph-wrapper font-x1">
-                            Связи с болезнью Доцента кафедры ПОВТ факульта ФММП Преподователь Мария Иванова не сможет проводить свои занятии в 1 апреля,
-                            но сможет проводить 3 апреля
-                        </p>
-                        <a>Читать далее...</a>
-                    </div>
-                    <div class="media-right">
-                        <a href="#">
-                            <img src="assets/img/students/news/template.png">
-                        </a>
-                        <div class="date-right">
-                            11 apr
-                        </div>
-                    </div>
-                </div>
+          <mat-card-content>
+            <div class="part-content" [tooltip]="'Содержание новости' | translate">
+              {{item.content}}
             </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img src="assets/img/students/news/template.png">
-                        </a>
-                        <div class="date">
-                            28 feb
-                        </div>
-                    </div>
-                    <div class="media-body">
-                        <h3>Сдача Куприянову в 301</h3>
-                        <p class="font-x1">Показ Дипломной работы Куприянову будет осуществлятся в левом крыле 3 этажа ФИТРа в 301 кабинете
-                            с одновременной сдачей лабораторной работы у группе 10701215</p>
-                        <a>Читать далее...</a>
-                    </div>
-                </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button color="primary" (click)="openNewsPage(item)" mat-button>{{'MORE' | translate}}</button>
+            <button color="primary" (click)="openNewsForm(item)" mat-button *ngIf="hasChangeAccess(user, item)">{{'EDIT'
+              | translate}}</button>
+            <button color="warn" (click)="deleteNews(item)" mat-button *ngIf="hasChangeAccess(user, item)">{{'DELETE' |
+              translate}}</button>
+          </mat-card-actions>
+        </mat-card> -->
+        <br>
+      </div>
+      <!-- <div *ngFor="let item of newsItems; let i = index" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="media center-align">
+          <div *ngIf="i % 2 == 0" class="media-left">
+            <a href="#">
+              <img src="{{item.src}}">
+            </a>
+            <div class="date">
+              {{item.date}}
             </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="media">
-                    <div class="media-body body-right">
-                        <h3>Перенос сдачи у Ивановой</h3>
-                        <p class="paragraph-wrapper font-x1">
-                            Связи с болезнью Доцента кафедры ПОВТ факульта ФММП Преподователь Мария Иванова не сможет проводить свои занятии в 1 апреля,
-                            но сможет проводить 3 апреля
-                        </p>
-                        <a>Читать далее...</a>
-                    </div>
-                    <div class="media-right">
-                        <a href="#">
-                            <img src="assets/img/students/news/template.png">
-                        </a>
-                        <div class="date-right">
-                            11 apr
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+          </div>
+          <div [ngClass]="{'body-right': i % 2 == 1}" class="media-body">
+            <h3>{{item.title}}</h3>
+            <p class="paragraph-wrapper font-x1">
+              {{item.description}}
+            </p>
+            <a>Читать далее...</a>
+          </div>
+          <div *ngIf="i % 2 == 1" class="media-right">
+            <a href="#">
+              <img src="{{item.src}}">
+            </a>
+            <div class="date-right">
+              {{item.date}}
+            </div>
+          </div>
         </div>
+      </div> -->
     </div>
+  </div>
 </div>

@@ -59,3 +59,7 @@ button.btn:disabled {
 	background-color: grey;
 	border: none;
 }
+
+.form-control-sm {
+	height: 100%;
+}

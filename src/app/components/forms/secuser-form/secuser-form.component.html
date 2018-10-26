@@ -1,0 +1,136 @@
+<form *ngIf="secUserForm" [formGroup]="secUserForm">
+  <div class="modal-header">
+    <div class="title-center-container">
+      <h4>{{'Участник комиссии' | translate}}</h4>
+    </div>
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="cancel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container  col-md-12">
+      <div class="form-secUser">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 align-center">
+            <!--<div class="form-group form-control-sm">
+              <label for="exampleInputFirstName">{{'Название'| translate}}</label>
+
+              <input formControlName="name" [(ngModel)]="secUser.name" type="text" class="form-control" id="exampleInputComment"
+                [placeholder]="'Название' | translate">
+            </div>-->
+            <mat-form-field class="example-full-width">
+              <input matInput [placeholder]="'Фамилия' | translate" formControlName="lastname" [(ngModel)]="editedSecUser.lastname">
+            </mat-form-field>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 align-center">
+            <!--<div class="form-group form-control-sm">
+              <label for="exampleInputFirstName">{{'Название'| translate}}</label>
+
+              <input formControlName="name" [(ngModel)]="secUser.name" type="text" class="form-control" id="exampleInputComment"
+                [placeholder]="'Название' | translate">
+            </div>-->
+            <mat-form-field class="example-full-width">
+              <input matInput [placeholder]="'Имя' | translate" formControlName="firstname" [(ngModel)]="editedSecUser.firstname">
+            </mat-form-field>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 align-center">
+            <!--<div class="form-group form-control-sm">
+              <label for="exampleInputFirstName">{{'Название'| translate}}</label>
+
+              <input formControlName="name" [(ngModel)]="secUser.name" type="text" class="form-control" id="exampleInputComment"
+                [placeholder]="'Название' | translate">
+            </div>-->
+            <mat-form-field class="example-full-width">
+              <input matInput [placeholder]="'Отчество' | translate" formControlName="middlename" [(ngModel)]="editedSecUser.middlename">
+            </mat-form-field>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group form-control-sm">
+              <label for="exampleFormControlSelect1">{{'Роль' | translate}}</label>
+              <select [compareWith]="compareFaculties" [(ngModel)]="editedSecUser.role" formControlName="role"
+                class="form-control" id="exampleFormControlSelect1">
+                <!-- <option>FITR</option> -->
+                <option *ngFor="let role of secRoles"
+                  [ngValue]="role">{{role.name}}</option>
+                <!-- <option>FMMP</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option> -->
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="row">
+
+          <div class="like-form-group">
+            <div class="col-xs-12 col-12 col-md-4 form-group full-width">
+              <input [disableControl]="startDate" [bsConfig]="dateConfig" [minDate]="minDate" [maxDate]=" secUser.endDate || maxDate "
+                placeholder="Дата начала" (bsValueChange)="changeStartDate()" formControlName="startDate" type="text" class="form-control full-width"
+                #dps="bsDatepicker" bsDatepicker [(ngModel)]="secUser.startDate">
+            </div>
+          </div>
+          <div class="col-xs-12 col-12 col-md-3 form-group">
+            <button [disabled]="startDate" class="btn btn-success" (click)="dps.toggle()" [attr.aria-expanded]="dps.isOpen">Выбрать дату начала</button>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="like-form-group">
+            <div class="col-xs-12 col-12 col-md-4 form-group  full-width">
+              <input (bsValueChange)="changeEndDate()" [disableControl]="secUser.startDate == null || endDate" formControlName="endDate"
+                [isDisabled]="secUser.startDate == null" type="text" class="form-control  full-width" #dpe="bsDatepicker"
+                [bsConfig]="dateConfig" [minDate]="secUser.startDate || minDate " [maxDate]="maxDate" placeholder="Дата окончания"
+                bsDatepicker [(ngModel)]="secUser.endDate">
+            </div>
+          </div>
+          <div class="col-xs-12 col-12 col-md-3 form-group">
+            <button [disabled]="secUser.startDate == null || endDate" class="btn btn-success" (click)="dpe.toggle()" [attr.aria-expanded]="dpe.isOpen">Выбрать дату окончания</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 align-center">
+            <div class="form-group form-control-sm">
+              <label for="exampleInputFirstName">Процент</label>
+              <input [(ngModel)]="secUser.percent" formControlName="percent" class="form-control" percent placeholder="%">
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group form-control-sm">
+              <label for="exampleInputFirstName">Комментарий</label>
+
+              <textarea rows="3" formControlName="comment" [(ngModel)]="secUser.comment" type="text" class="form-control" id="exampleInputComment"
+                placeholder="Комментарий">
+              </textarea>
+            </div>
+
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button *ngIf="!isEdit" [disabled]="secUserForm.invalid" (click)="save()" type="submit" class="btn btn-primary full-width">{{'Добавить'
+      | translate}}</button>
+    <button *ngIf="isEdit" [disabled]="secUserForm.invalid" (click)="edit()" type="submit" class="btn btn-primary full-width">{{'Редактировать'
+      | translate}}</button>
+
+    <button (click)="cancel()" type="submit" class="btn btn-danger full-width">{{'Отмена' | translate}}</button>
+
+  </div>
+</form>

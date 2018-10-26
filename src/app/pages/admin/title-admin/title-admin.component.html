@@ -1,3 +1,102 @@
-<p>
-  title-admin works!
-</p>
+<!-- <ul class="nav nav-tabs w-100 nav-justified black-navs">
+
+  <li text-center class="half-width">
+    <a>Добавить</a>
+  </li>
+  <li text-center  class="half-width">
+    <a>Просмотр</a>
+  </li>
+</ul> -->
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <mat-form-field class="example-full-width">
+        <!-- <i class="material-icons material-icons.md-36">search</i> -->
+        <!-- <span matPrefix>
+              <button mat-raised-button color="primary">
+                <mat-icon>search</mat-icon>
+              </button>
+            </span> -->
+        <input [(ngModel)]="search" (keyup)="keyUp($event)" matInput [placeholder]="'Search' | translate" type="search">
+        <span matSuffix>
+          <button mat-raised-button color="primary">
+            <mat-icon>search</mat-icon>
+          </button>
+        </span>
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-md-6 col-center">
+      <!-- <mat-icon>search</mat-icon> -->
+    </div>
+  </div>
+  <br>
+  <!-- <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Название</th>
+        <th scope="col">Краткое название</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let title of titles; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{title.name}}</td>
+        <td>{{title.shortName}}</td>
+        <td>
+          <button (click)="openTitleForm(title)" type="button" class="btn btn-info">Редактировать</button>
+        </td>
+        <td>
+          <button (click)="deleteTitle(title)" type="button" class="btn btn-danger">Удалить</button>
+        </td>
+      </tr>
+    </tbody>
+  </table> -->
+
+  <table mat-table [dataSource]="selectedTitles" class="mat-elevation-z8 full-width">
+
+    <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> {{'Название' | translate}} </th>
+      <td mat-cell *matCellDef="let title"> {{title.name}} </td>
+    </ng-container>
+    <!-- <ng-container matColumnDef="shortName">
+      <th mat-header-cell *matHeaderCellDef> {{'Краткое название' | translate}} </th>
+      <td mat-cell *matCellDef="let title"> {{title.shortName}} </td>
+    </ng-container> -->
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let title">
+        <button (click)="openTitleForm(title)" type="button" class="btn btn-info">{{'Редактировать' | translate}}</button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let qualification">
+        <button (click)="deleteTitle(title)" type="button" class="btn btn-danger">{{'Удалить' | translate}}</button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <br>
+  <div class="row">
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+      <button (click)="openTitleForm()" type="submit" class="btn btn-primary full-width">{{'Добавить ученное звание' |
+        translate}}</button>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    </div>
+  </div>
+</div>

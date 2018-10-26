@@ -1,7 +1,7 @@
-<form [hidden]="isShowFaculty" [formGroup]="specializationForm">
+<form class="material-form" [hidden]="isHidden" [formGroup]="specializationForm">
   <div class="modal-header">
     <div class="title-center-container">
-      <h4>Специальность</h4>
+      <h4>{{'Специальность' | translate}}</h4>
     </div>
 
     <button type="button" class="close pull-right" aria-label="Close" (click)="cancel()">
@@ -14,12 +14,16 @@
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-          <div class="form-group form-control-sm">
-            <label for="exampleInputFirstName">Название</label>
+          <!-- <div class="form-group form-control-sm">
+            <label for="exampleInputFirstName">{{'Название' | translate}}</label>
             <input [(ngModel)]="specialization.name" formControlName="name" type="text" class="form-control" id="exampleInputFirstName"
-              placeholder="Название">
-            <!-- <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.firstname.touched && studentForm.controls.firstname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div> -->
-          </div>
+              [placeholder]="'Название' | translate">
+            <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.firstname.touched && studentForm.controls.firstname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div>
+          </div> -->
+          <mat-form-field class="example-full-width">
+            <input matInput [placeholder]="'Название' | translate" [(ngModel)]="specialization.name" formControlName="name">
+          </mat-form-field>
+
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
         </div>
@@ -28,17 +32,20 @@
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-          <div class="form-group form-control-sm">
-            <label for="exampleInputFirstName">Код:</label>
+          <!-- <div class="form-group form-control-sm">
+            <label for="exampleInputFirstName">{{'Код' | translate}}:</label>
             <input [(ngModel)]="specialization.code" formControlName="code" type="text" class="form-control" id="exampleInputFirstName"
-              placeholder="Код:">
-            <!-- <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.firstname.touched && studentForm.controls.firstname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div> -->
-          </div>
+              [placeholder]="'Код' | translate">
+            <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.firstname.touched && studentForm.controls.firstname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div>
+          </div> -->
+          <mat-form-field class="example-full-width">
+            <input matInput [placeholder]="'Код' | translate" [(ngModel)]="specialization.code" formControlName="code">
+          </mat-form-field>
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
         </div>
       </div>
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -46,19 +53,20 @@
             <label for="exampleInputFirstName">Квалификация:</label>
             <input [(ngModel)]="specialization.qualification" formControlName="qualification" type="text" class="form-control" id="exampleInputFirstName"
               placeholder="Квалификация">
-            <!-- <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.firstname.touched && studentForm.controls.firstname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div> -->
-          </div>
+            </div>
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
         </div>
-      </div>
+      </div> -->
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <div class="form-group form-control-sm">
-            <label for="exampleFormControlSelect1">Факультет:</label>
-            <select  [compareWith]="compareFaculties" [(ngModel)]="specialization.faculty" formControlName="faculty" class="form-control" id="exampleFormControlSelect1">
+            <label for="exampleFormControlSelect1">{{'Квалификация' | translate}}</label>
+            <select [compareWith]="compareFaculties" [(ngModel)]="specialization.qualification" formControlName="qualification"
+              class="form-control" id="exampleFormControlSelect1">
               <!-- <option>FITR</option> -->
-              <option *ngFor="let faculty of faculties" [selected]="faculty.idFaculty == specialization.faculty?.idFaculty" [ngValue]="faculty">{{faculty.name}}</option>
+              <option *ngFor="let qualification of qualifications" [selected]="qualification.id == specialization.qualification?.id"
+                [ngValue]="qualification">{{qualification.name}}</option>
               <!-- <option>FMMP</option>
               <option>3</option>
               <option>4</option>
@@ -71,7 +79,38 @@
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <button (click)="openFacultyForm()" type="submit" class="btn btn-warning full-width">Добавить Факультет</button>
+          <button (click)="openQualificationForm()" type="submit" class="btn btn-warning full-width">{{'Добавить
+            Квалификацию' | translate}}</button>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="form-group form-control-sm">
+            <label for="exampleFormControlSelect1">{{'Факультет' | translate}}</label>
+            <select [compareWith]="compareFaculties" [(ngModel)]="specialization.faculty" formControlName="faculty"
+              class="form-control" id="exampleFormControlSelect1">
+              <option *ngFor="let faculty of faculties" [selected]="faculty.idFaculty == specialization.faculty?.idFaculty"
+                [ngValue]="faculty">{{faculty.name}}</option>
+            </select>
+          </div>
+          <!--<mat-form-field>
+            <mat-select [compareWith]="compareFaculties" [(ngModel)]="specialization.faculty" formControlName="faculty" [placeholder]="'Факультет' | translate">
+              <mat-option *ngFor="let faculty of faculties" [selected]="faculty.idFaculty == specialization.faculty?.idFaculty"
+              [ngValue]="faculty">
+                {{food.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>-->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <button (click)="openFacultyForm()" type="submit" class="btn btn-warning full-width">{{'Добавить факультет' |
+            translate}}</button>
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
         </div>
@@ -79,9 +118,11 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button *ngIf="!isEdit" [disabled]="specializationForm.invalid" (click)="saveSpecialization()" type="submit" class="btn btn-primary full-width">Добавить</button>
-    <button *ngIf="isEdit" [disabled]="specializationForm.invalid" (click)="editSpecialization()" type="submit" class="btn btn-primary full-width">Сохранить</button>
-    <button (click)="cancel()" type="submit" class="btn btn-danger full-width">Отмена</button>
+    <button *ngIf="!isEdit" [disabled]="specializationForm.invalid" (click)="saveSpecialization()" type="submit" class="btn btn-primary full-width">{{'Добавить'
+      | translate}}</button>
+    <button *ngIf="isEdit" [disabled]="specializationForm.invalid" (click)="editSpecialization()" type="submit" class="btn btn-primary full-width">{{'Сохранить'
+      | translate}}</button>
+    <button (click)="cancel()" type="submit" class="btn btn-danger full-width">{{'Отмена' | translate}}</button>
   </div>
 
 </form>

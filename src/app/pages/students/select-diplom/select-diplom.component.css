@@ -79,3 +79,11 @@ iframe .media-object {
 .tegs .row > * {
     text-align: center;
 }
+
+.bottom-align {
+	align-items: baseline;
+}
+
+.form-control-sm {
+	height: 100%;
+}

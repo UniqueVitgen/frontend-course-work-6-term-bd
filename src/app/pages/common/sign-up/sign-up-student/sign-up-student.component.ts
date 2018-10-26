@@ -134,21 +134,25 @@ export class SignUpStudentComponent implements OnInit {
 
   changeFaculty() {
     console.log('sel fac - ', this.student.selectedFaculty);
-    this.specializationServive.getByFaculty(this.student.selectedFaculty.idFaculty).subscribe(specializations => {
-      this.student.specializations = specializations;
-      // this.student.selectedSpecialization = undefined;
-    })
+    if(this.student.selectedFaculty) {
+      this.specializationServive.getByFaculty(this.student.selectedFaculty.idFaculty).subscribe(specializations => {
+        this.student.specializations = specializations;
+        // this.student.selectedSpecialization = undefined;
+      })
+    }
   }
 
   changeSpecialization() {
     console.log('sel spec - ', this.student.selectedSpecialization);
-    this.groupService.getAllBySpecializationId(this.student.selectedSpecialization.idSpecialization).subscribe(groups => {
-      this.student.groups = groups;
-      setTimeout(() => {
-        this.student.group = undefined;
-
-      }, 0);
-    })
+    if(this.student.selectedSpecialization) {
+      this.groupService.getAllBySpecializationId(this.student.selectedSpecialization.idSpecialization).subscribe(groups => {
+        this.student.groups = groups;
+        setTimeout(() => {
+          this.student.group = undefined;
+  
+        }, 0);
+      })
+    }
   }
 
   RegistrationStudent() {

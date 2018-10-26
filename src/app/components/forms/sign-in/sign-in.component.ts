@@ -54,7 +54,22 @@ export class SignInComponent implements OnInit {
           this.tokenStorage.saveToken(data.token);
           this.userStorage.saveUser(data.user);
           this.cancel();
-          this.router.navigate(['/news']);
+          let user = data.user;
+          for(let role of user.roles) {
+            if(role.name == "STUDENT")
+            {
+              this.router.navigate(['/lector-staff']);
+            }
+            else if(role.name == "LECTOR") {
+              this.router.navigate(['/involve']);
+            }
+            else if(role.name == "ADMIN") {
+              this.router.navigate(["/admin-faculty"])
+            }
+            else {
+              this.router.navigate(["/news"]);
+            }
+          }
         // })
       },
       (err) => {

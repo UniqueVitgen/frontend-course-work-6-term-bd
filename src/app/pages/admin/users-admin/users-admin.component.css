@@ -1,0 +1,10 @@
+.user-expansion .text-contain {
+    justify-content: center;
+    width: 30%;
+}
+
+.user-expansion .row mat-panel-description,
+.user-expansion .row mat-panel-title
+{
+    justify-content: center;
+}

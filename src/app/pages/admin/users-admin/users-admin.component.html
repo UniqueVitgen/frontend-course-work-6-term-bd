@@ -1,0 +1,127 @@
+<!-- <ul class="nav nav-tabs w-100 nav-justified black-navs">
+
+  <li text-center class="half-width">
+    <a>Добавить</a>
+  </li>
+  <li text-center  class="half-width">
+    <a>Просмотр</a>
+  </li>
+</ul> -->
+<div class="container">
+  <!-- <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Никнейм</th>
+        <th scope="col">ФИО</th>
+        <th scope="col">Роль</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{user.username}}</td>
+        <td>{{formatFullName(user)}}</td>
+        <td>{{formatUserRole(user)}}</td>
+        <td>
+          <button (click)="goToUser(user)" type="button" class="btn btn-warning">Подробнее</button>
+        </td>
+      </tr>
+    </tbody>
+  </table> -->
+  <br>
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <mat-form-field class="example-full-width">
+        <!-- <i class="material-icons material-icons.md-36">search</i> -->
+        <!-- <span matPrefix>
+              <button mat-raised-button color="primary">
+                <mat-icon>search</mat-icon>
+              </button>
+            </span> -->
+        <input [(ngModel)]="search" (keyup)="keyUp($event)" matInput [placeholder]="'Search' | translate" type="search">
+        <span matSuffix>
+          <button mat-raised-button color="primary">
+            <mat-icon>search</mat-icon>
+          </button>
+        </span>
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-md-6 col-center">
+      <!-- <mat-icon>search</mat-icon> -->
+    </div>
+  </div>
+  <br>
+  <mat-accordion>
+    <mat-expansion-panel class="user-expansion" *ngFor="let user of selectedUsers; let i = index">
+      <mat-expansion-panel-header>
+        <mat-panel-title [tooltip]="'Никнейм' | translate" class="text-contain">
+          {{user.username}}
+        </mat-panel-title>
+        <mat-panel-description [tooltip]="'ФИО' | translate" class="text-contain">
+          {{formatFullName(user)}}
+        </mat-panel-description>
+        <mat-panel-description [tooltip]="'Роль' | translate" class="text-contain">
+          {{formatUserRole(user)}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div *ngIf="formatUserRole(user) == 'STUDENT'">
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right-text">
+            <mat-panel-description>{{'Группа' | translate}}</mat-panel-description>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <mat-panel-title>{{user.group.number}}</mat-panel-title>
+            <!-- <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
+          <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">Отсутствует</span> -->
+          </div>
+        </div>
+      </div>
+      <div *ngIf="formatUserRole(user) == 'LECTOR'">
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right-text">
+            <mat-panel-description>{{'Должность' | translate}}</mat-panel-description>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <mat-panel-title>{{user.post.name}}</mat-panel-title>
+            <!-- <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
+          <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">Отсутствует</span> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right-text">
+            <mat-panel-description>{{'Ученая степень' | translate}}</mat-panel-description>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <mat-panel-title>{{user.degree.name}}</mat-panel-title>
+            <!-- <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
+          <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">Отсутствует</span> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right-text">
+            <mat-panel-description>{{'Ученое звание' | translate}}</mat-panel-description>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <mat-panel-title>{{user.title.name}}</mat-panel-title>
+            <!-- <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
+          <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">Отсутствует</span> -->
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <br>
+  <!-- <div class="row">
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+      <button (click)="openUserForm()" type="submit" class="btn btn-primary full-width">Добавить факультет</button>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    </div>
+  </div> -->
+</div>

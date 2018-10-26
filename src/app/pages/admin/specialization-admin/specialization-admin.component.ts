@@ -12,7 +12,10 @@ import { FormEventService } from '../../../services/events/form/form-event.servi
 })
 export class SpecializationAdminComponent implements OnInit {
   specializations;
+  selectedSpecializations;
   bsModalRef: BsModalRef;
+  displayedColumns= ['name', 'faculty', 'code', 'qualification', 'edit', 'delete'];
+  search;
 
   constructor(private specializationService: SpecializationService,
     private modalService: BsModalService, 
@@ -24,8 +27,27 @@ export class SpecializationAdminComponent implements OnInit {
     this.specializationService.getAll().subscribe(specializations => {
         console.log('facs - ', specializations);
         this.specializations = specializations;
+        this.selectedSpecializations = specializations;
     })
 
+   }
+
+   keyUp(event) {
+     if (event.key === 'Escape') {
+       this.search = '';
+     }
+     this.clickSearch();
+   }
+ 
+   clickSearch() {
+     let value = this.search.toUpperCase();
+     console.log()
+     this.selectedSpecializations = this.specializations.filter((fac) => {
+       let targ = fac.name.toUpperCase();
+       if(targ.indexOf(value) != -1) {
+         return true;
+       } 
+     })
    }
 
    trackSpecializations() {

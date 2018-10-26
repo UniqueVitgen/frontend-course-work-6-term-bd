@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { LectorService } from '../../../services/lector-service/lector.service';
 
 @Component({
@@ -10,24 +10,33 @@ export class LectorStaffComponent implements OnInit {
 
   lectorStaff: Array<{description: any, src: any, post: any, title: any, degree: any, name: any}>;
   lectors;
+  @Input() isChild = false;
+  properties = {
+    'leader':'Руководитель проекта',
+    'scienceConsultor': 'Научный консультант',
+    'recensor': 'Рецензент',
+    'otConsultor': 'Консультант по организационно-технической части',
+    'teoConsultor': 'Консультант по техническо-экономическому обоснованию'
+  }
+    
 
   constructor(public lectorService: LectorService) { 
     // this.lectorStaff = [
     //   {
     //     degree:'Доцент', post:'Зам декана', title:'ядерный физик', src:'assets/img/students/lector-staff/team-img.jpg',
-    //     description:'Занимается Преподовательской деятельностью с прошлого века. ', name:'Куприянов'
+    //     description:'Занимается Преподавательской деятельностью с прошлого века. ', name:'Куприянов'
     //   },
     //   {
     //     degree:'Доцент', post:'Зам декана', title:'ядерный физик', src:'assets/img/students/lector-staff/team-img.jpg',
-    //     description:'Занимается Преподовательской деятельностью с прошлого века. ', name:'Куприянов'
+    //     description:'Занимается Преподавательской деятельностью с прошлого века. ', name:'Куприянов'
     //   },
     //   {
     //     degree:'Доцент', post:'Зам декана', title:'ядерный физик', src:'assets/img/students/lector-staff/team-img.jpg',
-    //     description:'Занимается Преподовательской деятельностью с прошлого века. ', name:'Куприянов'
+    //     description:'Занимается Преподавательской деятельностью с прошлого века. ', name:'Куприянов'
     //   },
     //   {
     //     degree:'Доцент', post:'Зам декана', title:'ядерный физик', src:'assets/img/students/lector-staff/team-img.jpg',
-    //     description:'Занимается Преподовательской деятельностью с прошлого века. ', name:'Куприянов'
+    //     description:'Занимается Преподавательской деятельностью с прошлого века. ', name:'Куприянов'
     //   }
     // ];
   }
@@ -38,6 +47,16 @@ export class LectorStaffComponent implements OnInit {
       this.lectors = lectors;
     })  
 
+  }
+
+  formatRole(lector) {
+    let strs = [];
+    for(let property in this.properties) {
+      if(lector['is' + property]) {
+        strs.push(this.properties[property]);
+      }
+    }
+    return strs;
   }
 
   formatFullName(user) {

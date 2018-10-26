@@ -1,0 +1,28 @@
+<mat-card [ngClass]="itemsCSS" class="news-item example-card">
+  <mat-card-header class="example-header-image">
+    <mat-card-title [tooltip]="'Заголовок новости' | translate">{{item.title}}</mat-card-title>
+    <mat-card-subtitle [tooltip]="'Дата публикации' | translate">{{formatDate(item.created, 'dd MMMM yyyy') |
+      translate}}</mat-card-subtitle>
+    <!-- <div mat-card-avatar class="example-header-image">
+                  <img *ngIf="item.src != null" src="{{item.src}}">
+                  <img *ngIf="item.src == null" src="assets/img/students/news/template.png">
+                </div> -->
+  </mat-card-header>
+  <img mat-card-image *ngIf="item.imageModel.filename != null" src="http://localhost:8081/files/{{item.imageModel.filename}}">
+  <img mat-card-image *ngIf="item.imageModel.filename == null" src="assets/img/students/news/template.png">
+  <!-- <img class="" mat-card-image *ngIf="item.src != null" src="{{item.src}}">
+  <img mat-card-image *ngIf="item.src == null" src="assets/img/students/news/template.png"> -->
+
+  <mat-card-content>
+    <div [ngClass]="{'part-content': !expanded}" [tooltip]="'Содержание новости' | translate">
+      {{item.content}}
+    </div>
+  </mat-card-content>
+  <mat-card-actions *ngIf="hasPossibleAction">
+    <button color="primary" (click)="openNewsPage(item)" mat-button>{{'MORE' | translate}}</button>
+    <button color="primary" (click)="openNewsForm(item)" mat-button *ngIf="hasChangeAccess(user, item)">{{'EDIT'
+      | translate}}</button>
+    <button color="warn" (click)="deleteNews(item)" mat-button *ngIf="hasChangeAccess(user, item)">{{'DELETE' |
+      translate}}</button>
+  </mat-card-actions>
+</mat-card>

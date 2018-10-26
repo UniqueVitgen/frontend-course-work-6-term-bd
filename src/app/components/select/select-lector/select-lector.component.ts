@@ -11,27 +11,28 @@ export class SelectLectorComponent implements OnInit, OnDestroy {
 
   lectorStaff: Array<{description: any, src: any, post: any, title: any, degree: any, name: any}>;
   lectors;
-  lector;
-  onDestoy;
+  // lector;
+  onDestroy;
   selectedLector;
+  isOk;
 
   constructor(public lectorService: LectorService, public bsModalRef: BsModalRef,) { 
     // this.lectorStaff = [
     //   {
     //     degree:'Доцент', post:'Зам декана', title:'ядерный физик', src:'assets/img/students/lector-staff/team-img.jpg',
-    //     description:'Занимается Преподовательской деятельностью с прошлого века. ', name:'Куприянов'
+    //     description:'Занимается Преподавательской деятельностью с прошлого века. ', name:'Куприянов'
     //   },
     //   {
     //     degree:'Доцент', post:'Зам декана', title:'ядерный физик', src:'assets/img/students/lector-staff/team-img.jpg',
-    //     description:'Занимается Преподовательской деятельностью с прошлого века. ', name:'Куприянов'
+    //     description:'Занимается Преподавательской деятельностью с прошлого века. ', name:'Куприянов'
     //   },
     //   {
     //     degree:'Доцент', post:'Зам декана', title:'ядерный физик', src:'assets/img/students/lector-staff/team-img.jpg',
-    //     description:'Занимается Преподовательской деятельностью с прошлого века. ', name:'Куприянов'
+    //     description:'Занимается Преподавательской деятельностью с прошлого века. ', name:'Куприянов'
     //   },
     //   {
     //     degree:'Доцент', post:'Зам декана', title:'ядерный физик', src:'assets/img/students/lector-staff/team-img.jpg',
-    //     description:'Занимается Преподовательской деятельностью с прошлого века. ', name:'Куприянов'
+    //     description:'Занимается Преподавательской деятельностью с прошлого века. ', name:'Куприянов'
     //   }
     // ];
   }
@@ -51,7 +52,9 @@ export class SelectLectorComponent implements OnInit, OnDestroy {
   }
 
   initializeSelecteLector() {
-    this.selectedLector = this.lectors[0];
+    if(this.selectedLector == null) {
+      this.selectedLector = this.lectors[0];
+    }
   }
 
   selectLector(lector?) {
@@ -62,6 +65,11 @@ export class SelectLectorComponent implements OnInit, OnDestroy {
   cancel() {
     // this.router.navigate(['admin-faculty']);
     this.bsModalRef.hide();
+  }
+
+  ok() {
+    this.isOk = true;
+    this.cancel();
   }
 
   formatFullName(user) {
@@ -75,9 +83,16 @@ export class SelectLectorComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(this.onDestoy) {
-      this.onDestoy(this.selectedLector);
-      
+    if(this.onDestroy) {
+      // console.log('enter');
+      if(this.isOk) {
+        this.onDestroy(this.selectedLector);
+      }
+
+    }
+    else {
+      // console.log('leave');
+
     }
   }
 

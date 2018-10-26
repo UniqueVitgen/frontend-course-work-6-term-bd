@@ -1,0 +1,38 @@
+.main-news,
+mat-card.main-news {
+    background: rgba(255,255,255,0.7)
+}
+
+.main-news img {
+    opacity: 0.9;
+}
+
+.news-item img{
+    height: 200px;
+        /* height: 100px; */
+        /* width: auto; */
+}
+
+.news-item {
+
+    text-align: justify;
+}
+
+.news-item .full-width-img {
+    height: 350px;
+    width: 50%;
+}
+
+.part-content {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    /* display: -webkit-box; */
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.full-width-news img {
+    height: 350px;
+    width: 50%;
+}

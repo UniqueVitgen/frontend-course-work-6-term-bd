@@ -1,0 +1,65 @@
+<div class="material-form" [hidden]="isShowSpecialization">
+  <div class="modal-header">
+    <div class="title-center-container">
+      <h4>{{'Группа' | translate}}</h4>
+    </div>
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="cancel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <div class="container">
+
+        <table *ngIf="groups?.length > 0" mat-table [dataSource]="groups" class="mat-elevation-z8 full-width">
+
+          <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="number">
+            <th mat-header-cell *matHeaderCellDef> {{'Номер' | translate}} </th>
+            <td mat-cell *matCellDef="let group"> {{group.number}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="specialization">
+            <th mat-header-cell *matHeaderCellDef> {{'Специальность' | translate}} </th>
+            <td mat-cell *matCellDef="let group"> {{group.specialization.name}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef> {{'Количество студентов' | translate}} </th>
+            <td mat-cell *matCellDef="let group"> {{group.amount_student}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="selected">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let group">
+              <mat-checkbox [checked]="arrayWorker.containtsByProperty(targetGroups, group, 'idGroup')"
+              (change)="selectGroup(group)"></mat-checkbox> 
+              <!-- <div class="input-group-text">
+                <input type="checkbox" aria-label="Checkbox for following text input">
+              </div> -->
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'selected-item': arrayWorker.containtsByProperty(targetGroups, row, 'idGroup')}"
+          ></tr>
+        </table>
+        <div *ngIf="groups?.length == 0" class="center-text">
+          Нет доступных групп.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button (click)="selectGroups()" type="submit" class="btn btn-primary full-width">{{'Выбрать'
+      | translate}}</button>
+
+    <button (click)="cancel()" type="submit" class="btn btn-danger full-width">{{'Отмена' | translate}}</button>
+  </div>
+</div>

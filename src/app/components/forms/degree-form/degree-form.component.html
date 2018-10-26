@@ -1,3 +1,90 @@
-<p>
-  degree-form works!
-</p>
+<form *ngIf="degreeForm" [formGroup]="degreeForm">
+  <div class="modal-header">
+    <div class="title-center-container">
+      <h4>{{'Название' | translate}}</h4>
+    </div>
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="cancel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container  col-md-12">
+      <div class="form-degree">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 align-center">
+            <!--<div class="form-group form-control-sm">
+              <label for="exampleInputFirstName">{{'Название'| translate}}</label>
+
+              <input formControlName="name" [(ngModel)]="degree.name" type="text" class="form-control" id="exampleInputComment"
+                [placeholder]="'Название' | translate">
+            </div>-->
+            <mat-form-field class="example-full-width">
+              <input matInput [placeholder]="'Название' | translate"  formControlName="name" [(ngModel)]="degree.name">
+            </mat-form-field>
+
+          </div>
+        </div>
+
+        <!-- <div class="row">
+
+          <div class="like-form-group">
+            <div class="col-xs-12 col-12 col-md-4 form-group full-width">
+              <input [disableControl]="startDate" [bsConfig]="dateConfig" [minDate]="minDate" [maxDate]=" degree.endDate || maxDate "
+                placeholder="Дата начала" (bsValueChange)="changeStartDate()" formControlName="startDate" type="text" class="form-control full-width"
+                #dps="bsDatepicker" bsDatepicker [(ngModel)]="degree.startDate">
+            </div>
+          </div>
+          <div class="col-xs-12 col-12 col-md-3 form-group">
+            <button [disabled]="startDate" class="btn btn-success" (click)="dps.toggle()" [attr.aria-expanded]="dps.isOpen">Выбрать дату начала</button>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="like-form-group">
+            <div class="col-xs-12 col-12 col-md-4 form-group  full-width">
+              <input (bsValueChange)="changeEndDate()" [disableControl]="degree.startDate == null || endDate" formControlName="endDate"
+                [isDisabled]="degree.startDate == null" type="text" class="form-control  full-width" #dpe="bsDatepicker"
+                [bsConfig]="dateConfig" [minDate]="degree.startDate || minDate " [maxDate]="maxDate" placeholder="Дата окончания"
+                bsDatepicker [(ngModel)]="degree.endDate">
+            </div>
+          </div>
+          <div class="col-xs-12 col-12 col-md-3 form-group">
+            <button [disabled]="degree.startDate == null || endDate" class="btn btn-success" (click)="dpe.toggle()" [attr.aria-expanded]="dpe.isOpen">Выбрать дату окончания</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 align-center">
+            <div class="form-group form-control-sm">
+              <label for="exampleInputFirstName">Процент</label>
+              <input [(ngModel)]="degree.percent" formControlName="percent" class="form-control" percent placeholder="%">
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group form-control-sm">
+              <label for="exampleInputFirstName">Комментарий</label>
+
+              <textarea rows="3" formControlName="comment" [(ngModel)]="degree.comment" type="text" class="form-control" id="exampleInputComment"
+                placeholder="Комментарий">
+              </textarea>
+            </div>
+
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button *ngIf="!isEdit" [disabled]="degreeForm.invalid" (click)="save()" type="submit" class="btn btn-primary full-width">{{'Добавить'
+      | translate}}</button>
+    <button *ngIf="isEdit" [disabled]="degreeForm.invalid" (click)="edit()" type="submit" class="btn btn-primary full-width">{{'Редактировать'
+      | translate}}</button>
+
+    <button (click)="cancel()" type="submit" class="btn btn-danger full-width">{{'Отмена' | translate}}</button>
+
+  </div>
+</form>

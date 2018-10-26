@@ -1,3 +1,35 @@
-<p>
-  title-form works!
-</p>
+<form class="material-form" *ngIf="titleForm" [formGroup]="titleForm">
+  <div class="modal-header">
+    <div class="title-center-container">
+      <h4>{{'Ученое звание' | translate}}</h4>
+    </div>
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="cancel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container  col-md-12">
+      <div class="form-title">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 align-center">
+            <mat-form-field class="example-full-width">
+              <input matInput [placeholder]="'Название' | translate"  formControlName="name" [(ngModel)]="title.name">
+            </mat-form-field>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button *ngIf="!isEdit" [disabled]="titleForm.invalid" (click)="save()" type="submit" class="btn btn-primary full-width">{{'Добавить'
+      | translate}}</button>
+    <button *ngIf="isEdit" [disabled]="titleForm.invalid" (click)="edit()" type="submit" class="btn btn-primary full-width">{{'Редактировать'
+      | translate}}</button>
+
+    <button (click)="cancel()" type="submit" class="btn btn-danger full-width">{{'Отмена' | translate}}</button>
+
+  </div>
+</form>

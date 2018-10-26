@@ -1,0 +1,29 @@
+.grey-text {
+    color:grey;
+}
+
+.float-right {
+    float: right;
+}
+
+.right-text {
+    text-align: right;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.big-text {
+    font-size: 25px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

@@ -1,0 +1,92 @@
+<div class="profile-container">
+  <div *ngIf="user" class="container">
+    <!-- <div class="media"> -->
+    <!-- <div class="media-body"> -->
+    <!-- <h4 class="media-heading"> -->
+    <div class="form-info-container">
+      <div class="form-info">
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right-text">
+            <span class="grey-text float-rigth">ФИО</span>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <span>{{formatFullName(user)}}</span>
+          </div>
+        </div>
+        <!-- </h4> -->
+        <!-- <p> -->
+        <!-- <h4 class="media-heading"> -->
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right-text">
+            <span class="grey-text float-rigth">Никнейм</span>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            {{user.username}}
+            <!-- <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
+          <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">Отсутствует</span> -->
+          </div>
+        </div>
+        <!-- </h4> -->
+        <!-- <h4 class="media-heading"> -->
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right-text">
+            <span class="grey-text float-rigth">Роль</span>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            {{formatUserRole(user)}}
+            <!-- <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
+          <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">Отсутствует</span> -->
+          </div>
+        </div>
+        <!-- </h4> -->
+        <div *ngIf="formatUserRole(user) == 'STUDENT'">
+          <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right-text">
+              <span class="grey-text float-rigth">Группа</span>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              {{user.group.number}}
+              <!-- <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
+            <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">Отсутствует</span> -->
+            </div>
+          </div>
+        </div>
+        <div *ngIf="formatUserRole(user) == 'LECTOR'">
+          <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right-text">
+              <span class="grey-text float-rigth">Должность</span>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              {{user.post.name}}
+              <!-- <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
+            <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">Отсутствует</span> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right-text">
+              <span class="grey-text float-rigth">Ученая степень</span>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              {{user.degree.name}}
+              <!-- <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
+            <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">Отсутствует</span> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right-text">
+              <span class="grey-text float-rigth">Ученая звание</span>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              {{user.title.name}}
+              <!-- <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
+            <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">Отсутствует</span> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- </p> -->
+    <!-- </div> -->
+    <!-- </div> -->
+  </div>
+</div>

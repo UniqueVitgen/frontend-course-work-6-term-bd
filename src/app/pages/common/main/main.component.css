@@ -2,5 +2,5 @@
 
 .main-image {
     background-image: url('assets/img/home/graduation-caps-in-air1.jpg');
-    height: 100vh;
+    min-height: 100vh;
 }

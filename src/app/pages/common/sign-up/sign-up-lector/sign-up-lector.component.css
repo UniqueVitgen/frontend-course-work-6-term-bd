@@ -63,3 +63,7 @@ button.btn:disabled {
 textarea {
 	resize: none;
 }
+
+.form-control-sm {
+	height: 100%;
+}

@@ -16,4 +16,16 @@ export class DegreeService {
       return this.configService.get(prefix+'getAll');
     }
 
+    save(degree) {
+      return this.configService.post(prefix + 'save', degree);
+    }
+
+    edit(degree) {
+      return this.configService.put(prefix + 'edit', degree);
+    }
+
+    delete(degree) {
+      return this.configService.delete(prefix + 'delete-' + degree.id);
+    }
+
 }

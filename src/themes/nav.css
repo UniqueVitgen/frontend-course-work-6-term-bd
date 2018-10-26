@@ -1,0 +1,22 @@
+.nav-container {
+    justify-content: space-between;
+    width: 100%;
+}
+
+.nav-link {
+    cursor: pointer;
+}
+
+.navbar .dropdown li {
+    cursor: pointer;
+
+}
+
+.navbar .dropdown li:hover {
+    cursor: pointer;
+    background: gray;
+}
+
+.navbar .nav-link:hover {
+    text-shadow: 1px 1px black;
+}

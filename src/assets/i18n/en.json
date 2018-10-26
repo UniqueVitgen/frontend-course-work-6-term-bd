@@ -1,0 +1,117 @@
+{
+    "log out": "Log out",
+    "en": "En",
+    "ru": "Ru",
+
+    "Войти": "Login",
+    "Регистрация": "Sign Up",
+    "Главная": "Home",
+
+    "Участие": "Involve",
+
+    "Преподователи": "Lectors",
+    "Дипломная работа": "Diplom Work",
+
+    "Как студент": "Like student",
+    "Как преподаватель": "Like lector",
+
+    "Подробнее": "More",
+    "Редактировать": "Edit",
+    "Удалить": "Delete",
+    "Студент": "Student",
+    "Название": "Title",
+
+    "Факультет": "Faculty",
+    "Добавить факультет": "Add Faculty",
+    "Специальность": "Specialization",
+    "Добавить специальность": "Add specialization",
+    "Группа": "Group",
+    "Добавить группу": "Add group",
+    "Квалификация": "Qualification",
+    "Добавить квалификацию": "Add qualification",
+    "Степень": "Degree",
+    "Добавить ученную степень": "Add degree",
+    "Добавить степень": "Add degree",
+    "Звание": "Title",
+    "Добавить звание": "Add title",
+    "Добавить ученное звание": "Add title",
+    "Должность": "Post",
+    "Добавить должность": "Add post",
+    "Пользователи": "Users",
+    "Дипломные работы": "Diplom works",
+
+    "Роль": "Role",
+
+    "Логин": "Login",
+    "Фамилия": "Lastname",
+    "Имя": "Firstname",
+    "Отчество": "Middlename",
+    "Пароль": "Password",
+    "Подтвердить пароль": "Confirm password",
+    "Описание": "Description",
+
+    "Запомнить меня": "Remember me",
+    "Вы не зарегистрированы?": "Are you not registered?",
+
+    "Кандидат наук": "Candidate of Sciences",
+    "Доктор наук": "doctor of Sciences",
+    "Преподаватель": "Lector",
+    "Старший преподаватель": "Seniour lecturer",
+    "Доцент": "Associate professor",
+    "Профессор": "professor",
+    "Заведующий кафедры": "Head of the department",
+    "Старший научный сотрудник": "Senior researcher",
+
+    "Преподаватели": "Lectors",
+
+    "Комментарий": "Comment",
+    "Отсутствует": "Lack",
+
+    "Краткое название": "Short name",
+
+    "У вас уже есть аккоунт?": "Have you had account?",
+
+    "Номер":"number",
+    "Количество студентов":" amount of students",
+
+    "Добавить": "Add",
+    "Отмена": "Cancel",
+    "Сохранить": "Save",
+    "Код": "Code",
+    "Добавить Квалификацию": "Add qualification",
+    "ФИО":"Full name",
+    "Никнейм":"Username",
+    "Ученая степень": "Degree",
+    "Ученое звание": "Title",
+
+    "Copyright": "Copyright",
+    "Diplom": "Diplom",
+
+    "Начать": "Start",
+    "ФиТР":"FITR",
+    "ПОВТ":"POVT",
+
+    "Новости": "News",
+    "Добавить Новость": "Add News",
+
+    "October": "October",
+    "December": "December",
+
+    "Содержание": "Contain",
+    "Оглавление": "Title",
+    "Выбрать изображения": "Select image",
+    "Новость": "News",
+    "ГЭК комиссия": "SEC comission",
+    "Добавить Государственную экономическую комиссию": "Add State Economical Comission",
+    "Дата начала": "Start date",
+    "Дата окончания": "End date",
+
+    "Заголовок новости": "Title news",
+    "Дата публикации": "Publish date",
+    "Содержание новости": "news content",
+    
+    "Полезная информация": "helpful information",
+    "Методические материалы":"learning documents",
+
+    "Intro": "Hello I am Arthur, I am 42 years old."
+}

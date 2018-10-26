@@ -38,4 +38,25 @@ export class GroupService {
     return this.configService.delete(prefix + 'delete-' + group.idGroup);
   }
 
+  findAllBySecInOrNull(secList) {
+    let ids = secList.map((sec) => {
+      return sec.id;
+    });
+    let query = prefix + 'find-all-by-sec-or-null';
+    for(let i = 0; i < ids.length; i++) {
+      if(i == 0) {
+        query += '?secIds=' + ids[i];
+      }
+      else {
+        query += '&secIds=' + ids[i];
+      }
+    }
+    return this.configService.get(query);
+  }
+
+  findAllBySecIsNull() {
+    let query = prefix + 'find-all-by-where-sec-is-null';
+    return this.configService.get(query);
+  }
+
 }

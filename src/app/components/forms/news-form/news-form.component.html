@@ -1,3 +1,101 @@
-<p>
-  news-form works!
-</p>
+<form [formGroup]="newsForm">
+  <div class="modal-header">
+    <div class="title-center-container">
+      <h4>{{'Новость' | translate}}</h4>
+    </div>
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="cancel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container  col-md-12">
+      <div class="form-news">
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <img class="news-image" *ngIf="editedNews.url == null && news?.imageModel == null" src="assets/img/news/640b4a_8b8d2a01db2a4db7aaa88ae66c000211_mv2.png">
+            <img class="news-image" *ngIf="isRefresh && editedNews.url != null" src="{{editedNews.url}}">
+            <img class="news-image" *ngIf="!isRefresh && news?.imageModel != null" src="{{ 'http://localhost:8081/files/' + news.imageModel.filename}}">
+            <button (click)="selectImage()" type="submit" class="btn btn-success full-width">{{'Выбрать изображения' | translate}}</button>
+            <!-- <input type="file" (change)="onChange($event)"> -->
+            <!-- <app-file-upload (onChange)="onChange($event)" text="Загрузить изображение"></app-file-upload> -->
+            <!-- <ng2-file-input></ng2-file-input>  -->
+            <!-- <button (click)="openPhoto()" type="submit" class="btn btn-warning full-width">Добавить Фото</button> -->
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 align-center">
+            <div class="form-group form-control-sm">
+              <label for="exampleInputFirstName">{{'Название' | translate}}</label>
+              
+              <textarea rows="3" formControlName="title" [(ngModel)]="editedNews.title" type="text" class="form-control"
+                id="exampleInputComment" [placeholder]="'Оглавление' | translate">
+              </textarea>
+              <!-- <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.firstname.touched && studentForm.controls.firstname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div> -->
+            </div>
+
+            <!-- <div class="form-group form-control-sm">
+              <label for="exampleInputComment">Комментарий</label>
+              <textarea formControlName="comment" [(ngModel)]="comment" (ngModelChange)="changeComment()" type="text" class="form-control"
+                id="exampleInputComment" placeholder="Комментарий">
+              </textarea>
+            </div> -->
+          </div>
+          <!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
+          <!-- <div class="form-group form-control-sm"> -->
+          <!-- <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.firstname.touched && studentForm.controls.firstname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div> -->
+          <!-- </div> -->
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group form-control-sm">
+              <label for="exampleInputFirstName">{{'Содержание' | translate}}</label>
+              
+              <textarea rows="9" formControlName="content" [(ngModel)]="editedNews.content" type="text" class="form-control"
+                id="exampleInputComment" [placeholder]="'Содержание' | translate">
+              </textarea>
+              <!-- <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.firstname.touched && studentForm.controls.firstname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div> -->
+            </div>
+
+            <!-- <div class="form-group form-control-sm">
+              <label for="exampleInputComment">Комментарий</label>
+              <textarea formControlName="comment" [(ngModel)]="comment" (ngModelChange)="changeComment()" type="text" class="form-control"
+                id="exampleInputComment" placeholder="Комментарий">
+              </textarea>
+            </div> -->
+          </div>
+          <!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
+          <!-- <div class="form-group form-control-sm"> -->
+          <!-- <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.firstname.touched && studentForm.controls.firstname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div> -->
+          <!-- </div> -->
+        </div>
+      </div>
+      <div class="row">
+        <!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          </div> -->
+        <!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"> -->
+        <div class="col-md-12">
+          <!-- <span *ngFor="let image of images; let i = index">
+                <img src="{{image}}"></span> -->
+          <!-- <input type="file" (change)="onChange($event)"> -->
+          <!-- <app-file-upload (onChange)="onChange($event)" text="Загрузить изображение"></app-file-upload> -->
+          <!-- <ng2-file-input></ng2-file-input>  -->
+          <!-- <button (click)="openPhoto()" type="submit" class="btn btn-warning full-width">Добавить Фото</button> -->
+        </div>
+        <!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          </div> -->
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button *ngIf="!isEdit" [disabled]="newsForm.invalid" (click)="save()" type="submit" class="btn btn-primary full-width">{{'Добавить' | translate}}</button>
+    <button *ngIf="isEdit" [disabled]="newsForm.invalid" (click)="edit()" type="submit" class="btn btn-primary full-width">{{'Редактировать' | translate}}</button>
+    <!-- <button *ngIf="!isEdit" [disabled]="newsForm.invalid" (click)="saveNews()" type="submit" class="btn btn-primary full-width">Добавить</button>
+    <button *ngIf="isEdit" [disabled]="newsForm.invalid" (click)="editNews()" type="submit" class="btn btn-primary full-width">Сохранить</button> -->
+    <!-- </div> -->
+    <!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"> -->
+    <button (click)="cancel()" type="submit" class="btn btn-danger full-width">{{'Отмена' | translate}}</button>
+    <!-- </div> -->
+    <!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"> -->
+    <!-- </div> -->
+    <!-- </div> -->
+  </div>
+</form>

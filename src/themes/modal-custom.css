@@ -24,6 +24,27 @@
     padding: 0;
 }
 
+.specialization-form.modal-dialog {
+    max-width: 650px;
+
+}
+
+.percentage-form.modal-dialog, .group-form.modal-dialog {
+    max-width: 650px;
+}
+
+.percentage-form .modal-content {
+    background: #676bf9;
+
+}
+
+.percentage-form form {
+}
+
+.select-lector.modal-dialog {
+    max-width: 800px;
+}
+
 .select-lector .media-left {
     width: 30%;
 }
@@ -45,4 +66,16 @@ app-faculty-form {
 .modal-dialog .modal-content {
     border-radius: 10px;    
 
+}
+
+.sec-form.modal-dialog {
+    max-width: 800px;
+}
+
+.sec-form .modal-content {
+    background:#DCDCDC;
+}
+
+.news-form.modal-dialog {
+    max-width: 800px;
 }

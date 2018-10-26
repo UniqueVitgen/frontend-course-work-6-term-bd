@@ -1,5 +1,28 @@
 <div class="container">
-  <table class="table table-dark">
+  <br>
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <mat-form-field class="example-full-width">
+        <!-- <i class="material-icons material-icons.md-36">search</i> -->
+        <!-- <span matPrefix>
+          <button mat-raised-button color="primary">
+            <mat-icon>search</mat-icon>
+          </button>
+        </span> -->
+        <input [(ngModel)]="search" (keyup)="keyUp($event)" matInput [placeholder]="'Search' | translate" type="search">
+        <span matSuffix>
+          <button mat-raised-button color="primary">
+            <mat-icon>search</mat-icon>
+          </button>
+        </span>
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-md-6 col-center">
+      <!-- <mat-icon>search</mat-icon> -->
+    </div>
+  </div>
+  <br>
+  <!-- <table class="table table-dark">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -20,30 +43,73 @@
           <span *ngIf="specialization.faculty == null">-</span>
         </td>
         <td>{{specialization.code}}</td>
-        <td>{{specialization.qualification}}</td>
+        <td>{{specialization.qualification.name}}</td>
         <td>
           <button (click)="openSpecializationForm(specialization)" type="button" class="btn btn-info">Редактировать</button>
         </td>
         <td>
           <button (click)="deleteSpecialization(specialization)" type="button" class="btn btn-danger">Удалить</button>
         </td>
-        <!-- <td>@mdo</td> -->
       </tr>
-      <!-- <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr> -->
     </tbody>
+  </table> -->
+
+
+
+  <table mat-table [dataSource]="selectedSpecializations" class="mat-elevation-z8 full-width">
+
+    <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> {{'Название' | translate}} </th>
+      <td mat-cell *matCellDef="let specialization"> {{specialization.name}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="faculty">
+      <th mat-header-cell *matHeaderCellDef> {{'Факультет' | translate}} </th>
+      <td mat-cell *matCellDef="let specialization"> {{specialization.faculty.name}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="code">
+      <th mat-header-cell *matHeaderCellDef> {{'Код' | translate}} </th>
+      <td mat-cell *matCellDef="let specialization"> {{specialization.code}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="qualification">
+      <th mat-header-cell *matHeaderCellDef> {{'Квалификация' | translate}} </th>
+      <td mat-cell *matCellDef="let specialization"> {{specialization.qualification.name}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let specialization">
+          <button (click)="openSpecializationForm(specialization)" type="button" class="btn btn-info">{{'Редактировать' | translate}}</button>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let specialization">
+          <button (click)="deleteSpecialization(specialization)" type="button" class="btn btn-danger">{{'Удалить' | translate}}</button>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  <br>
   <div class="row">
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
-      <button (click)="openSpecializationForm()" type="submit" class="btn btn-primary full-width">Добавить специальность</button>
+      <button (click)="openSpecializationForm()" type="submit" class="btn btn-primary full-width">
+        {{'Добавить специальность' | translate}}</button>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
     </div>

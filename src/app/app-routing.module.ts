@@ -34,17 +34,41 @@ import { StudentGuard } from './guards/student/student.guard';
 import { UnauthGuard } from './guards/unauth/unauth.guard';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { AdminGuard } from './guards/admin/admin.guard';
+import { StudentHasDiplomGuard } from './guards/student-has-diplom/student-has-diplom.guard';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from './interceptor/interceptor';
+import { NewsAdminComponent } from './pages/admin/news-admin/news-admin.component';
+import { LeaderComponent } from './pages/lectors/leader/leader.component';
+import { LectorGuard } from './guards/lector/lector.guard';
+import { DiplomWorkComponent } from './pages/common/diplom-work/diplom-work.component';
+import { DiplomWorkStudentComponent } from './pages/students/diplom-work-student/diplom-work-student.component';
+import { QualificationAdminComponent } from './pages/admin/qualification-admin/qualification-admin.component';
+import { DegreeAdminComponent } from './pages/admin/degree-admin/degree-admin.component';
+import { PostAdminComponent } from './pages/admin/post-admin/post-admin.component';
+import { TitleAdminComponent } from './pages/admin/title-admin/title-admin.component';
+import { DiplomWorkAdminComponent } from './pages/admin/diplom-work-admin/diplom-work-admin.component';
+import { UsersAdminComponent } from './pages/admin/users-admin/users-admin.component';
+import { ProfileComponent } from './pages/common/profile/profile.component';
+import { SignUpOrganizerComponent } from './pages/common/sign-up/sign-up-organizer/sign-up-organizer.component';
+import { ExpectedRolesGuard } from './guards/expected-roles/expected-roles.guard';
+import { SignUpSecretarySecComponent } from './pages/common/sign-up/sign-up-secretary-sec/sign-up-secretary-sec.component';
+import { SECListComponent } from './pages/secretary/seclist/seclist.component';
+import { SECComponent } from './pages/secretary/sec/sec.component';
+import { NewsItemComponent } from './pages/common/news-item/news-item.component';
 
 export const routes: Routes = [
   // { path: '',  redirectTo: 'home'},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: MainComponent, canActivate: [UnauthGuard],  },
   { path: 'registration', component: SignUpComponent, canActivate: [UnauthGuard] },
   { path: 'registration-student', component: SignUpStudentComponent, canActivate: [UnauthGuard] },
   { path: 'registration-lector', component: SignUpLectorComponent, canActivate: [UnauthGuard] },
+  { path: 'registration-organizer', component: SignUpOrganizerComponent, canActivate: [UnauthGuard] },
+  { path: 'registration-secretary-sec', component: SignUpSecretarySecComponent, canActivate: [UnauthGuard] },
   // { path: 'login', component: SignInComponent, canActivate: [UnauthGuard] },
+  { path: 'diplom-work', canActivate: [StudentHasDiplomGuard], component:DiplomWorkStudentComponent },
+  { path: 'diplom-work/:id', component: DiplomWorkComponent, canActivate: [AuthGuard] },
 
   { path: 'about-us', component: AboutUsComponent, canActivate: [AuthGuard] },
   { path: 'news', component: NewsComponent, canActivate:[AuthGuard]  },
@@ -52,13 +76,37 @@ export const routes: Routes = [
   { path: 'lector-staff', component: LectorStaffComponent, canActivate: [StudentGuard]  },
   { path: 'select-diplom', component: SelectDiplomComponent, canActivate:[StudentGuard]  },
 
-  { path: 'query-students', component: QueryStudentsComponent, canActivate:[StudentGuard]  },
-  { path: 'involve', component: InvolveComponent, canActivate:[StudentGuard]  },
-  { path: 'percentage', component: PercentageComponent, canActivate:[StudentGuard]  },
+  { path: 'query-students', component: QueryStudentsComponent, canActivate:[LectorGuard]  },
+  { path: 'involve', component: LeaderComponent, canActivate:[LectorGuard]  },
+  { path: 'percentage', component: PercentageComponent, canActivate:[LectorGuard]  },
+
+  { path: 'user/:id', component: ProfileComponent, canActivate: [AuthGuard],  },
+  { path: 'news/:id', component: NewsItemComponent  },
+
+  { path: 'sec-list', component: SECListComponent, canActivate: [ExpectedRolesGuard],
+  data: {
+    expectedRoles: ['SECRETARY_SEC', 'ADMIN']
+  }},
+  { path: 'sec/:id', component: SECComponent, canActivate: [ExpectedRolesGuard], 
+  data: {
+    expectedRoles: ['SECRETARY_SEC', 'ADMIN']
+  } },
+  
   
   { path: 'admin-faculty', component: FacultyAdminComponent, canActivate:[AdminGuard] },
   { path: 'admin-specialization', component: SpecializationAdminComponent, canActivate:[AdminGuard]  },
   { path: 'admin-group', component: GroupAdminComponent, canActivate: [AdminGuard]  },
+  { path: 'admin-news', component: NewsAdminComponent, canActivate: [ExpectedRolesGuard], data: {
+    expectedRoles: ['ADMIN', 'ORGANIZER', 'SECRETARY_SEC', 'LECTOR']
+  }   },
+  { path: 'admin-degree', component: DegreeAdminComponent, canActivate: [AdminGuard]  },
+  { path: 'admin-post', component: PostAdminComponent, canActivate: [AdminGuard]  },
+  { path: 'admin-title', component: TitleAdminComponent, canActivate: [AdminGuard]  },
+  { path: 'admin-diplom-work', component: DiplomWorkAdminComponent, canActivate: [ExpectedRolesGuard], data: {
+    expectedRoles: ['ADMIN', 'ORGANIZER', 'SECRETARY_SEC']
+  }  },
+  { path: 'admin-users', component: UsersAdminComponent, canActivate: [AdminGuard]  },
+  { path: 'admin-qualifications', component: QualificationAdminComponent, canActivate: [AdminGuard]  },
   // { path: 'new-faculty', component: FacultyFormComponent, canActivate:[AdminGuard] },
   // { path: 'new-specialization', component: SpecializationFormComponent, canActivate:[AdminGuard]  },
   // { path: 'new-group', component: GroupFormComponent, canActivate: [AdminGuard]  },

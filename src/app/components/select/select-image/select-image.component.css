@@ -1,0 +1,10 @@
+img {
+    /* width: 200px; */
+    height: 100px;
+    margin: 5px;
+}
+
+.selected {
+    -webkit-box-shadow: 3px 3px 1px #ff0018;
+    box-shadow: 3px 3px 1px #ff0018;
+}

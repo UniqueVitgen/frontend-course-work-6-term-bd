@@ -98,3 +98,25 @@
 .news .row > div:nth-child(4n) .media-body {
     background: #ba950b;
 }
+
+.center-align {
+    align-items: center;
+}
+
+.news img {
+    /* width: 40vw; */
+    
+}
+
+
+
+.truncate-text {
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.example-card {
+    max-width: 400px;
+}

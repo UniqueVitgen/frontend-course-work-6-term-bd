@@ -9,6 +9,8 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { FacultyFormComponent } from '../faculty-form/faculty-form.component';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
+import { QualificationService } from '../../../services/qualification/qualification.service';
+import { QualificationFormComponent } from '../qualification-form/qualification-form.component';
 
 @Component({
   selector: 'app-specialization-form',
@@ -20,21 +22,24 @@ export class SpecializationFormComponent implements OnInit, OnDestroy {
   public specialization = {
     name: '',
     code: '',
-    qualification: '',
+    qualification: undefined,
     faculty: undefined
   };
   public specializationEdit;
   faculties;
+  qualifications;
   sub;
   isEdit;
-  isShowFaculty = false;
+  isHidden = false;
   facultyModal: BsModalRef;
+  qualificationModal: BsModalRef;
   subscriptions: Subscription[] = [];
 
   constructor(public formBuilder: FormBuilder, public facultyService:FacultyService, 
     public specializationService: SpecializationService, public router: Router,
     private modalService: BsModalService, private changeDetection: ChangeDetectorRef,
     public formEventService: FormEventService, 
+    private qualificationService: QualificationService,
   private route: ActivatedRoute, public bsModalRef: BsModalRef) {
     this.specializationForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
@@ -46,16 +51,29 @@ export class SpecializationFormComponent implements OnInit, OnDestroy {
 
   subscribeFacultyForm() {
     this.formEventService.showFacultyForm.subscribe(() => {
-      this.isShowFaculty = true;
+      this.isHidden = true;
       // console.log('i see');
     })
     this.formEventService.hideFacultyForm.subscribe(() => {
-      this.isShowFaculty = false;
+      this.isHidden = false;
       // console.log('hide form');
       this.getAllFaculties();
 
     })
 
+  }
+
+  subscribeQualificationForm() {
+    this.formEventService.showQualificationForm.subscribe(() => {
+      this.isHidden = true;
+      // console.log('i see');
+    })
+    this.formEventService.hideQualificationForm.subscribe(() => {
+      this.isHidden = false;
+      // console.log('hide form');
+      this.getAllQualifications();
+
+    })
   }
 
   getAllFaculties() {
@@ -64,6 +82,12 @@ export class SpecializationFormComponent implements OnInit, OnDestroy {
        this.faculties = faculties;
    });
 
+  }
+
+  getAllQualifications() {
+    this.qualificationService.getAll().subscribe((qualifications) => {
+      this.qualifications = qualifications;
+    });
   }
 
   saveSpecialization() {
@@ -172,6 +196,30 @@ export class SpecializationFormComponent implements OnInit, OnDestroy {
     this.facultyModal.content.closeBtnName = 'Close';
   }
 
+  openQualificationForm(qualification?) {
+    let edit;
+    if(qualification) {
+      edit = true;
+    }
+    else {
+      edit=false;
+    }
+    let initialState = {
+      isEdit: edit,
+      qualificationEdit: qualification,
+
+    };
+    let modalOptions = {
+      initialState: initialState,
+      class:'qualification-form',
+      ignoreBackdropClick: true
+
+    }
+    // this.subscribe();
+    this.qualificationModal = this.modalService.show(QualificationFormComponent, modalOptions);
+    this.qualificationModal.content.closeBtnName = 'Close';
+  }
+
   compareFaculties(c1, c2): boolean {
     if(c1 && c2) {
       return c1 && c2 ? c1.idFaculty === c2.idFaculty : c1 === c2;
@@ -182,7 +230,9 @@ export class SpecializationFormComponent implements OnInit, OnDestroy {
     this.formEventService.showSpecializationForm.emit(true);
     this.determineIfEdit();
     this.getAllFaculties();
+    this.getAllQualifications();
     this.subscribeFacultyForm();
+    this.subscribeQualificationForm();
     console.log('changed - ',this.specialization);
     // this.sub = this.route.params      
     // .subscribe(params => {

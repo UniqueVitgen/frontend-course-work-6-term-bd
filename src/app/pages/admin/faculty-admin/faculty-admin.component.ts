@@ -9,6 +9,7 @@ import { BsModalComponent } from 'ng2-bs3-modal';
 import { ModalService } from '../../../services/modal-service/modal.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { FormEventService } from '../../../services/events/form/form-event.service';
 
 @Component({
   selector: 'app-faculty-admin',
@@ -17,14 +18,14 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 })
 export class FacultyAdminComponent implements OnInit {
   bsModalRef: BsModalRef;
-  @ViewChild(FacultyFormComponent)
-  public facultyForm;
   public faculties;
-  @ViewChild('modal')
-  modal: BsModalComponent;
+  public selectedFaculties;
+  displayedColumns= ['name', 'shortName', 'edit', 'delete'];
+  search;
 
   constructor(public facultyService: FacultyService,
     private modalService: BsModalService,
+    private formEventService: FormEventService,
     public router: Router,) {
   }
 
@@ -32,11 +33,33 @@ export class FacultyAdminComponent implements OnInit {
     this.facultyService.getAll().subscribe(faculties => {
       console.log('facs - ', faculties);
       this.faculties = faculties;
+      this.selectedFaculties = this.faculties
     })
 
   }
 
-  
+  keyUp(event) {
+    if (event.key === 'Escape') {
+      this.search = '';
+    }
+    this.clickSearch();
+  }
+
+  clickSearch() {
+    let value = this.search.toUpperCase();
+    this.selectedFaculties = this.faculties.filter((fac) => {
+      let targ = fac.name.toUpperCase();
+      if(targ.indexOf(value) != -1) {
+        return true;
+      } 
+    })
+  }
+
+  trackFormFacultyHide() {
+    this.formEventService.hideFacultyForm.subscribe(()=> {
+      this.getAll();
+    })
+  }
  
   openFacultyForm(faculty?) {
     let edit;
@@ -102,6 +125,7 @@ export class FacultyAdminComponent implements OnInit {
 
   ngOnInit() {
     this.getAll();
+    this.trackFormFacultyHide();
     setTimeout(() => {
       // this.modalService.open('1');
 

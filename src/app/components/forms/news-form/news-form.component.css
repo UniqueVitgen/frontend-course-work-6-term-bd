@@ -1,0 +1,16 @@
+.news-image {
+    height: 200px;
+    width: 200px;
+}
+
+.align-center {
+    display: flex;
+    align-items: center;
+}
+
+.truncat-text {
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}

@@ -1,0 +1,70 @@
+<form *ngIf="secEventForm" [formGroup]="secEventForm">
+  <div class="modal-header">
+    <div class="title-center-container">
+      <h4>{{'Время приема групп' | translate}}</h4>
+    </div>
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="cancel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container  col-md-12">
+      <div class="form-sec-event">
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 align-center">
+            <!--<div class="form-group form-control-sm">
+                <label for="exampleInputFirstName">{{'Название' | translate}}</label>
+  
+                <input formControlName="name" [(ngModel)]="post.name" type="text" class="form-control" id="exampleInputComment" [placeholder]="'Название' | translate">
+              </div>-->
+            <mat-form-field class="example-full-width">
+              <input matInput [placeholder]="'Адрес' | translate" formControlName="address" [(ngModel)]="secEvent.address">
+            </mat-form-field>
+
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="like-form-group">
+            <div class="col-xs-12 col-12 col-md-4 form-group full-width">
+              <input [disableControl]="date" [bsConfig]="dateConfig" [placeholder]="'Дата проведения' | translate" (bsValueChange)="changeDate()"
+                formControlName="date" type="text" class="form-control full-width" #dps="bsDatepicker" bsDatepicker
+                [(ngModel)]="dateTime.date">
+            </div>
+          </div>
+          <div class="col-xs-12 col-12 col-md-3 form-group">
+            <button [disabled]="date" class="btn btn-success" (click)="dps.toggle()" [attr.aria-expanded]="dps.isOpen">{{'Выбрать дату' | translate}}:</button>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="like-form-group">
+            <div class="col-xs-12 col-12 col-md-4 form-group full-width">
+              <timepicker formControlName="time" [min]="minTime" [max]="maxTime" [(ngModel)]="dateTime.time"
+              (ngModelChange)="changeTime()"
+                [showMeridian]="false"></timepicker>
+              <!-- <input [disableControl]="date" [bsConfig]="dateConfig"
+                  placeholder="Дата начала" (bsValueChange)="changeDate()" formControlName="startDate" type="text" class="form-control full-width"
+                  #dps="bsDatepicker" bsDatepicker [(ngModel)]="secEvent.date"> -->
+            </div>
+          </div>
+          <!-- <div class="col-xs-12 col-12 col-md-3 form-group">
+              <button [disabled]="startDate" class="btn btn-success" (click)="dps.toggle()" [attr.aria-expanded]="dps.isOpen">Выбрать дату:</button>
+            </div> -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button *ngIf="!isEdit" [disabled]="secEventForm.invalid" (click)="save()" type="submit" class="btn btn-primary full-width">Добавить</button>
+    <button *ngIf="isEdit" [disabled]="secEventForm.invalid" (click)="edit()" type="submit" class="btn btn-primary full-width">Редактировать</button>
+
+    <button (click)="cancel()" type="submit" class="btn btn-danger full-width">Отмена</button>
+
+  </div>
+</form>

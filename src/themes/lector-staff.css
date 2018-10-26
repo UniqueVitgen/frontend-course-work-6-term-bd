@@ -107,3 +107,8 @@
 .tegs .row > * {
     text-align: center;
 }
+
+.target-list {
+    color: black;
+    list-style-type: circle;
+}

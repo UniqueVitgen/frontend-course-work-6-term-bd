@@ -8,75 +8,84 @@ import { UserStorage } from '../../storage/user/UserStorage';
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router, 
-      private globalEventsManager: GlobalEventsService,
-      private userStorage: UserStorage,
-      private tokenStorage: TokenStorage) { }
+    constructor(private router: Router,
+        private globalEventsManager: GlobalEventsService,
+        private userStorage: UserStorage,
+        private tokenStorage: TokenStorage) { }
 
-  hasStudentRole(user) {
-      for(let role of user.roles) {
-          if(role.name == "STUDENT") {
-              return true;
-          }
-      }
-  }
-
-  
-
-  hasAdminRole(user) {
-    for(let role of user.roles) {
-        if(role.name == "ADMIN") {
-            return true;
+    hasStudentRole(user) {
+        for (let role of user.roles) {
+            if (role.name == "STUDENT") {
+                return true;
+            }
         }
     }
-  }
 
-  hasLectorRole(user) {
-    for(let role of user.roles) {
-        if(role.name == "LECTOR") {
-            return true;
+
+
+    hasAdminRole(user) {
+        for (let role of user.roles) {
+            if (role.name == "ADMIN") {
+                return true;
+            }
         }
     }
-  }
 
-  canActivate() {
-      if(this.tokenStorage.getToken()) {
-          let user = this.userStorage.getUser();  
-          if(this.hasAdminRole(user)) {
-            this.globalEventsManager.showAdminNavBar.emit(true);
-            return true;
-          }
-          else if(this.hasStudentRole(user)){
-              this.globalEventsManager.showStudentsNavBar.emit(true);
-              return true;
-          }
-          else if(this.hasLectorRole(user)){
-            this.globalEventsManager.showLectorNavBar.emit(true);
-            return true;
+    hasLectorRole(user) {
+        for (let role of user.roles) {
+            if (role.name == "LECTOR") {
+                return true;
+            }
         }
-          return false;
-      }
-      else {
-          return false;
-      }
+    }
 
-      // console.log('entered in activated');
+    hasOrganizerRole(user) {
+        for (let role of user.roles) {
+            if (role.name == "ORGANIZER") {
+                return true;
+            }
+        }
+    }
 
-      // if (localStorage.getItem('student')) {
+    hasSecretaryRole(user) {
+        for (let role of user.roles) {
+            if (role.name == "SECRETARY_SEC") {
+                return true;
+            }
+        }
+    }
 
-      //     this.globalEventsManager.showStudentsNavBar.emit(true);
+    canActivate() {
+        if (this.tokenStorage.getToken()) {
+            let user = this.userStorage.getUser();
+            console.log('user - ', user);
+            if (this.hasAdminRole(user)) {
+                this.globalEventsManager.showAdminNavBar.emit(true);
+                return true;
+            }
+            else if (this.hasStudentRole(user)) {
+                this.globalEventsManager.showStudentsNavBar.emit(true);
+                return true;
+            }
+            else if (this.hasLectorRole(user)) {
+                console.log('user is lector');
+                this.globalEventsManager.showLectorNavBar.emit(true);
+                return true;
+            }
+            else if (this.hasOrganizerRole(user)) {
+                this.globalEventsManager.showOrganizerNavBar.emit(true);
+                return true;
+            }
+            else if(this.hasSecretaryRole(user)) {
+                this.globalEventsManager.showSecretaryNavBar.emit(true);
+                return true;
+            }
+            return false;
+        }
+        else {
+            return false;
+        }
 
-      //     console.log(localStorage.getItem('student'));
-      //     return true;
-      // }
-      // else {
-      //     // not logged in so redirect to login page
-      //     this.globalEventsManager.showUnathoridNavBar.emit(true);
 
-      //     console.log(localStorage.getItem('student'));
-      //     return;
-      // }
-
-
-  }
+    }
 }

@@ -14,9 +14,8 @@ export class LectorGuard implements CanActivate {
       private tokenStorage: TokenStorage) { }
 
   hasLectorRole(user) {
-      console.log('user - ',user);
       for(let role of user.roles) {
-          if(role.name == "ADMIN") {
+          if(role.name == "LECTOR") {
               return true;
           }
       }
@@ -24,11 +23,8 @@ export class LectorGuard implements CanActivate {
 
   canActivate() {
       if(this.tokenStorage.getToken()) {
-          console.log('log');
-          let user = this.userStorage.getUser();
-          console.log('is user - ',this.hasLectorRole(user));    
+          let user = this.userStorage.getUser();  
           if(this.hasLectorRole(this.userStorage.getUser())){
-              console.log(this.tokenStorage.getToken());
               this.globalEventsManager.showLectorNavBar.emit(true);
               return true;
           }

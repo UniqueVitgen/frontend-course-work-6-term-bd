@@ -22,6 +22,8 @@ import { GlobalEventsService } from './services/events/global/global-events.serv
 import { TokenStorage } from './storage/token/TokenStorage';
 import { UserStorage } from './storage/user/UserStorage';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { LeaderComponent } from './pages/lectors/leader/leader.component';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -37,41 +39,61 @@ export class AppComponent {
     { title: 'Главная', path:'home' },
     { title: 'Регистрация', path:'registration' },
     // { title: 'Войти', path: 'login' },
-    // { path: 'news', component: NewsComponent  },
+    { path: 'news', component: NewsComponent  },
     // { path: 'lector-staff', component: LectorStaffComponent  },
     // { path: 'about-us', component: SelectDiplomComponent  },
 
   ];
 
   student = [
-    { path: 'select-diplom', component: NewsComponent, title:'Выбор работы' },
+    { path: 'diplom-work', component: NewsComponent, title:'Дипломная работа' },
+    // { path: 'select-diplom', component: NewsComponent, title:'Дипломная работа' },
     { path: 'news', component: NewsComponent, title:'Новости' },
     { path: 'lector-staff', component: LectorStaffComponent, title:'Преподователи' },
-    { path: 'about-us', component: SelectDiplomComponent,content: [], title:'О нас' },
+    // { path: 'about-us', component: SelectDiplomComponent,content: [], title:'О нас' },
   ]
 
   lector = [
+    { path: 'involve', component: LeaderComponent, title:'Участие' },
+    {  path: 'admin-news', component: NewsComponent, title:'Новости' },
+    // { path: 'about-us', component: SelectDiplomComponent,content: [], title:'О нас' },
+  ]
 
-    { path: 'involve', component: InvolveComponent },
-    { path: 'query-students', component: QueryStudentsComponent },
-    { path: 'percentage', component: SelectDiplomComponent,content: [] },
-    { path: 'news', component: NewsComponent },
-    { path: 'about-us', component: SelectDiplomComponent,content: [] },
+  organizer = [
+    {path: 'admin-diplom-work', title: 'Дипломные работы'},
+    {  path: 'admin-news', component: NewsComponent, title:'Новости' },
+    // { path: 'about-us', component: SelectDiplomComponent,content: [], title:'О нас' },
+  ]
+
+  secretary = [
+    {path: 'admin-diplom-work', title: 'Дипломные работы'},
+    {path: 'sec-list', title: 'ГЭК комиссия'},
+    {  path: 'admin-news', component: NewsComponent, title:'Новости' },
+    // { path: 'about-us', component: SelectDiplomComponent,content: [], title:'О нас' },
   ]
 
   admin = [
     {path: 'admin-faculty', title: 'Факультет'},
     {path: 'admin-specialization', title: 'Специальность'},
     {path: 'admin-group', title: 'Группа'},
-    { path: 'news', title: 'Новости',  component: NewsComponent },
-    { path: 'about-us', title: 'О нас', component: SelectDiplomComponent,content: [] },
+    {path: 'admin-qualifications', title: 'Квалификация'},
+    {path: 'admin-degree', title: 'Степень'},
+    {path: 'admin-title', title: 'Звание'},
+    {path: 'admin-post', title: 'Должность'},
+    {path: 'admin-users', title: 'Пользователи'},
+    {path: 'admin-diplom-work', title: 'Дипломные работы'},
+    { path: 'admin-news', title: 'Новости',  component: NewsComponent },
+    // { path: 'about-us', title: 'О нас', component: SelectDiplomComponent,content: [] },
   ]
 
   constructor(private globalEventsManager: GlobalEventsService,
+    private translate: TranslateService,
     private modalService: BsModalService,
     public userStorage: UserStorage,
     public tokenStorage: TokenStorage
   ) {
+    this.translate.setDefaultLang(this.getLanguage());
+    this.translate.use(this.getLanguage()); 
     this.globalEventsManager.showStudentsNavBar.subscribe((mode: any) => {
       console.log('student user');
       this.mode = 'student';
@@ -88,6 +110,30 @@ export class AppComponent {
     this.globalEventsManager.showLectorNavBar.subscribe((mode: any) => {
       this.mode = 'lector';
     });
+    this.globalEventsManager.showOrganizerNavBar.subscribe((mode: any) => {
+      this.mode = 'organizer';
+    })
+    this.globalEventsManager.showSecretaryNavBar.subscribe((mode: any) => {
+      this.mode = 'secretary';
+    })
+  }
+
+  switchLanguage(language: string) {
+    this.setLanguage(language);
+  }
+
+  setLanguage(lang) {
+    this.translate.use(lang);
+    localStorage.setItem('lang', lang);
+  }
+
+  getLanguage() {
+    let lang = localStorage.getItem('lang');
+    console.log('llang ', lang);
+    if(lang == null) {
+      lang = 'ru';
+    }
+    return lang;
   }
 
   loginForm() {

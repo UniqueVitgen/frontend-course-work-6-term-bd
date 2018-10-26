@@ -18,8 +18,26 @@ export class UserStorage {
     window.sessionStorage.setItem(USER_KEY,  JSON.stringify(user));
   }
 
-  public getUser(): string {
+  public getUser() {
     return JSON.parse(sessionStorage.getItem(USER_KEY));
+  }
+
+  public isStudent() {
+    let user = this.getUser();
+    for(let role of user.roles) {
+      if(role.name == "STUDENT") {
+        return true;
+      }
+    }
+  }
+
+  public isLector() {
+    let user = this.getUser();
+    for(let role of user.roles) {
+      if(role.name == "LECTOR") {
+        return true;
+      }
+    }
   }
 
 }
