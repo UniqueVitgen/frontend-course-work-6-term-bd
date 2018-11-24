@@ -1,3 +1,5 @@
+import { Group } from "./group.factory";
+
 export class Person {
     firstname: string;
     lastname: string;
@@ -9,6 +11,10 @@ export class User extends Person {
     username: string;
     password: string;
     roles: string;
+}
+
+export class Student extends User {
+    group?: Group;
 }
 
 export class SECUserBase extends Person {
