@@ -1,3 +1,4 @@
+import { User } from "../factory/user.factory";
 
 
 export class UserWorker {
@@ -53,5 +54,9 @@ export class UserWorker {
                 }
             }
         }
+    }
+
+    formatFullName(user: User) {
+        return user.lastname + ' ' + user.firstname + ' ' + user.middlename;
     }
 }

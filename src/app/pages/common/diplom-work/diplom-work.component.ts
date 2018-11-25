@@ -10,6 +10,7 @@ import { PercentageService } from '../../../services/percentage/percentage.servi
 import { PercentPipe } from '@angular/common';
 import { StatusService } from '../../../services/status/status.service';
 import { DiplomWorkTitleFormComponent } from '../../../components/forms/diplom-work-title-form/diplom-work-title-form.component';
+import { UserWorker } from '../../../workers/UserWorker';
 
 @Component({
   selector: 'app-diplom-work',
@@ -37,6 +38,7 @@ export class DiplomWorkComponent implements OnInit {
      public diplomWorkService: DiplomWorkService,
      private percentageService: PercentageService,
      private userStorage: UserStorage,
+     private userWorker: UserWorker,
      private statusService: StatusService,
      private percentagePipe: PercentPipe,
     private dateTimeWorker: DateTimeWorker) { }
