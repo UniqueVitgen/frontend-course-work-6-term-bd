@@ -88,6 +88,20 @@ export class GroupItemComponent implements OnInit {
     });
   }
 
+  saveInWord() {
+    this.groupService.getWord(this.group).subscribe(res => {
+      console.log('res', res);
+      let data = new Blob([res], { type: 'application/docx' });
+      let file = window.URL.createObjectURL(data);
+      let link = document.createElement('a');
+      link.href = file;
+      link.download = 'Группа:' + this.group.number + '.docx';
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+    });
+  }
+
   ngOnInit() {
   }
 

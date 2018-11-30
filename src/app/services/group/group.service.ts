@@ -67,4 +67,10 @@ export class GroupService {
    return this.configService.blob(query);
   }
 
+  getWord(group: Group) {
+    console.log('prefix');
+    let query = prefix + 'word-' + group.idGroup;
+   return this.configService.blob(query);
+  }
+
 }
