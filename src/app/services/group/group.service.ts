@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ConfigService } from '../config/config.service';
+import { Group } from '../../factory/group.factory';
+import { Observable } from 'rxjs';
 
 const prefix = 'group/';
 @Injectable()
@@ -12,13 +14,13 @@ export class GroupService {
   }
 
   getAllByGroupId(groupId) {
-    return this.configService.get(prefix + 'get-by-group/'+ groupId);
+    return this.configService.get(prefix + 'find-all-student?idGroup='+ groupId);
   }
 
   get(group) {
     return this.configService.get(prefix + 'group-' + group.idGroup);
   }
-  getById(id) {
+  getById(id): Observable<Group> {
     return this.configService.get(prefix + 'group-' + id);
   }
 
@@ -57,6 +59,12 @@ export class GroupService {
   findAllBySecIsNull() {
     let query = prefix + 'find-all-by-where-sec-is-null';
     return this.configService.get(query);
+  }
+
+  getPDF(group: Group) {
+    console.log('prefix');
+    let query = prefix + 'pdf-' + group.idGroup;
+   return this.configService.blob(query);
   }
 
 }

@@ -56,6 +56,12 @@ import { SignUpSecretarySecComponent } from './pages/common/sign-up/sign-up-secr
 import { SECListComponent } from './pages/secretary/seclist/seclist.component';
 import { SECComponent } from './pages/secretary/sec/sec.component';
 import { NewsItemComponent } from './pages/common/news-item/news-item.component';
+import { GroupItemComponent } from './pages/common/group-item/group-item.component';
+import { GroupDashboardComponent } from './pages/common/group-dashboard/group-dashboard.component';
+import { SECAdminComponent } from './pages/admin/secadmin/secadmin.component';
+import { SECRoleAdminComponent } from './pages/admin/secrole-admin/secrole-admin.component';
+import { StatusAdminComponent } from './pages/admin/status-admin/status-admin.component';
+import { RoleAdminComponent } from './pages/admin/role-admin/role-admin.component';
 
 export const routes: Routes = [
   // { path: '',  redirectTo: 'home'},
@@ -69,9 +75,12 @@ export const routes: Routes = [
   // { path: 'login', component: SignInComponent, canActivate: [UnauthGuard] },
   { path: 'diplom-work', canActivate: [StudentHasDiplomGuard], component:DiplomWorkStudentComponent },
   { path: 'diplom-work/:id', component: DiplomWorkComponent, canActivate: [AuthGuard] },
+  { path: 'group/:id', component: GroupItemComponent, canActivate: [AuthGuard]},
+  { path: 'student-group', component: GroupItemComponent, canActivate: [AuthGuard]},
 
   { path: 'about-us', component: AboutUsComponent, canActivate: [AuthGuard] },
   { path: 'news', component: NewsComponent, canActivate:[AuthGuard]  },
+  { path: 'groups', component: GroupDashboardComponent, canActivate: [AuthGuard]},
 
   { path: 'lector-staff', component: LectorStaffComponent, canActivate: [StudentGuard]  },
   { path: 'select-diplom', component: SelectDiplomComponent, canActivate:[StudentGuard]  },
@@ -105,6 +114,18 @@ export const routes: Routes = [
   { path: 'admin-diplom-work', component: DiplomWorkAdminComponent, canActivate: [ExpectedRolesGuard], data: {
     expectedRoles: ['ADMIN', 'ORGANIZER', 'SECRETARY_SEC']
   }  },
+  { path: 'admin-sec', component: SECAdminComponent, canActivate: [ExpectedRolesGuard], data: {
+    expectedRoles: ['ADMIN', 'ORGANIZER', 'SECRETARY_SEC']
+  }  },
+  { path: 'admin-sec-role', component: SECRoleAdminComponent, canActivate: [ExpectedRolesGuard], data: {
+    expectedRoles: ['ADMIN', 'ORGANIZER', 'SECRETARY_SEC']
+  }  },
+  { path: 'admin-status', component: StatusAdminComponent, canActivate: [ExpectedRolesGuard], data: {
+    expectedRoles: ['ADMIN', 'ORGANIZER', 'SECRETARY_SEC']
+  }  },
+  { path: 'admin-role', component: RoleAdminComponent, canActivate: [ExpectedRolesGuard], data: {
+    expectedRoles: ['ADMIN']
+  }  },
   { path: 'admin-users', component: UsersAdminComponent, canActivate: [AdminGuard]  },
   { path: 'admin-qualifications', component: QualificationAdminComponent, canActivate: [AdminGuard]  },
   // { path: 'new-faculty', component: FacultyFormComponent, canActivate:[AdminGuard] },
@@ -120,6 +141,7 @@ export const routes: Routes = [
   exports: [ RouterModule ],
   imports: [
     CommonModule,
+    RouterModule.forRoot(routes)
   ],
   declarations: []
 })

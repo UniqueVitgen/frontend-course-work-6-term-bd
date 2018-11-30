@@ -1,4 +1,4 @@
 export class SECRole {
-    id;
+    id?;
     name;
 }

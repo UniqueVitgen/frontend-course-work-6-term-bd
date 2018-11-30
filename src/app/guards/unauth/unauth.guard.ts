@@ -8,6 +8,7 @@ export class UnauthGuard implements CanActivate {
   constructor(private router: Router, private globalEventsManager: GlobalEventsService) { }
 
     canActivate() {
+        console.log('log');
         this.globalEventsManager.showUnathoridNavBar.emit(true);
         return true;
 

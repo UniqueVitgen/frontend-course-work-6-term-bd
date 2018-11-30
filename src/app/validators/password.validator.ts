@@ -3,7 +3,7 @@ export class PasswordValidator {
     static onlyLetters = /^[a-zA-Zа-яА-Я]+$/;
     static onlyRussianLetters = /^[а-яА-Я]+$/;
     static onlyLatinLetters = /^[a-zA-Z]+$/;
-    static atLeastOneLetterOfLettersAndNumbers = /^[0-9]*[A-Za-а-яА-Я][0-9A-Za-z]*$/;
+    static atLeastOneLetterOfLettersAndNumbers = /^[0-9]*[A-Za-а-яА-Я][0-9A-Za-z$&+,:;=?@#|'<>.^*()%!-_]*$/;
     static onlyLettersAlert = 'Только символы русского и латинского алфавита';
     static onlyRussianLettersAlert = 'Только символы русского алфавита';
     static onlyLatinLettersAlert = 'Только символы латинского алфавита';

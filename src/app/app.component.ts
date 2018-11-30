@@ -24,6 +24,7 @@ import { UserStorage } from './storage/user/UserStorage';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { LeaderComponent } from './pages/lectors/leader/leader.component';
 import { TranslateService } from '@ngx-translate/core';
+import { GroupDashboardComponent } from './pages/common/group-dashboard/group-dashboard.component';
 
 
 @Component({
@@ -50,18 +51,21 @@ export class AppComponent {
     // { path: 'select-diplom', component: NewsComponent, title:'Дипломная работа' },
     { path: 'news', component: NewsComponent, title:'Новости' },
     { path: 'lector-staff', component: LectorStaffComponent, title:'Преподователи' },
+    { path: 'student-group', component: LectorStaffComponent, title:'Моя Группа' },
     // { path: 'about-us', component: SelectDiplomComponent,content: [], title:'О нас' },
   ]
 
   lector = [
     { path: 'involve', component: LeaderComponent, title:'Участие' },
     {  path: 'admin-news', component: NewsComponent, title:'Новости' },
+    {  path: 'groups', component: GroupDashboardComponent, title:'Группы' },
     // { path: 'about-us', component: SelectDiplomComponent,content: [], title:'О нас' },
   ]
 
   organizer = [
     {path: 'admin-diplom-work', title: 'Дипломные работы'},
     {  path: 'admin-news', component: NewsComponent, title:'Новости' },
+    {  path: 'groups', component: GroupDashboardComponent, title:'Группы' },
     // { path: 'about-us', component: SelectDiplomComponent,content: [], title:'О нас' },
   ]
 
@@ -69,6 +73,7 @@ export class AppComponent {
     {path: 'admin-diplom-work', title: 'Дипломные работы'},
     {path: 'sec-list', title: 'ГЭК комиссия'},
     {  path: 'admin-news', component: NewsComponent, title:'Новости' },
+    {  path: 'groups', component: GroupDashboardComponent, title:'Группы' },
     // { path: 'about-us', component: SelectDiplomComponent,content: [], title:'О нас' },
   ]
 
@@ -81,8 +86,11 @@ export class AppComponent {
     {path: 'admin-title', title: 'Звание'},
     {path: 'admin-post', title: 'Должность'},
     {path: 'admin-users', title: 'Пользователи'},
+    { path: 'admin-role', title: 'Роль' },
     {path: 'admin-diplom-work', title: 'Дипломные работы'},
-    { path: 'admin-news', title: 'Новости',  component: NewsComponent },
+    { path: 'admin-status', title: 'Статус' },
+    { path: 'sec-list', title: 'ГЭК' },
+    { path: 'admin-sec-role', title: 'ГЭК Роль' },
     // { path: 'about-us', title: 'О нас', component: SelectDiplomComponent,content: [] },
   ]
 
@@ -152,12 +160,8 @@ export class AppComponent {
   }
 
   unAuth() {
-    console.log('unath');
-    localStorage.removeItem('student');
   }
 
   authStudent() {
-    console.log('student');
-    localStorage.removeItem('student');
   }
 }

@@ -88,7 +88,7 @@
             </span>
           </div> -->
           <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-            <span>{{diplomWork.student.group.number}}</span>
+            <a  [routerLink]="'/group/' + diplomWork.student.group.idGroup">{{diplomWork.student.group.number}}</a>
           </div>
         </div>
         <div *ngIf="(diplomWork.comment != null && diplomWork.comment != '')" class="row">
@@ -144,6 +144,7 @@
     </tbody>
   </table> -->
   <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> -->
+  <br>
   <div *ngIf="(diplomWork?.percentages != null && diplomWork?.percentages.length > 0)">
     <table mat-table [dataSource]="diplomWork.percentages" class="mat-elevation-z8 full-width">
 

@@ -1,0 +1,59 @@
+  <mat-accordion>
+    <mat-expansion-panel class="user-expansion">
+      <mat-expansion-panel-header>
+        <mat-panel-title [tooltip]="'Никнейм' | translate" class="text-contain">
+          {{user.username}}
+        </mat-panel-title>
+        <mat-panel-description [tooltip]="'ФИО' | translate" class="text-contain">
+          {{formatFullName(user)}}
+        </mat-panel-description>
+        <mat-panel-description [tooltip]="'Роль' | translate" class="text-contain">
+          {{formatUserRole(user)}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div *ngIf="formatUserRole(user) == 'STUDENT'">
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right-text">
+            <mat-panel-description>{{'Группа' | translate}}</mat-panel-description>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <mat-panel-title>{{user.group.number}}</mat-panel-title>
+            <!-- <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
+          <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">Отсутствует</span> -->
+          </div>
+        </div>
+      </div>
+      <div *ngIf="formatUserRole(user) == 'LECTOR'">
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right-text">
+            <mat-panel-description>{{'Должность' | translate}}</mat-panel-description>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <mat-panel-title>{{user.post.name}}</mat-panel-title>
+            <!-- <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
+          <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">Отсутствует</span> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right-text">
+            <mat-panel-description>{{'Ученая степень' | translate}}</mat-panel-description>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <mat-panel-title>{{user.degree.name}}</mat-panel-title>
+            <!-- <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
+          <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">Отсутствует</span> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right-text">
+            <mat-panel-description>{{'Ученое звание' | translate}}</mat-panel-description>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <mat-panel-title>{{user.title.name}}</mat-panel-title>
+            <!-- <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
+          <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">Отсутствует</span> -->
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>

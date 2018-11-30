@@ -26,11 +26,30 @@ import { SelectGroupComponent } from '../../components/select/select-group/selec
 import { DiplomWorkTitleFormComponent } from '../../components/forms/diplom-work-title-form/diplom-work-title-form.component';
 import { FormsModule } from '@angular/forms';
 import { AngularLibraryModule } from '../library/angular-library/angular-library.module';
+import { MaterialDesignModule } from '../library/material-design/material-design.module';
+import { DirectivesModule } from '../others/directives/directives.module';
+import { BootstrapModule } from '../library/bootstrap/bootstrap.module';
+import { StoragesModule } from '../others/storages/storages.module';
+import { WorkersModule } from '../others/workers/workers.module';
+import { UserAccordionComponent } from '../../components/accordion/user-accordion/user-accordion.component';
+import { GroupTableComponent } from '../../components/table/group-table/group-table.component';
+import { SearchInputComponent } from '../../components/input/search-input/search-input.component';
+import { StatusTableComponent } from '../../components/table/status-table/status-table.component';
+import { RoleTableComponent } from '../../components/table/role-table/role-table.component';
+import { SECTableComponent } from '../../components/table/sectable/sectable.component';
+import { SECRoleTableComponent } from '../../components/table/secrole-table/secrole-table.component';
+import { RoleFormComponent } from '../../components/forms/role-form/role-form.component';
+import { StatusFormComponent } from '../../components/forms/status-form/status-form.component';
 
 @NgModule({
   imports: [
     CommonModule,
     AngularLibraryModule,
+    MaterialDesignModule,
+    BootstrapModule,
+    DirectivesModule,
+    StoragesModule,
+    WorkersModule,
     
   ],
   declarations: [
@@ -57,7 +76,16 @@ import { AngularLibraryModule } from '../library/angular-library/angular-library
     SECRoleFormComponent,
     NewsCardComponent,
     SECDateFormComponent,
-    StudentCardComponent
+    StudentCardComponent,
+    UserAccordionComponent,
+    GroupTableComponent,
+    SearchInputComponent,
+    RoleTableComponent,
+    SECTableComponent,
+    SECRoleTableComponent,
+    StatusTableComponent,
+    RoleFormComponent,
+    StatusFormComponent
   ],
   entryComponents: [
     SignInComponent,
@@ -77,7 +105,11 @@ import { AngularLibraryModule } from '../library/angular-library/angular-library
     DiplomWorkTitleFormComponent,
     SECFormComponent,
     SECEventFormComponent,
-    SECUserFormComponent
+    SECUserFormComponent,
+    RoleFormComponent,
+    StatusFormComponent,
+    SECRoleFormComponent,
+    SECDateFormComponent
   ],
   exports: [
     
@@ -103,7 +135,16 @@ import { AngularLibraryModule } from '../library/angular-library/angular-library
     SECRoleFormComponent,
     NewsCardComponent,
     SECDateFormComponent,
-    StudentCardComponent
+    StudentCardComponent,
+    UserAccordionComponent,
+    GroupTableComponent,
+    SearchInputComponent,
+    RoleTableComponent,
+    SECTableComponent,
+    SECRoleTableComponent,
+    StatusTableComponent,
+    RoleFormComponent,
+    StatusFormComponent
   ]
 })
 export class ComponentsModule { }

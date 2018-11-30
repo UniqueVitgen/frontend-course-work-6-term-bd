@@ -6,10 +6,23 @@ import { PercentageComponent } from '../../../pages/lectors/percentage/percentag
 import { QueryStudentsComponent } from '../../../pages/lectors/query-students/query-students.component';
 import { LeaderComponent } from '../../../pages/lectors/leader/leader.component';
 import { PercentageControlComponent } from '../../../pages/lectors/percentage-control/percentage-control.component';
+import { AngularLibraryModule } from '../../library/angular-library/angular-library.module';
+import { MaterialDesignModule } from '../../library/material-design/material-design.module';
+import { ComponentsModule } from '../../components/components.module';
+import { StudentModule } from '../student/student.module';
+import { BootstrapModule } from '../../library/bootstrap/bootstrap.module';
+import { StoragesModule } from '../../others/storages/storages.module';
+import { WorkersModule } from '../../others/workers/workers.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    AngularLibraryModule,
+    MaterialDesignModule,
+    BootstrapModule,
+    ComponentsModule,
+    StoragesModule,
+    WorkersModule,
   ],
   declarations: [
     QueryStudentsComponent,

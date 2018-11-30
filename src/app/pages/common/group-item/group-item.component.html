@@ -1,3 +1,14 @@
-<p>
-  group-item works!
-</p>
+<div class="container">
+    <br>
+    <div >
+  
+      <button mat-raised-button color="primary" (click)="saveInWord()">{{'Сохранить информацию в ворд' | translate}}</button>
+      <button mat-raised-button color="warn" (click)="saveInPDF()">{{'Сохранить информацию в PDF' | translate}}</button>
+    </div>
+    <br>
+  <mat-card>
+    <mat-card-title>Группа: {{group?.number}}</mat-card-title>
+  </mat-card>
+  <br>
+  <app-user-accordion *ngFor="let user of students" [user]="user"></app-user-accordion>
+</div>

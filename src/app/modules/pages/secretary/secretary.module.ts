@@ -1,11 +1,25 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SECComponent } from '../../../pages/secretary/sec/sec.component';
 import { SECListComponent } from '../../../pages/secretary/seclist/seclist.component';
+import { CommonPagesModule } from '../common-pages/common-pages.module';
+import { AngularLibraryModule } from '../../library/angular-library/angular-library.module';
+import { MaterialDesignModule } from '../../library/material-design/material-design.module';
+import { ComponentsModule } from '../../components/components.module';
+import { BootstrapModule } from '../../library/bootstrap/bootstrap.module';
+import { StoragesModule } from '../../others/storages/storages.module';
+import { WorkersModule } from '../../others/workers/workers.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    AngularLibraryModule,
+    MaterialDesignModule,
+    BootstrapModule,
+    ComponentsModule,
+    CommonPagesModule,
+    StoragesModule,
+    WorkersModule
   ],
   declarations: [
     SECListComponent,
@@ -14,6 +28,7 @@ import { SECListComponent } from '../../../pages/secretary/seclist/seclist.compo
   exports: [
     SECListComponent,
     SECComponent
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class SecretaryModule { }

@@ -4,12 +4,10 @@ import { FormsModule, ReactiveFormsModule, NgControl } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { BsModalModule } from 'ng2-bs3-modal';
 import { HttpModule, XHRBackend, RequestOptions, Http } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { httpFactory } from './interceptor/http.factory';
-import { ModalModule } from 'ngx-bootstrap/modal';
 import { Ng2FileInputModule } from 'ng2-file-input'; // <-- import the module
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -148,6 +146,15 @@ import { LectorModule } from './modules/pages/lector/lector.module';
 import { SecretaryModule } from './modules/pages/secretary/secretary.module';
 import { StudentModule } from './modules/pages/student/student.module';
 import { ComponentsModule } from './modules/components/components.module';
+import { DirectivesModule } from './modules/others/directives/directives.module';
+import { AngularLibraryModule } from './modules/library/angular-library/angular-library.module';
+import { BootstrapModule } from './modules/library/bootstrap/bootstrap.module';
+import { MaterialDesignModule } from './modules/library/material-design/material-design.module';
+import { PipesModule } from './modules/others/pipes/pipes.module';
+import { StoragesModule } from './modules/others/storages/storages.module';
+import { WorkersModule } from './modules/others/workers/workers.module';
+import { ServicesModule } from './modules/others/services/services.module';
+import { GuardsModule } from './modules/others/guards/guards.module';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -156,20 +163,20 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
     // MainComponent,
     // AboutUsComponent,
     // SignUpComponent,
     // SignInComponent,
-    SelectDiplomComponent,
-    SelectTeacherComponent,
-    LectorStaffComponent,
-    NewsComponent,
+    // SelectDiplomComponent,
+    // SelectTeacherComponent,
+    // LectorStaffComponent,
+    // NewsComponent,
     // SignUpStudentComponent,
     // SignUpLectorComponent,
-    QueryStudentsComponent,
-    InvolveComponent,
-    PercentageComponent,
+    // QueryStudentsComponent,
+    // InvolveComponent,
+    // PercentageComponent,
 
     // FacultyAdminComponent,
     // SpecializationAdminComponent,
@@ -192,14 +199,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     // SelectLectorComponent,
     // FileUploadComponent,
     // SelectImageComponent,
-    LeaderComponent,
-    PercentageControlComponent,
+    // LeaderComponent,
+    // PercentageControlComponent,
     // PercentageFormComponent,
-    DisableControlDirective,
+    // DisableControlDirective,
     // DiplomWorkComponent,
     // DiplomLectorStaffComponent,
-    DiplomWorkStudentComponent,
-    PercentDirective,
+    // DiplomWorkStudentComponent,
+    // PercentDirective,
     // QualificationFormComponent,
     // DiplomWorkAdminComponent,
     // UsersAdminComponent,
@@ -207,7 +214,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     // SignUpOrganizerComponent,
     // DiplomWorkTitleFormComponent,
     // SignUpSecretarySecComponent,
-    SECListComponent,
+    // SECListComponent,
     // SECFormComponent,
     // SECEventFormComponent,
     // SelectGroupComponent,
@@ -220,50 +227,41 @@ export function HttpLoaderFactory(http: HttpClient) {
     // NgControl
   ],
   imports: [
-    ModalModule.forRoot(),
-    BsDatepickerModule.forRoot(),
-    MatMenuModule,
+    // MatMenuModule,
     // Ng2FileInputModule.forRoot({
     //   showPreviews: false
     // }),
-    BrowserModule,
     // Browser
-    BsModalModule,
-    HttpModule,
-
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FormsModule,
-    RouterModule.forRoot(routes),
     // RouterModule.forRoot(routes),
     AppRoutingModule,
-    BrowserAnimationsModule,
-    TranslateModule.forRoot({
-        loader: {
-            provide: TranslateLoader,
-            useFactory: HttpLoaderFactory,
-            deps: [HttpClient]
-        }
-    })
-    ,
-    MatCardModule,
-    MatTableModule,
-    MatExpansionModule,
-    MatInputModule,
-    MatSelectModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCheckboxModule,
+    // MatCardModule,
+    // MatTableModule,
+    // MatExpansionModule,
+    // MatInputModule,
+    // MatSelectModule,
+    // MatIconModule,
+    // MatButtonModule,
+    // MatCheckboxModule,
 
-    TimepickerModule.forRoot(),
-    TooltipModule.forRoot(),
+    // TimepickerModule.forRoot(),
+    // TooltipModule.forRoot(),
+    AngularLibraryModule,
+    BootstrapModule,
+    MaterialDesignModule,
+
     AdminModule,
-    // CommonPagesModule,
-    // LectorModule,
-    // SecretaryModule,
-    // StudentModule,
-    // ComponentsModule
+    CommonPagesModule,
+    LectorModule,
+    SecretaryModule,
+    StudentModule,
+    ComponentsModule,
+
+    DirectivesModule,
+    StoragesModule,
+    WorkersModule,
+    PipesModule,
+    GuardsModule,
+    ServicesModule
   ],
   entryComponents: [
     // SignInComponent,
@@ -301,50 +299,41 @@ export function HttpLoaderFactory(http: HttpClient) {
     //   multi: true
     // },
 
-    GlobalEventsService,
-    FormEventService,  
-    // ModalService,
-    LectorService,
-    TitleService,
-    PostService,
-    DegreeService,
-    UserService,
-    RoleService,
-    ConfigService,
-    LectorService,
-    NewsService,
-    FacultyService,
-    SpecializationService,
-    GroupService,
-    SignUpService,
-    AuthService,
-    UploadFileService,
-    DiplomWorkService,
-    PercentageService,
-    QualificationService,
-    StatusService,
-    SECService,
-    SECEventService,
+    // GlobalEventsService,
+    // FormEventService,  
+    // // ModalService,
+    // LectorService,
+    // TitleService,
+    // PostService,
+    // DegreeService,
+    // UserService,
+    // RoleService,
+    // ConfigService,
+    // LectorService,
+    // NewsService,
+    // FacultyService,
+    // SpecializationService,
+    // GroupService,
+    // SignUpService,
+    // AuthService,
+    // UploadFileService,
+    // DiplomWorkService,
+    // PercentageService,
+    // QualificationService,
+    // StatusService,
+    // SECService,
+    // SECEventService,
 
-    StudentGuard,
-    UnauthGuard,
-    AuthGuard,
-    LectorGuard,
-    AdminGuard,
-    StudentHasDiplomGuard,
-    ExpectedRolesGuard,
+    // StudentGuard,
+    // UnauthGuard,
+    // AuthGuard,
+    // LectorGuard,
+    // AdminGuard,
+    // StudentHasDiplomGuard,
+    // ExpectedRolesGuard,
     // SignInComponent,
 
     // PasswordValidator,
-
-    TokenStorage,
-    UserStorage,
-
-    DateTimeWorker,
-    ArrayWorker,
-    UserWorker,
-
-    PercentPipe
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]

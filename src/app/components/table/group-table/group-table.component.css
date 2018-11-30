@@ -1,0 +1,4 @@
+.group-item:hover {
+    background: #ccc;
+    cursor: pointer;
+}

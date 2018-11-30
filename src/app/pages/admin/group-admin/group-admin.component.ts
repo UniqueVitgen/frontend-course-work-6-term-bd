@@ -30,7 +30,7 @@ export class GroupAdminComponent implements OnInit {
       console.log('groups - ', groups);
       this.groups = groups;
       this.selectedGroups = groups;
-    })
+    });
 
   }
 

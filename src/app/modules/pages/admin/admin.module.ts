@@ -16,14 +16,26 @@ import { AngularLibraryModule } from '../../library/angular-library/angular-libr
 import { MaterialDesignModule } from '../../library/material-design/material-design.module';
 import { ComponentsModule } from '../../components/components.module';
 import { CommonPagesModule } from '../common-pages/common-pages.module';
+import { BootstrapModule } from '../../library/bootstrap/bootstrap.module';
+import { StudentModule } from '../student/student.module';
+import { StoragesModule } from '../../others/storages/storages.module';
+import { WorkersModule } from '../../others/workers/workers.module';
+import { SECRoleAdminComponent } from '../../../pages/admin/secrole-admin/secrole-admin.component';
+import { SECAdminComponent } from '../../../pages/admin/secadmin/secadmin.component';
+import { StatusAdminComponent } from '../../../pages/admin/status-admin/status-admin.component';
+import { RoleAdminComponent } from '../../../pages/admin/role-admin/role-admin.component';
 
 @NgModule({
   imports: [
     CommonModule,
     AngularLibraryModule,
     MaterialDesignModule,
+    BootstrapModule,
     ComponentsModule,
-    CommonPagesModule
+    CommonPagesModule,
+    StudentModule,
+    StoragesModule,
+    WorkersModule
   ],
   declarations: [
     FacultyAdminComponent,
@@ -37,7 +49,11 @@ import { CommonPagesModule } from '../common-pages/common-pages.module';
     DegreeAdminComponent,
     PostAdminComponent,
     DiplomWorkAdminComponent,
-    UsersAdminComponent
+    UsersAdminComponent,
+    SECAdminComponent,
+    SECRoleAdminComponent,
+    StatusAdminComponent,
+    RoleAdminComponent
   ],
   exports: [
     FacultyAdminComponent,
@@ -51,7 +67,11 @@ import { CommonPagesModule } from '../common-pages/common-pages.module';
     DegreeAdminComponent,
     PostAdminComponent,
     DiplomWorkAdminComponent,
-    UsersAdminComponent
+    UsersAdminComponent,
+    SECAdminComponent,
+    SECRoleAdminComponent,
+    StatusAdminComponent,
+    RoleAdminComponent
   ]
 })
 export class AdminModule { }

@@ -27,13 +27,12 @@ export function HttpLoaderFactory(http: HttpClient) {
         }
     })
     ,
-
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FormsModule,
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RouterModule
   ],
   declarations: [],
   providers: [
@@ -46,14 +45,13 @@ export function HttpLoaderFactory(http: HttpClient) {
   exports: [
     CommonModule,
     HttpModule,
-
     HttpClientModule,
-    FormsModule,
     ReactiveFormsModule,
     FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
-    TranslateModule
+    TranslateModule,
+    RouterModule
   ]
 })
 export class AngularLibraryModule { }
