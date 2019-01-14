@@ -45,6 +45,63 @@
         </div>
       </div>
       <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="form-group form-control-sm">
+            <label for="exampleFormControlSelect1">{{'Университет' | translate}}</label>
+            <select [(ngModel)]="lector.university" (ngModelChange)="changeUniversity()" formControlName="university"
+              class="form-control" id="exampleFormControlSelect1">
+              <option *ngFor="let university of lector.universities" [ngValue]="university">{{university.name}}</option>
+
+            </select>
+          </div>
+          <!-- <mat-form-field>
+          <mat-select placeholder="Факультет">
+            <mat-option *ngFor="let university of lector.universities" [value]="university">
+              {{university.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="form-group form-control-sm">
+            <label for="exampleFormControlSelect1">{{'Факультет' | translate}}</label>
+            <select [(ngModel)]="lector.faculty" (ngModelChange)="changeFaculty()" formControlName="faculty"
+              class="form-control" id="exampleFormControlSelect1">
+              <option *ngFor="let faculty of lector.faculties" [ngValue]="faculty">{{faculty.name}}</option>
+
+            </select>
+          </div>
+          <!-- <mat-form-field>
+          <mat-select placeholder="Факультет">
+            <mat-option *ngFor="let faculty of student.faculties" [value]="faculty">
+              {{faculty.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="form-group form-control-sm">
+            <label for="exampleFormControlSelect1">{{'Кафедра' | translate}}</label>
+            <select [(ngModel)]="lector.department" (ngModelChange)="changeDepartment()" formControlName="department"
+              class="form-control" id="exampleFormControlSelect1">
+              <option *ngFor="let department of lector.departments" [ngValue]="department">{{department.name}}</option>
+
+            </select>
+          </div>
+          <!-- <mat-form-field>
+          <mat-select placeholder="Факультет">
+            <mat-option *ngFor="let faculty of student.faculties" [value]="faculty">
+              {{faculty.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> -->
+        </div>
+      </div>
+      <div class="row">
         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
           <div class="form-group form-control-sm">
             <label for="degree">{{'Ученная степень' | translate}}</label>

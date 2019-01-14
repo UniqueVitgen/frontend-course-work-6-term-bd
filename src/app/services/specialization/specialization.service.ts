@@ -7,8 +7,8 @@ export class SpecializationService {
 
   constructor(public configService: ConfigService) { }
 
-  getByFaculty(idFaculty) {
-    return this.configService.get(prefix + 'get-by-specialization/' + idFaculty);
+  getByDepartment(idFaculty) {
+    return this.configService.get(prefix + 'get-by-department/' + idFaculty);
   }
 
   get(specialization) {

@@ -20,6 +20,7 @@ import { BootstrapModule } from '../../library/bootstrap/bootstrap.module';
 import { StoragesModule } from '../../others/storages/storages.module';
 import { WorkersModule } from '../../others/workers/workers.module';
 import { GroupDashboardComponent } from '../../../pages/common/group-dashboard/group-dashboard.component';
+import { SignUpLectorOrganizerComponent } from '../../../pages/common/sign-up/sign-up-lector-organizer/sign-up-lector-organizer.component';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import { GroupDashboardComponent } from '../../../pages/common/group-dashboard/g
     DiplomWorkComponent,
     DiplomLectorStaffComponent,
     SignUpSecretarySecComponent,
+    SignUpLectorOrganizerComponent,
     ProfileComponent,
     SignUpOrganizerComponent,
     NewsItemComponent,
@@ -59,6 +61,7 @@ import { GroupDashboardComponent } from '../../../pages/common/group-dashboard/g
     DiplomWorkComponent,
     DiplomLectorStaffComponent,
     SignUpSecretarySecComponent,
+    SignUpLectorOrganizerComponent,
     ProfileComponent,
     SignUpOrganizerComponent,
     NewsItemComponent,

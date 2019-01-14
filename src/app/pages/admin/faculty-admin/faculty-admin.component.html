@@ -73,6 +73,12 @@
       <td mat-cell *matCellDef="let faculty"> {{faculty.shortName}} </td>
     </ng-container>
 
+    <!-- Name Column -->
+    <ng-container matColumnDef="university">
+      <th mat-header-cell *matHeaderCellDef> {{'Университет' | translate}} </th>
+      <td mat-cell *matCellDef="let faculty"> {{faculty.university.shortName}} </td>
+    </ng-container>
+
     <!-- Weight Column -->
     <ng-container matColumnDef="edit">
       <th mat-header-cell *matHeaderCellDef> </th>

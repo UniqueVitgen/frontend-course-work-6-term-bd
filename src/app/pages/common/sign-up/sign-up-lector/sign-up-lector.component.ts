@@ -13,6 +13,10 @@ import { TitleService } from '../../../../services/title/title.service';
 import { PostService } from '../../../../services/post/post.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { SignInComponent } from '../../../../components/forms/sign-in/sign-in.component';
+import { UniversityService } from '../../../../services/university/university.service';
+import { FacultyService } from '../../../../services/faculty/faculty.service';
+import { University } from '../../../../factory/university.factory';
+import { DepartmentService } from '../../../../services/department/department.service';
 
 @Component({
   selector: 'app-sign-up-lector',
@@ -29,6 +33,12 @@ export class SignUpLectorComponent implements OnInit {
     firstname: '',
     lastname: '',
     middlename: '',
+    university: undefined,
+    universities: [],
+    faculty: undefined,
+    faculties: [],
+    department: undefined, 
+    departments: [],
     title: undefined,
     titles: [],
     post: undefined,
@@ -47,6 +57,7 @@ export class SignUpLectorComponent implements OnInit {
     lastname: '',
     middlename: '',
     title: undefined,
+    department: undefined,
     post: undefined,
     degree: undefined,
     password: '',
@@ -76,6 +87,9 @@ export class SignUpLectorComponent implements OnInit {
     public degreeService: DegreeService,
     public titleService: TitleService,
     public postService: PostService,
+    public universityService: UniversityService,
+    public facultyService: FacultyService,
+    public departmentService: DepartmentService,
     private modalService: BsModalService,
     
     public tokenStorage: TokenStorage,
@@ -89,6 +103,9 @@ export class SignUpLectorComponent implements OnInit {
       lastname: ['', Validators.compose([Validators.required, Validators.pattern(PasswordValidator.onlyRussianLetters)])],
       middlename: ['', Validators.compose([Validators.required, Validators.pattern(PasswordValidator.onlyRussianLetters)])],
       title: ['', Validators.compose([Validators.required])],
+      university: ['', Validators.compose([Validators.required])],
+      faculty: ['',  Validators.compose([Validators.required])],
+      department: ['',  Validators.compose([Validators.required])],
       post: ['', Validators.compose([Validators.required])],
       degree: ['', Validators.compose([Validators.required])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
@@ -148,6 +165,30 @@ export class SignUpLectorComponent implements OnInit {
     this.getDegrees();
     this.getTitles();
     this.getPosts();
+    this.getUniveristies();
+  }
+
+  getUniveristies() {
+    this.universityService.getAll().subscribe(resUniversities => {
+      this.lector.universities = resUniversities;
+    })
+  }
+
+  changeUniversity() {
+    this.facultyService.getAllByUniversity(this.lector.university).subscribe(resFaculties => {
+      console.log('res - ', resFaculties);
+      this.lector.faculties = resFaculties;
+    })
+  }
+  
+  changeFaculty() {
+    console.log('res - ');
+    this.departmentService.getAllByFaculty(this.lector.faculty).subscribe(resDepartments => {
+      console.log('res - ', resDepartments);
+      this.lector.departments = resDepartments;
+    })
+  }
+  changeDepartment() {
   }
 
   initializeInputs() {

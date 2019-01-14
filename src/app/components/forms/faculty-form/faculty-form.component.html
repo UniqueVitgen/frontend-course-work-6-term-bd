@@ -48,6 +48,33 @@
           <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
           </div>
         </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group form-control-sm">
+              <label for="exampleFormControlSelect1">{{'Университет' | translate}}</label>
+              <select [compareWith]="compareFaculties" [(ngModel)]="faculty.university" formControlName="university"
+                class="form-control" id="exampleFormControlSelect1">
+                <!-- <option>FITR</option> -->
+                <option *ngFor="let university of universities" [selected]="university.id == faculty.university?.id"
+                  [ngValue]="university">{{university.name}}</option>
+                <!-- <option>FMMP</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option> -->
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <button (click)="openQualificationForm()" type="submit" class="btn btn-warning full-width">{{'Добавить
+              Квалификацию' | translate}}</button>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          </div>
+        </div>
       </div>
     </div>
   </div>

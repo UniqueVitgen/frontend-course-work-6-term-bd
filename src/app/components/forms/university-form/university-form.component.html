@@ -1,0 +1,62 @@
+<form class="material-form" [formGroup]="universityForm">
+  <div class="modal-header">
+    <div class="title-center-container">
+      <h4>{{'Университет' | translate}}</h4>
+    </div>
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="cancel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-university">
+      <div class="container">
+        <div class="row">
+          <!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          </div> -->
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <!-- <div class="form-group form-control-sm">
+                  <label for="exampleInputFirstName">{{'Название' | translate}}</label>
+                  <input [(ngModel)]="university.name" formControlName="name" type="text" class="form-control" id="exampleInputFirstName" [placeholder]="'Название' | translate">
+                  <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.firstname.touched && studentForm.controls.firstname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div>
+                </div> -->
+            <mat-form-field class="example-full-width">
+              <input matInput [placeholder]="'Название' | translate" [(ngModel)]="university.name" formControlName="name">
+            </mat-form-field>
+          </div>
+          <!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          </div> -->
+        </div>
+        <div class="row">
+          <!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          </div> -->
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <!-- <div class="form-group form-control-sm">
+                  <label for="exampleInputFirstName">{{'Название' | translate}}</label>
+                  <input [(ngModel)]="university.name" formControlName="name" type="text" class="form-control" id="exampleInputFirstName" [placeholder]="'Название' | translate">
+                  <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.firstname.touched && studentForm.controls.firstname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div>
+                </div> -->
+            <mat-form-field class="example-full-width">
+              <input matInput [placeholder]="'Краткое Название' | translate" [(ngModel)]="university.shortName" formControlName="shortName">
+            </mat-form-field>
+          </div>
+          <!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button *ngIf="!isEdit" [disabled]="universityForm.invalid" (click)="saveUniversity()" type="submit" class="btn btn-primary full-width">{{'Добавить'
+      | translate}}</button>
+    <button *ngIf="isEdit" [disabled]="universityForm.invalid" (click)="editUniversity()" type="submit" class="btn btn-primary full-width">{{'Сохранить'
+      | translate}}</button>
+    <!-- </div> -->
+    <!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"> -->
+    <button (click)="cancel()" type="submit" class="btn btn-danger full-width">{{'Отмена' | translate}}</button>
+    <!-- </div> -->
+    <!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"> -->
+    <!-- </div> -->
+    <!-- </div> -->
+  </div>
+</form>

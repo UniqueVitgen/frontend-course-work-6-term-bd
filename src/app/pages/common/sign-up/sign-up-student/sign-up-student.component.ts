@@ -13,6 +13,8 @@ import { TokenStorage } from '../../../../storage/token/TokenStorage';
 import { UserStorage } from '../../../../storage/user/UserStorage';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { SignInComponent } from '../../../../components/forms/sign-in/sign-in.component';
+import { UniversityService } from '../../../../services/university/university.service';
+import { DepartmentService } from '../../../../services/department/department.service';
 
 @Component({
   selector: 'app-sign-up-student',
@@ -29,7 +31,11 @@ export class SignUpStudentComponent implements OnInit {
     password: '',
     confirmPassword: '',
     selectedFaculty: undefined,
+    universities: [],
+    university: undefined,
     faculties: undefined,
+    departments: [],
+    department: undefined,
     selectedSpecialization: undefined,
     specializations: undefined,
     // department: '',
@@ -57,7 +63,9 @@ export class SignUpStudentComponent implements OnInit {
     public signUpService: SignUpService,
     public authService: AuthService,
     public facultyService: FacultyService,
+    private universityService: UniversityService,
     public specializationServive: SpecializationService,
+    private departmentService: DepartmentService,
     public groupService: GroupService,
     public tokenStorage: TokenStorage,
     public userStorage: UserStorage,
@@ -70,6 +78,7 @@ export class SignUpStudentComponent implements OnInit {
       firstname: ['', Validators.compose([Validators.required, Validators.pattern(PasswordValidator.onlyRussianLetters)])],
       lastname: ['', Validators.compose([Validators.required, Validators.pattern(PasswordValidator.onlyRussianLetters)])],
       middlename: ['', Validators.compose([Validators.required, Validators.pattern(PasswordValidator.onlyRussianLetters)])],
+      university: ['', Validators.compose([Validators.required])],
       faculty: ['', Validators.compose([])],
       department: ['', Validators.compose([])],
       group: ['', Validators.compose([Validators.required])],
@@ -79,7 +88,7 @@ export class SignUpStudentComponent implements OnInit {
       {
         validator: PasswordValidator.MatchPassword
       });
-    this.initializeFaculty();
+    // this.initializeFaculty();
     // this.PasswordValidators.atLeastOneLetterOfLettersAndNumbersAlert
     // this.facultyService.getAll().subscribe(data => {
     //   console.log('data - ', data);
@@ -92,6 +101,7 @@ export class SignUpStudentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getUniversities();
   }
 
   loginForm() {
@@ -112,16 +122,16 @@ export class SignUpStudentComponent implements OnInit {
     });
   }
 
+  getUniversities() {
+    this.universityService.getAll().subscribe(resUniversities => {
+      this.student.universities = resUniversities;
+    });
+  }
+
   createSendLectorObject() {
     for (let property in this.studentSend) {
       this.studentSend[property] = this.student[property];
     }
-  }
-
-  getByFaculty(facultyId) {
-    this.specializationServive.getByFaculty(facultyId).subscribe(data => {
-      console.log('data');
-    })
   }
 
   getBySpecialization(specializationId) {
@@ -135,11 +145,26 @@ export class SignUpStudentComponent implements OnInit {
   changeFaculty() {
     console.log('sel fac - ', this.student.selectedFaculty);
     if(this.student.selectedFaculty) {
-      this.specializationServive.getByFaculty(this.student.selectedFaculty.idFaculty).subscribe(specializations => {
-        this.student.specializations = specializations;
-        // this.student.selectedSpecialization = undefined;
-      })
+      this.departmentService.getAllByFaculty(this.student.selectedFaculty).subscribe(resDepartments => {
+        this.student.departments = resDepartments;
+      });
+      // this.specializationServive.getByFaculty(this.student.selectedFaculty.idFaculty).subscribe(specializations => {
+      //   this.student.specializations = specializations;
+      //   // this.student.selectedSpecialization = undefined;
+      // })
     }
+  }
+
+  changeUniversity() {
+    this.facultyService.getAllByUniversity(this.student.university).subscribe(resFaculties => {
+      console.log('res - ', resFaculties);
+      this.student.faculties = resFaculties;
+    })
+  }
+  changeDepartment() {
+    this.specializationServive.getByDepartment(this.student.department.id).subscribe(resSpecializations => {
+      this.student.specializations = resSpecializations;
+    });
   }
 
   changeSpecialization() {

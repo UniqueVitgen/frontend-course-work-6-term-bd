@@ -18,6 +18,10 @@ export class SignUpService {
     return this.configService.post(prefix + 'lector', lector);
   }
 
+  signUpLectorOrganizer(lector) {
+    return this.configService.post(prefix + 'lector-organizer', lector);
+  }
+
   singUpOrganizer(organizer) {
     return this.configService.post(prefix + 'organizer', organizer);
   }

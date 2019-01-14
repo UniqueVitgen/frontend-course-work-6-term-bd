@@ -1,0 +1,148 @@
+<div class="reg-div">
+  <div class="container">
+    <!-- <input [(ngModel)]="login" type="text" class="form-control" placeholder="Логин"> -->
+
+    <form [formGroup]="lectorForm">
+      <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group form-control-sm">
+            <label for="login">{{'Логин' | translate}}</label>
+            <input [ngClass]="{'invalid-input':isUsernameExist}" [(ngModel)]="lector.username" formControlName="login"
+              type="text" class="form-control" id="login" placeholder="Логин">
+            <div class="alert alert-danger alert-form" *ngIf="isUsernameExist">{{'Пользователь существует' |
+              translate}}</div>
+            <div class="alert alert-danger alert-form" *ngIf="lectorForm.controls.login.touched && lectorForm.controls.login.errors?.pattern">{{PasswordValidators.atLeastOneLetterOfLettersAndNumbersAlert
+              | translate}}</div>
+          </div>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="form-group form-control-sm">
+            <label for="lastname">{{'Фамилия' | translate}}</label>
+            <input [(ngModel)]="lector.lastname" formControlName="lastname" type="text" class="form-control" id="lastname"
+              [placeholder]="'Фамилия' | translate">
+
+            <div class="alert alert-danger alert-form" *ngIf="lectorForm.controls.lastname.touched && lectorForm.controls.lastname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert
+              | translate}}</div>
+          </div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="form-group form-control-sm">
+            <label for="firstname">{{'Имя' | translate}}</label>
+            <input [(ngModel)]="lector.firstname" formControlName="firstname" type="text" class="form-control" id="firstname"
+              placeholder="Имя">
+
+            <div class="alert alert-danger alert-form" *ngIf="lectorForm.controls.firstname.touched && lectorForm.controls.firstname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert
+              | translate}}</div>
+          </div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="form-group form-control-sm">
+            <label for="middlename">{{'Отчество' | translate}}</label>
+            <input [(ngModel)]="lector.middlename" formControlName="middlename" type="text" class="form-control" id="middlename"
+              [placeholder]="'Отчество' | translate">
+
+            <div class="alert alert-danger alert-form" *ngIf="lectorForm.controls.middlename.touched && lectorForm.controls.middlename.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert
+              | translate}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <mat-form-field class="example-full-width">
+            <input matInput required placeholder="Organization" [matAutocomplete]="auto"
+              [(ngModel)]="lector.organization.name">
+            <mat-autocomplete required #auto="matAutocomplete">
+              <mat-option *ngFor="let state of search(lector.organization, lector.organizations)" [value]="state.name">
+                <span>{{state.name}}</span>
+                <!--<small>Population: {{state.population}}</small>-->
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <mat-form-field class="example-full-width">
+            <input matInput required placeholder="Post Organization" [matAutocomplete]="auto"
+              [(ngModel)]="lector.postOrganization.name">
+            <mat-autocomplete required #auto="matAutocomplete">
+              <mat-option *ngFor="let state of lector.postOrganizations" [value]="state.name">
+                <span>{{state.name}}</span>
+                <!--<small>Population: {{state.population}}</small>-->
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group form-control-sm">
+            <label for="password">{{'Пароль' | translate}}</label>
+            <input [(ngModel)]="lector.password" formControlName="password" type="password" class="form-control" id="password"
+              [placeholder]="'Пароль' | translate">
+            <div class="alert alert-danger alert-form" *ngIf="lectorForm.controls.password.touched && lectorForm.controls.password.errors?.minlength">{{'Пароль
+              должен содержать 6 символов' | translate}}</div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group form-control-sm">
+            <label for="confirmPassword">{{'Подтвердить пароль' | translate}}</label>
+            <input [(ngModel)]="lector.confirmPassword" formControlName="confirmPassword" type="password" class="form-control"
+              id="confirmPassword" [placeholder]="'Подтвердить пароль' | translate">
+            <div class="alert alert-danger alert-form" *ngIf="lectorForm.controls.confirmPassword.touched && lectorForm.controls.confirmPassword.errors?.MatchPassword">{{'Пароль
+              не совпадает' | translate}}</div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="form-group form-control-sm">
+            <label for="description">{{'Описание' | translate}}</label>
+            <textarea rows="3" [(ngModel)]="lector.description" formControlName="description" type="password" class="form-control"
+              id="description" [placeholder]="'Описание' | translate"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <button [disabled]="lectorForm.invalid" (click)="regLector()" class="btn btn-primary full-width">{{'Регистрация'
+            | translate}}</button>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div (click)="loginForm()" class="center-text">
+            <a class="custom-link">{{'У вас уже есть аккаунт?' | translate}}</a>
+          </div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        </div>
+      </div>
+    </form>
+    <!-- <button (click)="regLector()" class="btn btn-primary full-width">Регистрация</button> -->
+  </div>
+</div>

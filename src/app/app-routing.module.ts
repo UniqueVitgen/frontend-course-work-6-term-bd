@@ -62,6 +62,9 @@ import { SECAdminComponent } from './pages/admin/secadmin/secadmin.component';
 import { SECRoleAdminComponent } from './pages/admin/secrole-admin/secrole-admin.component';
 import { StatusAdminComponent } from './pages/admin/status-admin/status-admin.component';
 import { RoleAdminComponent } from './pages/admin/role-admin/role-admin.component';
+import { UniversityAdminComponent } from './pages/admin/university-admin/university-admin.component';
+import { DepartmentAdminComponent } from './pages/admin/department-admin/department-admin.component';
+import { SignUpLectorOrganizerComponent } from './pages/common/sign-up/sign-up-lector-organizer/sign-up-lector-organizer.component';
 
 export const routes: Routes = [
   // { path: '',  redirectTo: 'home'},
@@ -70,6 +73,7 @@ export const routes: Routes = [
   { path: 'registration', component: SignUpComponent, canActivate: [UnauthGuard] },
   { path: 'registration-student', component: SignUpStudentComponent, canActivate: [UnauthGuard] },
   { path: 'registration-lector', component: SignUpLectorComponent, canActivate: [UnauthGuard] },
+  { path: 'registration-lector-organizer', component: SignUpLectorOrganizerComponent, canActivate: [UnauthGuard] },
   { path: 'registration-organizer', component: SignUpOrganizerComponent, canActivate: [UnauthGuard] },
   { path: 'registration-secretary-sec', component: SignUpSecretarySecComponent, canActivate: [UnauthGuard] },
   // { path: 'login', component: SignInComponent, canActivate: [UnauthGuard] },
@@ -102,7 +106,9 @@ export const routes: Routes = [
   } },
   
   
+  { path: 'admin-university', component: UniversityAdminComponent, canActivate:[AdminGuard] },
   { path: 'admin-faculty', component: FacultyAdminComponent, canActivate:[AdminGuard] },
+  { path: 'admin-department', component: DepartmentAdminComponent, canActivate:[AdminGuard] },
   { path: 'admin-specialization', component: SpecializationAdminComponent, canActivate:[AdminGuard]  },
   { path: 'admin-group', component: GroupAdminComponent, canActivate: [AdminGuard]  },
   { path: 'admin-news', component: NewsAdminComponent, canActivate: [ExpectedRolesGuard], data: {

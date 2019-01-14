@@ -2,7 +2,7 @@
 	background: #262626;
 	color: #9b9b9b;
 	display: flex;
-	height: 100vh;
+	min-height: 100vh;
 	align-items: center;
 	/* background: url('../images/temno-ochen-temno-f3cbb64.jpg'); */
 	/* background: url('assets/img/reg/1517226261.jpg'); */

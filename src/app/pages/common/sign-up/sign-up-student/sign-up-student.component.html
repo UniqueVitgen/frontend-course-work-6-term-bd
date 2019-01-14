@@ -1,8 +1,8 @@
 <div class="reg-div">
   <div class="container">
     <!-- <mat-card> -->
-      <form [formGroup]="studentForm">
-        <!-- <div class="row">
+    <form [formGroup]="studentForm">
+      <!-- <div class="row">
         <div class="col">
       <div class="form-group">
         <label for="exampleInputUsername">Username</label>
@@ -26,116 +26,154 @@
         <input type="text" class="form-control" id="exampleInputLastName" placeholder="First name">
       </div>
       </div> -->
-        <div class="row">
-          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-          </div>
-          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <div class="form-group form-control-sm">
-              <label for="exampleInputFirstName">{{'Логин' | translate}}</label>
-              <input [ngClass]="{'invalid-input': isUsernameExist}" [(ngModel)]="student.username" formControlName="login"
-                type="text" class="form-control" id="exampleInputUsername" [placeholder]="'Логин' | translate">
-              <div class="alert alert-danger alert-form" *ngIf="isUsernameExist">{{'Пользователь существует' |
-                translate}}</div>
-              <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.login.touched && studentForm.controls.login.errors?.pattern">{{PasswordValidators.atLeastOneLetterOfLettersAndNumbersAlert
-                | translate}}</div>
+      <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group form-control-sm">
+            <label for="exampleInputFirstName">{{'Логин' | translate}}</label>
+            <input [ngClass]="{'invalid-input': isUsernameExist}" [(ngModel)]="student.username" formControlName="login"
+              type="text" class="form-control" id="exampleInputUsername" [placeholder]="'Логин' | translate">
+            <div class="alert alert-danger alert-form" *ngIf="isUsernameExist">{{'Пользователь существует' |
+              translate}}</div>
+            <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.login.touched && studentForm.controls.login.errors?.pattern">{{PasswordValidators.atLeastOneLetterOfLettersAndNumbersAlert
+              | translate}}</div>
 
-            </div>
-            <!-- <mat-form-field class="example-full-width">
+          </div>
+          <!-- <mat-form-field class="example-full-width">
             <input matInput placeholder="Логин" [(ngModel)]="student.username">
           </mat-form-field> -->
-          </div>
-          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-          </div>
         </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        </div>
+      </div>
 
-        <div class="row">
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <div class="form-group form-control-sm">
-              <label for="exampleInputLastName">{{'Фамилия' | translate}}</label>
-              <input [(ngModel)]="student.lastname" formControlName="lastname" type="text" class="form-control" id="exampleInputLastName"
-                [placeholder]="'Фамилия' | translate">
-              <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.lastname.touched && studentForm.controls.lastname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div>
-            </div>
-            <!-- <mat-form-field class="example-full-width">
+      <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="form-group form-control-sm">
+            <label for="exampleInputLastName">{{'Фамилия' | translate}}</label>
+            <input [(ngModel)]="student.lastname" formControlName="lastname" type="text" class="form-control" id="exampleInputLastName"
+              [placeholder]="'Фамилия' | translate">
+            <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.lastname.touched && studentForm.controls.lastname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div>
+          </div>
+          <!-- <mat-form-field class="example-full-width">
             <input matInput placeholder="Фамилия" [(ngModel)]="student.lastname">
           </mat-form-field>
           <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.lastname.touched && studentForm.controls.lastname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div> -->
 
-          </div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <div class="form-group form-control-sm">
-              <label for="exampleInputFirstName">{{'Имя' | translate}}</label>
-              <input [(ngModel)]="student.firstname" formControlName="firstname" type="text" class="form-control" id="exampleInputFirstName"
-                [placeholder]="'Имя' | translate">
-              <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.firstname.touched && studentForm.controls.firstname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div>
-            </div>
-          </div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <div class="form-group form-control-sm">
-              <label for="exampleInputMiddleName">{{'Отчество' | translate}}</label>
-              <input [(ngModel)]="student.middlename" formControlName="middlename" type="text" class="form-control" id="exampleInputMiddleName"
-                [placeholder]="'Отчество' | translate">
-              <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.middlename.touched && studentForm.controls.middlename.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div>
-            </div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="form-group form-control-sm">
+            <label for="exampleInputFirstName">{{'Имя' | translate}}</label>
+            <input [(ngModel)]="student.firstname" formControlName="firstname" type="text" class="form-control" id="exampleInputFirstName"
+              [placeholder]="'Имя' | translate">
+            <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.firstname.touched && studentForm.controls.firstname.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <div class="form-group form-control-sm">
-              <label for="exampleInputPassword1">{{'Пароль'| translate}}</label>
-              <input [(ngModel)]="student.password" formControlName="password" type="password" class="form-control" id="exampleInputPassword1"
-                [placeholder]="'Пароль' | translate">
-              <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.password.touched && studentForm.controls.password.errors?.minlength">
-                {{'Пароль должен содержать 6 символов' | translate}}</div>
-            </div>
-          </div>
-          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <div class="form-group form-control-sm">
-              <label for="exampleInputPassword2">{{'Подтвердить пароль' | translate}}</label>
-              <input [(ngModel)]="student.confirmPassword" (ngModelChange)="changeConfirmPassword()" formControlName="confirmPassword"
-                type="password" class="form-control" id="exampleInputPassword2" [placeholder]="'Подтвердить пароль' | translate">
-              <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.confirmPassword.touched && studentForm.controls.confirmPassword.errors?.MatchPassword">
-                {{'Пароль не совпадает' | translate}}</div>
-            </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="form-group form-control-sm">
+            <label for="exampleInputMiddleName">{{'Отчество' | translate}}</label>
+            <input [(ngModel)]="student.middlename" formControlName="middlename" type="text" class="form-control" id="exampleInputMiddleName"
+              [placeholder]="'Отчество' | translate">
+            <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.middlename.touched && studentForm.controls.middlename.errors?.pattern">{{PasswordValidators.onlyRussianLettersAlert}}</div>
           </div>
         </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group form-control-sm">
+            <label for="exampleInputPassword1">{{'Пароль'| translate}}</label>
+            <input [(ngModel)]="student.password" formControlName="password" type="password" class="form-control" id="exampleInputPassword1"
+              [placeholder]="'Пароль' | translate">
+            <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.password.touched && studentForm.controls.password.errors?.minlength">
+              {{'Пароль должен содержать 6 символов' | translate}}</div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group form-control-sm">
+            <label for="exampleInputPassword2">{{'Подтвердить пароль' | translate}}</label>
+            <input [(ngModel)]="student.confirmPassword" (ngModelChange)="changeConfirmPassword()" formControlName="confirmPassword"
+              type="password" class="form-control" id="exampleInputPassword2" [placeholder]="'Подтвердить пароль' | translate">
+            <div class="alert alert-danger alert-form" *ngIf="studentForm.controls.confirmPassword.touched && studentForm.controls.confirmPassword.errors?.MatchPassword">
+              {{'Пароль не совпадает' | translate}}</div>
+          </div>
+        </div>
+      </div>
 
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="form-group form-control-sm">
+            <label for="exampleFormControlSelect1">{{'Университет' | translate}}</label>
+            <select [(ngModel)]="student.university" (ngModelChange)="changeUniversity()" formControlName="university"
+              class="form-control" id="exampleFormControlSelect1">
+              <option *ngFor="let university of student.universities" [ngValue]="university">{{university.name}}</option>
 
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="form-group form-control-sm">
-              <label for="exampleFormControlSelect1">{{'Факультет' | translate}}</label>
-              <select [(ngModel)]="student.selectedFaculty" (ngModelChange)="changeFaculty()" formControlName="faculty"
-                class="form-control" id="exampleFormControlSelect1">
-                <option *ngFor="let faculty of student.faculties" [ngValue]="faculty">{{faculty.name}}</option>
+            </select>
+          </div>
+          <!-- <mat-form-field>
+            <mat-select placeholder="Факультет">
+              <mat-option *ngFor="let university of student.universities" [value]="university">
+                {{university.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> -->
+        </div>
+      </div>
 
-              </select>
-            </div>
-            <!-- <mat-form-field>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="form-group form-control-sm">
+            <label for="exampleFormControlSelect1">{{'Факультет' | translate}}</label>
+            <select [(ngModel)]="student.selectedFaculty" (ngModelChange)="changeFaculty()" formControlName="faculty"
+              class="form-control" id="exampleFormControlSelect1">
+              <option *ngFor="let faculty of student.faculties" [ngValue]="faculty">{{faculty.name}}</option>
+
+            </select>
+          </div>
+          <!-- <mat-form-field>
             <mat-select placeholder="Факультет">
               <mat-option *ngFor="let faculty of student.faculties" [value]="faculty">
                 {{faculty.name}}
               </mat-option>
             </mat-select>
           </mat-form-field> -->
-          </div>
         </div>
-        <div class="row">
-          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-              <div class="form-group form-control-sm">
-                <label for="exampleFormControlSelect2">{{'Специальность' | translate}}</label>
-                <select [(ngModel)]="student.selectedSpecialization" (ngModelChange)="changeSpecialization()"
-                  formControlName="department" class="form-control" id="exampleFormControlSelect2">
-                  <option *ngFor="let specialization of student.specializations" [ngValue]="specialization">{{specialization.name}}</option>
-                  <!-- <option *ngFor="let  group of st>POVT</option> -->
-                  <!-- <option *></option> -->
-                  <!-- <option>2</option>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="form-group form-control-sm">
+            <label for="exampleFormControlSelect1">{{'Кафедра' | translate}}</label>
+            <select [(ngModel)]="student.department" (ngModelChange)="changeDepartment()" formControlName="department"
+              class="form-control" id="exampleFormControlSelect1">
+              <option *ngFor="let department of student.departments" [ngValue]="department">{{department.name}}</option>
+
+            </select>
+          </div>
+          <!-- <mat-form-field>
+          <mat-select placeholder="Факультет">
+            <mat-option *ngFor="let faculty of student.faculties" [value]="faculty">
+              {{faculty.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group form-control-sm">
+            <label for="exampleFormControlSelect2">{{'Специальность' | translate}}</label>
+            <select [(ngModel)]="student.selectedSpecialization" (ngModelChange)="changeSpecialization()"
+              formControlName="department" class="form-control" id="exampleFormControlSelect2">
+              <option *ngFor="let specialization of student.specializations" [ngValue]="specialization">{{specialization.name}}</option>
+              <!-- <option *ngFor="let  group of st>POVT</option> -->
+              <!-- <option *></option> -->
+              <!-- <option>2</option>
                 <option>3</option>
                 <option>4</option>
                 <option>5</option> -->
-                </select>
-              </div>
-              <!-- <div class="form-group form-control-sm">
+            </select>
+          </div>
+          <!-- <div class="form-group form-control-sm">
                 <label for="exampleFormControlSelect1">{{'Факультет' | translate}}</label>
                 <select [(ngModel)]="student.selectedFaculty" (ngModelChange)="changeFaculty()" formControlName="faculty"
                   class="form-control" id="exampleFormControlSelect1">
@@ -143,22 +181,22 @@
   
                 </select>
               </div> -->
-          </div>
-          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-              <div class="form-group form-control-sm">
-                <label for="exampleFormControlSelectGroup">{{'Группа' | translate}}</label>
-                <select [(ngModel)]="student.group" formControlName="group" class="form-control" id="exampleFormControlSelectGroup">
-                  <!-- <option>1</option> -->
-                  <option *ngFor="let group of student.groups" [ngValue]="group">{{group.number}}</option>
-                  <!-- <option>2</option>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group form-control-sm">
+            <label for="exampleFormControlSelectGroup">{{'Группа' | translate}}</label>
+            <select [(ngModel)]="student.group" formControlName="group" class="form-control" id="exampleFormControlSelectGroup">
+              <!-- <option>1</option> -->
+              <option *ngFor="let group of student.groups" [ngValue]="group">{{group.number}}</option>
+              <!-- <option>2</option>
                 <option>3</option>
                 <option>4</option>
                 <option>5</option> -->
-                </select>
-              </div>
+            </select>
           </div>
         </div>
-        <!-- <div class="row">
+      </div>
+      <!-- <div class="row">
 
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="form-group form-control-sm">
@@ -193,28 +231,28 @@
 
 
 
-        <div class="row">
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-          </div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <button [disabled]="studentForm.invalid" (click)="RegistrationStudent()" type="submit" class="btn btn-primary full-width">{{'Регистрация'
-              | translate}}</button>
-          </div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <button [disabled]="studentForm.invalid" (click)="RegistrationStudent()" type="submit" class="btn btn-primary full-width">{{'Регистрация'
+            | translate}}</button>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="center-text">
+            <a class="custom-link" (click)="login">{{'У вас уже есть аккаунт?' | translate}}</a>
           </div>
         </div>
-        <div class="row">
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-          </div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <div class="center-text">
-              <a class="custom-link" (click)="login">{{'У вас уже есть аккаунт?' | translate}}</a>
-            </div>
-          </div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-          </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
         </div>
-      </form>
+      </div>
+    </form>
     <!-- </mat-card> -->
   </div>
 </div>

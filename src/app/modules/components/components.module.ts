@@ -40,6 +40,10 @@ import { SECTableComponent } from '../../components/table/sectable/sectable.comp
 import { SECRoleTableComponent } from '../../components/table/secrole-table/secrole-table.component';
 import { RoleFormComponent } from '../../components/forms/role-form/role-form.component';
 import { StatusFormComponent } from '../../components/forms/status-form/status-form.component';
+import { UniversityTableComponent } from '../../components/table/university-table/university-table.component';
+import { UniversityFormComponent } from '../../components/forms/university-form/university-form.component';
+import { DepartmentFormComponent } from '../../components/forms/department-form/department-form.component';
+import { DepartmentTableComponent } from '../../components/table/department-table/department-table.component';
 
 @NgModule({
   imports: [
@@ -85,7 +89,11 @@ import { StatusFormComponent } from '../../components/forms/status-form/status-f
     SECRoleTableComponent,
     StatusTableComponent,
     RoleFormComponent,
-    StatusFormComponent
+    StatusFormComponent,
+    UniversityTableComponent,
+    UniversityFormComponent,
+    DepartmentFormComponent,
+    DepartmentTableComponent
   ],
   entryComponents: [
     SignInComponent,
@@ -109,7 +117,9 @@ import { StatusFormComponent } from '../../components/forms/status-form/status-f
     RoleFormComponent,
     StatusFormComponent,
     SECRoleFormComponent,
-    SECDateFormComponent
+    SECDateFormComponent,
+    UniversityFormComponent,
+    DepartmentFormComponent
   ],
   exports: [
     
@@ -144,7 +154,11 @@ import { StatusFormComponent } from '../../components/forms/status-form/status-f
     SECRoleTableComponent,
     StatusTableComponent,
     RoleFormComponent,
-    StatusFormComponent
+    StatusFormComponent,
+    UniversityTableComponent,
+    UniversityFormComponent,
+    DepartmentFormComponent,
+    DepartmentTableComponent
   ]
 })
 export class ComponentsModule { }

@@ -96,12 +96,6 @@ export class SignUpSecretarySecComponent implements OnInit {
     }
   }
 
-  getByFaculty(facultyId) {
-    this.specializationServive.getByFaculty(facultyId).subscribe(data => {
-      console.log('data');
-    })
-  }
-
   getBySpecialization(specializationId) {
     this.groupService.getAllBySpecializationId(specializationId);
   }

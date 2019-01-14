@@ -4,6 +4,9 @@ import { FacultyService } from '../../../services/faculty/faculty.service';
 import { FormEventService }  from '../../../services/events/form/form-event.service';
 import { Router, Route, ActivatedRoute } from '@angular/router';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { UniversityService } from '../../../services/university/university.service';
+import { University } from '../../../factory/university.factory';
+import { Faculty } from '../../../factory/faculty.factory';
 
 @Component({
   selector: 'app-faculty-form',
@@ -12,20 +15,24 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class FacultyFormComponent implements OnInit, OnDestroy {
   public facultyForm;
-  public faculty = {
+  public faculty: Faculty = {
     name: '',
-    shortName: ''
+    shortName: '',
+    university: null
   };
   public facultyEdit;
+  public universities: University[];
   sub;
   isEdit;
 
   constructor(public formBuilder: FormBuilder, public facultyService: FacultyService, public router: Router,
-  private route: ActivatedRoute, public bsModalRef: BsModalRef, public formEventService: FormEventService) { 
+  private route: ActivatedRoute, public bsModalRef: BsModalRef, public formEventService: FormEventService,
+  private universityService: UniversityService) { 
     
     this.facultyForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
-      shortName: ['', Validators.compose([Validators.required])]
+      shortName: ['', Validators.compose([Validators.required])],
+      university: ['', Validators.compose([Validators.required])]
       
     })
   }
@@ -37,6 +44,12 @@ export class FacultyFormComponent implements OnInit, OnDestroy {
     })
 
   }
+
+  compareFaculties(c1, c2): boolean {
+    if(c1 && c2) {
+      return c1 && c2 ? c1.idFaculty === c2.idFaculty : c1 === c2;
+    }
+  } 
 
   editFaculty(faculty) {
     // console.log('edited - ', this.facultyEdit);
@@ -65,6 +78,11 @@ export class FacultyFormComponent implements OnInit, OnDestroy {
       this.facultyEdit[property] = this.faculty[property];
     }
   }
+  getAllUniversities() {
+    this.universityService.getAll().subscribe((universities) => {
+      this.universities = universities;
+    });
+  }
 
   determineIfEdit() {
     if(this.facultyEdit) {
@@ -77,6 +95,7 @@ export class FacultyFormComponent implements OnInit, OnDestroy {
     this.formEventService.showFacultyForm.emit(true);
     console.log('on init');
     this.determineIfEdit();
+    this.getAllUniversities();
 
   }
   

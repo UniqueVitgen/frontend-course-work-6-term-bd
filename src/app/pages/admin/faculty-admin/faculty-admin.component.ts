@@ -20,7 +20,7 @@ export class FacultyAdminComponent implements OnInit {
   bsModalRef: BsModalRef;
   public faculties;
   public selectedFaculties;
-  displayedColumns= ['name', 'shortName', 'edit', 'delete'];
+  displayedColumns= ['name', 'shortName', 'university', 'edit', 'delete'];
   search;
 
   constructor(public facultyService: FacultyService,

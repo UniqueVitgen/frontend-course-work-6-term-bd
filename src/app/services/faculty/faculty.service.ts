@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ConfigService } from '../config/config.service';
+import { University } from '../../factory/university.factory';
 
 const prefix = 'faculty/';
 @Injectable()
@@ -18,6 +19,10 @@ export class FacultyService {
 
    getAll() {
      return this.configService.get(prefix + 'getAll');
+   }
+
+   getAllByUniversity(university: University) {
+    return this.configService.get(prefix + 'findAll-by-university-' + university.id);
    }
 
    save(faculty) {

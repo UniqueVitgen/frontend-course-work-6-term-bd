@@ -78,7 +78,9 @@ export class AppComponent {
   ]
 
   admin = [
+    {path: 'admin-university', title: 'Университет'},
     {path: 'admin-faculty', title: 'Факультет'},
+    {path: 'admin-department', title: 'Кафедра'},
     {path: 'admin-specialization', title: 'Специальность'},
     {path: 'admin-group', title: 'Группа'},
     {path: 'admin-qualifications', title: 'Квалификация'},

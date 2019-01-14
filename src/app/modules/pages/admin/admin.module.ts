@@ -24,6 +24,8 @@ import { SECRoleAdminComponent } from '../../../pages/admin/secrole-admin/secrol
 import { SECAdminComponent } from '../../../pages/admin/secadmin/secadmin.component';
 import { StatusAdminComponent } from '../../../pages/admin/status-admin/status-admin.component';
 import { RoleAdminComponent } from '../../../pages/admin/role-admin/role-admin.component';
+import { UniversityAdminComponent } from '../../../pages/admin/university-admin/university-admin.component';
+import { DepartmentAdminComponent } from '../../../pages/admin/department-admin/department-admin.component';
 
 @NgModule({
   imports: [
@@ -53,7 +55,9 @@ import { RoleAdminComponent } from '../../../pages/admin/role-admin/role-admin.c
     SECAdminComponent,
     SECRoleAdminComponent,
     StatusAdminComponent,
-    RoleAdminComponent
+    RoleAdminComponent,
+    UniversityAdminComponent,
+    DepartmentAdminComponent
   ],
   exports: [
     FacultyAdminComponent,
@@ -71,7 +75,9 @@ import { RoleAdminComponent } from '../../../pages/admin/role-admin/role-admin.c
     SECAdminComponent,
     SECRoleAdminComponent,
     StatusAdminComponent,
-    RoleAdminComponent
+    RoleAdminComponent,
+    UniversityAdminComponent,
+    DepartmentAdminComponent
   ]
 })
 export class AdminModule { }

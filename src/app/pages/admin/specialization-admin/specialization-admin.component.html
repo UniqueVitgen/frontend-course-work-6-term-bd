@@ -69,8 +69,8 @@
 
     <!-- Name Column -->
     <ng-container matColumnDef="faculty">
-      <th mat-header-cell *matHeaderCellDef> {{'Факультет' | translate}} </th>
-      <td mat-cell *matCellDef="let specialization"> {{specialization.faculty.name}} </td>
+      <th mat-header-cell *matHeaderCellDef> {{'Кафедра' | translate}} </th>
+      <td mat-cell *matCellDef="let specialization"> {{specialization.department?.shortName}} </td>
     </ng-container>
 
     <!-- Name Column -->

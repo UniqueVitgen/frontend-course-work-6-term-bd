@@ -9,6 +9,8 @@ export class FormEventService {
   public showFacultyForm: EventEmitter<any> = new EventEmitter();
   public showSpecializationForm: EventEmitter<any> = new EventEmitter();
   public showGroupForm: EventEmitter<any> = new EventEmitter();
+  public showUniversityForm: EventEmitter<any> = new EventEmitter();
+  public showDepartmentForm: EventEmitter<any> = new EventEmitter();
   public hideSECRoleForm: EventEmitter<any> = new EventEmitter();
   public hideStatusForm: EventEmitter<any> = new EventEmitter();
   public hideRoleForm: EventEmitter<any> = new EventEmitter();
@@ -22,6 +24,8 @@ export class FormEventService {
   public hidePostForm: EventEmitter<any> = new EventEmitter();
   public hideTitleForm: EventEmitter<any> = new EventEmitter();
   public hideSECUserForm: EventEmitter<any> = new EventEmitter(); 
+  public hideUniversityForm: EventEmitter<any> = new EventEmitter()
+  public hideDepartmentForm: EventEmitter<any> = new EventEmitter()
 
   constructor() { }
 

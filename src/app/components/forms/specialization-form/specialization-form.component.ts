@@ -2,11 +2,11 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { SpecializationService } from '../../../services/specialization/specialization.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
-import { FacultyService } from '../../../services/faculty/faculty.service';
+import { DepartmentService } from '../../../services/department/department.service';
 import { FormEventService }  from '../../../services/events/form/form-event.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { FacultyFormComponent } from '../faculty-form/faculty-form.component';
+import { DepartmentFormComponent } from '../department-form/department-form.component';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { QualificationService } from '../../../services/qualification/qualification.service';
@@ -23,19 +23,19 @@ export class SpecializationFormComponent implements OnInit, OnDestroy {
     name: '',
     code: '',
     qualification: undefined,
-    faculty: undefined
+    department: undefined
   };
   public specializationEdit;
-  faculties;
+  departments;
   qualifications;
   sub;
   isEdit;
   isHidden = false;
-  facultyModal: BsModalRef;
+  departmentModal: BsModalRef;
   qualificationModal: BsModalRef;
   subscriptions: Subscription[] = [];
 
-  constructor(public formBuilder: FormBuilder, public facultyService:FacultyService, 
+  constructor(public formBuilder: FormBuilder, public departmentService:DepartmentService, 
     public specializationService: SpecializationService, public router: Router,
     private modalService: BsModalService, private changeDetection: ChangeDetectorRef,
     public formEventService: FormEventService, 
@@ -45,19 +45,19 @@ export class SpecializationFormComponent implements OnInit, OnDestroy {
       name: ['', Validators.compose([Validators.required])],
       code: ['', Validators.compose([Validators.required])],
       qualification: ['', Validators.compose([Validators.required])],
-      faculty: ['', Validators.compose([Validators.required])]
+      department: ['', Validators.compose([Validators.required])]
     });
   }
 
-  subscribeFacultyForm() {
-    this.formEventService.showFacultyForm.subscribe(() => {
+  subscribeDepartmentForm() {
+    this.formEventService.showDepartmentForm.subscribe(() => {
       this.isHidden = true;
       // console.log('i see');
     })
-    this.formEventService.hideFacultyForm.subscribe(() => {
+    this.formEventService.hideDepartmentForm.subscribe(() => {
       this.isHidden = false;
       // console.log('hide form');
-      this.getAllFaculties();
+      this.getAllDepartments();
 
     })
 
@@ -76,13 +76,19 @@ export class SpecializationFormComponent implements OnInit, OnDestroy {
     })
   }
 
-  getAllFaculties() {
-   this.facultyService.getAll().subscribe(faculties => {
-       console.log('facs - ', faculties);
-       this.faculties = faculties;
+  getAllDepartments() {
+   this.departmentService.getAll().subscribe(departments => {
+       console.log('facs - ', departments);
+       this.departments = departments;
    });
 
   }
+
+  compareFaculties(c1, c2): boolean {
+    if(c1 && c2) {
+      return c1 && c2 ? c1.idFaculty === c2.idFaculty : c1 === c2;
+    }
+  }  
 
   getAllQualifications() {
     this.qualificationService.getAll().subscribe((qualifications) => {
@@ -100,7 +106,7 @@ export class SpecializationFormComponent implements OnInit, OnDestroy {
   }
 
   editSpecialization(specialization) {
-    // console.log('edited - ', this.facultyEdit);
+    // console.log('edited - ', this.departmentEdit);
     this.createSpecializationEditFromSpecialization();
     console.log('edited - ', this.specializationEdit);
     this.specializationService.edit(this.specializationEdit).subscribe(answer => {
@@ -172,9 +178,9 @@ export class SpecializationFormComponent implements OnInit, OnDestroy {
 
   
  
-  openFacultyForm(faculty?) {
+  openDepartmentForm(department?) {
     let edit;
-    if(faculty) {
+    if(department) {
       edit = true;
     }
     else {
@@ -182,18 +188,18 @@ export class SpecializationFormComponent implements OnInit, OnDestroy {
     }
     let initialState = {
       isEdit: edit,
-      facultyEdit: faculty,
+      departmentEdit: department,
 
     };
     let modalOptions = {
       initialState: initialState,
-      class:'faculty-form',
+      class:'department-form',
       ignoreBackdropClick: true
 
     }
     // this.subscribe();
-    this.facultyModal = this.modalService.show(FacultyFormComponent, modalOptions);
-    this.facultyModal.content.closeBtnName = 'Close';
+    this.departmentModal = this.modalService.show(DepartmentFormComponent, modalOptions);
+    this.departmentModal.content.closeBtnName = 'Close';
   }
 
   openQualificationForm(qualification?) {
@@ -220,18 +226,18 @@ export class SpecializationFormComponent implements OnInit, OnDestroy {
     this.qualificationModal.content.closeBtnName = 'Close';
   }
 
-  compareFaculties(c1, c2): boolean {
+  compareDepartments(c1, c2): boolean {
     if(c1 && c2) {
-      return c1 && c2 ? c1.idFaculty === c2.idFaculty : c1 === c2;
+      return c1 && c2 ? c1.idDepartment === c2.idDepartment : c1 === c2;
     }
   }  
 
   ngOnInit() {
     this.formEventService.showSpecializationForm.emit(true);
     this.determineIfEdit();
-    this.getAllFaculties();
+    this.getAllDepartments();
     this.getAllQualifications();
-    this.subscribeFacultyForm();
+    this.subscribeDepartmentForm();
     this.subscribeQualificationForm();
     console.log('changed - ',this.specialization);
     // this.sub = this.route.params      
@@ -243,9 +249,9 @@ export class SpecializationFormComponent implements OnInit, OnDestroy {
     //       this.specializationService.getById(id).subscribe(data => {
     //         console.log('data - ', data);
     //         this.specializationEdit = data;
-    //         // console.log('edited - ', this.facultyEdit);
+    //         // console.log('edited - ', this.departmentEdit);
     //         this.createSpecializationFromEditSpecialization();
-    //         // console.log('edited - ', this.facultyEdit);
+    //         // console.log('edited - ', this.departmentEdit);
     //       })
     //     }
     //     else {

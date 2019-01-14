@@ -89,16 +89,16 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <div class="form-group form-control-sm">
             <label for="exampleFormControlSelect1">{{'Факультет' | translate}}</label>
-            <select [compareWith]="compareFaculties" [(ngModel)]="specialization.faculty" formControlName="faculty"
+            <select [compareWith]="compareFaculties" [(ngModel)]="specialization.department" formControlName="department"
               class="form-control" id="exampleFormControlSelect1">
-              <option *ngFor="let faculty of faculties" [selected]="faculty.idFaculty == specialization.faculty?.idFaculty"
-                [ngValue]="faculty">{{faculty.name}}</option>
+              <option *ngFor="let department of departments" [selected]="department.id == specialization.department?.id"
+                [ngValue]="department">{{department.name}}</option>
             </select>
           </div>
           <!--<mat-form-field>
-            <mat-select [compareWith]="compareFaculties" [(ngModel)]="specialization.faculty" formControlName="faculty" [placeholder]="'Факультет' | translate">
-              <mat-option *ngFor="let faculty of faculties" [selected]="faculty.idFaculty == specialization.faculty?.idFaculty"
-              [ngValue]="faculty">
+            <mat-select [compareWith]="compareFaculties" [(ngModel)]="specialization.department" formControlName="department" [placeholder]="'Факультет' | translate">
+              <mat-option *ngFor="let department of departments" [selected]="department.idFaculty == specialization.department?.idFaculty"
+              [ngValue]="department">
                 {{food.viewValue}}
               </mat-option>
             </mat-select>
@@ -109,7 +109,7 @@
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-          <button (click)="openFacultyForm()" type="submit" class="btn btn-warning full-width">{{'Добавить факультет' |
+          <button (click)="openDepartmentForm()" type="submit" class="btn btn-warning full-width">{{'Добавить факультет' |
             translate}}</button>
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
