@@ -57,6 +57,8 @@ export class UserWorker {
     }
 
     formatFullName(user: User) {
+      if (user) {
         return user.lastname + ' ' + user.firstname + ' ' + user.middlename;
+      }
     }
 }

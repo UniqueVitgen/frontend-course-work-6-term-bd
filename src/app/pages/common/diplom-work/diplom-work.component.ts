@@ -11,6 +11,9 @@ import { PercentPipe } from '@angular/common';
 import { StatusService } from '../../../services/status/status.service';
 import { DiplomWorkTitleFormComponent } from '../../../components/forms/diplom-work-title-form/diplom-work-title-form.component';
 import { UserWorker } from '../../../workers/UserWorker';
+import {DiplomWorkWorker} from '../../../workers/diplom-work.worker';
+import {DiplomWork} from '../../../factory/diplom-work.factory';
+import {DiplomWorkLectorsFormComponent} from '../../../components/forms/diplom-work-lectors-form/diplom-work-lectors-form.component';
 
 @Component({
   selector: 'app-diplom-work',
@@ -36,6 +39,7 @@ export class DiplomWorkComponent implements OnInit {
     private route: ActivatedRoute,
     private modalService: BsModalService,
      public diplomWorkService: DiplomWorkService,
+     public diplomWorkWorker: DiplomWorkWorker,
      private percentageService: PercentageService,
      private userStorage: UserStorage,
      private userWorker: UserWorker,
@@ -127,8 +131,6 @@ export class DiplomWorkComponent implements OnInit {
           link.parentNode.removeChild(link);
     });
   }
-
-  
  
   openDiplomWorkForm(diplomWork?) {
     let edit;
@@ -149,6 +151,25 @@ export class DiplomWorkComponent implements OnInit {
       ignoreBackdropClick: true
     }
     this.bsModalRef2 = this.modalService.show(DiplomWorkTitleFormComponent, modalOptions);
+    this.bsModalRef2.content.closeBtnName = 'Close';
+  }
+  openDiplomWorkLectorsForm(diplomWork: DiplomWork): void {
+    let edit;
+    if (diplomWork) {
+      edit = true;
+    } else {
+      edit = false;
+    }
+    const initialState = {
+      isEdit: edit,
+      diplomWorkEdit: diplomWork,
+    };
+    const modalOptions = {
+      initialState: initialState,
+      class: 'diplomWork-form',
+      ignoreBackdropClick: true
+    };
+    this.bsModalRef2 = this.modalService.show(DiplomWorkLectorsFormComponent, modalOptions);
     this.bsModalRef2.content.closeBtnName = 'Close';
   }
 

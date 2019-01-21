@@ -31,7 +31,7 @@ export class DiplomWorkTitleFormComponent implements OnInit, OnDestroy {
   onDestroy;
   percentArrayValidators;
 
-  constructor(public formBuilder: FormBuilder, 
+  constructor(public formBuilder: FormBuilder,
     private formEventService: FormEventService,
     public bsModalRef: BsModalRef, public diplomWorkService: DiplomWorkService) {
 
@@ -51,7 +51,7 @@ export class DiplomWorkTitleFormComponent implements OnInit, OnDestroy {
   }
 
   configPercentValidation() {
-    let validators = [];
+    const validators = [];
     if (this.previous) {
       validators.push(Validators.min(Number(this.previous.percent) + 1));
     }
@@ -86,14 +86,6 @@ export class DiplomWorkTitleFormComponent implements OnInit, OnDestroy {
   cancel() {
     this.bsModalRef.hide();
   }
-
-  //save() {
-  //  console.log('organizer - ', this.diplomWork);
-  //  this.diplomWorkService.editByName(this.diplomWork).subscribe(res => {
-  //    console.log('res - ', res);
-  //    this.cancel();
-  //  })
-  //}
 
   edit() {
     console.log('diplomWork - ', this.diplomWork);

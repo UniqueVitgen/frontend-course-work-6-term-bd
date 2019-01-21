@@ -1,0 +1,10 @@
+.lector-item:hover {
+  background: #ccc;
+  cursor: pointer;
+}
+.lector-item .edit-icon {
+  visibility: hidden;
+}
+.lector-item:hover .edit-icon {
+  visibility: visible;
+}

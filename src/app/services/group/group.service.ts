@@ -33,7 +33,7 @@ export class GroupService {
   }
 
   edit(group) {
-    return this.configService.put(prefix + "edit", group);
+    return this.configService.put(prefix + 'edit', group);
   }
 
   delete(group) {

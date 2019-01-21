@@ -1,3 +1,6 @@
 .center-text, .text-center {
     text-align: center;
 }
+.space-between-container {
+  justify-content: space-between;
+}

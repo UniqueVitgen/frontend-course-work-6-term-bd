@@ -1,6 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LectorService } from '../../../services/lector-service/lector.service';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {LectorService} from '../../../services/lector-service/lector.service';
+import {BsModalRef} from 'ngx-bootstrap/modal';
+import {Lector} from '../../../factory/lector.factory';
+import {LectorType} from '../../../factory/enums/lector-type.enum';
 
 @Component({
   selector: 'app-select-lector',
@@ -9,57 +11,39 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class SelectLectorComponent implements OnInit, OnDestroy {
 
-  lectorStaff: Array<{description: any, src: any, post: any, title: any, degree: any, name: any}>;
-  lectors;
-  // lector;
+  lectors: Lector[];
   onDestroy;
-  selectedLector;
-  isOk;
+  selectedLector: Lector;
+  isOk: boolean;
+  type: LectorType;
 
-  constructor(public lectorService: LectorService, public bsModalRef: BsModalRef,) { 
-    // this.lectorStaff = [
-    //   {
-    //     degree:'Доцент', post:'Зам декана', title:'ядерный физик', src:'assets/img/students/lector-staff/team-img.jpg',
-    //     description:'Занимается Преподавательской деятельностью с прошлого века. ', name:'Куприянов'
-    //   },
-    //   {
-    //     degree:'Доцент', post:'Зам декана', title:'ядерный физик', src:'assets/img/students/lector-staff/team-img.jpg',
-    //     description:'Занимается Преподавательской деятельностью с прошлого века. ', name:'Куприянов'
-    //   },
-    //   {
-    //     degree:'Доцент', post:'Зам декана', title:'ядерный физик', src:'assets/img/students/lector-staff/team-img.jpg',
-    //     description:'Занимается Преподавательской деятельностью с прошлого века. ', name:'Куприянов'
-    //   },
-    //   {
-    //     degree:'Доцент', post:'Зам декана', title:'ядерный физик', src:'assets/img/students/lector-staff/team-img.jpg',
-    //     description:'Занимается Преподавательской деятельностью с прошлого века. ', name:'Куприянов'
-    //   }
-    // ];
+  constructor(public lectorService: LectorService, public bsModalRef: BsModalRef) {
   }
 
   getAllLectors(onSuccess?) {
-    this.lectorService.getLectors().subscribe(lectors => {
-      this.lectors = lectors;
-      console.log('lectors - ', lectors);
-      if(onSuccess) {
-        onSuccess(lectors);
-      }
-      // this.lectors = this.lectors.map(lector => {
-      //   lector.selected = false;
-      // })
-    })  
+    if (this.lectors == null) {
+      this.lectorService.getLectors().subscribe(lectors => {
+        this.lectors = lectors;
+        console.log('lectors - ', lectors);
+        if (onSuccess) {
+          onSuccess(lectors);
+        }
+      });
+    }
 
   }
 
   initializeSelecteLector() {
-    if(this.selectedLector == null) {
-      this.selectedLector = this.lectors[0];
+    if (this.selectedLector == null) {
+      // this.selectedLector = this.lectors[0];
     }
   }
 
-  selectLector(lector?) {
-    this.selectedLector = lector;
-    console.log('select');
+  selectLector(lector?: Lector) {
+    if (!(this.type === LectorType.leader && !lector.free)) {
+      this.selectedLector = lector;
+      console.log('select');
+    }
   }
 
   cancel() {

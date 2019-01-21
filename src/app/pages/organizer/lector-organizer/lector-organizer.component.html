@@ -1,0 +1,12 @@
+
+<br>
+<div class="container">
+
+  <div *ngIf="userWorker.hasOrganizerRole(user)">
+
+    <button mat-raised-button color="primary" (click)="saveInWord()">{{'Сохранить информацию в ворд' | translate}}</button>
+    <button mat-raised-button color="warn" (click)="saveInPDF()">{{'Сохранить информацию в PDF' | translate}}</button>
+  </div>
+  <app-lector-table [lectors]="lectors" (clickEditCountOfDiplomButton)="clickEditButton($event)"></app-lector-table>
+</div>
+<br>

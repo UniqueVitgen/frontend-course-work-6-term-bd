@@ -65,6 +65,8 @@ import { RoleAdminComponent } from './pages/admin/role-admin/role-admin.componen
 import { UniversityAdminComponent } from './pages/admin/university-admin/university-admin.component';
 import { DepartmentAdminComponent } from './pages/admin/department-admin/department-admin.component';
 import { SignUpLectorOrganizerComponent } from './pages/common/sign-up/sign-up-lector-organizer/sign-up-lector-organizer.component';
+import {LectorOrganizerComponent} from './pages/organizer/lector-organizer/lector-organizer.component';
+import {SpecializationItemComponent} from './pages/common/specialization-item/specialization-item.component';
 
 export const routes: Routes = [
   // { path: '',  redirectTo: 'home'},
@@ -77,9 +79,10 @@ export const routes: Routes = [
   { path: 'registration-organizer', component: SignUpOrganizerComponent, canActivate: [UnauthGuard] },
   { path: 'registration-secretary-sec', component: SignUpSecretarySecComponent, canActivate: [UnauthGuard] },
   // { path: 'login', component: SignInComponent, canActivate: [UnauthGuard] },
-  { path: 'diplom-work', canActivate: [StudentHasDiplomGuard], component:DiplomWorkStudentComponent },
+  { path: 'diplom-work', canActivate: [StudentHasDiplomGuard], component: DiplomWorkStudentComponent },
   { path: 'diplom-work/:id', component: DiplomWorkComponent, canActivate: [AuthGuard] },
   { path: 'group/:id', component: GroupItemComponent, canActivate: [AuthGuard]},
+  { path: 'specialization/:id', component: SpecializationItemComponent, canActivate: [AuthGuard]},
   { path: 'student-group', component: GroupItemComponent, canActivate: [AuthGuard]},
 
   { path: 'about-us', component: AboutUsComponent, canActivate: [AuthGuard] },
@@ -104,12 +107,16 @@ export const routes: Routes = [
   data: {
     expectedRoles: ['SECRETARY_SEC', 'ADMIN']
   } },
-  
-  
+  { path: 'organizer-lector', component: LectorOrganizerComponent, canActivate: [ExpectedRolesGuard], data: {
+      expectedRoles: ['ADMIN', 'ORGANIZER', 'SECRETARY_SEC', 'LECTOR']
+    }
+    },
   { path: 'admin-university', component: UniversityAdminComponent, canActivate:[AdminGuard] },
   { path: 'admin-faculty', component: FacultyAdminComponent, canActivate:[AdminGuard] },
   { path: 'admin-department', component: DepartmentAdminComponent, canActivate:[AdminGuard] },
-  { path: 'admin-specialization', component: SpecializationAdminComponent, canActivate:[AdminGuard]  },
+  { path: 'admin-specialization', component: SpecializationAdminComponent, canActivate:[ExpectedRolesGuard] , data: {
+      expectedRoles: ['ADMIN', 'ORGANIZER', 'SECRETARY_SEC']
+    }   },
   { path: 'admin-group', component: GroupAdminComponent, canActivate: [AdminGuard]  },
   { path: 'admin-news', component: NewsAdminComponent, canActivate: [ExpectedRolesGuard], data: {
     expectedRoles: ['ADMIN', 'ORGANIZER', 'SECRETARY_SEC', 'LECTOR']

@@ -25,6 +25,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { LeaderComponent } from './pages/lectors/leader/leader.component';
 import { TranslateService } from '@ngx-translate/core';
 import { GroupDashboardComponent } from './pages/common/group-dashboard/group-dashboard.component';
+import {LectorOrganizerComponent} from './pages/organizer/lector-organizer/lector-organizer.component';
 
 
 @Component({
@@ -37,8 +38,8 @@ export class AppComponent {
   title = 'app';
   mode: any = 'unathored';
   unauthored = [
-    { title: 'Главная', path:'home' },
-    { title: 'Регистрация', path:'registration' },
+    { title: 'Главная', path: 'home' },
+    { title: 'Регистрация', path: 'registration' },
     // { title: 'Войти', path: 'login' },
     { path: 'news', component: NewsComponent  },
     // { path: 'lector-staff', component: LectorStaffComponent  },
@@ -47,35 +48,37 @@ export class AppComponent {
   ];
 
   student = [
-    { path: 'diplom-work', component: NewsComponent, title:'Дипломная работа' },
+    { path: 'diplom-work', component: NewsComponent, title: 'Дипломная работа' },
     // { path: 'select-diplom', component: NewsComponent, title:'Дипломная работа' },
-    { path: 'news', component: NewsComponent, title:'Новости' },
-    { path: 'lector-staff', component: LectorStaffComponent, title:'Преподователи' },
-    { path: 'student-group', component: LectorStaffComponent, title:'Моя Группа' },
+    { path: 'news', component: NewsComponent, title: 'Новости' },
+    { path: 'lector-staff', component: LectorStaffComponent, title: 'Преподователи' },
+    { path: 'student-group', component: LectorStaffComponent, title: 'Моя Группа' },
     // { path: 'about-us', component: SelectDiplomComponent,content: [], title:'О нас' },
-  ]
+  ];
 
   lector = [
-    { path: 'involve', component: LeaderComponent, title:'Участие' },
-    {  path: 'admin-news', component: NewsComponent, title:'Новости' },
-    {  path: 'groups', component: GroupDashboardComponent, title:'Группы' },
+    { path: 'involve', component: LeaderComponent, title: 'Участие' },
+    {  path: 'admin-news', component: NewsComponent, title: 'Новости' },
+    {  path: 'groups', component: GroupDashboardComponent, title: 'Группы' },
     // { path: 'about-us', component: SelectDiplomComponent,content: [], title:'О нас' },
-  ]
+  ];
 
   organizer = [
     {path: 'admin-diplom-work', title: 'Дипломные работы'},
-    {  path: 'admin-news', component: NewsComponent, title:'Новости' },
-    {  path: 'groups', component: GroupDashboardComponent, title:'Группы' },
+    {  path: 'admin-news', component: NewsComponent, title: 'Новости' },
+    {  path: 'organizer-lector', component: LectorOrganizerComponent, title: 'Преподаватели' },
+    { path: 'admin-specialization', title: 'Специальность' },
+    {  path: 'groups', component: GroupDashboardComponent, title: 'Группы' },
     // { path: 'about-us', component: SelectDiplomComponent,content: [], title:'О нас' },
-  ]
+  ];
 
   secretary = [
     {path: 'admin-diplom-work', title: 'Дипломные работы'},
     {path: 'sec-list', title: 'ГЭК комиссия'},
-    {  path: 'admin-news', component: NewsComponent, title:'Новости' },
-    {  path: 'groups', component: GroupDashboardComponent, title:'Группы' },
+    {  path: 'admin-news', component: NewsComponent, title: 'Новости' },
+    {  path: 'groups', component: GroupDashboardComponent, title: 'Группы' },
     // { path: 'about-us', component: SelectDiplomComponent,content: [], title:'О нас' },
-  ]
+  ];
 
   admin = [
     {path: 'admin-university', title: 'Университет'},
@@ -94,7 +97,7 @@ export class AppComponent {
     { path: 'sec-list', title: 'ГЭК' },
     { path: 'admin-sec-role', title: 'ГЭК Роль' },
     // { path: 'about-us', title: 'О нас', component: SelectDiplomComponent,content: [] },
-  ]
+  ];
 
   constructor(private globalEventsManager: GlobalEventsService,
     private translate: TranslateService,
@@ -103,7 +106,7 @@ export class AppComponent {
     public tokenStorage: TokenStorage
   ) {
     this.translate.setDefaultLang(this.getLanguage());
-    this.translate.use(this.getLanguage()); 
+    this.translate.use(this.getLanguage());
     this.globalEventsManager.showStudentsNavBar.subscribe((mode: any) => {
       console.log('student user');
       this.mode = 'student';
@@ -122,10 +125,10 @@ export class AppComponent {
     });
     this.globalEventsManager.showOrganizerNavBar.subscribe((mode: any) => {
       this.mode = 'organizer';
-    })
+    });
     this.globalEventsManager.showSecretaryNavBar.subscribe((mode: any) => {
       this.mode = 'secretary';
-    })
+    });
   }
 
   switchLanguage(language: string) {
@@ -140,20 +143,20 @@ export class AppComponent {
   getLanguage() {
     let lang = localStorage.getItem('lang');
     console.log('llang ', lang);
-    if(lang == null) {
+    if (lang == null) {
       lang = 'ru';
     }
     return lang;
   }
 
   loginForm() {
-    let modalOptions = {
+    const modalOptions = {
       // initialState: initialState,
-      class:'login-form',
+      class: 'login-form',
       ignoreBackdropClick: true
 
-    }
-    this.modalService.show(SignInComponent, modalOptions)
+    };
+    this.modalService.show(SignInComponent, modalOptions);
   }
 
   logout() {

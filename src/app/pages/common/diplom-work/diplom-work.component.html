@@ -4,7 +4,7 @@
   <div *ngIf="hasOrganizerRole(user)">
 
     <button mat-raised-button color="primary" (click)="saveInWord()">{{'Сохранить информацию в ворд' | translate}}</button>
-    <button mat-raised-button color="warn" (click)="saveInPDF()">{{'Сохранить информацию в PDF' | translate}}</button>
+    <!--<button mat-raised-button color="warn" (click)="saveInPDF()">{{'Сохранить информацию в PDF' | translate}}</button>-->
   </div>
 
   <br>
@@ -19,7 +19,9 @@
             </div>
             <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
               <span>{{diplomWork.name}} </span>
-              <mat-icon (click)="openDiplomWorkForm(diplomWork)" *ngIf="hasOrganizerRole(user)">mode_edit</mat-icon>
+              <mat-icon (click)="openDiplomWorkForm(diplomWork)" *ngIf="hasOrganizerRole(user)
+              || userWorker.hasStudentRole(user)
+              || diplomWorkWorker.isLeader(diplomWork, user)">mode_edit</mat-icon>
             </div>
           </div>
         </h4>
@@ -245,5 +247,13 @@
     </div>
   </div>
 
-  <app-lector-staff isChild="true"></app-lector-staff>
+  <app-lector-staff isChild="true">
+    <action-buttons  *ngIf="hasOrganizerRole(user)
+              || userWorker.hasStudentRole(user)
+              || diplomWorkWorker.isLeader(diplomWork, user)">
+      <button mat-icon-button (click)="openDiplomWorkLectorsForm(diplomWork)">
+        <mat-icon aria-label="Example icon-button with a heart icon">create</mat-icon>
+      </button>
+    </action-buttons>
+  </app-lector-staff>
 </div>

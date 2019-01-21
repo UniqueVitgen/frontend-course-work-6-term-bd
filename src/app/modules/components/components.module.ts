@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import { CommonModule } from '@angular/common';
 //form
 import { FacultyFormComponent } from '../../components/forms/faculty-form/faculty-form.component';
@@ -44,6 +44,10 @@ import { UniversityTableComponent } from '../../components/table/university-tabl
 import { UniversityFormComponent } from '../../components/forms/university-form/university-form.component';
 import { DepartmentFormComponent } from '../../components/forms/department-form/department-form.component';
 import { DepartmentTableComponent } from '../../components/table/department-table/department-table.component';
+import {DiplomWorkLectorsFormComponent} from '../../components/forms/diplom-work-lectors-form/diplom-work-lectors-form.component';
+import {AppComponent} from '../../app.component';
+import {LectorTableComponent} from '../../components/table/lector-table/lector-table.component';
+import {LectorCountDiplomFormComponent} from '../../components/forms/lector-count-diplom-form/lector-count-diplom-form.component';
 
 @NgModule({
   imports: [
@@ -53,13 +57,10 @@ import { DepartmentTableComponent } from '../../components/table/department-tabl
     BootstrapModule,
     DirectivesModule,
     StoragesModule,
-    WorkersModule,
-    
+    WorkersModule
   ],
   declarations: [
-    
     SignInComponent,
-
     FacultyFormComponent,
     SpecializationFormComponent,
     GroupFormComponent,
@@ -88,12 +89,15 @@ import { DepartmentTableComponent } from '../../components/table/department-tabl
     SECTableComponent,
     SECRoleTableComponent,
     StatusTableComponent,
+    LectorTableComponent,
     RoleFormComponent,
     StatusFormComponent,
     UniversityTableComponent,
     UniversityFormComponent,
     DepartmentFormComponent,
-    DepartmentTableComponent
+    DepartmentTableComponent,
+    DiplomWorkLectorsFormComponent,
+    LectorCountDiplomFormComponent
   ],
   entryComponents: [
     SignInComponent,
@@ -119,12 +123,12 @@ import { DepartmentTableComponent } from '../../components/table/department-tabl
     SECRoleFormComponent,
     SECDateFormComponent,
     UniversityFormComponent,
-    DepartmentFormComponent
+    DepartmentFormComponent,
+    DiplomWorkLectorsFormComponent,
+    LectorCountDiplomFormComponent
   ],
   exports: [
-    
     SignInComponent,
-
     FacultyFormComponent,
     SpecializationFormComponent,
     GroupFormComponent,
@@ -158,7 +162,11 @@ import { DepartmentTableComponent } from '../../components/table/department-tabl
     UniversityTableComponent,
     UniversityFormComponent,
     DepartmentFormComponent,
-    DepartmentTableComponent
-  ]
+    DepartmentTableComponent,
+    LectorTableComponent,
+    DiplomWorkLectorsFormComponent,
+    LectorCountDiplomFormComponent
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })
 export class ComponentsModule { }

@@ -16,10 +16,10 @@ import { Router } from '@angular/router';
   templateUrl: './select-diplom.component.html',
   styleUrls: ['./select-diplom.component.css']
 })
-export class SelectDiplomComponent implements OnInit { 
+export class SelectDiplomComponent implements OnInit {
   bsModalRef: BsModalRef;
 
-  private bodyText: string = 'hello';
+  private bodyText = 'hello';
   diplomWork = {
     name: '',
     student: undefined,
@@ -29,28 +29,28 @@ export class SelectDiplomComponent implements OnInit {
     otConsultor: undefined,
     teoConsultor: undefined,
     comment: '',
-  }
+  };
   selectDiplomForm;
 
-  constructor(private modalService: BsModalService, 
-    public formBuilder: FormBuilder, 
+  constructor(private modalService: BsModalService,
+    public formBuilder: FormBuilder,
     public userStorage: UserStorage,
     private router: Router,
-    public diplomWorkService: DiplomWorkService) { 
+    public diplomWorkService: DiplomWorkService) {
     this.selectDiplomForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
       leader: ['', Validators.compose([Validators.required])],
-      recensor: ['', Validators.compose([Validators.required])],
-      scienceConsultor: ['', Validators.compose([Validators.required])],
-      otConsultor: ['', Validators.compose([Validators.required])],
-      teoConsultor: ['', Validators.compose([Validators.required])],
+      recensor: ['', Validators.compose([])],
+      scienceConsultor: ['', Validators.compose([])],
+      otConsultor: ['', Validators.compose([])],
+      teoConsultor: ['', Validators.compose([])],
       comment: ['']
 
     });
   }
 
   ngOnInit() {
-  } 
+  }
 
   selectLeader() {
     // this.template.createEmbeddedView(``)
@@ -59,7 +59,7 @@ export class SelectDiplomComponent implements OnInit {
 
   selectLector(that, property) {
     // this.template.createEmbeddedView(``)
-    let initialState = {
+    const initialState = {
       onDestroy: (lector) => {
         that[property] = lector;
         that.selectDiplomForm.controls[property].setValue(that.formatFullName(lector));
@@ -67,30 +67,31 @@ export class SelectDiplomComponent implements OnInit {
         this.diplomWork[property] = lector;
         // console.log(this.)
       },
+      type: property,
       selectedLector: that[property]
-    }
-    let modalOptions = {
-      class:'select-lector',
+    };
+    const modalOptions = {
+      class: 'select-lector',
       ignoreBackdropClick: true,
       initialState: initialState
-    }
+    };
     this.bsModalRef = this.modalService.show(SelectLectorComponent, modalOptions);
   }
 
   selectRecensor() {
-    this.selectLector(this, "recensor");
+    this.selectLector(this, 'recensor');
   }
 
   selectScienceConsultor() {
-    this.selectLector(this, "scienceConsultor");
+    this.selectLector(this, 'scienceConsultor');
   }
 
   selectOtConsultor() {
-    this.selectLector(this, "otConsultor");
+    this.selectLector(this, 'otConsultor');
   }
 
   selectTeoConsultor() {
-    this.selectLector(this, "teoConsultor");
+    this.selectLector(this, 'teoConsultor');
   }
 
   changeComment() {
@@ -107,7 +108,7 @@ export class SelectDiplomComponent implements OnInit {
     this.diplomWorkService.save(this.diplomWork).subscribe(res => {
       console.log('res - ', res);
       this.router.navigate(['/diplom-work', res.id]);
-    })
+    });
     // this.diplomWorkService.save(this.d)
   }
 

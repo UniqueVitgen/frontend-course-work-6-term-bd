@@ -1,0 +1,21 @@
+<div class="container">
+  <br>
+  <div >
+
+    <button mat-raised-button color="primary" (click)="saveInWord()">{{'Сохранить информацию в ворд' | translate}}</button>
+    <button mat-raised-button color="warn" (click)="saveInPDF()">{{'Сохранить информацию в PDF' | translate}}</button>
+  </div>
+  <br>
+  <mat-card>
+    <mat-card-title>{{'Специальность' | translate}}: {{specialization?.name}}</mat-card-title>
+    <mat-card-title>{{'Код' | translate}}: {{specialization?.code}}</mat-card-title>
+    <mat-card-title>{{'Квалификация' | translate}}: {{specialization?.qualification.name}}</mat-card-title>
+    <mat-card-title>{{'Кафедра' | translate}}: {{specialization?.department.name}}</mat-card-title>
+  </mat-card>
+  <br>
+  <mat-card>
+    <mat-card-title>{{'Группы'| translate}}</mat-card-title>
+    <app-group-table [groups]="groups"></app-group-table>
+  </mat-card>
+  <!--<app-user-accordion *ngFor="let user of students" [user]="user"></app-user-accordion>-->
+</div>

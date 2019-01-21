@@ -155,6 +155,14 @@ import { StoragesModule } from './modules/others/storages/storages.module';
 import { WorkersModule } from './modules/others/workers/workers.module';
 import { ServicesModule } from './modules/others/services/services.module';
 import { GuardsModule } from './modules/others/guards/guards.module';
+import { DiplomWorkLectorsFormComponent } from './components/forms/diplom-work-lectors-form/diplom-work-lectors-form.component';
+import { SelectSecretaryComponent } from './components/select/select-secretary/select-secretary.component';
+import { LectorTableComponent } from './components/table/lector-table/lector-table.component';
+import { LectorOrganizerComponent } from './pages/organizer/lector-organizer/lector-organizer.component';
+import {OrganizerModule} from './modules/pages/organizer/organizer.module';
+import { LectorCountDiplomFormComponent } from './components/forms/lector-count-diplom-form/lector-count-diplom-form.component';
+import { SpecializationTableComponent } from './components/table/specialization-table/specialization-table.component';
+import { SpecializationItemComponent } from './pages/common/specialization-item/specialization-item.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -163,7 +171,9 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SpecializationTableComponent,
+    SpecializationItemComponent
     // MainComponent,
     // AboutUsComponent,
     // SignUpComponent,
@@ -255,6 +265,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SecretaryModule,
     StudentModule,
     ComponentsModule,
+    OrganizerModule,
 
     DirectivesModule,
     StoragesModule,

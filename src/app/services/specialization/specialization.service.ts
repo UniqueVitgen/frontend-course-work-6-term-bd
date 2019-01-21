@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ConfigService } from '../config/config.service';
+import {Group} from '../../factory/group.factory';
+import {Specialization} from '../../factory/specialization.factory';
 
 const prefix = 'specialization/';
 @Injectable()
@@ -27,11 +29,23 @@ export class SpecializationService {
   }
 
   edit(specialization) {
-    return this.configService.put(prefix + "edit", specialization);
+    return this.configService.put(prefix + 'edit', specialization);
   }
 
   delete(specialization) {
     return this.configService.delete(prefix + 'delete-' + specialization.idSpecialization);
+  }
+
+  getPDF(specialization: Specialization) {
+    console.log('prefix');
+    const query = prefix + 'pdf-' + specialization.idSpecialization;
+    return this.configService.blob(query);
+  }
+
+  getWord(specialization: Specialization) {
+    console.log('prefix');
+    const query = prefix + 'word-' + specialization.idSpecialization;
+    return this.configService.blob(query);
   }
 
 }

@@ -1,3 +1,9 @@
 .selected {
     background: #337ab7;
 }
+.selected .tegs a {
+  color: red;
+}
+.disabled {
+  opacity: 0.7;
+}

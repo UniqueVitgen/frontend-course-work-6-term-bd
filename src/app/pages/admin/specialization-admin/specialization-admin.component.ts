@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { SpecializationFormComponent } from '../../../components/forms/specialization-form/specialization-form.component';
 import { FormEventService } from '../../../services/events/form/form-event.service';
+import {Specialization} from '../../../factory/specialization.factory';
+import {UserWorker} from '../../../workers/UserWorker';
+import {User} from '../../../factory/user.factory';
+import {UserStorage} from '../../../storage/user/UserStorage';
 
 @Component({
   selector: 'app-specialization-admin',
@@ -12,14 +16,18 @@ import { FormEventService } from '../../../services/events/form/form-event.servi
 })
 export class SpecializationAdminComponent implements OnInit {
   specializations;
-  selectedSpecializations;
+  selectedSpecializations: Specialization[];
   bsModalRef: BsModalRef;
-  displayedColumns= ['name', 'faculty', 'code', 'qualification', 'edit', 'delete'];
+  displayedColumnsAdmin= ['name', 'faculty', 'code', 'qualification', 'edit', 'delete'];
+  displayedColumns= ['name', 'faculty', 'code', 'qualification'];
   search;
+  public user: User;
 
   constructor(private specializationService: SpecializationService,
-    private modalService: BsModalService, 
-    public formEventService: FormEventService, 
+    private modalService: BsModalService,
+    private userWorker: UserWorker,
+    private userStorage: UserStorage,
+    public formEventService: FormEventService,
     private router: Router) { }
 
 
@@ -28,7 +36,7 @@ export class SpecializationAdminComponent implements OnInit {
         console.log('facs - ', specializations);
         this.specializations = specializations;
         this.selectedSpecializations = specializations;
-    })
+    });
 
    }
 
@@ -38,16 +46,15 @@ export class SpecializationAdminComponent implements OnInit {
      }
      this.clickSearch();
    }
- 
    clickSearch() {
-     let value = this.search.toUpperCase();
+     const value = this.search.toUpperCase();
      console.log()
      this.selectedSpecializations = this.specializations.filter((fac) => {
-       let targ = fac.name.toUpperCase();
-       if(targ.indexOf(value) != -1) {
+       const targ = fac.name.toUpperCase();
+       if (targ.indexOf(value) !== -1) {
          return true;
-       } 
-     })
+       }
+     });
    }
 
    trackSpecializations() {
@@ -64,26 +71,24 @@ export class SpecializationAdminComponent implements OnInit {
    goToEdit(specialization) {
      this.router.navigate(['edit-specialization', specialization.idSpecialization]);
    }
- 
   openSpecializationForm(specialization?) {
     let edit;
-    if(specialization) {
+    if (specialization) {
       edit = true;
+    } else {
+      edit = false;
     }
-    else {
-      edit=false;
-    }
-    let initialState = {
+    const initialState = {
       isEdit: edit,
       specializationEdit: specialization,
 
     };
-    let modalOptions = {
+    const modalOptions = {
       initialState: initialState,
-      class:'specialization-form',
+      class: 'specialization-form',
       ignoreBackdropClick: true
 
-    }
+    };
     this.bsModalRef = this.modalService.show(SpecializationFormComponent, modalOptions);
     // this.bsModalRef.content.closeBtnName = 'Close';
   }
@@ -92,10 +97,13 @@ export class SpecializationAdminComponent implements OnInit {
      this.specializationService.delete(specialization).subscribe(answer => {
        console.log('answer');
        this.getAll();
-     })
+     });
    }
-
+   goToSpecializationPage(specialization: Specialization) {
+    this.router.navigate(['specialization', specialization.idSpecialization]);
+   }
   ngOnInit() {
+    this.user = this.userStorage.getUser();
     this.getAll();
     this.trackSpecializations();
   }

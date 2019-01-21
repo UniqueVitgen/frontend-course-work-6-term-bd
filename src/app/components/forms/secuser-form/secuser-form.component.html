@@ -20,7 +20,7 @@
                 [placeholder]="'Название' | translate">
             </div>-->
             <mat-form-field class="example-full-width">
-              <input matInput [placeholder]="'Фамилия' | translate" formControlName="lastname" [(ngModel)]="editedSecUser.lastname">
+              <input matInput [disabled]="editedSecUser.user" [placeholder]="'Фамилия' | translate" formControlName="lastname" [(ngModel)]="editedSecUser.lastname">
             </mat-form-field>
 
           </div>
@@ -34,7 +34,7 @@
                 [placeholder]="'Название' | translate">
             </div>-->
             <mat-form-field class="example-full-width">
-              <input matInput [placeholder]="'Имя' | translate" formControlName="firstname" [(ngModel)]="editedSecUser.firstname">
+              <input matInput [disabled]="editedSecUser.user" [placeholder]="'Имя' | translate" formControlName="firstname" [(ngModel)]="editedSecUser.firstname">
             </mat-form-field>
 
           </div>
@@ -48,7 +48,7 @@
                 [placeholder]="'Название' | translate">
             </div>-->
             <mat-form-field class="example-full-width">
-              <input matInput [placeholder]="'Отчество' | translate" formControlName="middlename" [(ngModel)]="editedSecUser.middlename">
+              <input matInput [disabled]="editedSecUser.user" [placeholder]="'Отчество' | translate" formControlName="middlename" [(ngModel)]="editedSecUser.middlename">
             </mat-form-field>
 
           </div>
@@ -71,6 +71,13 @@
             </div>
           </div>
         </div>
+        <button *ngIf="!editedSecUser.user" (click)="selectLector()" type="submit" class="btn btn-primary full-width">
+          {{'Добавить из существующих пользователей'| translate}}
+        </button>
+        <button *ngIf="editedSecUser.user" (click)="createNewLector()" type="submit" class="btn btn-primary full-width">
+          {{'Создать нового пользователя'| translate}}
+        </button>
+
 
         <!-- <div class="row">
 

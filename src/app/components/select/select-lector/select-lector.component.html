@@ -13,7 +13,8 @@
       <!-- <h1 class="center-text">Преподаватели</h1> -->
 
       <div *ngFor="let lector of lectors" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div *ngIf="lector" (click)="selectLector(lector)" [ngClass]="{'selected': lector.idPerson == selectedLector?.idPerson }" class="media">
+        <div *ngIf="lector" [tooltip]="(type === 'leader' && !lector.free ? 'Преподаватель занят': null) | translate" (click)="selectLector(lector)" [ngClass]="{'selected': lector.idPerson == selectedLector?.idPerson,
+         'disabled': type === 'leader' && !lector.free}" class="media">
           <div class="media-left">
             <a>
               <img *ngIf="lector.src" src="{{lector.src}}">

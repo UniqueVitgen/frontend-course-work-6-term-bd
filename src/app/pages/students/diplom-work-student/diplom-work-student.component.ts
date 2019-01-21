@@ -14,7 +14,7 @@ export class DiplomWorkStudentComponent implements OnInit {
   }
 
   goToSelectDiplomWork() {
-    this.router.navigate(['select-diplom'])
+    this.router.navigate(['select-diplom']);
   }
 
 }

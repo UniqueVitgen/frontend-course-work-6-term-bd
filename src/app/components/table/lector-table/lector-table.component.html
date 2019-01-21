@@ -1,0 +1,62 @@
+<table mat-table [dataSource]="lectors" class="mat-elevation-z8 full-width">
+
+  <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> {{'Имя' | translate}} </th>
+    <td mat-cell *matCellDef="let lector"> {{userWorker.formatFullName(lector)}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef> {{'Тип' | translate}} </th>
+    <td mat-cell *matCellDef="let lector"> {{(lectorWorker.isLectorUniversity(lector) ? 'Универститет' : 'Организация') | translate}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="post">
+    <th mat-header-cell *matHeaderCellDef> {{'Должность' | translate}} </th>
+    <td mat-cell *matCellDef="let lector"> {{lectorWorker.getPost(lector)}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="count">
+    <th mat-header-cell *matHeaderCellDef>  {{'Максимальное количество дипломов' | translate}}</th>
+    <td mat-cell *matCellDef="let lector">
+      <span>{{lector.maxCountOfDiplom}}<mat-icon class="edit-icon" (click)="clickEditCountOfDiplomButton(lector)" *ngIf="isOrganizer">create</mat-icon></span>
+    </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <!--<ng-container matColumnDef="degree">-->
+    <!--<th mat-header-cell *matHeaderCellDef> {{'Степень' | translate}} </th>-->
+    <!--<td mat-cell *matCellDef="let lector"> {{lector.degree.name}} </td>-->
+  <!--</ng-container>-->
+
+  <!--&lt;!&ndash; Name Column &ndash;&gt;-->
+  <!--<ng-container matColumnDef="amount">-->
+    <!--<th mat-header-cell *matHeaderCellDef> {{'Звание' | translate}} </th>-->
+    <!--<td mat-cell *matCellDef="let lector"> {{lector.title.name}} </td>-->
+  <!--</ng-container>-->
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let lector">
+      <button (click)="clickEditButton(lector)" type="button" class="btn btn-info">{{'Редактировать' | translate}}</button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let lector">
+      <button (click)="deleteLector(lector)" type="button" class="btn btn-danger">{{'Удалить' | translate}}</button>
+    </td>
+  </ng-container>
+  <div *ngIf="isAdmin">
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </div>
+  <div *ngIf="!isAdmin">
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsUser"></tr>
+    <tr class="lector-item" mat-row *matRowDef="let row; columns: displayedColumnsUser;" (click)="goToLectorPage(row)"></tr>
+  </div>
+</table>

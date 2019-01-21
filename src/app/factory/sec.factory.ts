@@ -1,9 +1,9 @@
-import { SECEvent } from "./sec-event.factory";
-import { Group } from "./group.factory";
-import { SECUser } from "./user.factory";
+import { SECEvent } from './sec-event.factory';
+import { Group } from './group.factory';
+import { SECUser } from './user.factory';
 
 export class SEC {
-    id : number;
+    id: number;
     groups: Group[];
 
     events: SECEvent[];

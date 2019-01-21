@@ -3,7 +3,10 @@
         <br>
         <div>
             <mat-card>
-                <h1 class="center-text">{{'Преподаватели' | translate}}</h1>
+                <mat-card-title class="center-text">{{'Преподаватели' | translate}}
+                  <span class="float-right">
+                <ng-content select="action-buttons"></ng-content>
+              </span></mat-card-title>
             </mat-card>
         </div>
         <br>

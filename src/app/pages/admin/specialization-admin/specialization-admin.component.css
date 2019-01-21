@@ -1,0 +1,22 @@
+.mat-column-name {
+  width: 30%;
+}
+.mat-column-edit {
+  width: 3%;
+}
+.mat-column-delete {
+  width: 3%;
+}
+.mat-column-code {
+  width: 10%;
+}
+.mat-column-faculty {
+  width: 15%;
+}
+.mat-column-qualification {
+  width: 15%;
+}
+.specialization-item:hover {
+  background: #ccc;
+  cursor: pointer;
+}
