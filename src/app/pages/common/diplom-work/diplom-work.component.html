@@ -247,7 +247,7 @@
     </div>
   </div>
 
-  <app-lector-staff isChild="true">
+  <app-lector-staff [diplomWork]="diplomWork" isChild="true">
     <action-buttons  *ngIf="hasOrganizerRole(user)
               || userWorker.hasStudentRole(user)
               || diplomWorkWorker.isLeader(diplomWork, user)">

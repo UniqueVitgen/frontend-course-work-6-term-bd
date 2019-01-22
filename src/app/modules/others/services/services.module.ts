@@ -28,10 +28,8 @@ import { SECEventService } from '../../../services/sec-event/secevent.service';
     CommonModule
   ],
   providers: [
-    
-
     GlobalEventsService,
-    FormEventService,  
+    FormEventService,
     // ModalService,
     LectorService,
     TitleService,

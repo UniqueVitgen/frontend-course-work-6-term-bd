@@ -25,15 +25,15 @@ export class DiplomWorkService {
    }
 
    edit(diplomWork) {
-     return this.configService.put(prefix + "edit", diplomWork);
+     return this.configService.put(prefix + 'edit', diplomWork);
    }
-   
+
    editByStatus(diplomWork, status) {
-      return this.configService.put(prefix + "edit-status-" + diplomWork.id, status);
+      return this.configService.put(prefix + 'edit-status-' + diplomWork.id, status);
    }
-   
+
    editByName(diplomWork, name) {
-      return this.configService.get(prefix + "edit-name-" + diplomWork.id + "?name=" + name);
+      return this.configService.get(prefix + 'edit-name-' + diplomWork.id + '?name=' + name);
    }
 
    delete(diplomWork) {
@@ -58,13 +58,13 @@ export class DiplomWorkService {
 
    getWord(diplomWork) {
      console.log('prefix');
-     let query = prefix + 'word-' + diplomWork.id;
+     const query = prefix + 'word-' + diplomWork.id;
     return this.configService.blob(query);
    }
 
    getPDF(diplomWork) {
      console.log('prefix');
-     let query = prefix + 'pdf-' + diplomWork.id;
+     const query = prefix + 'pdf-' + diplomWork.id;
     return this.configService.blob(query);
    }
 }

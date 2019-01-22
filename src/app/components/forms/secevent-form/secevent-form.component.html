@@ -30,7 +30,7 @@
 
           <div class="like-form-group">
             <div class="col-xs-12 col-12 col-md-4 form-group full-width">
-              <input [disableControl]="date" [bsConfig]="dateConfig" [placeholder]="'Дата проведения' | translate" (bsValueChange)="changeDate()"
+              <input [disableControl]="date" [minDate]="sec.startDate" [maxDate]="sec.endDate" [bsConfig]="dateConfig" [placeholder]="'Дата проведения' | translate" (bsValueChange)="changeDate()"
                 formControlName="date" type="text" class="form-control full-width" #dps="bsDatepicker" bsDatepicker
                 [(ngModel)]="dateTime.date">
             </div>

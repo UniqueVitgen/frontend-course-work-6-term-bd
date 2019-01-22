@@ -51,110 +51,45 @@
           </div>
         </mat-card>
         <br>
-        <mat-card>
-          <mat-card-title>{{'Принимаемые группы' | translate}}</mat-card-title>
+        <!--<mat-card>-->
+          <!--<mat-card-title>{{'Принимаемые специальности' | translate}}</mat-card-title>-->
 
-          <table *ngIf="sec.groups.length > 0" mat-table [dataSource]="sec.groups" class="mat-elevation-z8 full-width">
+          <!--<table *ngIf="sec.groups.length > 0" mat-table [dataSource]="sec.groups" class="mat-elevation-z8 full-width">-->
 
 
-            <ng-container matColumnDef="number">
-              <th mat-header-cell *matHeaderCellDef> {{'Номер' | translate}} </th>
-              <td mat-cell *matCellDef="let group"> {{group.number}} </td>
-            </ng-container>
-            <ng-container matColumnDef="specialization">
-              <th mat-header-cell *matHeaderCellDef> {{'Специальность' | translate}} </th>
-              <td mat-cell *matCellDef="let group"> {{group.specialization.name}} </td>
-            </ng-container>
-            <ng-container matColumnDef="amount">
-              <th mat-header-cell *matHeaderCellDef> {{'Количество студентов' | translate}} </th>
-              <td mat-cell *matCellDef="let group"> {{group.amount_student}} </td>
-            </ng-container>
+            <!--<ng-container matColumnDef="number">-->
+              <!--<th mat-header-cell *matHeaderCellDef> {{'Номер' | translate}} </th>-->
+              <!--<td mat-cell *matCellDef="let group"> {{group.number}} </td>-->
+            <!--</ng-container>-->
+            <!--<ng-container matColumnDef="specialization">-->
+              <!--<th mat-header-cell *matHeaderCellDef> {{'Специальность' | translate}} </th>-->
+              <!--<td mat-cell *matCellDef="let group"> {{group.specialization.name}} </td>-->
+            <!--</ng-container>-->
+            <!--<ng-container matColumnDef="amount">-->
+              <!--<th mat-header-cell *matHeaderCellDef> {{'Количество студентов' | translate}} </th>-->
+              <!--<td mat-cell *matCellDef="let group"> {{group.amount_student}} </td>-->
+            <!--</ng-container>-->
+            <!--<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+            <!--<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
+          <!--</table>-->
+          <!--<br>-->
+          <!--<div class="row">-->
+            <!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">-->
+            <!--</div>-->
 
-            <!-- <ng-container matColumnDef="edit">
-              <th mat-header-cell *matHeaderCellDef> </th>
-              <td mat-cell *matCellDef="let group">
-                <button (click)="openGroupForm(group)" type="button" class="btn btn-info">{{'Редактировать' | translate}}</button>
-              </td>
-            </ng-container>
-  
-            <ng-container matColumnDef="delete">
-              <th mat-header-cell *matHeaderCellDef> </th>
-              <td mat-cell *matCellDef="let group">
-                <button (click)="deleteGroup(group)" type="button" class="btn btn-danger">{{'Удалить' | translate}}</button>
-              </td>
-            </ng-container> -->
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-          <br>
-          <div class="row">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            </div>
+            <!--<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">-->
 
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <!--<button (click)="openGroupForm(sec)" type="submit" class="btn btn-primary full-width">{{'Выбрать группы'-->
+                <!--|-->
+                <!--translate}}</button>-->
+            <!--</div>-->
+            <!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">-->
+            <!--</div>-->
+          <!--</div>-->
 
-              <button (click)="openGroupForm(sec)" type="submit" class="btn btn-primary full-width">{{'Выбрать группы'
-                |
-                translate}}</button>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            </div>
-          </div>
-
-        </mat-card>
+        <!--</mat-card>-->
 
         <br>
-
-        <!-- <mat-card> -->
-
-        <!-- <div class="row">
-
-          <div class="like-form-group">
-            <div class="col-xs-12 col-12 col-md-4 form-group full-width">
-              <input [disableControl]="startDate" [bsConfig]="dateConfig" [minDate]="minDate" [maxDate]=" sec.endDate || maxDate "
-                placeholder="Дата начала" (bsValueChange)="changeStartDate()" formControlName="startDate" type="text" class="form-control full-width"
-                #dps="bsDatepicker" bsDatepicker [(ngModel)]="sec.startDate">
-            </div>
-          </div>
-          <div class="col-xs-12 col-12 col-md-3 form-group">
-            <button [disabled]="startDate" class="btn btn-success" (click)="dps.toggle()" [attr.aria-expanded]="dps.isOpen">Выбрать дату начала</button>
-          </div>
-        </div>
-        <div class="row">
-
-          <div class="like-form-group">
-            <div class="col-xs-12 col-12 col-md-4 form-group  full-width">
-              <input (bsValueChange)="changeEndDate()" [disableControl]="sec.startDate == null || endDate" formControlName="endDate"
-                [isDisabled]="sec.startDate == null" type="text" class="form-control  full-width" #dpe="bsDatepicker"
-                [bsConfig]="dateConfig" [minDate]="sec.startDate || minDate " [maxDate]="maxDate" placeholder="Дата окончания"
-                bsDatepicker [(ngModel)]="sec.endDate">
-            </div>
-          </div>
-          <div class="col-xs-12 col-12 col-md-3 form-group">
-            <button [disabled]="sec.startDate == null || endDate" class="btn btn-success" (click)="dpe.toggle()" [attr.aria-expanded]="dpe.isOpen">Выбрать дату окончания</button>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 align-center">
-            <div class="form-group form-control-sm">
-              <label for="exampleInputFirstName">Процент</label>
-              <input [(ngModel)]="sec.percent" formControlName="percent" class="form-control" percent placeholder="%">
-
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="form-group form-control-sm">
-              <label for="exampleInputFirstName">Комментарий</label>
-
-              <textarea rows="3" formControlName="comment" [(ngModel)]="sec.comment" type="text" class="form-control" id="exampleInputComment"
-                placeholder="Комментарий">
-              </textarea>
-            </div>
-
-          </div>
-        </div> -->
       </div>
     </div>
 

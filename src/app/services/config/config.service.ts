@@ -6,6 +6,7 @@ const api = 'http://localhost:8081/';
 
 @Injectable()
 export class ConfigService {
+  public api = 'http://localhost:8081/';
 
   constructor(
     private http: Http) { }

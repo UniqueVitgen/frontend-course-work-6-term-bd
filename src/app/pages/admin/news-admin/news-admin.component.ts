@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NewsFormComponent } from '../../../components/forms/news-form/news-form.component';
 import { NewsComponent } from '../../students/news/news.component';
@@ -14,6 +14,7 @@ export class NewsAdminComponent implements OnInit {
   public faculties;
 
   constructor(
+    private cd: ChangeDetectorRef,
     private modalService: BsModalService) {
   }
 
@@ -25,33 +26,37 @@ export class NewsAdminComponent implements OnInit {
 
   }
 
-  
- 
+
+
   openNewsForm(news?) {
     let edit;
-    if(news) {
+    if (news) {
       edit = true;
     }
     else {
-      edit=false;
+      edit = false;
     }
-    let initialState = {
+    const initialState = {
       isEdit: edit,
       news: news,
 
     };
-    let modalOptions = {
+    const modalOptions = {
       initialState: initialState,
-      class:'news-form',
+      class: 'news-form',
       ignoreBackdropClick: true
 
-    }
+    };
     this.bsModalRef = this.modalService.show(NewsFormComponent, modalOptions);
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 
   ngOnInit(): void {
     // throw new Error("Method not implemented.");
+  }
+
+  onChange(): void {
+    this.cd.detectChanges();
   }
 
 }

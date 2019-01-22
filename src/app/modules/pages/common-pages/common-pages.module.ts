@@ -21,6 +21,7 @@ import { StoragesModule } from '../../others/storages/storages.module';
 import { WorkersModule } from '../../others/workers/workers.module';
 import { GroupDashboardComponent } from '../../../pages/common/group-dashboard/group-dashboard.component';
 import { SignUpLectorOrganizerComponent } from '../../../pages/common/sign-up/sign-up-lector-organizer/sign-up-lector-organizer.component';
+import {SpecializationItemComponent} from '../../../pages/common/specialization-item/specialization-item.component';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import { SignUpLectorOrganizerComponent } from '../../../pages/common/sign-up/si
     SignUpOrganizerComponent,
     NewsItemComponent,
     GroupItemComponent,
+    SpecializationItemComponent,
     GroupDashboardComponent
   ],
   providers: [
@@ -67,6 +69,7 @@ import { SignUpLectorOrganizerComponent } from '../../../pages/common/sign-up/si
     NewsItemComponent,
     GroupItemComponent,
     MainComponent,
+    SpecializationItemComponent,
     GroupDashboardComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]

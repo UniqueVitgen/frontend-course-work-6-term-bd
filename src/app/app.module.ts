@@ -163,6 +163,9 @@ import {OrganizerModule} from './modules/pages/organizer/organizer.module';
 import { LectorCountDiplomFormComponent } from './components/forms/lector-count-diplom-form/lector-count-diplom-form.component';
 import { SpecializationTableComponent } from './components/table/specialization-table/specialization-table.component';
 import { SpecializationItemComponent } from './pages/common/specialization-item/specialization-item.component';
+import { SelectSpecializationComponent } from './components/select/select-specialization/select-specialization.component';
+import { SelectDepartmentComponent } from './components/select/select-department/select-department.component';
+import {Ej2Module} from './modules/library/ej2/ej2.module';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -171,90 +174,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SpecializationTableComponent,
-    SpecializationItemComponent
-    // MainComponent,
-    // AboutUsComponent,
-    // SignUpComponent,
-    // SignInComponent,
-    // SelectDiplomComponent,
-    // SelectTeacherComponent,
-    // LectorStaffComponent,
-    // NewsComponent,
-    // SignUpStudentComponent,
-    // SignUpLectorComponent,
-    // QueryStudentsComponent,
-    // InvolveComponent,
-    // PercentageComponent,
-
-    // FacultyAdminComponent,
-    // SpecializationAdminComponent,
-    // GroupAdminComponent,
-    // LectorAdminComponent,
-    // StudentAdminComponent,
-    // QualificationAdminComponent,
-
-    // FacultyFormComponent,
-    // SpecializationFormComponent,
-    // GroupFormComponent,
-    // NewsFormComponent,
-    // NewsAdminComponent,
-    // TitleAdminComponent,
-    // TitleFormComponent,
-    // DegreeFormComponent,
-    // DegreeAdminComponent,
-    // PostAdminComponent,
-    // PostFormComponent,
-    // SelectLectorComponent,
-    // FileUploadComponent,
-    // SelectImageComponent,
-    // LeaderComponent,
-    // PercentageControlComponent,
-    // PercentageFormComponent,
-    // DisableControlDirective,
-    // DiplomWorkComponent,
-    // DiplomLectorStaffComponent,
-    // DiplomWorkStudentComponent,
-    // PercentDirective,
-    // QualificationFormComponent,
-    // DiplomWorkAdminComponent,
-    // UsersAdminComponent,
-    // ProfileComponent,
-    // SignUpOrganizerComponent,
-    // DiplomWorkTitleFormComponent,
-    // SignUpSecretarySecComponent,
-    // SECListComponent,
-    // SECFormComponent,
-    // SECEventFormComponent,
-    // SelectGroupComponent,
-    // SECComponent,
-    // SECUserFormComponent,
-    // SECRoleFormComponent,
-    // NewsItemComponent,
-    // NewsCardComponent,
-    // SECDateFormComponent,
-    // NgControl
+    AppComponent
   ],
   imports: [
-    // MatMenuModule,
-    // Ng2FileInputModule.forRoot({
-    //   showPreviews: false
-    // }),
-    // Browser
-    // RouterModule.forRoot(routes),
     AppRoutingModule,
-    // MatCardModule,
-    // MatTableModule,
-    // MatExpansionModule,
-    // MatInputModule,
-    // MatSelectModule,
-    // MatIconModule,
-    // MatButtonModule,
-    // MatCheckboxModule,
-
-    // TimepickerModule.forRoot(),
-    // TooltipModule.forRoot(),
     AngularLibraryModule,
     BootstrapModule,
     MaterialDesignModule,
@@ -272,27 +195,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     WorkersModule,
     PipesModule,
     GuardsModule,
-    ServicesModule
+    ServicesModule,
+    Ej2Module
   ],
   entryComponents: [
-    // SignInComponent,
-    // SelectLectorComponent,
-    // FacultyFormComponent,
-    // SpecializationFormComponent,
-    // GroupFormComponent,
-    // DegreeFormComponent,
-    // PostFormComponent,
-    // TitleFormComponent,
-    // NewsFormComponent,
-    // FileUploadComponent,
-    // SelectImageComponent,
-    // SelectGroupComponent,
-    // PercentageFormComponent,
-    // QualificationFormComponent,
-    // DiplomWorkTitleFormComponent,
-    // SECFormComponent,
-    // SECEventFormComponent,
-    // SECUserFormComponent
   ],
   providers: [
     CommonModule,
@@ -304,47 +210,6 @@ export function HttpLoaderFactory(http: HttpClient) {
       useFactory: httpFactory,
       deps: [XHRBackend, RequestOptions]
     },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: Interceptor,
-    //   multi: true
-    // },
-
-    // GlobalEventsService,
-    // FormEventService,  
-    // // ModalService,
-    // LectorService,
-    // TitleService,
-    // PostService,
-    // DegreeService,
-    // UserService,
-    // RoleService,
-    // ConfigService,
-    // LectorService,
-    // NewsService,
-    // FacultyService,
-    // SpecializationService,
-    // GroupService,
-    // SignUpService,
-    // AuthService,
-    // UploadFileService,
-    // DiplomWorkService,
-    // PercentageService,
-    // QualificationService,
-    // StatusService,
-    // SECService,
-    // SECEventService,
-
-    // StudentGuard,
-    // UnauthGuard,
-    // AuthGuard,
-    // LectorGuard,
-    // AdminGuard,
-    // StudentHasDiplomGuard,
-    // ExpectedRolesGuard,
-    // SignInComponent,
-
-    // PasswordValidator,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]

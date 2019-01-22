@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LectorService } from '../../../services/lector-service/lector.service';
+import {DiplomWork} from '../../../factory/diplom-work.factory';
 
 @Component({
   selector: 'app-lector-staff',
@@ -10,17 +11,18 @@ export class LectorStaffComponent implements OnInit {
 
   lectorStaff: Array<{description: any, src: any, post: any, title: any, degree: any, name: any}>;
   lectors;
+  @Input() diplomWork: DiplomWork;
   @Input() isChild = false;
   properties = {
-    'leader':'Руководитель проекта',
+    'leader': 'Руководитель проекта',
     'scienceConsultor': 'Научный консультант',
     'recensor': 'Рецензент',
     'otConsultor': 'Консультант по организационно-технической части',
     'teoConsultor': 'Консультант по техническо-экономическому обоснованию'
-  }
-    
+  };
 
-  constructor(public lectorService: LectorService) { 
+
+  constructor(public lectorService: LectorService) {
     // this.lectorStaff = [
     //   {
     //     degree:'Доцент', post:'Зам декана', title:'ядерный физик', src:'assets/img/students/lector-staff/team-img.jpg',
@@ -45,14 +47,14 @@ export class LectorStaffComponent implements OnInit {
     this.lectorService.getLectors().subscribe(lectors => {
       console.log('lectors - ', lectors);
       this.lectors = lectors;
-    })  
+    });
 
   }
 
   formatRole(lector) {
-    let strs = [];
-    for(let property in this.properties) {
-      if(lector['is' + property]) {
+    const strs = [];
+    for (const property in this.properties) {
+      if (lector['is' + property]) {
         strs.push(this.properties[property]);
       }
     }

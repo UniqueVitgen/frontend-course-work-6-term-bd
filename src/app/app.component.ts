@@ -65,6 +65,7 @@ export class AppComponent {
 
   organizer = [
     {path: 'admin-diplom-work', title: 'Дипломные работы'},
+    {path: 'sec-list', title: 'ГЭК комиссия'},
     {  path: 'admin-news', component: NewsComponent, title: 'Новости' },
     {  path: 'organizer-lector', component: LectorOrganizerComponent, title: 'Преподаватели' },
     { path: 'admin-specialization', title: 'Специальность' },

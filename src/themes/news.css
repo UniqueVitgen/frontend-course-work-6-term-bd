@@ -13,6 +13,10 @@ mat-card.main-news {
         /* width: auto; */
 }
 
+.news-image {
+  object-fit: contain;
+}
+
 .news-item {
 
     text-align: justify;
@@ -24,6 +28,7 @@ mat-card.main-news {
 }
 
 .part-content {
+    height: 20px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;

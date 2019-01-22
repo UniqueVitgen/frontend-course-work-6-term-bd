@@ -49,8 +49,23 @@
                     <div class="media-body">
                         <mat-card-title>{{formatFullName(lector)}}</mat-card-title>
                         <p *ngIf="lector.description" class="font-x1">{{lector.description}} </p>
-                        <ul class="target-list">
-                            <li *ngFor="let str of formatRole(lector)">{{str}}</li>
+                        <ul *ngIf="diplomWork" class="target-list">
+                          <li *ngIf="diplomWork.leader && diplomWork.leader.idPerson === lector.idPerson">
+                            {{'Руководитель проекта' | translate}}
+                          </li>
+                          <li *ngIf="diplomWork.teoConsultor && diplomWork.teoConsultor.idPerson === lector.idPerson">
+                            {{'Консультант по техническо-экономическому обоснованию' | translate}}
+                          </li>
+                          <li *ngIf="diplomWork.recensor && diplomWork.recensor.idPerson === lector.idPerson">
+                            {{'Рецензент' | translate}}
+                          </li>
+                          <li *ngIf="diplomWork.otConsultor && diplomWork.otConsultor.idPerson === lector.idPerson">
+                            {{'Консультант по организационно-технической части' | translate}}
+                          </li>
+                          <li *ngIf="diplomWork.scienceConsultor && diplomWork.scienceConsultor.idPerson === lector.idPerson">
+                            {{'Научный консультант' | translate}}
+                          </li>
+                            <!--<li *ngFor="let str of formatRole(lector)">{{str}}</li>-->
                         </ul>
                         <div class="tegs">
                             <div class="row">

@@ -79,3 +79,7 @@ app-faculty-form {
 .news-form.modal-dialog {
     max-width: 800px;
 }
+
+.diplomWork-form .modal-content {
+  width: 850px;
+}

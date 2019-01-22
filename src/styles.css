@@ -15,9 +15,9 @@
 @import "./themes/news.css";
 @import "./themes/input.css";
 @import "./themes/align.css";
+@import "./themes/ej2.css";
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
 
 /* You can add global styles to this file, and also import other style files */
 .nav li {

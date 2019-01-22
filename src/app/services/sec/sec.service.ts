@@ -11,11 +11,11 @@ export class SECService {
     private configService: ConfigService) { }
 
   getById(id) {
-    return this.configService.get(prefix+'sec-' + id);
+    return this.configService.get(prefix + 'sec-' + id);
   }
 
   getAll() {
-    return this.configService.get(prefix+'getAll');
+    return this.configService.get(prefix + 'getAll');
   }
 
   save(sec) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import {Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy} from '@angular/core';
 import { BsDatepickerDirective, BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormEventService } from '../../../services/events/form/form-event.service';
@@ -6,26 +6,27 @@ import { SECService } from '../../../services/sec/sec.service';
 import { SelectGroupComponent } from '../../select/select-group/select-group.component';
 import { SECEventFormComponent } from '../secevent-form/secevent-form.component';
 import { DateTimeWorker } from '../../../workers/DateTimeWorker';
+import {SEC} from '../../../factory/sec.factory';
 
 @Component({
   selector: 'app-secform',
   templateUrl: './secform.component.html',
   styleUrls: ['./secform.component.css']
 })
-export class SECFormComponent implements OnInit {
+export class SECFormComponent implements OnInit, OnDestroy {
   startDate;
   endDate;
   diplomWork;
   secForm;
-  sec = {
-    groups: []
-  }
+  sec: SEC = {
+    specializations: []
+  };
   bsRangeValue: Date[];
   @ViewChild('dpe') datepickerstart: BsDatepickerDirective;
   @ViewChild('dpe') datepickerend: BsDatepickerDirective;
   dateConfig = {
     dateInputFormat: 'DD.MM.YYYY'
-  }
+  };
   previous;
   next;
   minDate;
@@ -36,12 +37,12 @@ export class SECFormComponent implements OnInit {
   percentArrayValidators;
   displayedColumns= ['number', 'specialization', 'amount'];
   displayedColumnsEvent= ['startDate', 'endDate', 'address'];
-  public bsModalRefSelectGroups: BsModalRef
+  public bsModalRefSelectGroups: BsModalRef;
 
-  constructor(public formBuilder: FormBuilder, 
+  constructor(public formBuilder: FormBuilder,
     private formEventService: FormEventService,
     private modalService: BsModalService,
-    private cd:ChangeDetectorRef,
+    private cd: ChangeDetectorRef,
     private dateTimeWorker: DateTimeWorker,
     public bsModalRef: BsModalRef, public secService: SECService) {
 
@@ -61,7 +62,7 @@ export class SECFormComponent implements OnInit {
   }
 
   configPercentValidation() {
-    let validators = [];
+    const validators = [];
     if (this.previous) {
       validators.push(Validators.min(Number(this.previous.percent) + 1));
     }
@@ -76,48 +77,46 @@ export class SECFormComponent implements OnInit {
       startDate: [undefined, Validators.compose([Validators.required])],
       endDate: [undefined, Validators.compose([Validators.required])],
 
-    })
+    });
   }
- 
   openGroupForm(sec?) {
     let edit;
-    if(sec) {
+    if (sec) {
       edit = true;
     }
     else {
-      edit=false;
+      edit = false;
     }
-    let initialState = {
+    const initialState = {
       isEdit: edit,
       secEdit: sec,
       sec: sec,
       onSave: (groups) => {
         setTimeout(() => {
-          this.sec.groups = groups;
           this.cd.detectChanges();
           console.log('sec', this.sec);
         }, 200);
       }
     };
-    let modalOptions = {
+    const modalOptions = {
       initialState: initialState,
-      class:'group-form',
+      class: 'group-form',
       ignoreBackdropClick: true
 
-    }
+    };
     this.bsModalRefSelectGroups = this.modalService.show(SelectGroupComponent, modalOptions);
     this.bsModalRefSelectGroups.content.closeBtnName = 'Close';
   }
- 
+
   openSECEventForm(sec?, secEvent?) {
     let edit;
-    if(secEvent) {
+    if (secEvent) {
       edit = true;
     }
     else {
-      edit=false;
+      edit = false;
     }
-    let initialState = {
+    const initialState = {
       isEdit: edit,
       secEdit: sec,
       sec: sec,
@@ -130,12 +129,12 @@ export class SECFormComponent implements OnInit {
       //   }, 200);
       // }
     };
-    let modalOptions = {
+    const modalOptions = {
       initialState: initialState,
-      class:'sec-event-form',
+      class: 'sec-event-form',
       ignoreBackdropClick: true
 
-    }
+    };
     this.bsModalRefSelectGroups = this.modalService.show(SECEventFormComponent, modalOptions);
     this.bsModalRefSelectGroups.content.closeBtnName = 'Close';
   }
@@ -164,7 +163,7 @@ export class SECFormComponent implements OnInit {
     this.secService.save(this.sec).subscribe(res => {
       console.log('res - ', res);
       this.cancel();
-    })
+    });
   }
 
   edit() {
@@ -172,15 +171,15 @@ export class SECFormComponent implements OnInit {
     this.secService.edit(this.sec).subscribe(res => {
       console.log('res - ', res);
       this.cancel();
-    })
+    });
   }
 
   formatDate(date, format?) {
-    let dateObj = new Date(date);
-    if(format) {
+    const dateObj = new Date(date);
+    if (format) {
       return this.dateTimeWorker.getDate(date, format);
     }
-    else {return this.dateTimeWorker.getDate(date);}
+    else {return this.dateTimeWorker.getDate(date); }
   }
 
 }

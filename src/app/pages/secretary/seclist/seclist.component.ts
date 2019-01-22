@@ -5,6 +5,9 @@ import { SECService } from '../../../services/sec/sec.service';
 import { FormEventService } from '../../../services/events/form/form-event.service';
 import { Router } from '@angular/router';
 import { DateTimeWorker } from '../../../workers/DateTimeWorker';
+import {User} from '../../../factory/user.factory';
+import {UserWorker} from '../../../workers/UserWorker';
+import {UserStorage} from '../../../storage/user/UserStorage';
 
 @Component({
   selector: 'app-seclist',
@@ -15,14 +18,18 @@ export class SECListComponent implements OnInit {
   bsModalRef: BsModalRef;
   public secs;
   public selectedSECs;
-  displayedColumns= [ 'startDate', 'endDate', 'edit', 'delete']
+  displayedColumns= [ 'startDate', 'endDate', 'edit', 'delete'];
   search;
+  isCanAdd: boolean;
+  user: User;
 
   constructor(public secService: SECService,
     private modalService: BsModalService,
+    private userWorker: UserWorker,
+    private userStorage: UserStorage,
     private formEventService: FormEventService,
     private dateTimeWorker: DateTimeWorker,
-    public router: Router,) {
+    public router: Router) {
   }
 
   getAll() {
@@ -30,7 +37,7 @@ export class SECListComponent implements OnInit {
       console.log('facs - ', secs);
       this.secs = secs;
       this.selectedSECs = secs;
-    })
+    });
 
   }
 
@@ -42,86 +49,60 @@ export class SECListComponent implements OnInit {
   }
 
   clickSearch() {
-    let value = this.search.toUpperCase();
+    const value = this.search.toUpperCase();
     this.selectedSECs = this.secs.filter((fac) => {
-      let targ = fac.name.toUpperCase();
-      if(targ.indexOf(value) != -1) {
+      const targ = fac.name.toUpperCase();
+      if (targ.indexOf(value) != -1) {
         return true;
-      } 
-    })
+      }
+    });
   }
 
   trackFormSECHide() {
-    this.formEventService.hideSECForm.subscribe(()=> {
+    this.formEventService.hideSECForm.subscribe(() => {
       this.getAll();
-    })
+    });
   }
- 
+
   openSECForm(sec?) {
     let edit;
-    if(sec) {
+    if (sec) {
       edit = true;
     }
     else {
-      edit=false;
+      edit = false;
     }
-    let initialState = {
+    const initialState = {
       isEdit: edit,
       secEdit: sec,
 
     };
-    let modalOptions = {
+    const modalOptions = {
       initialState: initialState,
-      class:'sec-form',
+      class: 'sec-form',
       ignoreBackdropClick: true
 
-    }
+    };
     this.bsModalRef = this.modalService.show(SECFormComponent, modalOptions);
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 
-
-  // openModal(id: string) {
-  //   this.modalService.open(id);
-  // }
-
-  // closeModal(id: string) {
-  //   this.modalService.close(id);
-  // }
-
   addSEC() {
-    this.router.navigate(['new-sec'])
+    this.router.navigate(['new-sec']);
   }
-
-  // closeModal() {
-  //   console.log('inner');
-  //   try {
-  //     this.modal.close().then(answer => {
-  //       console.log('close1 - ', answer);
-  //     }).catch(err => {
-  //       console.log('close1 err - ', err);
-  //     });;
-  //     this.modal.dismiss().then(answer => {
-  //       console.log('close2 - ', answer);
-  //     }).catch(err => {
-  //       console.log('close2 err - ', err);
-  //     });
-  //   }
-  //   catch (err) {
-  //     console.log('err - ', err);
-  //   }
-  // }
 
   deleteSEC(sec) {
     this.secService.delete(sec).subscribe(answer => {
       console.log('answer');
       this.getAll();
-    })
+    });
   }
 
   ngOnInit() {
     this.getAll();
     this.trackFormSECHide();
+    this.user = this.userStorage.getUser();
+    this.isCanAdd = this.userWorker.hasOrganizerRole(this.user) || this.userWorker.hasAdminRole(this.user);
     setTimeout(() => {
       // this.modalService.open('1');
 
@@ -129,11 +110,10 @@ export class SECListComponent implements OnInit {
   }
 
   formatDate(date, format?) {
-    let dateObj = new Date(date);
-    if(format) {
+    const dateObj = new Date(date);
+    if (format) {
       return this.dateTimeWorker.getDate(date, format);
-    }
-    else {return this.dateTimeWorker.getDate(date);}
+    } else {return this.dateTimeWorker.getDate(date); }
   }
 
   goToSEC(sec) {

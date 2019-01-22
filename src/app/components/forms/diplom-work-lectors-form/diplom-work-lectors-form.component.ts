@@ -22,7 +22,7 @@ export class DiplomWorkLectorsFormComponent implements OnInit, OnDestroy {
   @ViewChild('dpe') datepickerend: BsDatepickerDirective;
   dateConfig = {
     dateInputFormat: 'DD.MM.YYYY'
-  }
+  };
   previous;
   next;
   minDate;
@@ -31,6 +31,7 @@ export class DiplomWorkLectorsFormComponent implements OnInit, OnDestroy {
   isEdit;
   onDestroy;
   percentArrayValidators;
+  bsModalRef2: BsModalRef;
 
   constructor(public formBuilder: FormBuilder,
               private formEventService: FormEventService,
@@ -54,7 +55,7 @@ export class DiplomWorkLectorsFormComponent implements OnInit, OnDestroy {
   }
 
   configPercentValidation() {
-    let validators = [];
+    const validators = [];
     if (this.previous) {
       validators.push(Validators.min(Number(this.previous.percent) + 1));
     }
@@ -81,7 +82,7 @@ export class DiplomWorkLectorsFormComponent implements OnInit, OnDestroy {
 
   selectLector(that, property) {
     // this.template.createEmbeddedView(``)
-    let initialState = {
+    const initialState = {
       onDestroy: (lector) => {
         // that[property] = lector;
         that.diplomWorkForm.controls[property].setValue(that.userWorker.formatFullName(lector));
@@ -90,29 +91,29 @@ export class DiplomWorkLectorsFormComponent implements OnInit, OnDestroy {
         // console.log(this.)
       },
       selectedLector: that[property]
-    }
-    let modalOptions = {
-      class:'select-lector',
+    };
+    const modalOptions = {
+      class: 'select-lector',
       ignoreBackdropClick: true,
       initialState: initialState
-    }
-    this.bsModalRef = this.modalService.show(SelectLectorComponent, modalOptions);
+    };
+    this.bsModalRef2 = this.modalService.show(SelectLectorComponent, modalOptions);
   }
 
   selectRecensor() {
-    this.selectLector(this, "recensor");
+    this.selectLector(this, 'recensor');
   }
 
   selectScienceConsultor() {
-    this.selectLector(this, "scienceConsultor");
+    this.selectLector(this, 'scienceConsultor');
   }
 
   selectOtConsultor() {
-    this.selectLector(this, "otConsultor");
+    this.selectLector(this, 'otConsultor');
   }
 
   selectTeoConsultor() {
-    this.selectLector(this, "teoConsultor");
+    this.selectLector(this, 'teoConsultor');
   }
 
   ngOnDestroy(): void {

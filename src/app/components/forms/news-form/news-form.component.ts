@@ -18,8 +18,18 @@ import { UserStorage } from '../../../storage/user/UserStorage';
 })
 export class NewsFormComponent implements OnInit, OnDestroy {
   public newsForm;
-  public news : News = new News();
+  public news: News = new News();
   private editedNews: NewsForm = new NewsForm();
+  public tools: object = {
+    items: ['Bold', 'Italic', 'StrikeThrough', '|',
+      'Formats', 'OrderedList', 'UnorderedList', '|',
+      'CreateTable', 'CreateLink', 'Image', '|',
+      {
+        tooltipText: 'Preview',
+        template: '<button id="preview-code" class="e-tbar-btn e-control e-btn e-icon-btn">' +
+          '<span class="e-btn-icon e-md-preview e-icons"></span></button>'
+      }, '|', 'Undo', 'Redo']
+  };
   sub;
   isEdit;
   image;
@@ -33,14 +43,14 @@ export class NewsFormComponent implements OnInit, OnDestroy {
   private uploadFileService: UploadFileService, private modalService: BsModalService,
   private newsService: NewsService,
   private userStorage: UserStorage
-  ) { 
-    
+  ) {
+
     this.newsForm = this.formBuilder.group({
       file: ['', Validators.compose([])],
       title: ['', Validators.compose([Validators.required])],
       content: ['', Validators.compose([Validators.required])],
-      
-    })
+
+    });
   }
 
   saveNews() {
@@ -50,21 +60,20 @@ export class NewsFormComponent implements OnInit, OnDestroy {
     // })
 
   }
-  
- 
+
+
   selectImage(faculty?) {
     let edit;
-    if(faculty) {
+    if (faculty) {
       edit = true;
+    } else {
+      edit = false;
     }
-    else {
-      edit=false;
-    }
-    let initialState = {
+    const initialState = {
       isEdit: edit,
       facultyEdit: faculty,
       onDestroy: (file) => {
-        if(file) {
+        if (file) {
           console.log('file', file);
           this.editedNews.url = file;
           this.editedNews.filename = this.editedNews.url.substring(this.editedNews.url.lastIndexOf('/') + 1);
@@ -72,12 +81,12 @@ export class NewsFormComponent implements OnInit, OnDestroy {
         }
       }
     };
-    let modalOptions = {
+    const modalOptions = {
       initialState: initialState,
-      class:'faculty-form',
+      class: 'faculty-form',
       ignoreBackdropClick: true
 
-    }
+    };
     // this.subscribe();
     this.imageModal = this.modalService.show(SelectImageComponent, modalOptions);
     this.imageModal.content.closeBtnName = 'Close';
@@ -86,8 +95,8 @@ export class NewsFormComponent implements OnInit, OnDestroy {
   getAllImages() {
     this.uploadFileService.getFiles().subscribe(data => {
       this.images = data;
-      console.log('data',data);
-    })
+      console.log('data', data);
+    });
   }
 
   editNews(news) {
@@ -105,17 +114,17 @@ export class NewsFormComponent implements OnInit, OnDestroy {
   }
 
   onChange(file) {
-    console.log('file1 - ',file);
+    console.log('file1 - ', file);
     this.uploadFileService.pushFileToStorage(file).subscribe(event => {
-      console.log('file - ',file);
-    })
+      console.log('file - ', file);
+    });
     // this.file = event.srcElement.files[0];
     // console.log(this.file);
   }
 
   save() {
     this.createNewsEditFromNews();
-    if(this.editedNews.url) {
+    if (this.editedNews.url) {
       this.editedNews.filename = this.editedNews.url.substring(this.editedNews.url.lastIndexOf('/') + 1);
     }
     console.log('this.news', this.editedNews);
@@ -124,7 +133,7 @@ export class NewsFormComponent implements OnInit, OnDestroy {
     // console.log('news - ',this.news);
     this.newsService.save(this.editedNews).subscribe(data => {
       console.log(data);
-      if(this.onSave) {
+      if (this.onSave) {
         this.onSave(data);
       }
       this.cancel();
@@ -132,45 +141,43 @@ export class NewsFormComponent implements OnInit, OnDestroy {
   }
 
   edit() {
-    if(this.checkIfNewsFormAndNewsHasSameImage()) {
+    if (this.checkIfNewsFormAndNewsHasSameImage()) {
       News.assignFromNewsForm(this.news, this.editedNews);
       this.newsService.edit(this.news).subscribe(res => {
         console.log('res ' , res);
-        if(this.onSave) {
+        if (this.onSave) {
           this.onSave(res);
         }
         this.cancel();
-  
-      })
-    }
-    else {
+
+      });
+    } else {
       this.newsService.editByForm(this.editedNews).subscribe(res => {
         console.log('res - ', res);
-        if(this.onSave) {
+        if (this.onSave) {
           this.onSave(res);
         }
         this.cancel();
-      })
+      });
     }
   }
 
   checkIfNewsFormAndNewsHasSameImage() {
-    if(this.isRefresh) {
-      if(this.news.imageModel) {
-        if(this.editedNews.filename == this.news.imageModel.filename) {
+    if (this.isRefresh) {
+      if (this.news.imageModel) {
+        if (this.editedNews.filename === this.news.imageModel.filename) {
           return true;
         }
         return false;
       }
       return false;
-    }
-    else {
+    } else {
       return true;
     }
   }
-  
+
   upload() {
- 
+
     // this.uploadFileService.pushFileToStorage(this.file).subscribe(event => {
     //   console.log('file - ',this.file);
     // })
@@ -187,7 +194,7 @@ export class NewsFormComponent implements OnInit, OnDestroy {
   }
 
   determineIfEdit() {
-    if(this.news) {
+    if (this.news) {
 
       console.log('edit - ', this.isEdit);
     }
@@ -196,7 +203,7 @@ export class NewsFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // this.formEventService.showFacultyForm.emit(true);
     this.editedNews.user = this.userStorage.getUser();
-    if(this.isEdit) {
+    if (this.isEdit) {
       NewsForm.assignFromNews(this.editedNews, this.news);
     }
     console.log('on init', this.news);
@@ -204,7 +211,7 @@ export class NewsFormComponent implements OnInit, OnDestroy {
     this.getAllImages();
 
   }
-  
+
   ngOnDestroy(): void {
     // this.formEventService.hideFacultyForm.emit(true);
   }

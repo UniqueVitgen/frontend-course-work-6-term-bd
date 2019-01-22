@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { BsDatepickerDirective, BsModalRef } from 'ngx-bootstrap';
 import { SECEventService } from '../../../services/sec-event/secevent.service';
+import {SEC} from '../../../factory/sec.factory';
+import {SECEvent, SECEventForm} from '../../../factory/sec-event.factory';
 
 @Component({
   selector: 'app-secevent-form',
@@ -13,7 +15,7 @@ export class SECEventFormComponent implements OnInit, OnDestroy {
   endDate;
   diplomWork;
   secEventForm;
-  bsRangeValue: Date[]; 
+  bsRangeValue: Date[];
   @ViewChild('dpe') datepickerstart: BsDatepickerDirective;
   @ViewChild('dpe') datepickerend: BsDatepickerDirective;
   dateConfig = {
@@ -33,15 +35,9 @@ export class SECEventFormComponent implements OnInit, OnDestroy {
   percentArrayValidators;
   minTime: Date = new Date();
   maxTime: Date = new Date();
-  //input
-  sec;
+  sec: SEC;
   secEdit;
-  secEvent = {
-    date: new Date(),
-    time: new Date(),
-    address: '',
-    sec: undefined
-  };
+  secEvent: SECEventForm;
   isEdit;
   dateTime = {
     date: undefined,
@@ -50,8 +46,6 @@ export class SECEventFormComponent implements OnInit, OnDestroy {
   onSave;
 
   constructor(public formBuilder: FormBuilder, public bsModalRef: BsModalRef, public secEventService: SECEventService ) {
-    
-    
   }
 
   initLimitValues() {
@@ -62,19 +56,25 @@ export class SECEventFormComponent implements OnInit, OnDestroy {
   }
 
   initStartTime() {
-    if(this.secEvent == null) {
+    if (this.secEvent == null) {
       this.secEvent = {
         date: new Date(),
-        time: new Date(),
         address: '',
         sec: this.sec
-      }
-    };
-    this.dateTime.date = new Date();
-    this.dateTime.time = new Date();
-    this.dateTime.time.setHours(8,0);
-    this.secEvent.time = new Date();
-    this.secEvent.time.setHours(8,0);
+      };
+      this.dateTime.date = new Date();
+      this.dateTime.time = new Date();
+      this.dateTime.time.setHours(8, 0);
+      // this.secEvent.time = new Date();
+      // this.secEvent.time.setHours(8, 0);
+    } else {
+      this.secEvent.date = new Date((this.secEvent.date as string));
+      this.dateTime.date = new Date(this.secEvent.date);
+      this.dateTime.time = new Date();
+      this.dateTime.time.setHours(this.secEvent.date.getHours(), this.secEvent.date.getMinutes());
+      // this.secEvent.time = new Date();
+      // this.secEvent.time.setHours(8, 0);
+    }
   }
 
   ngOnInit() {
@@ -89,8 +89,8 @@ export class SECEventFormComponent implements OnInit, OnDestroy {
     this.secEventForm = this.formBuilder.group({
       address: ['', Validators.compose([Validators.required])],
       date: [undefined, Validators.compose([Validators.required])],
-      time: [this.secEvent.time, Validators.compose([Validators.required])]
-    })
+      time: [this.secEvent.date, Validators.compose([Validators.required])]
+    });
   }
 
   ngOnDestroy(): void {
@@ -101,16 +101,16 @@ export class SECEventFormComponent implements OnInit, OnDestroy {
 
   changeDate() {
     setTimeout(() => {
-      this.secEvent.date.setMonth((this.dateTime.date as Date).getMonth());
-      this.secEvent.date.setFullYear((this.dateTime.date as Date).getFullYear());
-      this.secEvent.date.setDate((this.dateTime.date as Date).getDate());
+      (this.secEvent.date as Date).setMonth((this.dateTime.date as Date).getMonth());
+      (this.secEvent.date as Date).setFullYear((this.dateTime.date as Date).getFullYear());
+      (this.secEvent.date as Date).setDate((this.dateTime.date as Date).getDate());
       console.log(this.secEvent.date);
     }, 0);
   }
 
   changeTime() {
-    this.secEvent.date.setHours((this.dateTime.time as Date).getHours(), 
-    (this.dateTime.time as Date).getMinutes());
+    (this.secEvent.date as Date).setHours((this.dateTime.time as Date).getHours());
+    (this.secEvent.date as Date).setMinutes((this.dateTime.time as Date).getMinutes());
     console.log(this.secEvent.date);
   }
 
@@ -119,22 +119,22 @@ export class SECEventFormComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    console.log('secEvent - ',this.secEvent);
+    console.log('secEvent - ', this.secEvent);
     this.secEvent.sec = this.sec;
     this.secEventService.save(this.secEvent).subscribe(res => {
       console.log('res - ', res);
       this.onSave(res);
       this.cancel();
-    })
+    });
   }
 
   edit() {
-    console.log('secEvent - ',this.secEvent);
+    console.log('secEvent - ', this.secEvent);
     this.secEvent.sec = null;
     this.secEventService.edit(this.secEvent).subscribe(res => {
       console.log('res - ', res);
       this.onSave(res);
       this.cancel();
-    })
+    });
   }
 }

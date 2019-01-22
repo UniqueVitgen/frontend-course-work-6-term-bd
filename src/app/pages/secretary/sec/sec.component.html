@@ -8,7 +8,7 @@
 
           <!-- <div class="like-form-group"> -->
           <div class="col-xs-12 col-12 col-md-2 form-group full-width">
-            <mat-card-subtitle class="text-right">Дата начала</mat-card-subtitle>
+            <mat-card-subtitle class="text-right">{{'Дата начала' | translate}}</mat-card-subtitle>
           </div>
           <div class="col-xs-12 col-12 col-md-3 form-group">
             <mat-card-content>
@@ -21,7 +21,7 @@
 
           <!-- <div class="like-form-group"> -->
           <div class="col-xs-12 col-12 col-md-2 form-group full-width">
-            <mat-card-subtitle class="text-right">Дата окончания</mat-card-subtitle>
+            <mat-card-subtitle class="text-right">{{'Дата окончания' | translate}}</mat-card-subtitle>
           </div>
           <div class="col-xs-12 col-12 col-md-3 form-group">
 
@@ -37,7 +37,7 @@
             <mat-icon [matMenuTriggerFor]="menuEdit">more_horiz</mat-icon>
           <!-- </button> -->
         <mat-menu #menuEdit="matMenu">
-          <button mat-menu-item (click)="openSECDateForm(sec)">Изменить период проведения</button>
+          <button mat-menu-item (click)="openSECDateForm(sec)">{{'Изменить период проведения' | translate}}</button>
         </mat-menu>
       </div>
     </div>
@@ -71,50 +71,55 @@
   </mat-card>
 
   <br>
+
   <mat-card>
-    <mat-card-title>{{'Принимаемые группы' | translate}}</mat-card-title>
+  <mat-card-title>{{'Принимаемая кафедра' | translate}}</mat-card-title>
+    <div *ngIf="sec.department">
+      <div>
+        <span class="font-weight-bold">{{'Название' | translate}}:</span>
+        &nbsp;
+        <span>{{sec.department.name}}</span>
+      </div>
+      <div>
+        <span class="font-weight-bold">{{'Краткое название' | translate}}:</span>
+        &nbsp;
+        <span>{{sec.department.shortName}}</span>
+      </div>
+      <div>
+        <span class="font-weight-bold">{{'Факультет' | translate}}:</span>
+        &nbsp;
+        <span>{{sec.department.faculty.name}}</span>
+      </div>
+    </div>
+  <div *ngIf="!sec.department" class="center-text">
+  {{'Нет выбранной кафедры' | translate}}
+  </div>
+  <br>
+  <div class="row">
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+  </div>
 
-    <table *ngIf="sec.groups.length > 0" mat-table [dataSource]="sec.groups" class="mat-elevation-z8 full-width">
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
-      <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
+  <button (click)="openDepartmentForm(sec)" type="submit" class="btn btn-primary full-width">{{
+    (sec.department ? 'Поменять кафедру' : 'Выбрать кафедру')
+  |
+  translate}}</button>
+  </div>
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+  </div>
+  </div>
 
-      <!-- Position Column -->
-      <ng-container matColumnDef="number">
-        <th mat-header-cell *matHeaderCellDef> {{'Номер' | translate}} </th>
-        <td mat-cell *matCellDef="let group"> {{group.number}} </td>
-      </ng-container>
+  </mat-card>
+  <br>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="specialization">
-        <th mat-header-cell *matHeaderCellDef> {{'Специальность' | translate}} </th>
-        <td mat-cell *matCellDef="let group"> {{group.specialization.name}} </td>
-      </ng-container>
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef> {{'Количество студентов' | translate}} </th>
-        <td mat-cell *matCellDef="let group"> {{group.amount_student}} </td>
-      </ng-container>
-
-      <!-- <ng-container matColumnDef="edit">
-        <th mat-header-cell *matHeaderCellDef> </th>
-        <td mat-cell *matCellDef="let group">
-          <button (click)="openGroupForm(group)" type="button" class="btn btn-info">{{'Редактировать' | translate}}</button>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="delete">
-        <th mat-header-cell *matHeaderCellDef> </th>
-        <td mat-cell *matCellDef="let group">
-          <button (click)="deleteGroup(group)" type="button" class="btn btn-danger">{{'Удалить' | translate}}</button>
-        </td>
-      </ng-container> -->
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <div *ngIf="sec.groups.length == 0" class="center-text">
-      {{'Нет выбранных групп' | translate}}
+  <mat-card *ngIf="sec.department">
+    <mat-card-title>{{'Принимаемые специальности' | translate}}</mat-card-title>
+    <div *ngIf="sec.specializations && sec.specializations.length > 0">
+      <app-specialization-table [specializations]="sec.specializations" [user]="user"></app-specialization-table>
+    </div>
+    <div *ngIf="!(sec.specializations && sec.specializations.length > 0)" class="center-text">
+      {{'Нет выбранных специальностей' | translate}}
     </div>
     <br>
     <div class="row">
@@ -123,7 +128,8 @@
 
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
-        <button (click)="openGroupForm(sec)" type="submit" class="btn btn-primary full-width">{{'Выбрать группы'
+        <button (click)="openSpecializationForm(sec)" type="submit" class="btn btn-primary full-width">{{
+          (sec.specializations && sec.specializations.length > 0 ? 'Поменять группы': 'Выбрать группы')
           |
           translate}}</button>
       </div>
@@ -132,6 +138,68 @@
     </div>
 
   </mat-card>
+  <br>
+  <!--<mat-card>-->
+    <!--<mat-card-title>{{'Принимаемые группы' | translate}}</mat-card-title>-->
+
+    <!--<table *ngIf="sec.groups.length > 0" mat-table [dataSource]="sec.groups" class="mat-elevation-z8 full-width">-->
+
+      <!--&lt;!&ndash;- Note that these columns can be defined in any order.-->
+                  <!--The actual rendered columns are set as a property on the row definition" &ndash;&gt;-->
+
+      <!--&lt;!&ndash; Position Column &ndash;&gt;-->
+      <!--<ng-container matColumnDef="number">-->
+        <!--<th mat-header-cell *matHeaderCellDef> {{'Номер' | translate}} </th>-->
+        <!--<td mat-cell *matCellDef="let group"> {{group.number}} </td>-->
+      <!--</ng-container>-->
+
+      <!--&lt;!&ndash; Name Column &ndash;&gt;-->
+      <!--<ng-container matColumnDef="specialization">-->
+        <!--<th mat-header-cell *matHeaderCellDef> {{'Специальность' | translate}} </th>-->
+        <!--<td mat-cell *matCellDef="let group"> {{group.specialization.name}} </td>-->
+      <!--</ng-container>-->
+
+      <!--&lt;!&ndash; Name Column &ndash;&gt;-->
+      <!--<ng-container matColumnDef="amount">-->
+        <!--<th mat-header-cell *matHeaderCellDef> {{'Количество студентов' | translate}} </th>-->
+        <!--<td mat-cell *matCellDef="let group"> {{group.amount_student}} </td>-->
+      <!--</ng-container>-->
+
+      <!--&lt;!&ndash; <ng-container matColumnDef="edit">-->
+        <!--<th mat-header-cell *matHeaderCellDef> </th>-->
+        <!--<td mat-cell *matCellDef="let group">-->
+          <!--<button (click)="openGroupForm(group)" type="button" class="btn btn-info">{{'Редактировать' | translate}}</button>-->
+        <!--</td>-->
+      <!--</ng-container>-->
+
+      <!--<ng-container matColumnDef="delete">-->
+        <!--<th mat-header-cell *matHeaderCellDef> </th>-->
+        <!--<td mat-cell *matCellDef="let group">-->
+          <!--<button (click)="deleteGroup(group)" type="button" class="btn btn-danger">{{'Удалить' | translate}}</button>-->
+        <!--</td>-->
+      <!--</ng-container> &ndash;&gt;-->
+      <!--<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+      <!--<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
+    <!--</table>-->
+    <!--<div *ngIf="sec.groups.length == 0" class="center-text">-->
+      <!--{{'Нет выбранных групп' | translate}}-->
+    <!--</div>-->
+    <!--<br>-->
+    <!--<div class="row">-->
+      <!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">-->
+      <!--</div>-->
+
+      <!--<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">-->
+
+        <!--<button (click)="openGroupForm(sec)" type="submit" class="btn btn-primary full-width">{{'Выбрать группы'-->
+          <!--|-->
+          <!--translate}}</button>-->
+      <!--</div>-->
+      <!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">-->
+      <!--</div>-->
+    <!--</div>-->
+
+  <!--</mat-card>-->
 
   <br>
   <mat-card>
@@ -218,7 +286,7 @@
 
   <mat-card>
     <mat-card-title>
-      Состав комиссии
+      {{'Состав комиссии' | translate}}
     </mat-card-title>
 
     <table *ngIf="sec.users.length > 0" mat-table [dataSource]="sec.users" class="mat-elevation-z8 full-width">
@@ -298,8 +366,8 @@
 
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
-        <button (click)="openSECUserForm(sec)" type="submit" class="btn btn-primary full-width">{{'Добавить участника
-          комисии'
+        <button (click)="openSECUserForm(sec)" type="submit" class="btn btn-primary full-width">
+          {{'Добавить участника комисии'
           |
           translate}}</button>
       </div>

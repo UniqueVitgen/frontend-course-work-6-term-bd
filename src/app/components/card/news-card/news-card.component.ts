@@ -19,10 +19,10 @@ export class NewsCardComponent implements OnInit {
   @Input() user;
   @Input() hasPossibleAction;
   @Input() expanded: boolean;
-  @Output('onChange') onChange = new EventEmitter();;
+  @Output('onChange') onChange = new EventEmitter();
   bsModalRef: BsModalRef;
 
-  constructor(private dateTimeWorker: DateTimeWorker, 
+  constructor(private dateTimeWorker: DateTimeWorker,
     private userWorker: UserWorker,
     public newsService: NewsService,
     private modalService: BsModalService,
@@ -33,7 +33,7 @@ export class NewsCardComponent implements OnInit {
   }
 
   formatDate(date, format?) {
-    if(format) {
+    if (format) {
       return this.dateTimeWorker.getDate(date, format);
     }
     else {
@@ -43,46 +43,45 @@ export class NewsCardComponent implements OnInit {
 
   openNewsForm(news?) {
     let edit;
-    if(news) {
+    if (news) {
       edit = true;
     }
     else {
-      edit=false;
+      edit = false;
     }
-    let initialState = {
+    const initialState = {
       isEdit: edit,
       news: news,
       onSave: (res) => {
         this.onChange.emit(res);
       }
     };
-    let modalOptions = {
+    const modalOptions = {
       initialState: initialState,
-      class:'news-form',
+      class: 'news-form',
       ignoreBackdropClick: true
 
-    }
+    };
     this.bsModalRef = this.modalService.show(NewsFormComponent, modalOptions);
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 
   openNewsPage(item: News) {
-    this.router.navigate(['/news', item.id] )
+    this.router.navigate(['/news', item.id] );
   }
 
   deleteNews(news) {
     this.newsService.delete(news).subscribe(res => {
       this.onChange.emit(null);
-    })
+    });
   }
 
   hasChangeAccess(user: User, news: News) {
-    if(user) {
-      if(this.userWorker.hasAdminRole(user)) {
+    if (user) {
+      if (this.userWorker.hasAdminRole(user)) {
         return true;
-      }
-      else {
-        return user.idPerson == news.user.idPerson;
+      } else {
+        return user.idPerson === news.user.idPerson;
       }
     }
   }

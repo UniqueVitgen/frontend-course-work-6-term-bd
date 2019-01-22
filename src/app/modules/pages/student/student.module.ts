@@ -10,6 +10,8 @@ import { MaterialDesignModule } from '../../library/material-design/material-des
 import { BootstrapModule } from '../../library/bootstrap/bootstrap.module';
 import { StoragesModule } from '../../others/storages/storages.module';
 import { WorkersModule } from '../../others/workers/workers.module';
+import {CommonPagesModule} from '../common-pages/common-pages.module';
+import {ComponentsModule} from '../../components/components.module';
 
 @NgModule({
   imports: [
@@ -18,6 +20,8 @@ import { WorkersModule } from '../../others/workers/workers.module';
     BootstrapModule,
     MaterialDesignModule,
     StoragesModule,
+    ComponentsModule,
+    // CommonPagesModule,
     WorkersModule
   ],
   declarations: [

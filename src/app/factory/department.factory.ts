@@ -5,9 +5,10 @@ export class Department {
     id?: number;
     name: string;
     shortName: string;
-    specializations?: Specialization[];
+    faculty: Faculty;
+    // specializations?: Specialization[];
 }
 
 export class DepartmentForm extends Department {
-    faculty: Faculty;
+    // faculty: Faculty;
 }

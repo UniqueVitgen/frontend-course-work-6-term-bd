@@ -48,6 +48,10 @@ import {DiplomWorkLectorsFormComponent} from '../../components/forms/diplom-work
 import {AppComponent} from '../../app.component';
 import {LectorTableComponent} from '../../components/table/lector-table/lector-table.component';
 import {LectorCountDiplomFormComponent} from '../../components/forms/lector-count-diplom-form/lector-count-diplom-form.component';
+import {SpecializationTableComponent} from '../../components/table/specialization-table/specialization-table.component';
+import {SelectSpecializationComponent} from '../../components/select/select-specialization/select-specialization.component';
+import {SelectDepartmentComponent} from '../../components/select/select-department/select-department.component';
+import {Ej2Module} from '../library/ej2/ej2.module';
 
 @NgModule({
   imports: [
@@ -57,7 +61,8 @@ import {LectorCountDiplomFormComponent} from '../../components/forms/lector-coun
     BootstrapModule,
     DirectivesModule,
     StoragesModule,
-    WorkersModule
+    WorkersModule,
+    Ej2Module
   ],
   declarations: [
     SignInComponent,
@@ -97,6 +102,9 @@ import {LectorCountDiplomFormComponent} from '../../components/forms/lector-coun
     DepartmentFormComponent,
     DepartmentTableComponent,
     DiplomWorkLectorsFormComponent,
+    SpecializationTableComponent,
+    SelectSpecializationComponent,
+    SelectDepartmentComponent,
     LectorCountDiplomFormComponent
   ],
   entryComponents: [
@@ -125,6 +133,8 @@ import {LectorCountDiplomFormComponent} from '../../components/forms/lector-coun
     UniversityFormComponent,
     DepartmentFormComponent,
     DiplomWorkLectorsFormComponent,
+    SelectSpecializationComponent,
+    SelectDepartmentComponent,
     LectorCountDiplomFormComponent
   ],
   exports: [
@@ -165,6 +175,9 @@ import {LectorCountDiplomFormComponent} from '../../components/forms/lector-coun
     DepartmentTableComponent,
     LectorTableComponent,
     DiplomWorkLectorsFormComponent,
+    SpecializationTableComponent,
+    SelectSpecializationComponent,
+    SelectDepartmentComponent,
     LectorCountDiplomFormComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]

@@ -15,6 +15,9 @@ import {SelectLectorComponent} from '../../../components/select/select-lector/se
 import {LectorService} from '../../../services/lector-service/lector.service';
 import {Lector} from '../../../factory/lector.factory';
 import {Subscription} from 'rxjs';
+import {SelectDepartmentComponent} from '../../../components/select/select-department/select-department.component';
+import {Department} from '../../../factory/department.factory';
+import {SelectSpecializationComponent} from '../../../components/select/select-specialization/select-specialization.component';
 
 @Component({
   selector: 'app-sec',
@@ -46,8 +49,8 @@ export class SECComponent implements OnInit {
     private lectorService: LectorService,
     private secEventService: SECEventService,
     private secUserService: SECUserService,
-    public secService: SECService,) {
-      let date1 : Date | string = new Date();
+    public secService: SECService, ) {
+      const date1: Date | string = new Date();
       // console.log((date1 as Date));
       // console.log((date1 as string));
      }
@@ -63,12 +66,12 @@ export class SECComponent implements OnInit {
           this.getTargetLectors(sec);
           this.dateSaved.startDate = sec.startDate;
           console.log('sec ', sec);
-        })
-      })
+        });
+      });
   }
 
   setSEC(sec) {
-    if(sec) {
+    if (sec) {
       this.sec = sec;
       (this.sec.startDate as Date) = new Date((this.sec.startDate) as string);
       (this.sec.endDate as Date) = new Date((this.sec.endDate) as string);
@@ -91,30 +94,30 @@ export class SECComponent implements OnInit {
   }
   openSECDateForm(sec?) {
     let edit;
-    if(sec) {
+    if (sec) {
       edit = true;
     }
     else {
-      edit=false;
+      edit = false;
     }
-    let initialState = {
+    const initialState = {
       isEdit: edit,
       secEdit: sec,
 
     };
-    let modalOptions = {
+    const modalOptions = {
       initialState: initialState,
-      class:'sec-form',
+      class: 'sec-form',
       ignoreBackdropClick: true
 
-    }
+    };
     this.bsModalRef = this.modalService.show(SECDateFormComponent, modalOptions);
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 
   selectLector(that, property) {
     // this.template.createEmbeddedView(``)
-    let initialState = {
+    const initialState = {
       onDestroy: (lector) => {
         that[property] = lector;
         // that.selectDiplomForm.controls[property].setValue(that.formatFullName(lector));
@@ -123,12 +126,12 @@ export class SECComponent implements OnInit {
         // console.log(this.)
       },
       selectedLector: that[property]
-    }
-    let modalOptions = {
-      class:'select-lector',
+    };
+    const modalOptions = {
+      class: 'select-lector',
       ignoreBackdropClick: true,
       initialState: initialState
-    }
+    };
     this.bsModalRef = this.modalService.show(SelectLectorComponent, modalOptions);
   }
 
@@ -139,43 +142,113 @@ export class SECComponent implements OnInit {
       // this.lectorStaffComponent.lectors = this.generateLectorsStaff(this.sec);
       // this.selectedStatus = this.sec.status;
       // console.log(this.lectorStaffComponent.lectors);
-      if(onSuccess) {
+      if (onSuccess) {
         onSuccess(this.sec);
       }
-    })
+    });
 
   }
- 
+
+  openDepartmentForm(sec?: SEC) {
+    let edit;
+    if (sec) {
+      edit = true;
+    } else {
+      edit = false;
+    }
+    const initialState = {
+      isEdit: edit,
+      secEdit: sec,
+      sec: sec,
+      onSave: (department: Department) => {
+        setTimeout(() => {
+          const previousDepartment = this.sec.department;
+          if (previousDepartment == null || department.id !== previousDepartment.id) {
+            this.sec.department = department;
+            this.sec.specializations = [];
+            this.cd.detectChanges();
+            this.secService.edit(this.sec).subscribe(res => {
+              this.setSEC(res);
+              // this.sec = res;
+            });
+          }
+        }, 200);
+      }
+    };
+    const modalOptions = {
+      initialState: initialState,
+      class: 'group-form',
+      ignoreBackdropClick: true
+
+    };
+    this.bsModalRefSelectGroups = this.modalService.show(SelectDepartmentComponent, modalOptions);
+    this.bsModalRefSelectGroups.content.closeBtnName = 'Close';
+  }
+
   openGroupForm(sec?) {
     let edit;
-    if(sec) {
+    if (sec) {
       edit = true;
     }
     else {
-      edit=false;
+      edit = false;
     }
-    let initialState = {
+    const initialState = {
       isEdit: edit,
       secEdit: sec,
       sec: sec,
       onSave: (groups) => {
         setTimeout(() => {
-          this.sec.groups = groups;
+          // this.sec.groups = groups;
           this.cd.detectChanges();
           this.secService.edit(this.sec).subscribe(res => {
             this.setSEC(res);
             // this.sec = res;
-          })
+          });
         }, 200);
       }
     };
-    let modalOptions = {
+    const modalOptions = {
       initialState: initialState,
-      class:'group-form',
+      class: 'group-form',
       ignoreBackdropClick: true
 
-    }
+    };
     this.bsModalRefSelectGroups = this.modalService.show(SelectGroupComponent, modalOptions);
+    this.bsModalRefSelectGroups.content.closeBtnName = 'Close';
+  }
+
+  openSpecializationForm(sec?) {
+    let edit;
+    if (sec) {
+      edit = true;
+    }
+    else {
+      edit = false;
+    }
+    const initialState = {
+      isEdit: edit,
+      secEdit: sec,
+      sec: sec,
+      onSave: (resSpecializations) => {
+        setTimeout(() => {
+          this.sec.specializations = resSpecializations;
+          // this.sec.groups = groups;
+          this.cd.detectChanges();
+          this.secService.edit(this.sec).subscribe(res => {
+            this.setSEC(res);
+            // this.sec = res;
+          });
+        }, 200);
+      }
+    };
+    const modalOptions = {
+      initialState: initialState,
+      class: 'group-form',
+      ignoreBackdropClick: true
+
+    };
+    this.bsModalRefSelectGroups = this.modalService.show(SelectSpecializationComponent, modalOptions);
     this.bsModalRefSelectGroups.content.closeBtnName = 'Close';
   }
 
@@ -183,18 +256,18 @@ export class SECComponent implements OnInit {
     this.secEventService.delete(secEvent).subscribe(answer => {
       console.log('answer');
       this.getSEC();
-    })
+    });
   }
- 
+
   openSECEventForm(sec?, secEvent?) {
     let edit;
-    if(secEvent) {
+    if (secEvent) {
       edit = true;
     }
     else {
-      edit=false;
+      edit = false;
     }
-    let initialState = {
+    const initialState = {
       isEdit: edit,
       secEdit: sec,
       sec: sec,
@@ -208,12 +281,12 @@ export class SECComponent implements OnInit {
         }, 200);
       }
     };
-    let modalOptions = {
+    const modalOptions = {
       initialState: initialState,
-      class:'sec-event-form',
+      class: 'sec-event-form',
       ignoreBackdropClick: true
 
-    }
+    };
     this.bsModalRefSelectGroups = this.modalService.show(SECEventFormComponent, modalOptions);
     this.bsModalRefSelectGroups.content.closeBtnName = 'Close';
   }
@@ -223,13 +296,13 @@ export class SECComponent implements OnInit {
 
 
       let edit;
-      if(secUser) {
+      if (secUser) {
         edit = true;
       }
       else {
-        edit=false;
+        edit = false;
       }
-      let initialState = {
+      const initialState = {
         isEdit: edit,
         secEdit: sec,
         sec: sec,
@@ -253,7 +326,7 @@ export class SECComponent implements OnInit {
         initialState: initialState,
         class: 'sec-user-form',
         ignoreBackdropClick: true
-      }
+      };
       this.bsModalRefSelectGroups = this.modalService.show(SECUserFormComponent, modalOptions);
       this.bsModalRefSelectGroups.content.closeBtnName = 'Close';
     });
@@ -263,7 +336,7 @@ export class SECComponent implements OnInit {
     this.secUserService.delete(user).subscribe(answer => {
       console.log('answer');
       this.getSEC();
-    })
+    });
   }
 
   changeStartDate() {
@@ -275,11 +348,11 @@ export class SECComponent implements OnInit {
   }
 
   formatDateTime(date) {
-    return this.dateTimeWorker.getDate(date, 'yyyy-MM-dd H:mm')
+    return this.dateTimeWorker.getDate(date, 'yyyy-MM-dd H:mm');
   }
 
   formatDate(date) {
-    return this.dateTimeWorker.getDate(date, 'yyyy-MM-dd')
+    return this.dateTimeWorker.getDate(date, 'yyyy-MM-dd');
   }
 
 }

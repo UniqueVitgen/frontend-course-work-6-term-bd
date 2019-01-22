@@ -21,8 +21,8 @@ export class SelectImageComponent implements OnInit, OnDestroy {
     this.getAllImages();
   }
   ngOnDestroy(): void {
-    if(this.onDestroy) {
-      if(this.isSuccess) {
+    if (this.onDestroy) {
+      if (this.isSuccess) {
         this.onDestroy(this.selectedImage);
       }
     }
@@ -31,8 +31,8 @@ export class SelectImageComponent implements OnInit, OnDestroy {
   getAllImages() {
     this.uploadFileService.getFiles().subscribe(data => {
       this.images = data;
-      console.log('data',data);
-    })
+      console.log('data', data);
+    });
   }
 
   selectImage(index) {
@@ -55,22 +55,22 @@ export class SelectImageComponent implements OnInit, OnDestroy {
   }
 
   onChange(file) {
-    console.log('file1 - ',file);
+    console.log('file1 - ', file);
     this.uploadFileService.pushFileToStorage(file).subscribe(event => {
-      console.log('file - ',file);
+      console.log('file - ', file);
       this.getAllImages();
     }, err => {
-      
-    })
+
+    });
     // this.file = event.srcElement.files[0];
     // console.log(this.file);
   }
-  
+
   upload() {
- 
+
     this.uploadFileService.pushFileToStorage(this.file).subscribe(event => {
-      console.log('file - ',this.file);
-    })
+      console.log('file - ', this.file);
+    });
   }
 
   cancel() {

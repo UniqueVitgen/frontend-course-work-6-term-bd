@@ -101,11 +101,11 @@ export const routes: Routes = [
 
   { path: 'sec-list', component: SECListComponent, canActivate: [ExpectedRolesGuard],
   data: {
-    expectedRoles: ['SECRETARY_SEC', 'ADMIN']
+    expectedRoles: ['SECRETARY_SEC', 'ADMIN', 'ORGANIZER']
   }},
-  { path: 'sec/:id', component: SECComponent, canActivate: [ExpectedRolesGuard], 
+  { path: 'sec/:id', component: SECComponent, canActivate: [ExpectedRolesGuard],
   data: {
-    expectedRoles: ['SECRETARY_SEC', 'ADMIN']
+    expectedRoles: ['SECRETARY_SEC', 'ADMIN', 'ORGANIZER']
   } },
   { path: 'organizer-lector', component: LectorOrganizerComponent, canActivate: [ExpectedRolesGuard], data: {
       expectedRoles: ['ADMIN', 'ORGANIZER', 'SECRETARY_SEC', 'LECTOR']

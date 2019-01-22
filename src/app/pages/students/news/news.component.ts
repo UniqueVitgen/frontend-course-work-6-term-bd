@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { LectorService } from '../../../services/lector-service/lector.service';
 import { UserService } from '../../../services/user-service/user.service';
 import { NewsService } from '../../../services/news-service/news.service';
@@ -24,6 +24,7 @@ export class NewsComponent implements OnInit {
   @Input() itemsCSS;
   @Input() hasTitle = true;
   @Input() titleHeader = 'Новости';
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public lectorService: LectorService,
@@ -34,30 +35,12 @@ export class NewsComponent implements OnInit {
     public userStorage: UserStorage,
     private router: Router,
     public userService: UserService) {
-    this.newsItems = [
-      {
-        title: 'Перенос сдачи у Ивановой', description:'Связи с болезнью Доцента кафедры ПОВТ факульта ФММП Преподаватель Мария Иванова не сможет проводить свои занятии в 1 апреля, но сможет проводить 3 апреля',
-        src: 'assets/img/students/news/template.png', date: '11 apr'
-      },
-      {
-        title: 'Перенос сдачи у Ивановой', description:'Связи с болезнью Доцента кафедры ПОВТ факульта ФММП Преподаватель Мария Иванова не сможет проводить свои занятии в 1 апреля, но сможет проводить 3 апреля',
-        src: 'assets/img/students/news/template.png', date: '11 apr'
-      },
-      {
-        title: 'Сдача Куприянову в 301', description:'Показ Дипломной работы Куприянову будет осуществлятся в левом крыле 3 этажа ФИТРа в 301 кабинете с одновременной сдачей лабораторной работы у группе 10701215',
-        src: 'assets/img/students/news/template.png', date: '28 feb'
-      },
-      {
-        title: 'Перенос сдачи у Ивановой', description:'Связи с болезнью Доцента кафедры ПОВТ факульта ФММП Преподаватель Мария Иванова не сможет проводить свои занятии в 1 апреля, но сможет проводить 3 апреля',
-        src: 'assets/img/students/news/template.png', date: '11 apr'
-      }
-    ]
     this.lectorService.getLectors().subscribe(data => {
-      console.log('lectors - ',data);
+      console.log('lectors - ', data);
     });
     this.userService.getUsers().subscribe(data => {
       console.log('users - ', data);
-    })
+    });
    }
 
   ngOnInit() {
@@ -71,56 +54,57 @@ export class NewsComponent implements OnInit {
     this.newsService.getAll().subscribe(data => {
       this.news = data;
       this.createSrcInNews();
+      this.onChange.emit(true);
       console.log('news - ', this.news);
-    })
+    });
   }
 
   createSrcInNews() {
     this.news.forEach(element => {
-      if(element.imageModel) {
-        element.src = "http://localhost:8081/files/" + element.imageModel.filename;
+      if (element.imageModel) {
+        element.src = 'http://localhost:8081/files/' + element.imageModel.filename;
       }
     });
   }
 
   openNewsForm(news?) {
     let edit;
-    if(news) {
+    if (news) {
       edit = true;
     }
     else {
-      edit=false;
+      edit = false;
     }
-    let initialState = {
+    const initialState = {
       isEdit: edit,
       news: news,
       onSave: (res) => {
         this.getAllNews();
       }
     };
-    let modalOptions = {
+    const modalOptions = {
       initialState: initialState,
-      class:'news-form',
+      class: 'news-form',
       ignoreBackdropClick: true
 
-    }
+    };
     this.bsModalRef = this.modalService.show(NewsFormComponent, modalOptions);
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 
   openNewsPage(item: News) {
-    this.router.navigate(['/news', item.id] )
+    this.router.navigate(['/news', item.id] );
   }
 
   deleteNews(news) {
     this.newsService.delete(news).subscribe(res => {
       this.getAllNews();
-    })
+    });
   }
 
   hasChangeAccess(user: User, news: News) {
-    if(user) {
-      if(this.userWorker.hasAdminRole(user)) {
+    if (user) {
+      if (this.userWorker.hasAdminRole(user)) {
         return true;
       }
       else {
@@ -130,7 +114,7 @@ export class NewsComponent implements OnInit {
   }
 
   formatDate(date, format?) {
-    if(format) {
+    if (format) {
       return this.dateTimeWorker.getDate(date, format);
     }
     else {
