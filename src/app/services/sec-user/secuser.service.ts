@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ConfigService } from '../config/config.service';
 import { SECUser } from '../../factory/user.factory';
 
-const prefix="sec-user/"
+const prefix = 'sec-user/';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,10 +12,10 @@ export class SECUserService {
     private configService: ConfigService) { }
 
   getAll() {
-    return this.configService.get(prefix+'getAll');
+    return this.configService.get(prefix + 'getAll');
   }
 
-  save(degree:SECUser) {
+  save(degree: SECUser) {
     return this.configService.post(prefix + 'save', degree);
   }
 

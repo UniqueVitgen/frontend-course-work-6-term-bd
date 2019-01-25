@@ -18,6 +18,9 @@ import {Subscription} from 'rxjs';
 import {SelectDepartmentComponent} from '../../../components/select/select-department/select-department.component';
 import {Department} from '../../../factory/department.factory';
 import {SelectSpecializationComponent} from '../../../components/select/select-specialization/select-specialization.component';
+import {UserWorker} from '../../../workers/UserWorker';
+import {SecWorker} from '../../../workers/sec.worker';
+import {User} from '../../../factory/user.factory';
 
 @Component({
   selector: 'app-sec',
@@ -27,14 +30,15 @@ import {SelectSpecializationComponent} from '../../../components/select/select-s
 export class SECComponent implements OnInit {
   sec: SEC;
   sub;
-  id;
-  user;
+  id: number;
+  user: User;
   bsModalRef: BsModalRef;
   public bsModalRefSelectGroups: BsModalRef;
   dateSaved = {
     startDate: undefined,
     endDate: undefined
   };
+  isCanModify: boolean;
   targetLectors: Lector[];
   displayedColumns= ['number', 'specialization', 'amount'];
   displayedColumnsEvent= ['date', 'address', 'edit', 'delete'];
@@ -43,6 +47,8 @@ export class SECComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userStorage: UserStorage,
+    public userWorker: UserWorker,
+    public secWorker: SecWorker,
     private cd: ChangeDetectorRef,
     private modalService: BsModalService,
     private dateTimeWorker: DateTimeWorker,
@@ -64,6 +70,7 @@ export class SECComponent implements OnInit {
         this.getSEC((sec) => {
           this.setSEC(sec);
           this.getTargetLectors(sec);
+          this.isCanModify = this.secWorker.userIsSecretaryInSec(sec, this.user) || this.userWorker.hasOrganizerRole(this.user);
           this.dateSaved.startDate = sec.startDate;
           console.log('sec ', sec);
         });

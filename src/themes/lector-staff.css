@@ -17,9 +17,11 @@
     color: #f00;
     text-decoration: none;
 }
-
+.lector-staff .media-left {
+  width: 20vw;
+}
 .lector-staff img {
-    width: 40vw;
+    /*width: 40vw;*/
 }
 
 .lector-staff .media-body {

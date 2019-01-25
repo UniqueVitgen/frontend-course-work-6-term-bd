@@ -97,6 +97,7 @@ export const routes: Routes = [
   { path: 'percentage', component: PercentageComponent, canActivate:[LectorGuard]  },
 
   { path: 'user/:id', component: ProfileComponent, canActivate: [AuthGuard],  },
+  { path: 'my-profile', component: ProfileComponent, canActivate: [AuthGuard],  },
   { path: 'news/:id', component: NewsItemComponent  },
 
   { path: 'sec-list', component: SECListComponent, canActivate: [ExpectedRolesGuard],
@@ -119,7 +120,7 @@ export const routes: Routes = [
     }   },
   { path: 'admin-group', component: GroupAdminComponent, canActivate: [AdminGuard]  },
   { path: 'admin-news', component: NewsAdminComponent, canActivate: [ExpectedRolesGuard], data: {
-    expectedRoles: ['ADMIN', 'ORGANIZER', 'SECRETARY_SEC', 'LECTOR']
+    expectedRoles: ['ADMIN', 'LECTOR', 'ORGANIZER', 'SECRETARY_SEC']
   }   },
   { path: 'admin-degree', component: DegreeAdminComponent, canActivate: [AdminGuard]  },
   { path: 'admin-post', component: PostAdminComponent, canActivate: [AdminGuard]  },

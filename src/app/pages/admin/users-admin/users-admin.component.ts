@@ -10,6 +10,9 @@ import { ModalService } from '../../../services/modal-service/modal.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { FormEventService } from '../../../services/events/form/form-event.service';
+import {UserWorker} from '../../../workers/UserWorker';
+import {User} from '../../../factory/user.factory';
+import {UserOrganization} from '../../../factory/table/user-organization.factory';
 
 @Component({
   selector: 'app-users-admin',
@@ -25,7 +28,7 @@ export class UsersAdminComponent implements OnInit {
   constructor(public userService: UserService,
     private modalService: BsModalService,
     private formEventService: FormEventService,
-    public router: Router,) {
+    public router: Router, public userWorker: UserWorker) {
   }
 
   getAll() {
@@ -33,7 +36,7 @@ export class UsersAdminComponent implements OnInit {
       console.log('facs - ', users);
       this.users = users;
       this.selectedUsers = users;
-    })
+    });
 
   }
 
@@ -45,25 +48,25 @@ export class UsersAdminComponent implements OnInit {
   }
 
   clickSearch() {
-    let value = this.search.toUpperCase();
+    const value = this.search.toUpperCase();
     this.selectedUsers = this.users.filter((fac) => {
-      let targ = this.formatFullName(fac).toUpperCase();
-      if(targ.indexOf(value) != -1) {
+      const targ = this.formatFullName(fac).toUpperCase();
+      if (targ.indexOf(value) != -1) {
         return true;
-      } 
-    })
+      }
+    });
   }
 
   formatFullName(user) {
     return user.lastname + ' ' +  user.firstname + ' ' + user.middlename;
   }
 
-  formatUserRole(user) {
-    return user.roles[0].name;
+  formatUserRole(user: User) {
+    return this.userWorker.formatUserRole(user);
   }
 
   goToUser(user) {
-    this.router.navigate(['user',  user.idPerson])
+    this.router.navigate(['user',  user.idPerson]);
   }
 
   trackFormUserHide() {
@@ -71,26 +74,31 @@ export class UsersAdminComponent implements OnInit {
     //   this.getAll();
     // })
   }
- 
+
+  changeUserOrganization(userOrganization: UserOrganization) {
+    this.userService.editUserOrganizerRole(userOrganization.user, userOrganization.isOrganization).subscribe(resUser => {
+    });
+  }
+
   openUserForm(user?) {
     let edit;
-    if(user) {
+    if (user) {
       edit = true;
     }
     else {
-      edit=false;
+      edit = false;
     }
-    let initialState = {
+    const initialState = {
       isEdit: edit,
       userEdit: user,
 
     };
-    let modalOptions = {
+    const modalOptions = {
       initialState: initialState,
-      class:'user-form',
+      class: 'user-form',
       ignoreBackdropClick: true
 
-    }
+    };
     // this.bsModalRef = this.modalService.show(UserFormComponent, modalOptions);
     this.bsModalRef.content.closeBtnName = 'Close';
   }
@@ -105,7 +113,7 @@ export class UsersAdminComponent implements OnInit {
   // }
 
   addUser() {
-    this.router.navigate(['new-user'])
+    this.router.navigate(['new-user']);
   }
 
   // closeModal() {

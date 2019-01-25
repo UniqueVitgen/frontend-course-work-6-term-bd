@@ -3,7 +3,7 @@ import { ConfigService } from '../config/config.service';
 import { SECRole } from '../../factory/sec-roles.factory';
 import { Observable } from 'rxjs';
 
-const prefix="sec-role/"
+const prefix = 'sec-role/';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +14,7 @@ export class SECRoleService {
     private configService: ConfigService) { }
 
   getAll(): Observable<SECRole[]> {
-    return this.configService.get(prefix+'getAll');
+    return this.configService.get(prefix + 'getAll');
   }
 
   save(degree): Observable<SECRole> {

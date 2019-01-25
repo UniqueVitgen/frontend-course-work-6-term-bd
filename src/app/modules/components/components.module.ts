@@ -52,6 +52,8 @@ import {SpecializationTableComponent} from '../../components/table/specializatio
 import {SelectSpecializationComponent} from '../../components/select/select-specialization/select-specialization.component';
 import {SelectDepartmentComponent} from '../../components/select/select-department/select-department.component';
 import {Ej2Module} from '../library/ej2/ej2.module';
+import {UserAvatarComponent} from '../../components/avatar/user-avatar/user-avatar.component';
+import {UserTableComponent} from '../../components/table/user-table/user-table.component';
 
 @NgModule({
   imports: [
@@ -105,7 +107,9 @@ import {Ej2Module} from '../library/ej2/ej2.module';
     SpecializationTableComponent,
     SelectSpecializationComponent,
     SelectDepartmentComponent,
-    LectorCountDiplomFormComponent
+    LectorCountDiplomFormComponent,
+    UserAvatarComponent,
+    UserTableComponent
   ],
   entryComponents: [
     SignInComponent,
@@ -178,7 +182,9 @@ import {Ej2Module} from '../library/ej2/ej2.module';
     SpecializationTableComponent,
     SelectSpecializationComponent,
     SelectDepartmentComponent,
-    LectorCountDiplomFormComponent
+    LectorCountDiplomFormComponent,
+    UserAvatarComponent,
+    UserTableComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })

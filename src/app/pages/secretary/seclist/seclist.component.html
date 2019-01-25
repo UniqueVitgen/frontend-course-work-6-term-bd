@@ -80,6 +80,8 @@
       <th mat-header-cell *matHeaderCellDef> </th>
       <td mat-cell *matCellDef="let sec">
         <button (click)="goToSEC(sec)" type="button" class="btn btn-warning">{{'Подробнее' | translate}}</button>
+        &nbsp;
+        <mat-icon [tooltip]="'Вы являетесь секретарем в данном ГЭК' | translate" *ngIf="secWorker.userIsSecretaryInSec(sec, user)">fiber_manual_record</mat-icon>
         <!-- <button (click)="openSECForm(sec)" type="button" class="btn btn-info">{{'Редактировать' | translate}}</button> -->
       </td>
     </ng-container>
@@ -87,7 +89,7 @@
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef> </th>
       <td mat-cell *matCellDef="let sec">
-        <button (click)="deleteSEC(sec)" type="button" class="btn btn-danger">{{'Удалить' | translate}}</button>
+        <button *ngIf="isCanAdd" (click)="deleteSEC(sec)" type="button" class="btn btn-danger">{{'Удалить' | translate}}</button>
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

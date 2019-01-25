@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../../../factory/user.factory';
+import {UserWorker} from '../../../workers/UserWorker';
 
 @Component({
   selector: 'app-user-accordion',
@@ -9,7 +10,7 @@ import { User } from '../../../factory/user.factory';
 export class UserAccordionComponent implements OnInit {
   @Input() user: User;
 
-  constructor() { }
+  constructor(private userWorker: UserWorker) { }
 
   ngOnInit() {
   }
@@ -18,8 +19,8 @@ export class UserAccordionComponent implements OnInit {
     return user.lastname + ' ' +  user.firstname + ' ' + user.middlename;
   }
 
-  formatUserRole(user) {
-    return user.roles[0].name;
+  formatUserRole(user: User) {
+    this.userWorker.formatUserRole(user);
   }
 
 }

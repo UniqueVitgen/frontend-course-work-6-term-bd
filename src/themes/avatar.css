@@ -1,0 +1,32 @@
+
+.user-avatar {
+  /*//border: 1px solid;*/
+  display: inline-block;
+  position: relative;
+  /*width: 100%;*/
+}
+.user-avatar.user-avatar-hover:hover {
+  border-color: #00b0f0;
+}
+.user-avatar.user-avatar-hover:hover  .avatar-hover{
+  display: block;
+}
+
+
+.avatar-hover {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, .3);
+  /*//background-color: #cccccc;*/
+  color: black;
+  font-size: 1rem;
+  padding: 15px 10px;
+}
+.avatar-hover:hover {
+  display: block;
+  cursor: pointer;
+}

@@ -36,7 +36,7 @@ export class LectorCountDiplomFormComponent implements OnInit, OnDestroy {
   }
   configFormGroup() {
     this.lectorForm = this.formBuilder.group({
-      countDiplomWorks: [0, Validators.compose([Validators.required])]
+      countDiplomWorks: [0, Validators.compose([Validators.required, Validators.min(this.lector.countOfDiplom)])]
     });
   }
 

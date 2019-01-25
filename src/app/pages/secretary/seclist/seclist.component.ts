@@ -8,6 +8,7 @@ import { DateTimeWorker } from '../../../workers/DateTimeWorker';
 import {User} from '../../../factory/user.factory';
 import {UserWorker} from '../../../workers/UserWorker';
 import {UserStorage} from '../../../storage/user/UserStorage';
+import {SecWorker} from '../../../workers/sec.worker';
 
 @Component({
   selector: 'app-seclist',
@@ -27,6 +28,7 @@ export class SECListComponent implements OnInit {
     private modalService: BsModalService,
     private userWorker: UserWorker,
     private userStorage: UserStorage,
+    public secWorker: SecWorker,
     private formEventService: FormEventService,
     private dateTimeWorker: DateTimeWorker,
     public router: Router) {

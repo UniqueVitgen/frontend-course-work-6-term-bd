@@ -1,4 +1,6 @@
 import { Group } from './group.factory';
+import {ImageModel} from './image-model.factory';
+import {Role} from './role.factory';
 
 export class Person {
     firstname: string;
@@ -12,7 +14,13 @@ export class User extends Person {
     idPerson: number;
     username: string;
     password: string;
-    roles: string;
+    roles: Role[];
+    imageModel: ImageModel;
+}
+
+export class UserUploadForm {
+  user: User;
+  filename: string;
 }
 
 export class Student extends User {
@@ -25,15 +33,15 @@ export class SECUserBase extends Person {
 }
 
 export class SECUserForm extends SECUserBase {
-    role?;
+    role?: SECRole;
 }
 
 export class SECUser extends SECUserBase {
-    roles?;
+    roles?: SECRole[];
 
     static assign(secUser: SECUser, secUserForm: SECUserForm) {
-        for(let prop in secUserForm) {
-            if(prop == 'role') {
+        for (const prop in secUserForm) {
+            if (prop == 'role') {
                 secUser.roles = [secUserForm.role];
             }
             else {
@@ -43,8 +51,8 @@ export class SECUser extends SECUserBase {
     }
 
     static assignToForm(secUserForm: SECUserForm, secUser: SECUser) {
-        for(let prop in secUser) {
-            if(prop == 'roles') {
+        for (const prop in secUser) {
+            if (prop == 'roles') {
                 secUserForm.role = secUser.roles[0];
             }
             else {
@@ -53,4 +61,9 @@ export class SECUser extends SECUserBase {
         }
 
     }
+}
+
+export class SECRole {
+  id: number;
+  name: string;
 }

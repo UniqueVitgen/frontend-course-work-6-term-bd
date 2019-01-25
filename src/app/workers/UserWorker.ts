@@ -1,4 +1,4 @@
-import { User } from "../factory/user.factory";
+import { User } from '../factory/user.factory';
 
 
 export class UserWorker {
@@ -6,8 +6,8 @@ export class UserWorker {
 
     hasStudentRole(user) {
         if (user) {
-            for (let role of user.roles) {
-                if (role.name == "STUDENT") {
+            for (const role of user.roles) {
+                if (role.name == 'STUDENT') {
                     return true;
                 }
             }
@@ -18,8 +18,8 @@ export class UserWorker {
 
     hasAdminRole(user) {
         if (user) {
-            for (let role of user.roles) {
-                if (role.name == "ADMIN") {
+            for (const role of user.roles) {
+                if (role.name == 'ADMIN') {
                     return true;
                 }
             }
@@ -28,8 +28,8 @@ export class UserWorker {
 
     hasLectorRole(user) {
         if (user) {
-            for (let role of user.roles) {
-                if (role.name == "LECTOR") {
+            for (const role of user.roles) {
+                if (role.name == 'LECTOR') {
                     return true;
                 }
             }
@@ -38,8 +38,8 @@ export class UserWorker {
 
     hasOrganizerRole(user) {
         if (user) {
-            for (let role of user.roles) {
-                if (role.name == "ORGANIZER") {
+            for (const role of user.roles) {
+                if (role.name == 'ORGANIZER') {
                     return true;
                 }
             }
@@ -48,8 +48,8 @@ export class UserWorker {
 
     hasSecretaryRole(user) {
         if (user) {
-            for (let role of user.roles) {
-                if (role.name == "SECRETARY_SEC") {
+            for (const role of user.roles) {
+                if (role.name == 'SECRETARY_SEC') {
                     return true;
                 }
             }
@@ -61,4 +61,18 @@ export class UserWorker {
         return user.lastname + ' ' + user.firstname + ' ' + user.middlename;
       }
     }
+
+  formatUserRole(user: User) {
+      if (user.roles.length > 0) {
+        if (user.roles.length > 2) {
+          if (this.hasLectorRole(user)) {
+            return 'LECTOR';
+          } else {
+            return user.roles[0].name;
+          }
+        } else {
+          return user.roles[0].name;
+        }
+      }
+  }
 }

@@ -101,11 +101,19 @@
           <a routerLink="/login">Войти</a>
         </li> -->
       </ul>
-      <ul *ngIf="mode == 'lector'" class="navbar-nav  float-right">
+      <ul *ngIf="mode == 'lector'" class="navbar-nav float-right">
         <li *ngFor="let item of lector" role="presentation" class="active nav-item">
           <!-- <a routerLink="/home">Главная</a> -->
           <a class="nav-link" routerLink="/{{item.path}}">{{item.title | translate}}</a>
         </li>
+        <li *ngIf="user && (userWorker.hasSecretaryRole(user) || userWorker.hasOrganizerRole(user))" role="presentation" class="active nav-item">
+          <a class="nav-link" routerLink="/{{'sec-list'}}">{{'ГЭК комиссия' | translate}}</a>
+        </li>
+        <ng-container  *ngIf="user && userWorker.hasOrganizerRole(user)">
+          <li>
+            <a class="nav-link" routerLink="/{{'organizer-lector'}}">{{'Преподаватели' | translate}}</a>
+          </li>
+        </ng-container>
         <li class="nav-item" role="presentation">
           <a class="custom-link nav-link" (click)="logout()" routerLink="/home">{{'log out' | translate}}</a>
         </li>
@@ -224,7 +232,7 @@
           <a routerLink="/login">Войти</a>
         </li> -->
       </ul>
-      <ul *ngIf="mode == 'admin'" class="navbar-nav float-right">
+      <ul *ngIf="mode == 'admin'" class="navbar-nav  navbar-admin float-right">
         <li *ngFor="let item of admin" role="presentation" class="nav-item active">
           <!-- <a routerLink="/home">Главная</a> -->
           <a class="nav-link" routerLink="/{{item.path}}">{{item.title | translate}}</a>

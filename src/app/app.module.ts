@@ -166,6 +166,8 @@ import { SpecializationItemComponent } from './pages/common/specialization-item/
 import { SelectSpecializationComponent } from './components/select/select-specialization/select-specialization.component';
 import { SelectDepartmentComponent } from './components/select/select-department/select-department.component';
 import {Ej2Module} from './modules/library/ej2/ej2.module';
+import { UserAvatarComponent } from './components/avatar/user-avatar/user-avatar.component';
+import { UserTableComponent } from './components/table/user-table/user-table.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {

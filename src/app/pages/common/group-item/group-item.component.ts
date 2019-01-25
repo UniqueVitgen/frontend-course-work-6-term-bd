@@ -23,7 +23,7 @@ export class GroupItemComponent implements OnInit {
     this.route.url.subscribe(url => {
       let main = url[0];
       console.log(main);
-      if (main.path == 'student-group') {
+      if (main.path === 'student-group') {
           this.group = this.userStorage.getUser().group;
           this.getStudents(this.group);
       }

@@ -161,5 +161,14 @@
   "Статус": "Status",
   "Консультант по техническо-экономическому обоснованию": "technical-economical leader",
   "Консультант по организационно-технической части": "Organizer-technical leader",
-  "Научный консультант": "Science leader"
+  "Научный консультант": "Science leader",
+  "CHAIRMAN": "Chairman",
+  "SECRETARY": "Secretary",
+  "COMMISSION_MEMBER": "Commision member",
+  "ADMIN": "Admin",
+  "SECRETARY_SEC": "Secretary SEC",
+  "ORGANIZER": "Organizer",
+  "LECTOR": "Lector",
+  "STUDENT": "STUDENT",
+  "Student": "Student"
 }

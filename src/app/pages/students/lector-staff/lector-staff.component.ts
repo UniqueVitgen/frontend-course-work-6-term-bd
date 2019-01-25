@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LectorService } from '../../../services/lector-service/lector.service';
 import {DiplomWork} from '../../../factory/diplom-work.factory';
+import {FileWorker} from '../../../workers/file.worker';
+import {Lector} from '../../../factory/lector.factory';
 
 @Component({
   selector: 'app-lector-staff',
@@ -9,8 +11,8 @@ import {DiplomWork} from '../../../factory/diplom-work.factory';
 })
 export class LectorStaffComponent implements OnInit {
 
-  lectorStaff: Array<{description: any, src: any, post: any, title: any, degree: any, name: any}>;
-  lectors;
+  // lectorStaff: Array<{description: any, src: any, post: any, title: any, degree: any, name: any}>;
+  lectors: Lector[];
   @Input() diplomWork: DiplomWork;
   @Input() isChild = false;
   properties = {
@@ -22,25 +24,7 @@ export class LectorStaffComponent implements OnInit {
   };
 
 
-  constructor(public lectorService: LectorService) {
-    // this.lectorStaff = [
-    //   {
-    //     degree:'Доцент', post:'Зам декана', title:'ядерный физик', src:'assets/img/students/lector-staff/team-img.jpg',
-    //     description:'Занимается Преподавательской деятельностью с прошлого века. ', name:'Куприянов'
-    //   },
-    //   {
-    //     degree:'Доцент', post:'Зам декана', title:'ядерный физик', src:'assets/img/students/lector-staff/team-img.jpg',
-    //     description:'Занимается Преподавательской деятельностью с прошлого века. ', name:'Куприянов'
-    //   },
-    //   {
-    //     degree:'Доцент', post:'Зам декана', title:'ядерный физик', src:'assets/img/students/lector-staff/team-img.jpg',
-    //     description:'Занимается Преподавательской деятельностью с прошлого века. ', name:'Куприянов'
-    //   },
-    //   {
-    //     degree:'Доцент', post:'Зам декана', title:'ядерный физик', src:'assets/img/students/lector-staff/team-img.jpg',
-    //     description:'Занимается Преподавательской деятельностью с прошлого века. ', name:'Куприянов'
-    //   }
-    // ];
+  constructor(public lectorService: LectorService, public fileWorker: FileWorker) {
   }
 
   getAllLectors() {

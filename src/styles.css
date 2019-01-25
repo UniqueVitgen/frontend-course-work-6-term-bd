@@ -16,6 +16,8 @@
 @import "./themes/input.css";
 @import "./themes/align.css";
 @import "./themes/ej2.css";
+@import "./themes/avatar.css";
+@import "./themes/table.css";
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 

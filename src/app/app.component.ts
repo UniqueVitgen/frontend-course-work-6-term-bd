@@ -26,6 +26,8 @@ import { LeaderComponent } from './pages/lectors/leader/leader.component';
 import { TranslateService } from '@ngx-translate/core';
 import { GroupDashboardComponent } from './pages/common/group-dashboard/group-dashboard.component';
 import {LectorOrganizerComponent} from './pages/organizer/lector-organizer/lector-organizer.component';
+import {User} from './factory/user.factory';
+import {UserWorker} from './workers/UserWorker';
 
 
 @Component({
@@ -37,6 +39,7 @@ export class AppComponent {
   bsModalRef: BsModalRef;
   title = 'app';
   mode: any = 'unathored';
+  user: User;
   unauthored = [
     { title: 'Главная', path: 'home' },
     { title: 'Регистрация', path: 'registration' },
@@ -60,6 +63,7 @@ export class AppComponent {
     { path: 'involve', component: LeaderComponent, title: 'Участие' },
     {  path: 'admin-news', component: NewsComponent, title: 'Новости' },
     {  path: 'groups', component: GroupDashboardComponent, title: 'Группы' },
+    {  path: 'my-profile', component: GroupDashboardComponent, title: 'Мой профиль' },
     // { path: 'about-us', component: SelectDiplomComponent,content: [], title:'О нас' },
   ];
 
@@ -104,10 +108,15 @@ export class AppComponent {
     private translate: TranslateService,
     private modalService: BsModalService,
     public userStorage: UserStorage,
+    public userWorker: UserWorker,
     public tokenStorage: TokenStorage
   ) {
     this.translate.setDefaultLang(this.getLanguage());
     this.translate.use(this.getLanguage());
+    this.userStorage.changeUser.subscribe(resUser => {
+      this.user = resUser;
+      console.log('this.user', this.user);
+    });
     this.globalEventsManager.showStudentsNavBar.subscribe((mode: any) => {
       console.log('student user');
       this.mode = 'student';
@@ -125,10 +134,18 @@ export class AppComponent {
       this.mode = 'lector';
     });
     this.globalEventsManager.showOrganizerNavBar.subscribe((mode: any) => {
-      this.mode = 'organizer';
+      if (this.userWorker.hasLectorRole(this.user)) {
+        this.mode = 'lector';
+      } else {
+        this.mode = 'organizer';
+      }
     });
     this.globalEventsManager.showSecretaryNavBar.subscribe((mode: any) => {
-      this.mode = 'secretary';
+      if (this.userWorker.hasLectorRole(this.user)) {
+        this.mode = 'lector';
+      } else {
+        this.mode = 'secretary';
+      }
     });
   }
 

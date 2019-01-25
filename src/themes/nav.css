@@ -12,6 +12,10 @@
 
 }
 
+ul.navbar-admin {
+  display: contents;
+}
+
 .navbar .dropdown li:hover {
     cursor: pointer;
     background: gray;

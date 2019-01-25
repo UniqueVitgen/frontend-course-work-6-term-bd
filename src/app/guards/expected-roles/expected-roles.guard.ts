@@ -18,29 +18,25 @@ export class ExpectedRolesGuard implements CanActivate {
   }
 
   hasLectorRole(user) {
-    for (let role of user.roles) {
-      if (role.name == "LECTOR") {
+    for (const role of user.roles) {
+      if (role.name == 'LECTOR') {
         return true;
       }
     }
   }
 
   checkRoles(user) {
-    for (let role of user.roles) {
+    for (const role of user.roles) {
       if (this.expectedRoles.includes(role.name)) {
-        if(role.name == 'ADMIN') {
+        if (role.name === 'ADMIN') {
           this.globalEventsManager.showAdminNavBar.emit(true);
-        }
-        else if(role.name == 'SECRETARY_SEC') {
-          this.globalEventsManager.showSecretaryNavBar.emit(true);
-        }
-        else if(role.name == 'LECTOR') {
+        } else if (role.name === 'LECTOR') {
           this.globalEventsManager.showLectorNavBar.emit(true);
-        }
-        else if(role.name == 'STUDENT') {
+        } else if (role.name === 'SECRETARY_SEC') {
+          this.globalEventsManager.showSecretaryNavBar.emit(true);
+        } else if (role.name === 'STUDENT') {
           this.globalEventsManager.showStudentsNavBar.emit(true);
-        }
-        else if(role.name == 'ORGANIZER') {
+        } else if (role.name === 'ORGANIZER') {
           this.globalEventsManager.showOrganizerNavBar.emit(true);
         }
         return true;
@@ -51,7 +47,7 @@ export class ExpectedRolesGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot) {
     if (this.tokenStorage.getToken()) {
       this.expectedRoles = route.data.expectedRoles;
-      let user = this.userStorage.getUser();
+      const user = this.userStorage.getUser();
       return this.checkRoles(user);
     }
     else {

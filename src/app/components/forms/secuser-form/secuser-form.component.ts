@@ -8,6 +8,7 @@ import { SECRoleService } from '../../../services/sec-role/secrole.service';
 import { SECRole } from '../../../factory/sec-roles.factory';
 import {SelectLectorComponent} from '../../select/select-lector/select-lector.component';
 import {Lector} from '../../../factory/lector.factory';
+import {SecWorker} from '../../../workers/sec.worker';
 
 @Component({
   selector: 'app-secuser-form',
@@ -19,7 +20,7 @@ export class SECUserFormComponent implements OnInit, OnDestroy {
   endDate;
   diplomWork;
   secUserForm: FormGroup;
-  secUser : SECUser;
+  secUser: SECUser;
   editedSecUser: SECUserForm;
   secRoles: SECRole[];
   bsRangeValue: Date[];
@@ -27,7 +28,7 @@ export class SECUserFormComponent implements OnInit, OnDestroy {
   @ViewChild('dpe') datepickerend: BsDatepickerDirective;
   dateConfig = {
     dateInputFormat: 'DD.MM.YYYY'
-  }
+  };
   previous;
   next;
   minDate;
@@ -39,13 +40,15 @@ export class SECUserFormComponent implements OnInit, OnDestroy {
   onDestroy;
   percentArrayValidators;
   onSave;
-  public bsModalRef2: BsModalRef
+  public bsModalRef2: BsModalRef;
+  isDisabledSecretaryRole: boolean;
 
   constructor(public formBuilder: FormBuilder,
     private formEventService: FormEventService,
               private modalService: BsModalService,
     private cd: ChangeDetectorRef,
     public secRoleService: SECRoleService,
+    private secWorker: SecWorker,
     public bsModalRef: BsModalRef, public secUserService: SECUserService) {
 
 
@@ -62,9 +65,9 @@ export class SECUserFormComponent implements OnInit, OnDestroy {
   }
 
   selectLector() {
-    let that = this;
+    const that = this;
     // this.template.createEmbeddedView(``)
-    let initialState = {
+    const initialState = {
       lectors: that.targetLectors,
       onDestroy: (lector: User) => {
         if (lector) {
@@ -84,12 +87,12 @@ export class SECUserFormComponent implements OnInit, OnDestroy {
         // console.log(this.)
       },
       // selectedLector: that[property]
-    }
-    let modalOptions = {
+    };
+    const modalOptions = {
       class: 'select-lector',
       ignoreBackdropClick: true,
       initialState: initialState
-    }
+    };
     this.bsModalRef2 = this.modalService.show(SelectLectorComponent, modalOptions);
   }
   createNewLector() {
@@ -103,15 +106,15 @@ export class SECUserFormComponent implements OnInit, OnDestroy {
   getSECRoles() {
     this.secRoleService.getAll().subscribe(roles => {
       this.secRoles = roles;
-    })
+    });
   }
 
   initVariables() {
     if (this.startDate) {
       this.minDate = new Date(this.startDate);
     }
-    if (this.isEdit) { 
-      if(this.editedSecUser == null) {
+    if (this.isEdit) {
+      if (this.editedSecUser == null) {
         this.editedSecUser = {
           lastname: '',
           firstname: '',
@@ -119,7 +122,7 @@ export class SECUserFormComponent implements OnInit, OnDestroy {
           user: null
         };
       }
-      SECUser.assignToForm(this.editedSecUser, this.secUserEdit); 
+      SECUser.assignToForm(this.editedSecUser, this.secUserEdit);
     } else if (this.editedSecUser == null) {
       this.editedSecUser = {
         lastname: '',
@@ -128,11 +131,13 @@ export class SECUserFormComponent implements OnInit, OnDestroy {
         user: null
       };
     }
+    this.isDisabledSecretaryRole = this.secWorker.haveSecretary(this.sec);
     console.log('this.editedSecUser', this.editedSecUser);
+    console.log('this.isDisabledSecretaryRole', this.isDisabledSecretaryRole);
   }
 
   configPercentValidation() {
-    let validators = [];
+    const validators = [];
     if (this.previous) {
       validators.push(Validators.min(Number(this.previous.percent) + 1));
     }
@@ -147,8 +152,8 @@ export class SECUserFormComponent implements OnInit, OnDestroy {
     if (this.editedSecUser) {
       this.secUserForm = this.formBuilder.group({
         firstname: [{value: this.editedSecUser.firstname, disabled: this.editedSecUser.user}, Validators.compose([Validators.required])],
-        lastname: [{value:this.editedSecUser.lastname, disabled: this.editedSecUser.user}, Validators.compose([Validators.required])],
-        middlename: [{value:this.editedSecUser.middlename, disabled: this.editedSecUser.user}, Validators.compose([Validators.required])],
+        lastname: [{value: this.editedSecUser.lastname, disabled: this.editedSecUser.user}, Validators.compose([Validators.required])],
+        middlename: [{value: this.editedSecUser.middlename, disabled: this.editedSecUser.user}, Validators.compose([Validators.required])],
         role: [{value: this.editedSecUser.role}, Validators.compose([Validators.required])]
       });
     } else {
@@ -163,7 +168,7 @@ export class SECUserFormComponent implements OnInit, OnDestroy {
   }
 
   compareFaculties(c1, c2): boolean {
-    if(c1 && c2) {
+    if (c1 && c2) {
       return c1 && c2 ? c1.id === c2.id : c1 === c2;
     }
   }
@@ -187,7 +192,7 @@ export class SECUserFormComponent implements OnInit, OnDestroy {
   }
 
   public beforeSend() {
-    if(this.secUser == null) {
+    if (this.secUser == null) {
       this.secUser = new SECUser();
     }
     SECUser.assign(this.secUser, this.editedSecUser);
@@ -198,7 +203,7 @@ export class SECUserFormComponent implements OnInit, OnDestroy {
     this.beforeSend();
     this.secUserService.saveBySec(this.sec, this.secUser).subscribe(res => {
       console.log('res - ', res);
-      if(this.onSave) {
+      if (this.onSave) {
         this.onSave(res);
       }
       this.cancel();
@@ -209,11 +214,11 @@ export class SECUserFormComponent implements OnInit, OnDestroy {
     this.beforeSend();
     this.secUserService.edit(this.secUser).subscribe(res => {
       console.log('res - ', res);
-      if(this.onSave) {
+      if (this.onSave) {
         this.onSave(res);
       }
       this.cancel();
-    })
+    });
   }
 
 }
