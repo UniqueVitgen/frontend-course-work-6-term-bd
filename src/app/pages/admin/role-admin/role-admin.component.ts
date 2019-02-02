@@ -27,31 +27,31 @@ export class RoleAdminComponent implements OnInit {
   getRoles() {
     this.roleService.getRoles().subscribe(resRoles => {
       this.roles = resRoles;
-    })
+    });
   }
 
   changeInput(value: string) {
     this.searchValue = value;
   }
- 
+
   openRoleForm(role?: Role) {
     let edit;
-    if(role) {
+    if (role) {
       edit = true;
     }
     else {
-      edit=false;
+      edit = false;
     }
-    let initialState = {
+    const initialState = {
       isEdit: edit,
       roleEdit: role,
 
     };
-    let modalOptions = {
+    const modalOptions = {
       initialState: initialState,
-      class:'role-form',
+      class: 'role-form',
       ignoreBackdropClick: true
-    }
+    };
     this.bsModalRef = this.modalService.show(RoleFormComponent, modalOptions);
     this.bsModalRef.content.closeBtnName = 'Close';
   }
@@ -60,7 +60,7 @@ export class RoleAdminComponent implements OnInit {
     this.formEventService.hideRoleForm.subscribe(() => {
      //  console.log('hide');
        this.getRoles();
-    })
+    });
   }
 
 }

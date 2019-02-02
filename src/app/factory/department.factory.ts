@@ -6,6 +6,7 @@ export class Department {
     name: string;
     shortName: string;
     faculty: Faculty;
+    disabledEditSec?: boolean;
     // specializations?: Specialization[];
 }
 

@@ -14,8 +14,9 @@ export class SpecializationTableComponent implements OnInit {
   @Output('clickEdit') outputClickEdit: EventEmitter<Specialization> = new EventEmitter<Specialization>();
   @Output('clickDelete') outputClickDelete: EventEmitter<Specialization> = new EventEmitter<Specialization>();
   @Output('clickRow') outputClickRow: EventEmitter<Specialization> = new EventEmitter();
-  displayedColumnsAdmin= ['name', 'faculty', 'code', 'qualification', 'edit', 'delete'];
-  displayedColumns= ['name', 'faculty', 'code', 'qualification'];
+  @Output('editSpecialization') outputEditSpecialization: EventEmitter<Specialization> = new EventEmitter();
+  displayedColumnsAdmin= ['name', 'faculty', 'code', 'qualification', 'disableChange', 'edit', 'delete'];
+  displayedColumns= ['name', 'faculty', 'code', 'disableChange', 'qualification'];
 
   constructor(
     private userWorker: UserWorker) { }

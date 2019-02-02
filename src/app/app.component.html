@@ -111,6 +111,9 @@
         </li>
         <ng-container  *ngIf="user && userWorker.hasOrganizerRole(user)">
           <li>
+            <a class="nav-link" routerLink="/{{'admin-department'}}">{{'Кафедры' | translate}}</a>
+          </li>
+          <li>
             <a class="nav-link" routerLink="/{{'organizer-lector'}}">{{'Преподаватели' | translate}}</a>
           </li>
         </ng-container>

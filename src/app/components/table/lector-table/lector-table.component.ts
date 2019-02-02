@@ -5,6 +5,8 @@ import {UserStorage} from '../../../storage/user/UserStorage';
 import {Router} from '@angular/router';
 import {UserWorker} from '../../../workers/UserWorker';
 import {LectorWorker} from '../../../workers/lector.worker';
+import {SearchWorker} from '../../../workers/search.worker';
+import {SearchType} from '../../../factory/worker/SearchPropertyItem';
 
 @Component({
   selector: 'app-lector-table',
@@ -13,9 +15,11 @@ import {LectorWorker} from '../../../workers/lector.worker';
 })
 export class LectorTableComponent implements OnInit, OnChanges {
   @Input() lectors: Lector[];
+  @Input() search: string;
   @Output('clickEditCountOfDiplomButton') outputClickEditCountOfDiplomButton: EventEmitter<Lector> = new EventEmitter();
   @Output('clickEditButton') outputClickEditButton: EventEmitter<Lector> = new EventEmitter();
   @Output('clickDeleteButton') outputClickDeleteButton: EventEmitter<Lector> = new EventEmitter();
+  selectedLectors: Lector[];
   displayedColumns= ['name', 'type', 'post', 'count', 'edit', 'delete'];
   displayedColumnsUser = ['name', 'type', 'post', 'count'];
   user: User;
@@ -24,6 +28,7 @@ export class LectorTableComponent implements OnInit, OnChanges {
 
   constructor(private userStorage: UserStorage,
               public lectorWorker: LectorWorker,
+              private searchWorker: SearchWorker,
               private router: Router,
               private userWorker: UserWorker) { }
 
@@ -33,7 +38,12 @@ export class LectorTableComponent implements OnInit, OnChanges {
     this.isOrganizer = this.userWorker.hasOrganizerRole(this.user);
   }
   ngOnChanges(): void {
-
+    if (this.search) {
+      this.selectedLectors = this.searchWorker.searchValueBySearchPropertyItem(this.search, this.lectors,
+        [{type: SearchType.Function, value: this.userWorker.formatFullName}, {type: SearchType.Function, value: this.lectorWorker.getPost}]);
+    } else {
+      this.selectedLectors = this.lectors;
+    }
   }
 
   goToLectorPage(lector: Lector) {

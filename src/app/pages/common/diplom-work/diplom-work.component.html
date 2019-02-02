@@ -19,9 +19,7 @@
             </div>
             <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
               <span>{{diplomWork.name}} </span>
-              <mat-icon (click)="openDiplomWorkForm(diplomWork)" *ngIf="hasOrganizerRole(user)
-              || userWorker.hasStudentRole(user)
-              || diplomWorkWorker.isLeader(diplomWork, user)">mode_edit</mat-icon>
+              <mat-icon (click)="openDiplomWorkForm(diplomWork)" *ngIf="isCanChange && !isDisabledChangeDiplom">mode_edit</mat-icon>
             </div>
           </div>
         </h4>
@@ -30,7 +28,7 @@
           <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 right-text">
             <span class="grey-text float-rigth">{{'Статус' | translate}}</span>
           </div>
-          <div *ngIf="hasLectorRole(user)" class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+          <div *ngIf="isCanChangeLikeLeader && !isDisabledChangeDiplom" class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
             <span>
               <mat-select class="status-select" [compareWith]="compareObjects" [(ngModel)]="selectedStatus"
                 (ngModelChange)="changeStatus()" [placeholder]="'Статус' | translate">
@@ -40,7 +38,7 @@
               </mat-select>
             </span>
           </div>
-          <div *ngIf="!hasLectorRole(user)" class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+          <div *ngIf="!(isCanChangeLikeLeader && !isDisabledChangeDiplom)" class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
             <span>{{diplomWork.status.name}}</span>
           </div>
         </div>
@@ -70,7 +68,7 @@
             </div>
             <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
               <span>{{userWorker.formatFullName(diplomWork.student)}} </span>
-              <mat-icon (click)="openDiplomWorkForm(diplomWork)" *ngIf="hasOrganizerRole(user)">mode_edit</mat-icon>
+              <!--<mat-icon (click)="openDiplomWorkForm(diplomWork)" *ngIf="isCanChangeLikeOrganization && !isDisabledChangeDiplom">mode_edit</mat-icon>-->
             </div>
           </div>
         </h4>
@@ -184,7 +182,7 @@
       </ng-container>
 
       <!-- Weight Column -->
-      <ng-container *ngIf="isUserHasAdvancedPermitPercentages(user)" matColumnDef="addBefore">
+      <ng-container *ngIf="isCanChangeLikeLeader" matColumnDef="addBefore">
         <th mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell *matCellDef="let percentage; let i = index;">
           <button [disabled]="i != 0 && diplomWork.percentages[i - 1] &&  formatDate(diplomWork.percentages[i - 1].endDate) == formatDate(percentage.startDate)"
@@ -193,7 +191,7 @@
       </ng-container>
 
       <!-- Weight Column -->
-      <ng-container *ngIf="isUserHasAdvancedPermitPercentages(user)" matColumnDef="addAfter">
+      <ng-container *ngIf="isCanChangeLikeLeader" matColumnDef="addAfter">
         <th mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell *matCellDef="let percentage; let i = index;">
           <button [disabled]="i != (diplomWork?.percentages?.length - 1) && diplomWork.percentages[i + 1] && formatDate(diplomWork.percentages[i + 1].startDate) == formatDate(percentage.endDate)"
@@ -202,14 +200,14 @@
       </ng-container>
 
       <!-- Weight Column -->
-      <ng-container *ngIf="isUserHasAdvancedPermitPercentages(user)" matColumnDef="edit">
+      <ng-container *ngIf="isCanChangeLikeLeader" matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell *matCellDef="let percentage"> <button type="button" (click)="openPercentageForm(percentage, i)"
             class="btn btn-warning">Редактировать</button> </td>
       </ng-container>
 
       <!-- Weight Column -->
-      <ng-container *ngIf="isUserHasAdvancedPermitPercentages(user)" matColumnDef="delete">
+      <ng-container *ngIf="isCanChangeLikeLeader" matColumnDef="delete">
         <th mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell *matCellDef="let percentage">
           <button type="button" (click)="deletePercentage(percentage)" class="btn btn-danger">Удалить</button>
@@ -221,11 +219,11 @@
           <th mat-header-cell *matHeaderCellDef> Symbol </th>
           <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
         </ng-container> -->
-      <div *ngIf="isUserHasAdvancedPermitPercentages(user)">
+      <div *ngIf="isCanChangeLikeLeader">
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </div>
-      <div *ngIf="!isUserHasAdvancedPermitPercentages(user)">
+      <div *ngIf="!isCanChangeLikeLeader">
         <tr mat-header-row *matHeaderRowDef="userColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: userColumns; let i = index"></tr>
       </div>
@@ -237,7 +235,7 @@
       Процентовки отсутсвуют
     </div>
   </div>
-  <div class="row" *ngIf="isUserHasAdvancedPermitPercentages(user) && diplomWork.percentages.length == 0">
+  <div class="row" *ngIf="isCanChangeLikeLeader && diplomWork.percentages.length == 0">
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 right-text">
     </div>
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -248,9 +246,7 @@
   </div>
 
   <app-lector-staff [diplomWork]="diplomWork" isChild="true">
-    <action-buttons  *ngIf="hasOrganizerRole(user)
-              || userWorker.hasStudentRole(user)
-              || diplomWorkWorker.isLeader(diplomWork, user)">
+    <action-buttons  *ngIf="isCanChange && !isDisabledChangeDiplom">
       <button mat-icon-button (click)="openDiplomWorkLectorsForm(diplomWork)">
         <mat-icon aria-label="Example icon-button with a heart icon">create</mat-icon>
       </button>

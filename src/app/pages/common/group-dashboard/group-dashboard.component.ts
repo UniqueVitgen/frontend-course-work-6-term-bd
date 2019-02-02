@@ -10,6 +10,7 @@ import { Group } from '../../../factory/group.factory';
 export class GroupDashboardComponent implements OnInit {
   groups: Group[];
   selectedGroups: Group[];
+  search: string;
 
   constructor(private groupService: GroupService) { }
 

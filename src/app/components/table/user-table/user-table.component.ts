@@ -1,9 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {User} from '../../../factory/user.factory';
 import {UserStorage} from '../../../storage/user/UserStorage';
 import {UserWorker} from '../../../workers/UserWorker';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {UserOrganization} from '../../../factory/table/user-organization.factory';
+import {SearchWorker} from '../../../workers/search.worker';
+import {SearchType} from '../../../factory/worker/SearchPropertyItem';
 
 @Component({
   selector: 'app-user-table',
@@ -17,16 +19,19 @@ import {UserOrganization} from '../../../factory/table/user-organization.factory
   ]),
 ]
 })
-export class UserTableComponent implements OnInit {
+export class UserTableComponent implements OnInit, OnChanges {
   @Input() users: User[];
+  @Input() search: string;
   @Output('changeUserOrganization') outputChangeUserOrganization: EventEmitter<UserOrganization> = new EventEmitter<UserOrganization>();
+  selectedUsers: User[];
   displayedColumns= ['username', 'fullname', 'role',  'hasOrganizer'];
   displayedColumnsUser = ['username', 'fullname', 'role'];
   user: User;
   isAdmin: boolean;
   expandedElement: User | null;
 
-  constructor(private userStorage: UserStorage, private userWorker: UserWorker) { }
+  constructor(private userStorage: UserStorage, private userWorker: UserWorker,
+              private searchWorker: SearchWorker) { }
 
   ngOnInit() {
     this.user = this.userStorage.getUser();
@@ -37,6 +42,16 @@ export class UserTableComponent implements OnInit {
       user: user,
       isOrganization: isOrganizer
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.search) {
+      this.selectedUsers = this.searchWorker.searchValueBySearchPropertyItem(this.search, this.users,
+        [{type: SearchType.Property, value: 'username'}, {type: SearchType.Function, value: this.userWorker.formatFullName},
+          {type: SearchType.Function, value: this.userWorker.formatUserRole}]);
+    } else {
+      this.selectedUsers = this.users;
+    }
   }
 
 }

@@ -1,12 +1,14 @@
 
 <br>
 <div class="container">
+  <app-search-input [(input)]="searchValue"></app-search-input>
+  <br>
 
   <div *ngIf="userWorker.hasOrganizerRole(user)">
 
     <button mat-raised-button color="primary" (click)="saveInWord()">{{'Сохранить информацию в ворд' | translate}}</button>
     <button mat-raised-button color="warn" (click)="saveInPDF()">{{'Сохранить информацию в PDF' | translate}}</button>
   </div>
-  <app-lector-table [lectors]="lectors" (clickEditCountOfDiplomButton)="clickEditButton($event)"></app-lector-table>
+  <app-lector-table [search]="searchValue" [lectors]="lectors" (clickEditCountOfDiplomButton)="clickEditButton($event)"></app-lector-table>
 </div>
 <br>

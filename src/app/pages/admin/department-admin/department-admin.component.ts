@@ -27,27 +27,27 @@ export class DepartmentAdminComponent implements OnInit {
   getDepartments() {
     this.departmentService.getAll().subscribe(resDepartments => {
       this.departments = resDepartments;
-    })
+    });
   }
- 
+
   openDepartmentForm(department?: Department) {
     let edit;
-    if(department) {
+    if (department) {
       edit = true;
     }
     else {
-      edit=false;
+      edit = false;
     }
-    let initialState = {
+    const initialState = {
       isEdit: edit,
       departmentEdit: department,
 
     };
-    let modalOptions = {
+    const modalOptions = {
       initialState: initialState,
-      class:'department-form',
+      class: 'department-form',
       ignoreBackdropClick: true
-    }
+    };
     this.bsModalRef = this.modalService.show(DepartmentFormComponent, modalOptions);
     this.bsModalRef.content.closeBtnName = 'Close';
   }
@@ -56,10 +56,20 @@ export class DepartmentAdminComponent implements OnInit {
     this.searchValue = value;
   }
 
+  editDepartment(department: Department) {
+    if (department) {
+      this.departmentService.edit(department).subscribe(res => {
+        // this.getDepartments();
+      });
+    } else {
+      this.getDepartments();
+    }
+  }
+
   trackDepartments() {
     this.formEventService.hideDepartmentForm.subscribe(() => {
      //  console.log('hide');
      this.getDepartments();
-    })
+    });
   }
 }

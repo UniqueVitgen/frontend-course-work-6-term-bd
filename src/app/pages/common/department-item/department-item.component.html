@@ -1,0 +1,29 @@
+<!--<br>-->
+<div class="container">
+  <br>
+  <div >
+    <button mat-raised-button color="primary" (click)="saveInWord()">{{'Сохранить информацию в ворд' | translate}}</button>
+    <button mat-raised-button color="warn" (click)="saveInPDF()">{{'Сохранить информацию в PDF' | translate}}</button>
+  </div>
+  <br>
+  <mat-card *ngIf="department">
+    <mat-card-title>{{'Кафедра' | translate}}</mat-card-title>
+    <div>
+      <span class="font-weight-bold">{{'Название' | translate}}:</span>
+      &nbsp;
+      <span>{{department.name}}</span>
+    </div>
+    <div>
+      <span class="font-weight-bold">{{'Краткое название' | translate}}:</span>
+      &nbsp;
+      <span>{{department.shortName}}</span>
+    </div>
+    <div>
+      <span class="font-weight-bold">{{'Факультет' | translate}}:</span>
+      &nbsp;
+      <span>{{department.faculty.name}}</span>
+    </div>
+  </mat-card>
+  <br>
+  <app-specialization-table *ngIf="specializations && specializations.length > 0" [specializations]="specializations"></app-specialization-table>
+</div>

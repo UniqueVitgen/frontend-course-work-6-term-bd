@@ -71,6 +71,7 @@ export class AppComponent {
     {path: 'admin-diplom-work', title: 'Дипломные работы'},
     {path: 'sec-list', title: 'ГЭК комиссия'},
     {  path: 'admin-news', component: NewsComponent, title: 'Новости' },
+    {  path: 'admin-department', component: LectorOrganizerComponent, title: 'Кафедры' },
     {  path: 'organizer-lector', component: LectorOrganizerComponent, title: 'Преподаватели' },
     { path: 'admin-specialization', title: 'Специальность' },
     {  path: 'groups', component: GroupDashboardComponent, title: 'Группы' },

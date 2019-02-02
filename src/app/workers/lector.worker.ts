@@ -5,13 +5,13 @@ import {Lector, LectorOrganization, LectorUniversity} from '../factory/lector.fa
   providedIn: 'root'
 })
 export class LectorWorker {
-  isLectorUniversity(lector: Lector) {
+  public isLectorUniversity(lector: Lector) {
     return (lector as LectorUniversity).degree != null;
   }
-  isLectorOrganization(lector: Lector) {
+  public isLectorOrganization(lector: Lector) {
     return (lector as LectorOrganization).organization != null;
   }
-  getPost(lector: Lector) {
+  public getPost(lector: Lector) {
     if (this.isLectorUniversity(lector)) {
       return (lector as LectorUniversity).post.name;
     } else if (this.isLectorOrganization(lector)) {

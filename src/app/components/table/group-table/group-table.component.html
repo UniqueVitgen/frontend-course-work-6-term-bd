@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="groups" class="mat-elevation-z8 full-width">
+<table mat-table [dataSource]="selectedGroups" class="mat-elevation-z8 full-width">
 
   <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
@@ -24,14 +24,14 @@
   <ng-container matColumnDef="edit">
     <th mat-header-cell *matHeaderCellDef> </th>
     <td mat-cell *matCellDef="let group">
-      <button (click)="openGroupForm(group)" type="button" class="btn btn-info">{{'Редактировать' | translate}}</button>
+      <button (click)="clickEdit(group)" type="button" class="btn btn-info">{{'Редактировать' | translate}}</button>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="delete">
     <th mat-header-cell *matHeaderCellDef> </th>
     <td mat-cell *matCellDef="let group">
-      <button (click)="deleteGroup(group)" type="button" class="btn btn-danger">{{'Удалить' | translate}}</button>
+      <button (click)="clickDelete(group)" type="button" class="btn btn-danger">{{'Удалить' | translate}}</button>
     </td>
   </ng-container>
   <div *ngIf="isAdmin">

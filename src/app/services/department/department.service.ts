@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ConfigService } from '../config/config.service';
 import { Department } from '../../factory/department.factory';
 import { Faculty } from '../../factory/faculty.factory';
+import {Specialization} from '../../factory/specialization.factory';
 
 const prefix = 'department/';
 @Injectable({
@@ -25,7 +26,7 @@ export class DepartmentService {
   }
 
   getAllByFaculty(faculty: Faculty) {
-    return this.configService.get(prefix + 'findAll-by-department-' + faculty.idFaculty)
+    return this.configService.get(prefix + 'findAll-by-department-' + faculty.idFaculty);
   }
 
   save(department: Department) {
@@ -33,10 +34,22 @@ export class DepartmentService {
   }
 
   edit(department: Department) {
-    return this.configService.put(prefix + "edit", department);
+    return this.configService.put(prefix + 'edit', department);
   }
 
   delete(department: Department) {
     return this.configService.delete(prefix + 'delete-' + department.id);
+  }
+
+  getPDF(department: Department) {
+    console.log('prefix');
+    const query = prefix + 'pdf-' + department.id;
+    return this.configService.blob(query);
+  }
+
+  getWord(department: Department) {
+    console.log('prefix');
+    const query = prefix + 'word-' + department.id;
+    return this.configService.blob(query);
   }
 }

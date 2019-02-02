@@ -16,6 +16,7 @@ import {User} from '../../../factory/user.factory';
 export class LectorOrganizerComponent implements OnInit {
   lectors: Lector[];
   user: User;
+  searchValue: string;
   public bsModalRefSelectGroups: BsModalRef;
 
   constructor(private lectorService: LectorService,
@@ -70,5 +71,10 @@ export class LectorOrganizerComponent implements OnInit {
     this.bsModalRefSelectGroups = this.modalService.show(LectorCountDiplomFormComponent, modalOptions);
     this.bsModalRefSelectGroups.content.closeBtnName = 'Close';
   }
+
+  changeInput(value: string) {
+    this.searchValue = value;
+  }
+
 
 }

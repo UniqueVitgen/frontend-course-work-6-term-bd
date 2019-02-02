@@ -21,33 +21,33 @@ export class DepartmentFormComponent implements OnInit {
   isEdit;
   faculties: Faculty[];
 
-  constructor(public formBuilder: FormBuilder, 
+  constructor(public formBuilder: FormBuilder,
     public departmentService: DepartmentService, public router: Router,
-  private route: ActivatedRoute, 
-  public bsModalRef: BsModalRef, 
+  private route: ActivatedRoute,
+  public bsModalRef: BsModalRef,
   public facultyService: FacultyService,
-  public formEventService: FormEventService) { 
-    
+  public formEventService: FormEventService) {
+
     this.departmentForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
       shortName: ['', Validators.compose([])],
       faculty: ['', Validators.compose([])]
-    })
+    });
   }
 
   saveDepartment() {
     this.departmentService.save(this.department).subscribe(answer => {
       console.log('answer from save Department - ', answer);
       this.cancel();
-    })
+    });
 
   }
 
   compareFaculties(c1, c2): boolean {
-    if(c1 && c2) {
+    if (c1 && c2) {
       return c1 && c2 ? c1.idFaculty === c2.idFaculty : c1 === c2;
     }
-  }  
+  }
 
   editDepartment(department) {
     // console.log('edited - ', this.DepartmentEdit);
@@ -56,7 +56,7 @@ export class DepartmentFormComponent implements OnInit {
     this.departmentService.edit(this.departmentEdit).subscribe(answer => {
       console.log(answer);
       this.cancel();
-    })
+    });
   }
 
   cancel() {
@@ -65,19 +65,19 @@ export class DepartmentFormComponent implements OnInit {
   }
 
   createDepartmentFromEditDepartment() {
-    for(let property in this.department) {
+    for (const property in this.department) {
       this.department[property] = this.departmentEdit[property];
     }
   }
 
   createDepartmentEditFromDepartment() {
-    for(let property in this.department) {
+    for (const property in this.department) {
       this.departmentEdit[property] = this.department[property];
     }
   }
 
   determineIfEdit() {
-    if(this.departmentEdit) {
+    if (this.departmentEdit) {
       this.createDepartmentFromEditDepartment();
       console.log('edit - ', this.isEdit);
     }
@@ -99,7 +99,7 @@ export class DepartmentFormComponent implements OnInit {
    });
 
   }
-  
+
   ngOnDestroy(): void {
     this.formEventService.hideDepartmentForm.emit(true);
   }

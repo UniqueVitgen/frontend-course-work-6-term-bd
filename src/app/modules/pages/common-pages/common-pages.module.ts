@@ -22,6 +22,7 @@ import { WorkersModule } from '../../others/workers/workers.module';
 import { GroupDashboardComponent } from '../../../pages/common/group-dashboard/group-dashboard.component';
 import { SignUpLectorOrganizerComponent } from '../../../pages/common/sign-up/sign-up-lector-organizer/sign-up-lector-organizer.component';
 import {SpecializationItemComponent} from '../../../pages/common/specialization-item/specialization-item.component';
+import {DepartmentItemComponent} from '../../../pages/common/department-item/department-item.component';
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import {SpecializationItemComponent} from '../../../pages/common/specialization-
     NewsItemComponent,
     GroupItemComponent,
     SpecializationItemComponent,
-    GroupDashboardComponent
+    GroupDashboardComponent,
+    DepartmentItemComponent
   ],
   providers: [
     MainComponent
@@ -70,7 +72,8 @@ import {SpecializationItemComponent} from '../../../pages/common/specialization-
     GroupItemComponent,
     MainComponent,
     SpecializationItemComponent,
-    GroupDashboardComponent
+    GroupDashboardComponent,
+    DepartmentItemComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })

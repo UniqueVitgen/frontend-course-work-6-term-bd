@@ -22,6 +22,7 @@ export class SpecializationAdminComponent implements OnInit {
   displayedColumns= ['name', 'faculty', 'code', 'qualification'];
   search;
   public user: User;
+  // isAdmin: boolean;
 
   constructor(private specializationService: SpecializationService,
     private modalService: BsModalService,
@@ -92,6 +93,10 @@ export class SpecializationAdminComponent implements OnInit {
     this.bsModalRef = this.modalService.show(SpecializationFormComponent, modalOptions);
     // this.bsModalRef.content.closeBtnName = 'Close';
   }
+  editSpecialization(specialization: Specialization) {
+    this.specializationService.edit(specialization).subscribe(resSpecialization => {
+    });
+  }
 
    deleteSpecialization(specialization) {
      this.specializationService.delete(specialization).subscribe(answer => {
@@ -104,6 +109,7 @@ export class SpecializationAdminComponent implements OnInit {
    }
   ngOnInit() {
     this.user = this.userStorage.getUser();
+    // this.isAdmin = this.userWorker.hasAdminRole(this.user);
     this.getAll();
     this.trackSpecializations();
   }

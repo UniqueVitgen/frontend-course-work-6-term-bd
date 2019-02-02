@@ -7,4 +7,5 @@ export class Specialization {
     department?: Department;
     qualification: Qualification;
     code: string;
+    disabledEditDiplomWork?: boolean;
 }

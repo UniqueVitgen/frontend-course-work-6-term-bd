@@ -14,6 +14,7 @@ import { UserWorker } from '../../../workers/UserWorker';
 import {DiplomWorkWorker} from '../../../workers/diplom-work.worker';
 import {DiplomWork} from '../../../factory/diplom-work.factory';
 import {DiplomWorkLectorsFormComponent} from '../../../components/forms/diplom-work-lectors-form/diplom-work-lectors-form.component';
+import {User} from '../../../factory/user.factory';
 
 @Component({
   selector: 'app-diplom-work',
@@ -21,19 +22,23 @@ import {DiplomWorkLectorsFormComponent} from '../../../components/forms/diplom-w
   styleUrls: ['./diplom-work.component.css']
 })
 export class DiplomWorkComponent implements OnInit {
-  diplomWork;
+  diplomWork: DiplomWork;
   sub;
-  id;
+  id: number;
   @ViewChild(LectorStaffComponent) lectorStaffComponent;
   bsModalRef: BsModalRef;
   bsModalRef2: BsModalRef;
-  user;
-  isStudent;
-  isLeader;
+  user: User;
+  isStudent: boolean;
+  isLeader: boolean;
   selectedStatus;
   displayedColumns: string[] = ['name', 'comment', 'startDate', 'endDate', 'percent', 'addBefore', 'addAfter', 'edit', 'delete'];
   userColumns: string[] = ['name', 'comment', 'startDate', 'endDate', 'percent'];
   statuses;
+  isDisabledChangeDiplom: boolean;
+  isCanChange: boolean;
+  isCanChangeLikeLeader: boolean;
+  isCanChangeLikeOrganization: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -52,35 +57,40 @@ export class DiplomWorkComponent implements OnInit {
       .subscribe(params => {
         // Defaults to 0 if no query param provided.
         this.id = + params['id'] || 0;
-        this.user = this.userStorage.getUser();
+        this.user = this.userStorage.getUser();;
         this.getStatuses();
         this.getDiplomWork((diplomWork) => {
-          if(diplomWork.leader.idPerson == this.user.idPerson) {
+          this.isCanChange = (this.userWorker.hasOrganizerRole(this.user)
+            || this.userWorker.hasStudentRole(this.user)
+            || this.diplomWorkWorker.isLeader(this.diplomWork, this.user));
+          this.isCanChangeLikeLeader = this.userWorker.hasLectorRole(this.user);
+          this.isCanChangeLikeOrganization = this.userWorker.hasOrganizerRole(this.user);
+          if (diplomWork.leader.idPerson == this.user.idPerson) {
               this.isLeader = true;
           }
-        })
-      })
+        });
+      });
   }
 
   hasLectorRole(user) {
-      for(let role of user.roles) {
-          if(role.name == "LECTOR") {
+      for (const role of user.roles) {
+          if (role.name == 'LECTOR') {
               return true;
           }
       }
   }
 
   hasOrganizerRole(user) {
-      for(let role of user.roles) {
-          if(role.name == "ORGANIZER") {
+      for (const role of user.roles) {
+          if (role.name == 'ORGANIZER') {
               return true;
           }
       }
   }
 
   hasSecretaryRole(user) {
-      for(let role of user.roles) {
-          if(role.name == "SECRETARY_SEC") {
+      for (const role of user.roles) {
+          if (role.name == 'SECRETARY_SEC') {
               return true;
           }
       }
@@ -93,9 +103,9 @@ export class DiplomWorkComponent implements OnInit {
   saveInWord() {
     this.diplomWorkService.getWord(this.diplomWork).subscribe(res => {
       console.log('res', res);
-      let data = new Blob([res], { type: 'application/docx' });
-      let file = window.URL.createObjectURL(data);
-      let link = document.createElement('a');
+      const data = new Blob([res], { type: 'application/docx' });
+      const file = window.URL.createObjectURL(data);
+      const link = document.createElement('a');
       link.href = file;
       link.download = 'Дипломная работа:' + this.diplomWork.name + '.docx';
       document.body.appendChild(link);
@@ -121,9 +131,9 @@ export class DiplomWorkComponent implements OnInit {
   saveInPDF() {
     this.diplomWorkService.getPDF(this.diplomWork).subscribe(res => {
       console.log('res', res);
-          let data = new Blob([res], { type: 'application/pdf' });
-          let file = window.URL.createObjectURL(data);
-          let link = document.createElement('a');
+          const data = new Blob([res], { type: 'application/pdf' });
+          const file = window.URL.createObjectURL(data);
+          const link = document.createElement('a');
           link.href = file;
           link.download = 'Дипломная работа:' + this.diplomWork.name ;
           document.body.appendChild(link);
@@ -131,25 +141,25 @@ export class DiplomWorkComponent implements OnInit {
           link.parentNode.removeChild(link);
     });
   }
- 
+
   openDiplomWorkForm(diplomWork?) {
     let edit;
-    if(diplomWork) {
+    if (diplomWork) {
       edit = true;
     }
     else {
-      edit=false;
+      edit = false;
     }
-    let initialState = {
+    const initialState = {
       isEdit: edit,
       diplomWorkEdit: diplomWork,
 
     };
-    let modalOptions = {
+    const modalOptions = {
       initialState: initialState,
-      class:'diplomWork-form',
+      class: 'diplomWork-form',
       ignoreBackdropClick: true
-    }
+    };
     this.bsModalRef2 = this.modalService.show(DiplomWorkTitleFormComponent, modalOptions);
     this.bsModalRef2.content.closeBtnName = 'Close';
   }
@@ -183,21 +193,22 @@ export class DiplomWorkComponent implements OnInit {
     this.diplomWorkService.editByStatus(this.diplomWork, this.selectedStatus).subscribe(res => {
       Object.assign(this.diplomWork, res);
       console.log('finalyDipllomWork', this.diplomWork);
-    })
+    });
   }
 
   getDiplomWork(onSuccess?) {
     this.diplomWorkService.getById(this.id).subscribe(res => {
       this.diplomWork = res;
+      this.isDisabledChangeDiplom = this.diplomWork.student.group.specialization.disabledEditDiplomWork;
       console.log(this.diplomWork);
       this.lectorStaffComponent.isChild = true;
       // this.lectorStaffComponent.lectors = this.generateLectorsStaff(this.diplomWork);
       this.selectedStatus = this.diplomWork.status;
       console.log(this.lectorStaffComponent.lectors);
-      if(onSuccess) {
+      if (onSuccess) {
         onSuccess(this.diplomWork);
       }
-    })
+    });
 
   }
 
@@ -205,7 +216,7 @@ export class DiplomWorkComponent implements OnInit {
     this.statusService.getAll().subscribe(res => {
       console.log('res', res);
       this.statuses = res;
-    })
+    });
   }
 
   deletePercentage(percentage) {
@@ -218,21 +229,20 @@ export class DiplomWorkComponent implements OnInit {
   openPercentageForm(percentage?, i?) {
     let edit;
     let previous, next;
-    if(i - 1 >= 0) {
+    if (i - 1 >= 0) {
       previous = this.diplomWork.percentages[i - 1];
     }
-    if(i + 1 < this.diplomWork.percentages.length) {
+    if (i + 1 < this.diplomWork.percentages.length) {
       next = this.diplomWork.percentages[i + 1];
     }
-    if(percentage) {
+    if (percentage) {
       edit = true;
       percentage.startDate = new Date(percentage.startDate);
       percentage.endDate = new Date(percentage.endDate);
+    } else {
+      edit = false;
     }
-    else {
-      edit=false;
-    }
-    let initialState: any = {
+    const initialState: any = {
       isEdit: edit,
       percentageEdit: percentage,
       diplomWork: this.diplomWork,
@@ -242,29 +252,29 @@ export class DiplomWorkComponent implements OnInit {
       previous: previous,
       next: next,
     };
-    if(percentage) {
+    if (percentage) {
       initialState.percentage = percentage;
     }
-    let modalOptions = {
+    const modalOptions = {
       initialState: initialState,
-      class:'percentage-form',
+      class: 'percentage-form',
       ignoreBackdropClick: true
-    }
+    };
     // console.log('diplom work 1 - ', this.diplomWork);
 
     this.bsModalRef = this.modalService.show(PercentageFormComponent, modalOptions);
     this.bsModalRef.content.closeBtnName = 'Close';
   }
- 
+
   openPercentageFormBefore(percentage, i) {
-    let endDate = percentage.startDate;
+    const endDate = percentage.startDate;
     let edit;
     let previous, next;
-    if(i - 1 >= 0) {
+    if (i - 1 >= 0) {
       previous = this.diplomWork.percentages[i - 1];
     }
     next = percentage;
-    let initialState = {
+    const initialState = {
       percentageEdit: percentage,
       endDate: endDate,
       diplomWork: this.diplomWork,
@@ -274,26 +284,26 @@ export class DiplomWorkComponent implements OnInit {
       previous: previous,
       next: next
     };
-    let modalOptions = {
+    const modalOptions = {
       initialState: initialState,
-      class:'percentage-form',
+      class: 'percentage-form',
       ignoreBackdropClick: true
-    }
+    };
     // console.log('diplom work 1 - ', this.diplomWork);
 
     this.bsModalRef = this.modalService.show(PercentageFormComponent, modalOptions);
     this.bsModalRef.content.closeBtnName = 'Close';
   }
- 
+
   openPercentageFormAfter(percentage, i) {
-    let startDate = percentage.endDate;
+    const startDate = percentage.endDate;
     let edit;
     let previous, next;
-    if(i + 1 < this.diplomWork.percentages.length) {
+    if (i + 1 < this.diplomWork.percentages.length) {
       next = this.diplomWork.percentages[i + 1];
     }
     previous = percentage;
-    let initialState = {
+    const initialState = {
       percentageEdit: percentage,
       startDate: startDate,
       diplomWork: this.diplomWork,
@@ -303,51 +313,51 @@ export class DiplomWorkComponent implements OnInit {
       previous: previous,
       next: next
     };
-    let modalOptions = {
+    const modalOptions = {
       initialState: initialState,
-      class:'percentage-form',
+      class: 'percentage-form',
       ignoreBackdropClick: true
-    }
+    };
     this.bsModalRef = this.modalService.show(PercentageFormComponent, modalOptions);
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 
   generateLectorsStaff(diplomWork) {
-    let lectors = [];
-    let properties = ['leader','scienceConsultor','recensor','otConsultor','teoConsultor'];
-    for(let property of properties) {
-      let value = diplomWork[property];
+    const lectors = [];
+    const properties = ['leader', 'scienceConsultor', 'recensor', 'otConsultor', 'teoConsultor'];
+    for (const property of properties) {
+      const value = diplomWork[property];
       lectors.push(value);
     }
-    let idPersons = Array.from(new Set(lectors.map((lector, index) => {return lector.idPerson})));
-    let lectorsRight = [];
-    for(let idPerson of idPersons) { 
-      for(let lector of lectors) {
-        if(lector.idPerson == idPerson) {
+    const idPersons = Array.from(new Set(lectors.map((lector, index) => lector.idPerson)));
+    const lectorsRight = [];
+    for (const idPerson of idPersons) {
+      for (const lector of lectors) {
+        if (lector.idPerson == idPerson) {
           lectorsRight.push(lector);
           break;
         }
       }
     }
-    for(let property of properties) {
+    for (const property of properties) {
       lectorsRight.forEach(lector => {
-        if(lector.idPerson == diplomWork[property].idPerson) {lector['is' + property] = true;}
+        if (lector.idPerson == diplomWork[property].idPerson) {lector['is' + property] = true; }
       });
     }
     return lectorsRight;
   }
 
-  onlyUnique(value, index, self) { 
-    let indexOf = self.indexOf(value) === index;
+  onlyUnique(value, index, self) {
+    const indexOf = self.indexOf(value) === index;
     return indexOf;
   }
 
   formatDate(date, format?) {
-    let dateObj = new Date(date);
-    if(format) {
+    const dateObj = new Date(date);
+    if (format) {
       return this.dateTimeWorker.getDate(date, format);
     }
-    else {return this.dateTimeWorker.getDate(date);}
+    else {return this.dateTimeWorker.getDate(date); }
   }
 
 }
