@@ -41,7 +41,7 @@ export class SignUpStudentComponent implements OnInit {
     // department: '',
     group: undefined,
     groups: undefined
-  }
+  };
 
   isUsernameExist = false;
 
@@ -52,7 +52,7 @@ export class SignUpStudentComponent implements OnInit {
     lastname: '',
     password: '',
     group: undefined
-  }
+  };
 
   public studentForm;
   public PasswordValidators = PasswordValidator;

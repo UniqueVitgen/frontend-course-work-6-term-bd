@@ -21,13 +21,6 @@
 	text-shadow: 1px 1px white;
 }
 
-.reg-div .form-control {
-	border: 1px;
-	color: #9b9b9b;
-	background: #333;
-	/* widows: 60px; */
-}
-
 .reg-div form {
     margin: auto;
 }

@@ -1,6 +1,6 @@
 <div class="news">
   <div class="container">
-    <h1 class="text-center" *ngIf="hasTitle">{{titleHeader | translate}}</h1>
+    <h1 class="text-center" [ngStyle]="{'color': titleHeaderColor ? titleHeaderColor : null}" *ngIf="hasTitle">{{titleHeader | translate}}</h1>
     <div class="row">
 
       <div *ngFor="let item of news; let i = index" class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4">

@@ -54,8 +54,7 @@ export class SECUser extends SECUserBase {
         for (const prop in secUser) {
             if (prop == 'roles') {
                 secUserForm.role = secUser.roles[0];
-            }
-            else {
+            } else {
                 secUserForm[prop] = secUser[prop];
             }
         }

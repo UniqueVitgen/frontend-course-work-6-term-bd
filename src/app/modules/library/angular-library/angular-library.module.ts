@@ -10,6 +10,7 @@ import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common
 import { httpFactory } from '../../../interceptor/http.factory';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {TranslateModule, TranslateLoader, TranslateCompiler} from '@ngx-translate/core';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -32,7 +33,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReactiveFormsModule,
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule
+    RouterModule,
+    NgSelectModule
   ],
   declarations: [],
   providers: [
@@ -51,7 +53,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     BrowserAnimationsModule,
     TranslateModule,
-    RouterModule
+    RouterModule,
+    NgSelectModule
   ]
 })
 export class AngularLibraryModule { }

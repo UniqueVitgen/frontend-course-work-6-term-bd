@@ -36,12 +36,12 @@ export class SECDateFormComponent implements OnInit {
   percentArrayValidators;
   displayedColumns= ['number', 'specialization', 'amount'];
   displayedColumnsEvent= ['startDate', 'endDate', 'address'];
-  public bsModalRefSelectGroups: BsModalRef
+  public bsModalRefSelectGroups: BsModalRef;
 
-  constructor(public formBuilder: FormBuilder, 
+  constructor(public formBuilder: FormBuilder,
     private formEventService: FormEventService,
     private modalService: BsModalService,
-    private cd:ChangeDetectorRef,
+    private cd: ChangeDetectorRef,
     private dateTimeWorker: DateTimeWorker,
     public bsModalRef: BsModalRef, public secService: SECService) {
 
@@ -76,9 +76,8 @@ export class SECDateFormComponent implements OnInit {
       startDate: [undefined, Validators.compose([Validators.required])],
       endDate: [undefined, Validators.compose([Validators.required])],
 
-    })
+    });
   }
- 
   openGroupForm(sec?) {
     let edit;
     if(sec) {

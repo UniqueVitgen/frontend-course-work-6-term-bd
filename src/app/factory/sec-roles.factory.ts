@@ -1,4 +1,5 @@
 export class SECRole {
-    id?;
-    name;
+    id?: number;
+    name: string;
+    priority?: number;
 }

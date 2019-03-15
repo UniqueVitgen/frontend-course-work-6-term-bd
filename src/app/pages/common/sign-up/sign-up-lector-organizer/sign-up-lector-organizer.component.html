@@ -1,5 +1,7 @@
+
 <div class="reg-div">
   <div class="container">
+    <br>
     <!-- <input [(ngModel)]="login" type="text" class="form-control" placeholder="Логин"> -->
 
     <form [formGroup]="lectorForm">
@@ -53,40 +55,53 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        </div>
+      <div class="row" formGroupName="organization">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-          <mat-form-field class="example-full-width">
-            <input matInput required placeholder="Organization" [matAutocomplete]="auto"
-              [(ngModel)]="lector.organization.name">
+          <div class="form-group form-control-sm">
+          <label for="middlename">{{'Организация' | translate}}</label>
+            <input  class="form-control" required [placeholder]="'Организация' | translate" [matAutocomplete]="auto"
+                    [(ngModel)]="lector.organization.name"
+                    (ngModelChange)="changeOrganizationName()"
+              formControlName="name">
             <mat-autocomplete required #auto="matAutocomplete">
               <mat-option *ngFor="let state of search(lector.organization, lector.organizations)" [value]="state.name">
                 <span>{{state.name}}</span>
-                <!--<small>Population: {{state.population}}</small>-->
               </mat-option>
             </mat-autocomplete>
-          </mat-form-field>
-        </div>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-          <mat-form-field class="example-full-width">
-            <input matInput required placeholder="Post Organization" [matAutocomplete]="auto"
-              [(ngModel)]="lector.postOrganization.name">
-            <mat-autocomplete required #auto="matAutocomplete">
-              <mat-option *ngFor="let state of lector.postOrganizations" [value]="state.name">
+          <div class="form-group form-control-sm">
+            <label for="middlename">{{'Краткое название организации' | translate}}</label>
+            <input  class="form-control" required [placeholder]="'Краткое название организации' | translate"
+                    [(ngModel)]="lector.organization.shortName"
+                    formControlName="shortName">
+          </div>
+        </div>
+      </div>
+      <div class="row" formGroupName="postOrganization">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group form-control-sm">
+            <label>{{'Должность' | translate}}</label>
+            <input required [placeholder]="'Должность' | translate"  class="form-control" [matAutocomplete]="auto2"
+                   formControlName="name"
+              [(ngModel)]="lector.postOrganization.name"
+            (ngModelChange)="changePostOrganizationName()">
+            <mat-autocomplete required #auto2="matAutocomplete">
+              <mat-option *ngFor="let state of search(lector.postOrganization, lector.postOrganizations)" (onSelectionChange)="autocompletePost(state)" [value]="state.name">
                 <span>{{state.name}}</span>
-                <!--<small>Population: {{state.population}}</small>-->
               </mat-option>
             </mat-autocomplete>
-          </mat-form-field>
+          </div>
         </div>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group form-control-sm">
+            <label>{{'Краткое название должности' | translate}}</label>
+          <input required [placeholder]="'Краткое название должности' | translate"  class="form-control"
+                 formControlName="shortName"
+                 [(ngModel)]="lector.postOrganization.shortName"
+          >
+          </div>
         </div>
       </div>
       <div class="row">
@@ -95,8 +110,8 @@
             <label for="password">{{'Пароль' | translate}}</label>
             <input [(ngModel)]="lector.password" formControlName="password" type="password" class="form-control" id="password"
               [placeholder]="'Пароль' | translate">
-            <div class="alert alert-danger alert-form" *ngIf="lectorForm.controls.password.touched && lectorForm.controls.password.errors?.minlength">{{'Пароль
-              должен содержать 6 символов' | translate}}</div>
+            <div class="alert alert-danger alert-form" *ngIf="lectorForm.controls.password.touched
+            && lectorForm.controls.password.errors?.minlength">{{'Пароль должен содержать 6 символов' | translate}}</div>
           </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -104,8 +119,9 @@
             <label for="confirmPassword">{{'Подтвердить пароль' | translate}}</label>
             <input [(ngModel)]="lector.confirmPassword" formControlName="confirmPassword" type="password" class="form-control"
               id="confirmPassword" [placeholder]="'Подтвердить пароль' | translate">
-            <div class="alert alert-danger alert-form" *ngIf="lectorForm.controls.confirmPassword.touched && lectorForm.controls.confirmPassword.errors?.MatchPassword">{{'Пароль
-              не совпадает' | translate}}</div>
+            <div class="alert alert-danger alert-form"
+                 *ngIf="lectorForm.controls.confirmPassword.touched
+                 && lectorForm.controls.confirmPassword.errors?.MatchPassword">{{'Пароль не совпадает' | translate}}</div>
 
           </div>
         </div>
@@ -143,6 +159,7 @@
         </div>
       </div>
     </form>
-    <!-- <button (click)="regLector()" class="btn btn-primary full-width">Регистрация</button> -->
+    <br>
   </div>
 </div>
+

@@ -12,6 +12,7 @@ import { StoragesModule } from '../../others/storages/storages.module';
 import { WorkersModule } from '../../others/workers/workers.module';
 import {CommonPagesModule} from '../common-pages/common-pages.module';
 import {ComponentsModule} from '../../components/components.module';
+import {PrimeNGModule} from '../../library/prime-ng/prime-ng.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import {ComponentsModule} from '../../components/components.module';
     AngularLibraryModule,
     BootstrapModule,
     MaterialDesignModule,
+    PrimeNGModule,
     StoragesModule,
     ComponentsModule,
     // CommonPagesModule,

@@ -20,13 +20,13 @@ export class DegreeAdminComponent implements OnInit {
   bsModalRef: BsModalRef;
   public degrees;
   public selectedDegrees;
-  displayedColumns= ['name', 'edit', 'delete']
+  displayedColumns= ['name', 'edit', 'delete'];
   search;
 
   constructor(public degreeService: DegreeService,
     private modalService: BsModalService,
     private formEventService: FormEventService,
-    public router: Router,) {
+    public router: Router, ) {
   }
 
   getAll() {
@@ -34,7 +34,7 @@ export class DegreeAdminComponent implements OnInit {
       console.log('facs - ', degrees);
       this.degrees = degrees;
       this.selectedDegrees = degrees;
-    })
+    });
 
   }
 
@@ -46,40 +46,40 @@ export class DegreeAdminComponent implements OnInit {
   }
 
   clickSearch() {
-    let value = this.search.toUpperCase();
+    const value = this.search.toUpperCase();
     this.selectedDegrees = this.degrees.filter((fac) => {
-      let targ = fac.name.toUpperCase();
-      if(targ.indexOf(value) != -1) {
+      const targ = fac.name.toUpperCase();
+      if (targ.indexOf(value) != -1) {
         return true;
-      } 
-    })
+      }
+    });
   }
 
   trackFormDegreeHide() {
-    this.formEventService.hideDegreeForm.subscribe(()=> {
+    this.formEventService.hideDegreeForm.subscribe(() => {
       this.getAll();
-    })
+    });
   }
- 
+
   openDegreeForm(degree?) {
     let edit;
-    if(degree) {
+    if (degree) {
       edit = true;
     }
     else {
-      edit=false;
+      edit = false;
     }
-    let initialState = {
+    const initialState = {
       isEdit: edit,
       degreeEdit: degree,
 
     };
-    let modalOptions = {
+    const modalOptions = {
       initialState: initialState,
-      class:'degree-form',
+      class: 'degree-form',
       ignoreBackdropClick: true
 
-    }
+    };
     this.bsModalRef = this.modalService.show(DegreeFormComponent, modalOptions);
     this.bsModalRef.content.closeBtnName = 'Close';
   }
@@ -94,7 +94,7 @@ export class DegreeAdminComponent implements OnInit {
   // }
 
   addDegree() {
-    this.router.navigate(['new-degree'])
+    this.router.navigate(['new-degree']);
   }
 
   // closeModal() {
@@ -120,7 +120,7 @@ export class DegreeAdminComponent implements OnInit {
     this.degreeService.delete(degree).subscribe(answer => {
       console.log('answer');
       this.getAll();
-    })
+    });
   }
 
   ngOnInit() {

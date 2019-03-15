@@ -6,7 +6,9 @@ import {Department} from './department.factory';
 
 export class SEC {
     id?: number;
+    number?: number;
     specializations?: Specialization[];
+    groups?: Group[];
     department?: Department;
     events?: SECEvent[];
     users?: SECUser[];

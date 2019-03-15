@@ -43,7 +43,8 @@
               <select [compareWith]="compareFaculties" [(ngModel)]="editedSecUser.role" formControlName="role"
                 class="form-control" id="exampleFormControlSelect1">
                 <option *ngFor="let role of secRoles"
-                  [ngValue]="role" [disabled]="role.name === 'SECRETARY' && isDisabledSecretaryRole">{{role.name | translate}}</option>
+                  [ngValue]="role" [disabled]="(role.name === 'SECRETARY' && isDisabledSecretaryRole)
+                  || (role.name === 'CHAIRMAN' && isDisabledChairmanRole)">{{role.name | translate}}</option>
               </select>
             </div>
           </div>

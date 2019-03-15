@@ -8,7 +8,8 @@
                   <img *ngIf="item.src == null" src="assets/img/students/news/template.png">
                 </div> -->
   </mat-card-header>
-  <img mat-card-image *ngIf="item.imageModel && item.imageModel.filename != null" src="http://localhost:8081/files/{{item.imageModel.filename}}">
+  <img mat-card-image *ngIf="item.imageModel && item.imageModel.filename != null" src="http://localhost:8081/files/{{item.imageModel.filename}}"
+       onerror="this.src = 'assets/img/students/news/template.png'">
   <img mat-card-image *ngIf="!item.imageModel || item.imageModel.filename == null" src="assets/img/students/news/template.png">
   <!-- <img class="" mat-card-image *ngIf="item.src != null" src="{{item.src}}">
   <img mat-card-image *ngIf="item.src == null" src="assets/img/students/news/template.png"> -->

@@ -23,15 +23,17 @@ export class UserTableComponent implements OnInit, OnChanges {
   @Input() users: User[];
   @Input() search: string;
   @Output('changeUserOrganization') outputChangeUserOrganization: EventEmitter<UserOrganization> = new EventEmitter<UserOrganization>();
+  @Output('deleteUser') outputDeleteUser: EventEmitter<User> = new EventEmitter();
+  @Output('changePassword') outputChangePassword: EventEmitter<User> = new EventEmitter();
   selectedUsers: User[];
-  displayedColumns= ['username', 'fullname', 'role',  'hasOrganizer'];
+  displayedColumns= ['username', 'fullname', 'role',  'hasOrganizer', 'password', 'delete'];
   displayedColumnsUser = ['username', 'fullname', 'role'];
   user: User;
   isAdmin: boolean;
   expandedElement: User | null;
 
-  constructor(private userStorage: UserStorage, private userWorker: UserWorker,
-              private searchWorker: SearchWorker) { }
+  constructor(protected userStorage: UserStorage, protected userWorker: UserWorker,
+              protected searchWorker: SearchWorker) { }
 
   ngOnInit() {
     this.user = this.userStorage.getUser();
@@ -43,6 +45,12 @@ export class UserTableComponent implements OnInit, OnChanges {
       isOrganization: isOrganizer
     });
   }
+  changePassword(user: User) {
+    this.outputChangePassword.emit(user);
+  }
+  deleteUser(user: User) {
+    this.outputDeleteUser.emit(user);
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.search) {
@@ -52,6 +60,7 @@ export class UserTableComponent implements OnInit, OnChanges {
     } else {
       this.selectedUsers = this.users;
     }
+    console.log('this.selectedUsers', this.selectedUsers);
   }
 
 }

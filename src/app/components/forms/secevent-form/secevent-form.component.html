@@ -14,17 +14,46 @@
 
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 align-center">
-            <!--<div class="form-group form-control-sm">
-                <label for="exampleInputFirstName">{{'Название' | translate}}</label>
-  
-                <input formControlName="name" [(ngModel)]="post.name" type="text" class="form-control" id="exampleInputComment" [placeholder]="'Название' | translate">
-              </div>-->
             <mat-form-field class="example-full-width">
               <input matInput [placeholder]="'Адрес' | translate" formControlName="address" [(ngModel)]="secEvent.address">
             </mat-form-field>
 
           </div>
         </div>
+        <div class="row">
+          <div class="col-12">
+            <span>{{'Принимаемые группы' | translate}}</span>
+            <ng-select
+              [items]="sec.groups"
+              [multiple]="true"
+              [closeOnSelect]="false"
+              [searchable]="false"
+              bindLabel="number"
+              formControlName="groups"
+              [placeholder]="'Выбрать группы' | translate"
+              [(ngModel)]="secEvent.groups"
+              (ngModelChange)="changeGroups(secEvent.groups)">
+            </ng-select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <span>{{'Выбранные студенты' | translate}}</span>
+            <ng-select
+              [items]="studentsToSelect"
+              [multiple]="true"
+              [closeOnSelect]="false"
+              [searchable]="false"
+              bindLabel="lastname"
+              formControlName="students"
+              [placeholder]="'Выбрать студентов' | translate"
+              [(ngModel)]="secEvent.students"
+            >
+            </ng-select>
+          </div>
+        </div>
+
+        <br>
 
         <div class="row">
 
@@ -42,19 +71,29 @@
 
         <div class="row">
 
-          <div class="like-form-group">
-            <div class="col-xs-12 col-12 col-md-4 form-group full-width">
-              <timepicker formControlName="time" [min]="minTime" [max]="maxTime" [(ngModel)]="dateTime.time"
-              (ngModelChange)="changeTime()"
-                [showMeridian]="false"></timepicker>
-              <!-- <input [disableControl]="date" [bsConfig]="dateConfig"
-                  placeholder="Дата начала" (bsValueChange)="changeDate()" formControlName="startDate" type="text" class="form-control full-width"
-                  #dps="bsDatepicker" bsDatepicker [(ngModel)]="secEvent.date"> -->
-            </div>
+          <div class="col-xs-6 col-6 col-md-4 form-group full-width">
+            <mat-checkbox [checked]="secEvent.endDate != null" (change)="changeEndTimeExist($event)" color="primary">{{'Учитывать время завершения'}}</mat-checkbox>
           </div>
-          <!-- <div class="col-xs-12 col-12 col-md-3 form-group">
-              <button [disabled]="startDate" class="btn btn-success" (click)="dps.toggle()" [attr.aria-expanded]="dps.isOpen">Выбрать дату:</button>
-            </div> -->
+        </div>
+        <div class="row">
+
+            <div class="col-xs-6 col-6 col-md-4 form-group full-width">
+              <timepicker formControlName="time" [min]="minTime" [max]="(secEvent.endDate && dateTime.endTime) || maxTime " [(ngModel)]="dateTime.time"
+              (ngModelChange)="changeTime()"
+               [showMeridian]="false"></timepicker>
+            </div>
+            <div *ngIf="secEvent.endDate != null" class="col-xs-6 col-6 col-md-4 form-group full-width">
+              <timepicker formControlName="endTime" [min]="dateTime.time || minTime" [max]="maxTime" [(ngModel)]="dateTime.endTime"
+                          (ngModelChange)="changeTime()"
+                          [showMeridian]="false"></timepicker>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <span>{{'Период проведения ГЭК' | translate}}:</span>
+            &nbsp;
+            <span>{{sec.startDate | date: 'dd.MM.yyyy'}} - {{sec.endDate | date: 'dd.MM.yyyy'}}</span>
+          </div>
         </div>
       </div>
     </div>

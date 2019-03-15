@@ -1,10 +1,10 @@
 .main-news,
 mat-card.main-news {
-    background: rgba(255,255,255,0.7)
+    /*background: rgba(255,255,255,0.7)*/
 }
 
 .main-news img {
-    opacity: 0.9;
+    /*opacity: 0.9;*/
 }
 
 .news-item img{
@@ -25,6 +25,11 @@ mat-card.main-news {
 .news-item .full-width-img {
     height: 350px;
     width: 50%;
+}
+
+.news-container {
+  background: rgba(0,0,0,0.7);
+  border-radius: 10px;
 }
 
 .part-content {

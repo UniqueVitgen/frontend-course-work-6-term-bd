@@ -6,7 +6,7 @@
     <!-- <h4 class="media-heading"> -->
 
     <div class="row">
-      <div class="col-3">
+      <div class="col-3" *ngIf="userWorker.hasLectorRole(user)">
         <app-user-avatar  [tooltip]="'Для выбора изображение нажмите левой кнопкой мышки'" placement="left" (click)="selectImage()" [haveHoverEffect]="true" [src]="user.imageModel? fileWorker.formatUrl(user.imageModel) : 'assets/img/students/lector-staff/lector-avt.png'"></app-user-avatar>
       </div>
       <div class="col-9">
@@ -29,18 +29,14 @@
               </div>
               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 {{user.username}}
-                <!-- <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
-              <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">Отсутствует</span> -->
               </div>
             </div>
-            <!-- </h4> -->
-            <!-- <h4 class="media-heading"> -->
             <div class="row">
               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right-text">
                 <span class="grey-text float-rigth">{{'Роль' | translate}}</span>
               </div>
               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                {{formatUserRole(user)}}
+                {{formatUserRole(user) | translate}}
                 <!-- <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
               <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">Отсутствует</span> -->
               </div>
@@ -58,7 +54,7 @@
                 </div>
               </div>
             </div>
-            <div *ngIf="formatUserRole(user) == 'LECTOR'">
+            <div *ngIf="userWorker.isLectorUniversity(user)">
               <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right-text">
                   <span class="grey-text float-rigth">{{'Должность' | translate}}</span>
@@ -85,6 +81,30 @@
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                   {{user.title.name}}
+                  <!-- <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
+                <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">Отсутствует</span> -->
+                </div>
+              </div>
+            </div>
+            <div *ngIf="userWorker.isLectorOrganization(user)">
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right-text">
+                  <span class="grey-text float-rigth">{{'Организация' | translate}}</span>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  {{user.organization.name}} ({{user.organization.shortName}})
+                  <!--{{user.group.number}}-->
+                  <!-- <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
+                <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">Отсутствует</span> -->
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 right-text">
+                  <span class="grey-text float-rigth">{{'Должность' | translate}}</span>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  {{user.postOrganization.name}} ({{user.postOrganization.shortName}})
+                  <!--{{user.group.number}}-->
                   <!-- <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
                 <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">Отсутствует</span> -->
                 </div>

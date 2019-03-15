@@ -1,6 +1,16 @@
 <div class="container" *ngIf="sec">
   <br>
   <mat-card>
+    <mat-card-title>{{'Название ГЭК' | translate}}</mat-card-title>
+    <span>{{'ГЭК' | translate}}-{{sec.number}}<span *ngIf="isCanModify">
+      <mat-icon [matMenuTriggerFor]="numberMenu">create</mat-icon>
+        <mat-menu #numberMenu="matMenu">
+          <button mat-menu-item (click)="openSECNumberForm(sec)">{{'Изменить Номер ГЭК' | translate}}</button>
+        </mat-menu>
+    </span></span>
+  </mat-card>
+  <br>
+  <mat-card>
     <mat-card-title>{{'Период проведения' | translate}}</mat-card-title>
     <div class="row">
       <div class="col-xs-12 col-12 col-md-11 form-group full-width">
@@ -32,48 +42,21 @@
           <!-- </div> -->
         </div>
       </div>
-      <div class="col-xs-12 col-12 col-md-1">
+      <div *ngIf="isCanModify" class="col-xs-12 col-12 col-md-1">
         <!-- <button mat-raised-button color="primary"> -->
-            <mat-icon [matMenuTriggerFor]="menuEdit">more_horiz</mat-icon>
-          <!-- </button> -->
+        <mat-icon [matMenuTriggerFor]="menuEdit">more_horiz</mat-icon>
+        <!-- </button> -->
         <mat-menu #menuEdit="matMenu">
           <button mat-menu-item (click)="openSECDateForm(sec)">{{'Изменить период проведения' | translate}}</button>
         </mat-menu>
       </div>
     </div>
-    <!-- <div class="row">
-
-      <div class="like-form-group">
-        <div class="col-xs-12 col-12 col-md-4 form-group full-width">
-          <input [bsConfig]="dateConfig" placeholder="Дата начала" (bsValueChange)="changeStartDate()" type="text"
-            class="form-control full-width" #dps="bsDatepicker" bsDatepicker [(ngModel)]="sec.startDate" [maxDate]="sec.endDate ">
-        </div>
-      </div>
-      <div class="col-xs-12 col-12 col-md-3 form-group">
-        <button [disabled]="startDate" class="btn btn-success" (click)="dps.toggle()" [attr.aria-expanded]="dps.isOpen">Выбрать
-          дату начала</button>
-      </div>
-    </div>
-    <div class="row">
-
-      <div class="like-form-group">
-        <div class="col-xs-12 col-12 col-md-4 form-group  full-width">
-          <input [minDate]="sec.startDate || minDate " (bsValueChange)="changeEndDate()" [disabled]="sec.startDate == null || endDate"
-            type="text" class="form-control  full-width" #dpe="bsDatepicker" [bsConfig]="dateConfig" placeholder="Дата окончания"
-            bsDatepicker [(ngModel)]="sec.endDate">
-        </div>
-      </div>
-      <div class="col-xs-12 col-12 col-md-3 form-group">
-        <button [disabled]="sec.startDate == null || endDate" class="btn btn-success" (click)="dpe.toggle()"
-          [attr.aria-expanded]="dpe.isOpen">Выбрать дату окончания</button>
-      </div>
-    </div> -->
   </mat-card>
 
   <br>
 
   <mat-card>
-  <mat-card-title>{{'Принимаемая кафедра' | translate}}</mat-card-title>
+    <mat-card-title>{{'Принимаемая кафедра' | translate}}</mat-card-title>
     <div *ngIf="sec.department">
       <div>
         <span class="font-weight-bold">{{'Название' | translate}}:</span>
@@ -91,24 +74,24 @@
         <span>{{sec.department.faculty.name}}</span>
       </div>
     </div>
-  <div *ngIf="!sec.department" class="center-text">
-  {{'Нет выбранной кафедры' | translate}}
-  </div>
-  <br>
-  <div  *ngIf="isCanModify" class="row">
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-  </div>
+    <div *ngIf="!sec.department" class="center-text">
+      {{'Нет выбранной кафедры' | translate}}
+    </div>
+    <br>
+    <div *ngIf="isCanModify" class="row">
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      </div>
 
-  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
-  <button (click)="openDepartmentForm(sec)" type="submit" class="btn btn-primary full-width">{{
-    (sec.department ? 'Поменять кафедру' : 'Выбрать кафедру')
-  |
-  translate}}</button>
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-  </div>
-  </div>
+        <button (click)="openDepartmentForm(sec)" type="submit" class="btn btn-primary full-width">{{
+          (sec.department ? 'Поменять кафедру' : 'Выбрать кафедру')
+            |
+            translate}}</button>
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      </div>
+    </div>
 
   </mat-card>
   <br>
@@ -122,14 +105,38 @@
       {{'Нет выбранных специальностей' | translate}}
     </div>
     <br>
-    <div  *ngIf="isCanModify" class="row">
+    <div *ngIf="isCanModify" class="row">
       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
       </div>
 
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
         <button (click)="openSpecializationForm(sec)" type="submit" class="btn btn-primary full-width">{{
-          (sec.specializations && sec.specializations.length > 0 ? 'Поменять группы': 'Выбрать группы')
+          (sec.specializations && sec.specializations.length > 0 ? 'Поменять специальности' : 'Выбрать специальности')
+            |
+            translate}}</button>
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      </div>
+    </div>
+
+  </mat-card>
+  <br>
+  <mat-card>
+    <mat-card-title>{{'Принимаемые группы' | translate}}</mat-card-title>
+
+    <app-group-table *ngIf="sec.groups.length > 0" [groups]="sec.groups"></app-group-table>
+    <div *ngIf="sec.groups.length == 0" class="center-text">
+      {{'Нет выбранных групп' | translate}}
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      </div>
+
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+        <button (click)="openGroupForm(sec)" type="submit" class="btn btn-primary full-width">{{'Выбрать группы'
           |
           translate}}</button>
       </div>
@@ -138,73 +145,11 @@
     </div>
 
   </mat-card>
-  <br>
-  <!--<mat-card>-->
-    <!--<mat-card-title>{{'Принимаемые группы' | translate}}</mat-card-title>-->
-
-    <!--<table *ngIf="sec.groups.length > 0" mat-table [dataSource]="sec.groups" class="mat-elevation-z8 full-width">-->
-
-      <!--&lt;!&ndash;- Note that these columns can be defined in any order.-->
-                  <!--The actual rendered columns are set as a property on the row definition" &ndash;&gt;-->
-
-      <!--&lt;!&ndash; Position Column &ndash;&gt;-->
-      <!--<ng-container matColumnDef="number">-->
-        <!--<th mat-header-cell *matHeaderCellDef> {{'Номер' | translate}} </th>-->
-        <!--<td mat-cell *matCellDef="let group"> {{group.number}} </td>-->
-      <!--</ng-container>-->
-
-      <!--&lt;!&ndash; Name Column &ndash;&gt;-->
-      <!--<ng-container matColumnDef="specialization">-->
-        <!--<th mat-header-cell *matHeaderCellDef> {{'Специальность' | translate}} </th>-->
-        <!--<td mat-cell *matCellDef="let group"> {{group.specialization.name}} </td>-->
-      <!--</ng-container>-->
-
-      <!--&lt;!&ndash; Name Column &ndash;&gt;-->
-      <!--<ng-container matColumnDef="amount">-->
-        <!--<th mat-header-cell *matHeaderCellDef> {{'Количество студентов' | translate}} </th>-->
-        <!--<td mat-cell *matCellDef="let group"> {{group.amount_student}} </td>-->
-      <!--</ng-container>-->
-
-      <!--&lt;!&ndash; <ng-container matColumnDef="edit">-->
-        <!--<th mat-header-cell *matHeaderCellDef> </th>-->
-        <!--<td mat-cell *matCellDef="let group">-->
-          <!--<button (click)="openGroupForm(group)" type="button" class="btn btn-info">{{'Редактировать' | translate}}</button>-->
-        <!--</td>-->
-      <!--</ng-container>-->
-
-      <!--<ng-container matColumnDef="delete">-->
-        <!--<th mat-header-cell *matHeaderCellDef> </th>-->
-        <!--<td mat-cell *matCellDef="let group">-->
-          <!--<button (click)="deleteGroup(group)" type="button" class="btn btn-danger">{{'Удалить' | translate}}</button>-->
-        <!--</td>-->
-      <!--</ng-container> &ndash;&gt;-->
-      <!--<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
-      <!--<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
-    <!--</table>-->
-    <!--<div *ngIf="sec.groups.length == 0" class="center-text">-->
-      <!--{{'Нет выбранных групп' | translate}}-->
-    <!--</div>-->
-    <!--<br>-->
-    <!--<div class="row">-->
-      <!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">-->
-      <!--</div>-->
-
-      <!--<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">-->
-
-        <!--<button (click)="openGroupForm(sec)" type="submit" class="btn btn-primary full-width">{{'Выбрать группы'-->
-          <!--|-->
-          <!--translate}}</button>-->
-      <!--</div>-->
-      <!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">-->
-      <!--</div>-->
-    <!--</div>-->
-
-  <!--</mat-card>-->
 
   <br>
   <mat-card>
     <mat-card-title>{{'График приема' | translate}}</mat-card-title>
-
+<!--TODO: change following template to custom angular component-->
     <table *ngIf="sec.events.length > 0" mat-table [dataSource]="sec.events" class="mat-elevation-z8 full-width">
 
       <!--- Note that these columns can be defined in any order.
@@ -213,7 +158,21 @@
       <!-- Position Column -->
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef> {{'Дата проведения' | translate}} </th>
-        <td mat-cell *matCellDef="let secEvent"> {{formatDateTime(secEvent.date)}} </td>
+        <td mat-cell [ngClass]="{'wrong-date': !secWorker.secEventInSEC(sec, secEvent)}"
+            *matCellDef="let secEvent"> {{formatDate(secEvent.date)}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef> {{'Время проведения' | translate}} </th>
+        <td mat-cell *matCellDef="let secEvent">
+          <span>
+          {{formatTime(secEvent.date)}}
+            <span *ngIf="secEvent.endDate">
+            <span>-</span>
+              <!--&nbsp;-->
+            <span>{{formatTime(secEvent.endDate)}}</span>
+          </span>
+          </span></td>
       </ng-container>
 
       <!-- Name Column -->
@@ -228,36 +187,48 @@
         <td mat-cell *matCellDef="let secEvent"> {{secEvent.address}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="groups">
+        <th mat-header-cell *matHeaderCellDef> {{'Группы' | translate}} </th>
+        <td mat-cell *matCellDef="let secEvent">
+          <span *ngFor="let group of secEvent.groups; let groupIndex = index">
+            <a [routerLink]="['/group', group.idGroup]">{{group.number}}</a>
+            <span *ngIf="groupIndex != secEvent.groups.length - 1">,&nbsp;</span>
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="students">
+        <th mat-header-cell *matHeaderCellDef> {{'Студенты' | translate}} </th>
+        <td mat-cell *matCellDef="let secEvent">
+          <ng-container *ngIf="secEvent.students.length > 0">
+          <span *ngFor="let student of secEvent.students; let studentIndex = index">
+            <!--TODO: add link to student profile-->
+            <a [routerLink]="['/group', student.idPerson]">{{userWorker.formatFullName(student)}}</a>
+            <span *ngIf="studentIndex != secEvent.students.length - 1">,&nbsp;</span>
+          </span>
+          </ng-container>
+        </td>
+      </ng-container>
+
       <!-- Name Column -->
       <ng-container matColumnDef="edit">
-        <th mat-header-cell *matHeaderCellDef> </th>
+        <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let secEvent">
-          <button  *ngIf="isCanModify" (click)="openSECEventForm(sec, secEvent)" type="button" class="btn btn-info">{{'Редактировать' |
+          <button *ngIf="isCanModify" (click)="openSECEventForm(sec, secEvent)" type="button"
+                  class="btn btn-info">{{'Редактировать' |
             translate}}</button>
         </td>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="delete">
-        <th mat-header-cell *matHeaderCellDef> </th>
+        <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let secEvent">
-          <button  *ngIf="isCanModify" (click)="deleteSECEvent(secEvent)" type="button" class="btn btn-danger">{{'Удалить' | translate}}</button>
+          <button *ngIf="isCanModify" (click)="deleteSECEvent(secEvent)" type="button"
+                  class="btn btn-danger">{{'Удалить' | translate}}</button>
         </td>
       </ng-container>
 
-      <!-- <ng-container matColumnDef="edit">
-        <th mat-header-cell *matHeaderCellDef> </th>
-        <td mat-cell *matCellDef="let group">
-          <button (click)="openGroupForm(group)" type="button" class="btn btn-info">{{'Редактировать' | translate}}</button>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="delete">
-        <th mat-header-cell *matHeaderCellDef> </th>
-        <td mat-cell *matCellDef="let group">
-          <button (click)="deleteGroup(group)" type="button" class="btn btn-danger">{{'Удалить' | translate}}</button>
-        </td>
-      </ng-container> -->
       <tr mat-header-row *matHeaderRowDef="displayedColumnsEvent"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumnsEvent;"></tr>
     </table>
@@ -325,17 +296,19 @@
       </ng-container>
 
       <ng-container matColumnDef="edit">
-        <th mat-header-cell *matHeaderCellDef> </th>
+        <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let targetUser">
-          <button  *ngIf="isCanModify && (user.idPerson !== targetUser.user.idPerson)" (click)="openSECUserForm(sec, targetUser)" type="button" class="btn btn-info">{{'Редактировать' |
+          <button *ngIf="isCanModifyUser(targetUser)" (click)="openSECUserForm(sec, targetUser)" type="button"
+                  class="btn btn-info">{{'Редактировать' |
             translate}}</button>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="delete">
-        <th mat-header-cell *matHeaderCellDef> </th>
+        <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let targetUser">
-          <button  *ngIf="isCanModify && (user.idPerson !== targetUser.user.idPerson)" (click)="deleteSECUser(targetUser)" type="button" class="btn btn-danger">{{'Удалить' | translate}}</button>
+          <button *ngIf="isCanModifyUser(targetUser)" (click)="deleteSECUser(targetUser)" type="button"
+                  class="btn btn-danger">{{'Удалить' | translate}}</button>
         </td>
       </ng-container>
 
@@ -360,7 +333,7 @@
       {{'В комиисии не назначено участники' | translate}}
     </div>
     <br>
-    <div  *ngIf="isCanModify" class="row">
+    <div *ngIf="isCanModify" class="row">
       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
       </div>
 
@@ -376,7 +349,6 @@
     </div>
   </mat-card>
   <br>
-
 
 
 </div>

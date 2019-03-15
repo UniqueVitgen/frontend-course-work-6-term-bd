@@ -13,6 +13,9 @@
           <!--<img src="assets/icon/bntu-logo2.gif" />-->
           <!--<img src="assets/icon/fitr-logo.png" />-->
         </li>
+        <li *ngIf="user">
+          <a class="custom-link nav-link" [routerLink]="'/my-profile'">{{'Hello' | translate}}, {{userWorker.formatFullName(user)}}</a>
+        </li>
         <li class="nav-item" role="presentation">
           <a class="custom-link nav-link">{{'Полезная информация' | translate}}</a>
         </li>

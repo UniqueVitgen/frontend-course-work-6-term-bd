@@ -1,4 +1,5 @@
 import { User } from '../factory/user.factory';
+import {LectorOrganization, LectorUniversity} from '../factory/lector.factory';
 
 
 export class UserWorker {
@@ -74,5 +75,12 @@ export class UserWorker {
           return user.roles[0].name;
         }
       }
+  }
+
+  isLectorUniversity(user: User) {
+      return user instanceof LectorUniversity;
+  }
+  isLectorOrganization(user: User) {
+    return (user as LectorOrganization).postOrganization;
   }
 }

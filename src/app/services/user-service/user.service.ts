@@ -40,5 +40,11 @@ export class UserService {
     editUserOrganizerRole(user: User, isOrganizer: boolean) {
       return this.configService.put(prefix + 'update-user-organizer-role-' + isOrganizer, user);
     }
+    editPassword(user: User, password: string) {
+      return this.configService.put(prefix + 'update-user-password-' + password, user);
+    }
+    delete(user: User) {
+      return this.configService.delete(prefix + 'delete-' + user.idPerson);
+    }
 
 }

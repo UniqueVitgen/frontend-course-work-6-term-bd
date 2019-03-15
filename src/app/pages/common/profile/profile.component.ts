@@ -8,6 +8,7 @@ import {SelectImageComponent} from '../../../components/select/select-image/sele
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {UploadFileService} from '../../../services/upload-file/upload-file.service';
 import {FileWorker} from '../../../workers/file.worker';
+import {UserWorker} from '../../../workers/UserWorker';
 
 @Component({
   selector: 'app-profile',
@@ -25,6 +26,7 @@ export class ProfileComponent implements OnInit {
 
     private route: ActivatedRoute, private modalService: BsModalService,
     public fileWorker: FileWorker,
+    public userWorker: UserWorker,
     private userService: UserService) { }
 
   ngOnInit() {

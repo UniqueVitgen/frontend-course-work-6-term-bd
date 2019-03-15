@@ -10,13 +10,13 @@ export class ArrayWorker {
         return array.slice();
     }
 
-    containtsByProperty(array: any[], object, prop) {
+    containtsByProperty(array: any[], object: any, prop: string) {
         return array.filter((element) => {
             return element[prop] === object[prop];
         }).length > 0;
     }
 
-    getAllByProperty(array: any[], object, prop) {
+    getAllByProperty(array: any[], object, prop): any[] {
         const resArray = array.filter((element) => {
             return element[prop] === object[prop];
         });

@@ -19,7 +19,7 @@ export class SECListComponent implements OnInit {
   bsModalRef: BsModalRef;
   public secs;
   public selectedSECs;
-  displayedColumns= [ 'startDate', 'endDate', 'edit', 'delete'];
+  displayedColumns= [ 'number', 'startDate', 'endDate', 'edit', 'delete'];
   search;
   isCanAdd: boolean;
   user: User;

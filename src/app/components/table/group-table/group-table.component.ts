@@ -41,7 +41,7 @@ export class GroupTableComponent implements OnInit, OnChanges {
   }
 
   goToGroupPage(group: Group) {
-    this.router.navigate(['group', group.idGroup])
+    this.router.navigate(['group', group.idGroup]);
   }
   clickEdit(group: Group) {
     this.outputClickEdit.emit(group);

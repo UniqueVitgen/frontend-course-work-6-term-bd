@@ -18,3 +18,83 @@ button.btn:disabled {
 form .form-control-sm {
 	height: 100%;
 }
+
+.reg-div .form-control {
+  border: 1px;
+  color: #000 !important;
+  //font-weight: bold;
+  //color: #9b9b9b;
+  //background: #333;
+  /* widows: 60px; */
+}
+
+.reg-div form {
+  margin: auto;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+.reg-div.student-reg form {
+  padding: 10px;
+}
+
+.reg-div {
+  background: #262626;
+  color: #9b9b9b;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  /* background: url('../images/temno-ochen-temno-f3cbb64.jpg'); */
+  /* background: url('assets/img/reg/1517226261.jpg'); */
+  background: url('assets/img/login/Vipuskniki_tbc7wn3ya9m0imtnv8b4yt.jpg') 100% 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.reg-div.student-reg {
+  background: url('assets/img/students/select-diplom/640728163-conference-table-business-meeting-conference-room-authority.jpg');
+  background-size: 100% 100%;
+}
+
+.reg-div a {
+  text-shadow: 1px 1px black;
+}
+
+.reg-div label {
+  color: #fff;
+  /* color: #9b9b9b; */
+  //text-shadow: 1px 1px white;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.alert-form {
+  background: inherit;
+  border:none;
+  padding: 0;
+  margin: 0;
+  padding-left: 5px;
+  text-shadow: 1px 1px white;
+  font-weight: bold;
+}
+
+form input.ng-invalid.ng-touched, form select.ng-invalid.ng-touched,
+form input.invalid-input.ng-touched {
+  border-color: red;
+  border-width: 1px;
+  box-shadow: 0 0 0 1px rgba(220, 53,69, 1) ;
+  /* box-shadow: 0 0 0 0.2em #dc5345; */
+}
+
+button.btn:disabled {
+  opacity: 1;
+  background-color: grey;
+  border: none;
+}
+
+.form-control-sm {
+  height: 100%;
+}
+

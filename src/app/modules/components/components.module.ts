@@ -54,6 +54,9 @@ import {SelectDepartmentComponent} from '../../components/select/select-departme
 import {Ej2Module} from '../library/ej2/ej2.module';
 import {UserAvatarComponent} from '../../components/avatar/user-avatar/user-avatar.component';
 import {UserTableComponent} from '../../components/table/user-table/user-table.component';
+import {SECNumberFormComponent} from '../../components/forms/secnumber-form/secnumber-form.component';
+import {ChangePasswordFormComponent} from '../../components/forms/change-password-form/change-password-form.component';
+import {PrimeNGModule} from '../library/prime-ng/prime-ng.module';
 
 @NgModule({
   imports: [
@@ -64,7 +67,8 @@ import {UserTableComponent} from '../../components/table/user-table/user-table.c
     DirectivesModule,
     StoragesModule,
     WorkersModule,
-    Ej2Module
+    Ej2Module,
+    PrimeNGModule
   ],
   declarations: [
     SignInComponent,
@@ -109,7 +113,9 @@ import {UserTableComponent} from '../../components/table/user-table/user-table.c
     SelectDepartmentComponent,
     LectorCountDiplomFormComponent,
     UserAvatarComponent,
-    UserTableComponent
+    UserTableComponent,
+    SECNumberFormComponent,
+    ChangePasswordFormComponent
   ],
   entryComponents: [
     SignInComponent,
@@ -139,7 +145,9 @@ import {UserTableComponent} from '../../components/table/user-table/user-table.c
     DiplomWorkLectorsFormComponent,
     SelectSpecializationComponent,
     SelectDepartmentComponent,
-    LectorCountDiplomFormComponent
+    LectorCountDiplomFormComponent,
+    SECNumberFormComponent,
+    ChangePasswordFormComponent
   ],
   exports: [
     SignInComponent,
@@ -184,7 +192,9 @@ import {UserTableComponent} from '../../components/table/user-table/user-table.c
     SelectDepartmentComponent,
     LectorCountDiplomFormComponent,
     UserAvatarComponent,
-    UserTableComponent
+    UserTableComponent,
+    SECNumberFormComponent,
+    ChangePasswordFormComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })

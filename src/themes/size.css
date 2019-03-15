@@ -9,3 +9,7 @@
 .example-full-width {
   width: 100%;
 }
+
+.example-full-width-autocomplete input {
+  width: 100%;
+}

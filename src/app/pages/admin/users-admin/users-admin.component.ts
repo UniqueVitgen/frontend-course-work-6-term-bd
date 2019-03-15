@@ -13,6 +13,8 @@ import { FormEventService } from '../../../services/events/form/form-event.servi
 import {UserWorker} from '../../../workers/UserWorker';
 import {User} from '../../../factory/user.factory';
 import {UserOrganization} from '../../../factory/table/user-organization.factory';
+import {DegreeFormComponent} from '../../../components/forms/degree-form/degree-form.component';
+import {ChangePasswordFormComponent} from '../../../components/forms/change-password-form/change-password-form.component';
 
 @Component({
   selector: 'app-users-admin',
@@ -51,7 +53,7 @@ export class UsersAdminComponent implements OnInit {
     const value = this.search.toUpperCase();
     this.selectedUsers = this.users.filter((fac) => {
       const targ = this.formatFullName(fac).toUpperCase();
-      if (targ.indexOf(value) != -1) {
+      if (targ.indexOf(value) !== -1) {
         return true;
       }
     });
@@ -75,71 +77,33 @@ export class UsersAdminComponent implements OnInit {
     // })
   }
 
+  changeUserPassword(user: User): void {
+      const initialState = {
+        object: user
+      };
+      const modalOptions = {
+        initialState: initialState,
+        class: 'degree-form',
+        ignoreBackdropClick: true
+      };
+      this.bsModalRef = this.modalService.show(ChangePasswordFormComponent, modalOptions);
+      this.bsModalRef.content.closeBtnName = 'Close';
+  }
+
   changeUserOrganization(userOrganization: UserOrganization) {
     this.userService.editUserOrganizerRole(userOrganization.user, userOrganization.isOrganization).subscribe(resUser => {
     });
   }
 
-  openUserForm(user?) {
-    let edit;
-    if (user) {
-      edit = true;
-    }
-    else {
-      edit = false;
-    }
-    const initialState = {
-      isEdit: edit,
-      userEdit: user,
-
-    };
-    const modalOptions = {
-      initialState: initialState,
-      class: 'user-form',
-      ignoreBackdropClick: true
-
-    };
-    // this.bsModalRef = this.modalService.show(UserFormComponent, modalOptions);
-    this.bsModalRef.content.closeBtnName = 'Close';
-  }
-
-
-  // openModal(id: string) {
-  //   this.modalService.open(id);
-  // }
-
-  // closeModal(id: string) {
-  //   this.modalService.close(id);
-  // }
-
   addUser() {
     this.router.navigate(['new-user']);
   }
 
-  // closeModal() {
-  //   console.log('inner');
-  //   try {
-  //     this.modal.close().then(answer => {
-  //       console.log('close1 - ', answer);
-  //     }).catch(err => {
-  //       console.log('close1 err - ', err);
-  //     });;
-  //     this.modal.dismiss().then(answer => {
-  //       console.log('close2 - ', answer);
-  //     }).catch(err => {
-  //       console.log('close2 err - ', err);
-  //     });
-  //   }
-  //   catch (err) {
-  //     console.log('err - ', err);
-  //   }
-  // }
-
-  deleteUser(user) {
-    // this.userService.delete(user).subscribe(answer => {
-    //   console.log('answer');
-    //   this.getAll();
-    // })
+  deleteUser(user: User) {
+    this.userService.delete(user).subscribe(answer => {
+      console.log('answer');
+      this.getAll();
+    });
   }
 
   ngOnInit() {

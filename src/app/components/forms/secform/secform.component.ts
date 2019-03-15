@@ -74,6 +74,7 @@ export class SECFormComponent implements OnInit, OnDestroy {
   }
   configFormGroup() {
     this.secForm = this.formBuilder.group({
+      number: [undefined, Validators.compose([Validators.required])],
       startDate: [undefined, Validators.compose([Validators.required])],
       endDate: [undefined, Validators.compose([Validators.required])],
 

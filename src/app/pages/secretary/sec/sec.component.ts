@@ -20,7 +20,10 @@ import {Department} from '../../../factory/department.factory';
 import {SelectSpecializationComponent} from '../../../components/select/select-specialization/select-specialization.component';
 import {UserWorker} from '../../../workers/UserWorker';
 import {SecWorker} from '../../../workers/sec.worker';
-import {User} from '../../../factory/user.factory';
+import {SECUser, User} from '../../../factory/user.factory';
+import {SECNumberFormComponent} from '../../../components/forms/secnumber-form/secnumber-form.component';
+import {Group} from '../../../factory/group.factory';
+import {Specialization} from '../../../factory/specialization.factory';
 
 @Component({
   selector: 'app-sec',
@@ -41,7 +44,7 @@ export class SECComponent implements OnInit {
   isCanModify: boolean;
   targetLectors: Lector[];
   displayedColumns= ['number', 'specialization', 'amount'];
-  displayedColumnsEvent= ['date', 'address', 'edit', 'delete'];
+  displayedColumnsEvent= ['date', 'time', 'address', 'groups', 'students', 'edit', 'delete'];
   displayedColumnsUsers= ['lastname', 'firstname', 'middlename', 'role', 'edit', 'delete'];
 
   constructor(
@@ -70,7 +73,7 @@ export class SECComponent implements OnInit {
         this.getSEC((sec) => {
           this.setSEC(sec);
           this.getTargetLectors(sec);
-          this.isCanModify = this.secWorker.userIsSecretaryInSec(sec, this.user) || this.userWorker.hasOrganizerRole(this.user);
+          this.isCanModify = this.secWorker.userIsSecretaryInSec(sec, this.user) || this.userWorker.hasOrganizerRole(this.user)
           this.dateSaved.startDate = sec.startDate;
           console.log('sec ', sec);
         });
@@ -83,6 +86,9 @@ export class SECComponent implements OnInit {
       (this.sec.startDate as Date) = new Date((this.sec.startDate) as string);
       (this.sec.endDate as Date) = new Date((this.sec.endDate) as string);
     }
+  }
+  public isCanModifyUser(targetUser: SECUser): boolean {
+    return this.isCanModify && ((!this.user || !targetUser.user) || (this.user.idPerson !== targetUser.user.idPerson));
   }
 
   openDateForm() {
@@ -103,14 +109,12 @@ export class SECComponent implements OnInit {
     let edit;
     if (sec) {
       edit = true;
-    }
-    else {
+    } else {
       edit = false;
     }
     const initialState = {
       isEdit: edit,
       secEdit: sec,
-
     };
     const modalOptions = {
       initialState: initialState,
@@ -119,6 +123,26 @@ export class SECComponent implements OnInit {
 
     };
     this.bsModalRef = this.modalService.show(SECDateFormComponent, modalOptions);
+    this.bsModalRef.content.closeBtnName = 'Close';
+  }
+  openSECNumberForm(sec?) {
+    let edit;
+    if (sec) {
+      edit = true;
+    } else {
+      edit = false;
+    }
+    const initialState = {
+      isEdit: edit,
+      objectEdit: sec,
+    };
+    const modalOptions = {
+      initialState: initialState,
+      class: 'sec-form',
+      ignoreBackdropClick: true
+
+    };
+    this.bsModalRef = this.modalService.show(SECNumberFormComponent, modalOptions);
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 
@@ -173,6 +197,7 @@ export class SECComponent implements OnInit {
           if (previousDepartment == null || department.id !== previousDepartment.id) {
             this.sec.department = department;
             this.sec.specializations = [];
+            this.sec.groups = [];
             this.cd.detectChanges();
             this.secService.edit(this.sec).subscribe(res => {
               this.setSEC(res);
@@ -196,8 +221,7 @@ export class SECComponent implements OnInit {
     let edit;
     if (sec) {
       edit = true;
-    }
-    else {
+    } else {
       edit = false;
     }
     const initialState = {
@@ -208,6 +232,7 @@ export class SECComponent implements OnInit {
         setTimeout(() => {
           // this.sec.groups = groups;
           this.cd.detectChanges();
+          this.sec.groups = groups;
           this.secService.edit(this.sec).subscribe(res => {
             this.setSEC(res);
             // this.sec = res;
@@ -240,6 +265,11 @@ export class SECComponent implements OnInit {
       onSave: (resSpecializations) => {
         setTimeout(() => {
           this.sec.specializations = resSpecializations;
+          this.sec.groups = this.sec.groups.filter((group: Group) => {
+            return this.sec.specializations.filter((specialization: Specialization) => {
+              return group.specialization.idSpecialization === specialization.idSpecialization;
+            }).length > 0;
+          });
           // this.sec.groups = groups;
           this.cd.detectChanges();
           this.secService.edit(this.sec).subscribe(res => {
@@ -357,9 +387,12 @@ export class SECComponent implements OnInit {
   formatDateTime(date) {
     return this.dateTimeWorker.getDate(date, 'yyyy-MM-dd H:mm');
   }
+  formatTime(date) {
+    return this.dateTimeWorker.getDate(date, 'HH:mm');
+  }
 
   formatDate(date) {
-    return this.dateTimeWorker.getDate(date, 'yyyy-MM-dd');
+    return this.dateTimeWorker.getDate(date, 'dd.MM.yyyy');
   }
 
 }

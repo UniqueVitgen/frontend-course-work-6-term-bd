@@ -10,5 +10,6 @@
     <mat-card-title>{{'Группа' | translate}}: {{group?.number}}</mat-card-title>
   </mat-card>
   <br>
-  <app-user-accordion *ngFor="let user of students" [user]="user"></app-user-accordion>
+  <app-user-table [users]="students"></app-user-table>
+  <!--<app-user-accordion *ngFor="let user of students" [user]="user"></app-user-accordion>-->
 </div>

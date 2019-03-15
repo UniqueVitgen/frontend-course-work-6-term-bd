@@ -1,6 +1,7 @@
 <div class="reg-div">
   <div class="container">
     <!-- <mat-card> -->
+    <br>
     <form [formGroup]="studentForm">
       <!-- <div class="row">
         <div class="col">
@@ -235,7 +236,7 @@
         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-          <button [disabled]="studentForm.invalid" (click)="RegistrationStudent()" type="submit" class="btn btn-primary full-width">{{'Регистрация'
+          <button [disabled]="studentForm.invalid" mat-raised-button (click)="RegistrationStudent()" type="submit" color="primary" class="full-width">{{'Регистрация'
             | translate}}</button>
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -253,6 +254,8 @@
         </div>
       </div>
     </form>
+    <br>
     <!-- </mat-card> -->
   </div>
 </div>
+

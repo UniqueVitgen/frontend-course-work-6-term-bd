@@ -1,7 +1,7 @@
 <div class="material-form" [hidden]="isShowSpecialization">
   <div class="modal-header">
     <div class="title-center-container">
-      <h4>{{'Группа' | translate}}</h4>
+      <h4>{{'Группы' | translate}}</h4>
     </div>
 
     <button type="button" class="close pull-right" aria-label="Close" (click)="cancel()">
@@ -32,7 +32,7 @@
           <!-- Name Column -->
           <ng-container matColumnDef="amount">
             <th mat-header-cell *matHeaderCellDef> {{'Количество студентов' | translate}} </th>
-            <td mat-cell *matCellDef="let group"> {{group.amount_student}} </td>
+            <td mat-cell *matCellDef="let group"> {{group.amountStudent}} </td>
           </ng-container>
 
           <!-- Name Column -->

@@ -26,12 +26,15 @@ import { StatusAdminComponent } from '../../../pages/admin/status-admin/status-a
 import { RoleAdminComponent } from '../../../pages/admin/role-admin/role-admin.component';
 import { UniversityAdminComponent } from '../../../pages/admin/university-admin/university-admin.component';
 import { DepartmentAdminComponent } from '../../../pages/admin/department-admin/department-admin.component';
+import {Ej2Module} from '../../library/ej2/ej2.module';
+import {PrimeNGModule} from '../../library/prime-ng/prime-ng.module';
 
 @NgModule({
   imports: [
     CommonModule,
     AngularLibraryModule,
     MaterialDesignModule,
+    PrimeNGModule,
     BootstrapModule,
     ComponentsModule,
     CommonPagesModule,

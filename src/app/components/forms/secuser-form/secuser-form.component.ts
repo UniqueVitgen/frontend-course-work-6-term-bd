@@ -42,6 +42,11 @@ export class SECUserFormComponent implements OnInit, OnDestroy {
   onSave;
   public bsModalRef2: BsModalRef;
   isDisabledSecretaryRole: boolean;
+  public get isDisabledChairmanRole(): boolean {
+    if (this.sec) {
+      return this.secWorker.haveChairman(this.sec);
+    }
+  }
 
   constructor(public formBuilder: FormBuilder,
     private formEventService: FormEventService,

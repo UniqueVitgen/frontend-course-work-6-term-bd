@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { SpecializationService } from '../../../services/specialization/specialization.service';
 import { FormEventService } from '../../../services/events/form/form-event.service';
 import { ArrayWorker } from '../../../workers/ArrayWorker';
+import {SEC} from '../../../factory/sec.factory';
 
 @Component({
   selector: 'app-select-group',
@@ -16,37 +17,36 @@ export class SelectGroupComponent implements OnInit {
   public secEdit;
   sub;
   isEdit;
-  displayedColumns= ['number', 'specialization', 'amount', 'selected']
+  displayedColumns= ['number', 'specialization', 'amount', 'selected'];
   public groups;
   public selectedGroups;
   public targetGroups = [];
-  sec;
+  sec: SEC;
   onSave;
 
   constructor(public formBuilder: FormBuilder, public groupService: GroupService, public router: Router,
   private route: ActivatedRoute, public bsModalRef: BsModalRef,
-  private modalService: BsModalService, 
+  private modalService: BsModalService,
   private arrayWorker: ArrayWorker,
-  public specializationService: SpecializationService, public formEventService: FormEventService) { 
+  public specializationService: SpecializationService, public formEventService: FormEventService) {
 
   }
 
   getAll() {
-    if(this.sec && this.sec.id) {
-      this.groupService.findAllBySecInOrNull([this.sec]).subscribe(groups => {
+    if (this.sec && this.sec.id) {
+      this.groupService.findAllBySpecializations(this.sec.specializations).subscribe(groups => {
         console.log('groups - ', groups);
         this.groups = groups;
         this.selectedGroups = groups;
         this.targetGroups = this.secEdit.groups.slice();
-      })
-    }
-    else {
-      this.groupService.findAllBySecIsNull().subscribe(groups => {
+      });
+    } else {
+      this.groupService.getAll().subscribe(groups => {
         console.log('groups - ', groups);
         this.groups = groups;
         this.selectedGroups = groups;
         this.targetGroups = this.secEdit.groups.slice();
-      })
+      });
     }
   }
 
@@ -55,19 +55,19 @@ export class SelectGroupComponent implements OnInit {
   }
 
   compareSpecializations(c1, c2): boolean {
-    if(c1 && c2) {
+    if (c1 && c2) {
       return c1 && c2 ? c1.idSpecialization === c2.idSpecialization : c1 === c2;
     }
-  }  
+  }
 
   createGroupFromEditGroup() {
-    for(let property in this.sec) {
+    for (const property in this.sec) {
       this.sec[property] = this.secEdit[property];
     }
   }
 
   createGroupEditFromGroup() {
-    for(let property in this.sec) {
+    for (const property in this.sec) {
       this.secEdit[property] = this.sec[property];
     }
   }
@@ -83,11 +83,11 @@ export class SelectGroupComponent implements OnInit {
   }
 
   selectGroup(group) {
-    if(!this.arrayWorker.containtsByProperty(this.targetGroups, group, 'idGroup')) {
+    if (!this.arrayWorker.containtsByProperty(this.targetGroups, group, 'idGroup')) {
       this.targetGroups.push(group);
     }
     else {
-        var index = this.arrayWorker.indexOfByProperty(this.targetGroups, group, 'idGroup');
+        const index = this.arrayWorker.indexOfByProperty(this.targetGroups, group, 'idGroup');
         if (index > -1) {
           this.targetGroups.splice(index, 1);
         }

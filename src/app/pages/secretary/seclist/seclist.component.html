@@ -12,12 +12,6 @@
   <div class="row">
     <div class="col-12 col-md-6">
       <mat-form-field class="example-full-width">
-        <!-- <i class="material-icons material-icons.md-36">search</i> -->
-        <!-- <span matPrefix>
-            <button mat-raised-button color="primary">
-              <mat-icon>search</mat-icon>
-            </button>
-          </span> -->
         <input [(ngModel)]="search" (keyup)="keyUp($event)" matInput [placeholder]="'Search' | translate" type="search">
         <span matSuffix>
           <button mat-raised-button color="primary">
@@ -31,51 +25,20 @@
     </div>
   </div>
   <br>
-  <!-- <table class="table table-dark">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Название</th>
-        <th scope="col">Краткое название</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let sec of secs; let i = index">
-        <th scope="row">{{i + 1}}</th>
-        <td>{{sec.name}}</td>
-        <td>{{sec.shortName}}</td>
-        <td>
-          <button (click)="openSECForm(sec)" type="button" class="btn btn-info">Редактировать</button>
-        </td>
-        <td>
-          <button (click)="deleteSEC(sec)" type="button" class="btn btn-danger">Удалить</button>
-        </td>
-      </tr>
-    </tbody>
-  </table> -->
 
   <table mat-table [dataSource]="selectedSECs" class="mat-elevation-z8 full-width">
-
-    <!--- Note that these columns can be defined in any order.
-                The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- Position Column -->
+    <ng-container matColumnDef="number">
+      <th mat-header-cell *matHeaderCellDef> {{'Номер' | translate}} </th>
+      <td mat-cell *matCellDef="let element"> {{element.number}} </td>
+    </ng-container>
     <ng-container matColumnDef="startDate">
       <th mat-header-cell *matHeaderCellDef> {{'Дата начала' | translate}} </th>
       <td mat-cell *matCellDef="let element"> {{formatDate(element.startDate, 'dd.MM.yyyy')}} </td>
     </ng-container>
-
-    <!-- Weight Column -->
     <ng-container matColumnDef="endDate">
       <th mat-header-cell *matHeaderCellDef> {{'Дата окончания' | translate}} </th>
       <td mat-cell *matCellDef="let element"> {{formatDate(element.endDate, 'dd.MM.yyyy')}} </td>
     </ng-container>
-    <!-- <ng-container matColumnDef="shortName">
-      <th mat-header-cell *matHeaderCellDef> {{'Краткое название' | translate}} </th>
-      <td mat-cell *matCellDef="let sec"> {{sec.shortName}} </td>
-    </ng-container> -->
     <ng-container matColumnDef="edit">
       <th mat-header-cell *matHeaderCellDef> </th>
       <td mat-cell *matCellDef="let sec">

@@ -9,7 +9,7 @@
 
     "Участие": "Involve",
 
-    "Преподователи": "Lectors",
+    "Преподаватели": "Lectors",
     "Дипломная работа": "Diplom Work",
 
     "Как студент": "Like student",
@@ -155,7 +155,7 @@
   "Руководитель по организационно-технической части": "Organizer-technical leader",
   "Руководитель по техническо-экономическому обоснованию": "technical-economical leader",
   "Выбрать": "Select",
-  "Выбор преподователя": "Select lector",
+  "Выбор преподавателя": "Select lector",
   "Моя группа": "My group",
   "Моя Группа": "My Group",
   "Статус": "Status",
@@ -170,5 +170,6 @@
   "ORGANIZER": "Organizer",
   "LECTOR": "Lector",
   "STUDENT": "STUDENT",
-  "Student": "Student"
+  "Student": "Student",
+  "Hello": "Hello"
 }

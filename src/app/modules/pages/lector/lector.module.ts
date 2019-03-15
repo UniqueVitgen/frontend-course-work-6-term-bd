@@ -13,12 +13,14 @@ import { StudentModule } from '../student/student.module';
 import { BootstrapModule } from '../../library/bootstrap/bootstrap.module';
 import { StoragesModule } from '../../others/storages/storages.module';
 import { WorkersModule } from '../../others/workers/workers.module';
+import {PrimeNGModule} from '../../library/prime-ng/prime-ng.module';
 
 @NgModule({
   imports: [
     CommonModule,
     AngularLibraryModule,
     MaterialDesignModule,
+    PrimeNGModule,
     BootstrapModule,
     ComponentsModule,
     StoragesModule,

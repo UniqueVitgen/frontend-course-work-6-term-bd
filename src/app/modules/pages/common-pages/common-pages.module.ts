@@ -23,12 +23,14 @@ import { GroupDashboardComponent } from '../../../pages/common/group-dashboard/g
 import { SignUpLectorOrganizerComponent } from '../../../pages/common/sign-up/sign-up-lector-organizer/sign-up-lector-organizer.component';
 import {SpecializationItemComponent} from '../../../pages/common/specialization-item/specialization-item.component';
 import {DepartmentItemComponent} from '../../../pages/common/department-item/department-item.component';
+import {PrimeNGModule} from '../../library/prime-ng/prime-ng.module';
 
 @NgModule({
   imports: [
     CommonModule,
     AngularLibraryModule,
     MaterialDesignModule,
+    PrimeNGModule,
     BootstrapModule,
     ComponentsModule,
     StudentModule,

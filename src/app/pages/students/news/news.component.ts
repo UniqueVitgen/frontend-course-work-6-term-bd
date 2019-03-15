@@ -24,6 +24,7 @@ export class NewsComponent implements OnInit {
   @Input() itemsCSS;
   @Input() hasTitle = true;
   @Input() titleHeader = 'Новости';
+  @Input() titleHeaderColor: string;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   constructor(
@@ -35,12 +36,6 @@ export class NewsComponent implements OnInit {
     public userStorage: UserStorage,
     private router: Router,
     public userService: UserService) {
-    this.lectorService.getLectors().subscribe(data => {
-      console.log('lectors - ', data);
-    });
-    this.userService.getUsers().subscribe(data => {
-      console.log('users - ', data);
-    });
    }
 
   ngOnInit() {
