@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { LectorService } from '../../../services/lector-service/lector.service';
+import {Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {LectorService} from '../../../services/lector-service/lector.service';
 import {DiplomWork} from '../../../factory/diplom-work.factory';
 import {FileWorker} from '../../../workers/file.worker';
 import {Lector} from '../../../factory/lector.factory';
@@ -9,12 +9,12 @@ import {Lector} from '../../../factory/lector.factory';
   templateUrl: './lector-staff.component.html',
   styleUrls: ['./lector-staff.component.css']
 })
-export class LectorStaffComponent implements OnInit {
+export class LectorStaffComponent implements OnInit, OnChanges {
 
-  // lectorStaff: Array<{description: any, src: any, post: any, title: any, degree: any, name: any}>;
   lectors: Lector[];
   @Input() diplomWork: DiplomWork;
   @Input() isChild = false;
+  @Input() hasTitleCard = true;
   properties = {
     'leader': 'Руководитель проекта',
     'scienceConsultor': 'Научный консультант',
@@ -51,6 +51,10 @@ export class LectorStaffComponent implements OnInit {
 
   ngOnInit() {
     this.getAllLectors();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('lectors', this.lectors);
   }
 
 }

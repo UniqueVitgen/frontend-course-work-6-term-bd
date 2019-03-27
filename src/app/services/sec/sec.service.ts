@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ConfigService } from '../config/config.service';
+import {Observable} from 'rxjs';
+import {SEC} from '../../factory/sec.factory';
 
 const prefix="sec/"
 @Injectable({
@@ -12,6 +14,9 @@ export class SECService {
 
   getById(id) {
     return this.configService.get(prefix + 'sec-' + id);
+  }
+  getByDiplomId(diplomId: number): Observable<SEC> {
+    return this.configService.get(prefix + 'find-by-diplom-' + diplomId);
   }
 
   getAll() {

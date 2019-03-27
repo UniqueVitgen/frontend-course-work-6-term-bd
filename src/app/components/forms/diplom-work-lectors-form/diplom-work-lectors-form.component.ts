@@ -49,21 +49,6 @@ export class DiplomWorkLectorsFormComponent implements OnInit, OnDestroy {
       this.minDate = new Date(this.startDate);
     }
     if (this.isEdit) { this.diplomWork = this.diplomWorkEdit; }
-    setTimeout(() => {
-      this.configPercentValidation();
-    }, 200);
-  }
-
-  configPercentValidation() {
-    const validators = [];
-    if (this.previous) {
-      validators.push(Validators.min(Number(this.previous.percent) + 1));
-    }
-    if (this.next) {
-      validators.push(Validators.max(Number(this.next.percent) - 1));
-    }
-    this.percentArrayValidators = validators;
-    console.log('form - ', this.diplomWorkForm);
   }
   configFormGroup(diplomWork: DiplomWork) {
     this.diplomWorkForm = this.formBuilder.group({

@@ -41,7 +41,7 @@ export class AppComponent {
   ];
 
   lector = [
-    { path: 'involve', component: LeaderComponent, title: 'Участие' },
+    { path: 'involve', component: LeaderComponent, title: 'Дипломные работы' },
     {  path: 'admin-news', component: NewsComponent, title: 'Новости' },
     {  path: 'groups', component: GroupDashboardComponent, title: 'Группы' }
   ];

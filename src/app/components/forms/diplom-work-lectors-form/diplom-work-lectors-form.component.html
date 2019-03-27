@@ -24,6 +24,8 @@
               <div class="form-group">
                 <label for="exampleInputFirstName">Руководитель проекта</label>
                 <br>
+                <!--<ng-select formControlName="leader"-->
+                           <!--bindLabel="name"></ng-select>-->
                 <div class="input-group">
                   <input *ngIf="diplomWork.leader" formControlName="leader" [value]="userWorker.formatFullName(diplomWork.leader)" disabled type="text" class="form-control" id="exampleInputFirstName"
                           placeholder="Руководитель проекта">

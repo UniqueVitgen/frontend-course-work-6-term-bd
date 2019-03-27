@@ -20,22 +20,22 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 // import { NewsItemComponent } from './pages/common/news-item/news-item.component';
 // import { NewsCardComponent } from './components/card/news-card/news-card.component';
 // import { SECDateFormComponent } from './components/forms/secdate-form/secdate-form.component';
-import {AdminModule} from './modules/pages/admin/admin.module';
-import {CommonPagesModule} from './modules/pages/common-pages/common-pages.module';
-import {LectorModule} from './modules/pages/lector/lector.module';
-import {SecretaryModule} from './modules/pages/secretary/secretary.module';
-import {StudentModule} from './modules/pages/student/student.module';
-import {ComponentsModule} from './modules/components/components.module';
-import {DirectivesModule} from './modules/others/directives/directives.module';
+import {AdminModule} from './pages/admin/admin.module';
+import {CommonPagesModule} from './pages/common/common-pages.module';
+import {LectorModule} from './pages/lectors/lector.module';
+import {SecretaryModule} from './pages/secretary/secretary.module';
+import {StudentModule} from './pages/students/student.module';
+import {ComponentsModule} from './components/components.module';
+import {DirectivesModule} from './directives/directives.module';
 import {AngularLibraryModule} from './modules/library/angular-library/angular-library.module';
 import {BootstrapModule} from './modules/library/bootstrap/bootstrap.module';
 import {MaterialDesignModule} from './modules/library/material-design/material-design.module';
 import {PipesModule} from './modules/others/pipes/pipes.module';
-import {StoragesModule} from './modules/others/storages/storages.module';
-import {WorkersModule} from './modules/others/workers/workers.module';
-import {ServicesModule} from './modules/others/services/services.module';
-import {GuardsModule} from './modules/others/guards/guards.module';
-import {OrganizerModule} from './modules/pages/organizer/organizer.module';
+import {StoragesModule} from './storage/storages.module';
+import {WorkersModule} from './workers/workers.module';
+import {ServicesModule} from './services/services.module';
+import {GuardsModule} from './guards/guards.module';
+import {OrganizerModule} from './pages/organizer/organizer.module';
 import {Ej2Module} from './modules/library/ej2/ej2.module';
 import {PrimeNGModule} from './modules/library/prime-ng/prime-ng.module';
 import { SECEventTableComponent } from './components/table/secevent-table/secevent-table.component';
@@ -48,9 +48,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SECEventTableComponent,
-    StudentTableComponent
+    AppComponent
   ],
   imports: [
     AppRoutingModule,

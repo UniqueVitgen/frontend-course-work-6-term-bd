@@ -3,6 +3,7 @@ import { Group } from './group.factory';
 import { SECUser } from './user.factory';
 import {Specialization} from './specialization.factory';
 import {Department} from './department.factory';
+import {Percentage} from './percentage.factory';
 
 export class SEC {
     id?: number;
@@ -12,6 +13,7 @@ export class SEC {
     department?: Department;
     events?: SECEvent[];
     users?: SECUser[];
+    percentages?: Percentage[];
     startDate?: Date | string;
     endDate?: Date | string;
 }

@@ -103,6 +103,10 @@
     align-items: center;
 }
 
+.flex-display {
+  display: flex;
+}
+
 .news img {
     /* width: 40vw; */
     

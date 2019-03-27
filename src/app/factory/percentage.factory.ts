@@ -4,5 +4,6 @@ export class Percentage {
   comment: string;
   startDate: string;
   endDate: string;
-  percent: number;
+  planPercent: number;
+  factPercent: number;
 }

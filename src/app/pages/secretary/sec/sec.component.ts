@@ -24,6 +24,10 @@ import {SECUser, User} from '../../../factory/user.factory';
 import {SECNumberFormComponent} from '../../../components/forms/secnumber-form/secnumber-form.component';
 import {Group} from '../../../factory/group.factory';
 import {Specialization} from '../../../factory/specialization.factory';
+import {PercentageEventModel} from '../../../components/table/percentage-table/model/percentage-event.model';
+import {PercentageService} from '../../../services/percentage/percentage.service';
+import {PercentageFormComponent} from '../../../components/forms/percentage-form/percentage-form.component';
+import {PercentageTableEventService} from '../../../components/table/percentage-table/services/percentage-table-event.service';
 
 @Component({
   selector: 'app-sec',
@@ -56,6 +60,8 @@ export class SECComponent implements OnInit {
     private modalService: BsModalService,
     private dateTimeWorker: DateTimeWorker,
     private lectorService: LectorService,
+    private percentageService: PercentageService,
+    private percentageTableEventService: PercentageTableEventService,
     private secEventService: SECEventService,
     private secUserService: SECUserService,
     public secService: SECService, ) {
@@ -79,6 +85,9 @@ export class SECComponent implements OnInit {
         });
       });
   }
+  public onDestroy = () => {
+    this.getSEC();
+  }
 
   setSEC(sec) {
     if (sec) {
@@ -93,6 +102,20 @@ export class SECComponent implements OnInit {
 
   openDateForm() {
 
+  }
+
+
+  deletePercentage(percentageEventModel: PercentageEventModel) {
+    this.percentageTableEventService.deletePercentage(percentageEventModel, () => {this.getSEC()});
+  }
+  openPercentageForm(percentageEventModel: PercentageEventModel) {
+    this.percentageTableEventService.openPercentageForm(percentageEventModel, this.sec, this.onDestroy);
+  }
+  openPercentageFormBefore(percentageEventModel: PercentageEventModel) {
+    this.percentageTableEventService.openPercentageFormBefore(percentageEventModel, this.sec, this.onDestroy)
+  }
+  openPercentageFormAfter(percentageEventModel: PercentageEventModel) {
+    this.percentageTableEventService.openPercentageFormAfter(percentageEventModel, this.sec, this.onDestroy);
   }
   getTargetLectors(sec: SEC): Subscription {
     if (this.sec.users && this.sec.users.length > 0) {
@@ -153,7 +176,7 @@ export class SECComponent implements OnInit {
         that[property] = lector;
         // that.selectDiplomForm.controls[property].setValue(that.formatFullName(lector));
         // console.log('thsi - ', this);
-        // this.diplomWork[property] = lector;
+        // this.sec[property] = lector;
         // console.log(this.)
       },
       selectedLector: that[property]

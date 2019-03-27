@@ -147,9 +147,37 @@
   </mat-card>
 
   <br>
+
+  <mat-card>
+    <mat-card-title>{{'Процентовки' | translate}}</mat-card-title>
+    <ng-container *ngIf="(sec?.percentages != null && sec?.percentages.length > 0)">
+      <app-percentage-table [percentages]="sec.percentages"
+                            (clickBeforePercentage)="openPercentageFormBefore($event)"
+                            (clickAfterPercentage)="openPercentageFormAfter($event)"
+                            (clickEditPercentage)="openPercentageForm($event)"
+                            (clickDeletePercentage)="deletePercentage($event)"
+      ></app-percentage-table>
+    </ng-container>
+    <!-- </div> -->
+    <ng-container *ngIf="!(sec?.percentages != null && sec?.percentages.length > 0)" class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 grey-text center-text bold-text big-text">
+        Процентовки отсутсвуют
+      </div>
+    </ng-container>
+    <div class="row" *ngIf="isCanModify && sec.percentages.length == 0">
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 right-text">
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <button (click)="openPercentageForm()" class="btn btn-success">Добавить процентовку</button>
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 right-text">
+      </div>
+    </div>
+  </mat-card>
+  <br>
   <mat-card>
     <mat-card-title>{{'График приема' | translate}}</mat-card-title>
-<!--TODO: change following template to custom angular component-->
+    <!--TODO: change following template to custom angular component-->
     <table *ngIf="sec.events.length > 0" mat-table [dataSource]="sec.events" class="mat-elevation-z8 full-width">
 
       <!--- Note that these columns can be defined in any order.

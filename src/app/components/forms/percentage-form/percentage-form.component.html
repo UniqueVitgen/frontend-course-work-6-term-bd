@@ -52,8 +52,19 @@
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 align-center">
             <div class="form-group form-control-sm">
-              <label for="exampleInputFirstName">Процент</label>
-              <input [(ngModel)]="percentage.percent" formControlName="percent" class="form-control" percent placeholder="%">
+              <label for="exampleInputFirstName">{{'Планируемый процент' | translate}}</label>
+              <input [(ngModel)]="percentage.planPercent" formControlName="planPercent" class="form-control" percent placeholder="%">
+              <!-- <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">%</span>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 align-center">
+            <div class="form-group form-control-sm">
+              <label for="exampleInputFirstName">{{'Фактический процент' | translate}}</label>
+              <input [(ngModel)]="percentage.factPercent" formControlName="factPercent" class="form-control" percent placeholder="%">
               <!-- <div class="input-group-append">
                 <span class="input-group-text" id="basic-addon2">%</span>
               </div> -->

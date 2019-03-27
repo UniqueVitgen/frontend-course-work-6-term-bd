@@ -32,7 +32,7 @@ export class DateTimeWorker {
             // console.log('date - ', dateWithTime);
             const date = new Date(dateWithTime);
             if (format == null) {
-                format = 'yyyy-MM-dd';
+                format = 'dd.MM.yyyy';
             }
             return this.datePipe.transform(date, format);
         }

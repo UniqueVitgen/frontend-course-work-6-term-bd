@@ -12,7 +12,6 @@ import { BsModalModule } from 'ng2-bs3-modal';
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     BsModalModule,
-
     TooltipModule.forRoot()
   ],
   declarations: [],

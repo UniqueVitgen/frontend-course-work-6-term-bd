@@ -92,7 +92,7 @@ export class DiplomWorkTitleFormComponent implements OnInit, OnDestroy {
     this.diplomWorkService.editByName(this.diplomWork, this.diplomWork.name).subscribe(res => {
       console.log('res - ', res);
       this.cancel();
-    })
+    });
   }
 
 }

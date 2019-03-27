@@ -4,3 +4,21 @@
 .space-between-container {
   justify-content: space-between;
 }
+
+.flex-display {
+  display: flex;
+}
+
+
+.vertical-center-align {
+  align-items: center;
+}
+
+.float-right {
+  float: right;
+}
+
+.right-text {
+  text-align: right;
+}
+

@@ -14,29 +14,27 @@
           <!--<img src="assets/icon/fitr-logo.png" />-->
         </li>
         <li *ngIf="user">
-          <a class="custom-link nav-link" [routerLink]="'/my-profile'">{{'Hello' | translate}}, {{userWorker.formatFullName(user)}}</a>
+          <a class="custom-link nav-link" [routerLink]="'/my-profile'" routerLinkActive="active">{{'Hello' | translate}}, {{userWorker.formatFullName(user)}}</a>
         </li>
         <li class="nav-item" role="presentation">
-          <a class="custom-link nav-link">{{'Полезная информация' | translate}}</a>
+          <a class="custom-link nav-link" routerLinkActive="active">{{'Полезная информация' | translate}}</a>
         </li>
         <li class="nav-item" role="presentation">
-          <a class="custom-link nav-link">{{'Методические материалы' | translate}}</a>
+          <a class="custom-link nav-link" routerLinkActive="active">{{'Методические материалы' | translate}}</a>
         </li>
       </ul>
-      <!-- </div> -->
 
-      <!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
       <ul *ngIf="mode == 'unathored'" class="navbar-nav  float-right">
-        <li *ngFor="let item of unauthored" role="presentation" class="nav-item active">
+        <li *ngFor="let item of unauthored" role="presentation" class="nav-item">
           <!-- <a routerLink="/home">Главная</a> -->
-          <a class="nav-link" routerLink="/{{item.path}}">{{item.title | translate}}</a>
+          <a class="nav-link" routerLink="/{{item.path}}" routerLinkActive="active">{{item.title | translate}}</a>
         </li>
         <li class="nav-item" role="presentation">
-          <a class="custom-link nav-link" (click)="loginForm()">{{'Войти' | translate}}</a>
+          <a class="custom-link nav-link" (click)="loginForm()" routerLinkActive="active">{{'Войти' | translate}}</a>
         </li>
         <li role="presentation" class="dropdown nav-item">
           <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-            aria-expanded="false">
+            aria-expanded="false" routerLinkActive="active">
             {{translate.currentLang | translate}}
             <span class="caret"></span>
           </a>
@@ -50,26 +48,22 @@
           </ul>
         </li>
         <li class="nav-logo nav-item" role="presentation">
-          <!--<a class="custom-link nav-link">
-            {{'Дипломные работы' | translate}}</a>-->
           <a class="navbar-brand">
             <img class="img-logo" src="assets/icon/fitr2.png" />
           </a>
-          <!--<img src="assets/icon/bntu-logo2.gif" />-->
-          <!--<img src="assets/icon/fitr-logo.png" />-->
         </li>
       </ul>
       <ul *ngIf="mode == 'student'" class="navbar-nav  float-right">
-        <li *ngFor="let item of student" role="presentation" class="nav-item active">
+        <li *ngFor="let item of student" role="presentation" class="nav-item">
           <!-- <a routerLink="/home">Главная</a> -->
-          <a class="nav-link" routerLink="/{{item.path}}">{{item.title | translate}}</a>
+          <a class="nav-link" routerLink="/{{item.path}}"  routerLinkActive="active">{{item.title | translate}}</a>
         </li>
         <li class="nav-item" role="presentation">
-          <a class="nav-link" (click)="logout()" routerLink="/home">{{'log out' | translate}}</a>
+          <a class="nav-link" (click)="logout()" routerLink="/home"  routerLinkActive="active">{{'log out' | translate}}</a>
         </li>
         <li role="presentation" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-            aria-expanded="false">
+            aria-expanded="false"  routerLinkActive="active">
             {{translate.currentLang | translate}}
             <span class="caret"></span>
           </a>
@@ -83,49 +77,33 @@
           </ul>
         </li>
         <li class="nav-logo nav-item" role="presentation">
-          <!--<a class="custom-link nav-link">
-            {{'Дипломные работы' | translate}}</a>-->
           <a class="navbar-brand">
             <img class="img-logo" src="assets/icon/fitr2.png" />
           </a>
-          <!--<img src="assets/icon/bntu-logo2.gif" />-->
-          <!--<img src="assets/icon/fitr-logo.png" />-->
         </li>
-        <!-- <li role="presentation" class="active">
-          <a routerLink="/home">Главная</a>
-        </li>
-        <li role="presentation">
-          <a routerLink="/about-us">О нас</a>
-        </li>
-        <li role="presentation">
-          <a routerLink="/registration">Регистрация</a>
-        </li>
-        <li role="presentation">
-          <a routerLink="/login">Войти</a>
-        </li> -->
       </ul>
       <ul *ngIf="mode == 'lector'" class="navbar-nav float-right">
-        <li *ngFor="let item of lector" role="presentation" class="active nav-item">
+        <li *ngFor="let item of lector" role="presentation" class="nav-item">
           <!-- <a routerLink="/home">Главная</a> -->
-          <a class="nav-link" routerLink="/{{item.path}}">{{item.title | translate}}</a>
+          <a class="nav-link" routerLink="/{{item.path}}"  routerLinkActive="active">{{item.title | translate}}</a>
         </li>
         <li *ngIf="user && (userWorker.hasSecretaryRole(user) || userWorker.hasOrganizerRole(user))" role="presentation" class="active nav-item">
-          <a class="nav-link" routerLink="/{{'sec-list'}}">{{'ГЭК комиссия' | translate}}</a>
+          <a class="nav-link" routerLink="/{{'sec-list'}}"  routerLinkActive="active">{{'ГЭК комиссия' | translate}}</a>
         </li>
         <ng-container  *ngIf="user && userWorker.hasOrganizerRole(user)">
           <li>
-            <a class="nav-link" routerLink="/{{'admin-department'}}">{{'Кафедры' | translate}}</a>
+            <a class="nav-link" routerLink="/{{'admin-department'}}"  routerLinkActive="active">{{'Кафедры' | translate}}</a>
           </li>
           <li>
-            <a class="nav-link" routerLink="/{{'organizer-lector'}}">{{'Преподаватели' | translate}}</a>
+            <a class="nav-link" routerLink="/{{'organizer-lector'}}"  routerLinkActive="active">{{'Преподаватели' | translate}}</a>
           </li>
         </ng-container>
         <li class="nav-item" role="presentation">
-          <a class="custom-link nav-link" (click)="logout()" routerLink="/home">{{'log out' | translate}}</a>
+          <a class="custom-link nav-link" (click)="logout()" routerLink="/home"  routerLinkActive="active">{{'log out' | translate}}</a>
         </li>
         <li role="presentation" class="nav-item dropdown">
           <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-            aria-expanded="false">
+            aria-expanded="false"  routerLinkActive="active">
             {{translate.currentLang | translate}}
             <span class="caret"></span>
           </a>
@@ -149,9 +127,9 @@
         </li>
       </ul>
       <ul *ngIf="mode == 'organizer'" class="navbar-nav  float-right">
-        <li *ngFor="let item of organizer" role="presentation" class="active nav-item">
+        <li *ngFor="let item of organizer" role="presentation" class="nav-item">
           <!-- <a routerLink="/home">Главная</a> -->
-          <a class="nav-link" routerLink="/{{item.path}}">{{item.title | translate}}</a>
+          <a class="nav-link" routerLink="/{{item.path}}" routerLinkActive="active">{{item.title | translate}}</a>
         </li>
         <li class="nav-item" role="presentation">
           <a class="custom-link nav-link" (click)="logout()" routerLink="/home">{{'log out' | translate}}</a>
@@ -194,12 +172,11 @@
         </li> -->
       </ul>
       <ul *ngIf="mode == 'secretary'" class="navbar-nav  float-right">
-        <li *ngFor="let item of secretary" role="presentation" class="active nav-item">
-          <!-- <a routerLink="/home">Главная</a> -->
-          <a class="nav-link" routerLink="/{{item.path}}">{{item.title | translate}}</a>
+        <li *ngFor="let item of secretary" role="presentation" class="nav-item">
+          <a class="nav-link" routerLink="/{{item.path}}" routerLinkActive="active">{{item.title | translate}}</a>
         </li>
         <li class="nav-item" role="presentation">
-          <a class="custom-link nav-link" (click)="logout()" routerLink="/home">{{'log out' | translate}}</a>
+          <a class="custom-link nav-link" (click)="logout()" routerLink="/home" routerLinkActive="active">{{'log out' | translate}}</a>
         </li>
         <li role="presentation" class="nav-item dropdown">
           <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
@@ -217,34 +194,17 @@
           </ul>
         </li>
         <li class="nav-logo nav-item" role="presentation">
-          <!--<a class="custom-link nav-link">
-            {{'Дипломные работы' | translate}}</a>-->
           <a class="navbar-brand">
             <img class="img-logo" src="assets/icon/fitr2.png" />
           </a>
-          <!--<img src="assets/icon/bntu-logo2.gif" />-->
-          <!--<img src="assets/icon/fitr-logo.png" />-->
         </li>
-        <!-- <li role="presentation" class="active">
-          <a routerLink="/home">Главная</a>
-        </li>
-        <li role="presentation">
-          <a routerLink="/about-us">О нас</a>
-        </li>
-        <li role="presentation">
-          <a routerLink="/registration">Регистрация</a>
-        </li>
-        <li role="presentation">
-          <a routerLink="/login">Войти</a>
-        </li> -->
       </ul>
       <ul *ngIf="mode == 'admin'" class="navbar-nav  navbar-admin float-right">
-        <li *ngFor="let item of admin" role="presentation" class="nav-item active">
-          <!-- <a routerLink="/home">Главная</a> -->
-          <a class="nav-link" routerLink="/{{item.path}}">{{item.title | translate}}</a>
+        <li *ngFor="let item of admin" role="presentation" class="nav-item">
+          <a class="nav-link" routerLink="/{{item.path}}" routerLinkActive="active">{{item.title | translate}}</a>
         </li>
 
-        <li class="nav-item active" role="presentation">
+        <li class="nav-item" role="presentation">
           <a class="custom-link nav-link" (click)="logout()" routerLink="/home">{{'log out' | translate}}</a>
         </li>
         <li role="presentation" class="nav-item dropdown">
