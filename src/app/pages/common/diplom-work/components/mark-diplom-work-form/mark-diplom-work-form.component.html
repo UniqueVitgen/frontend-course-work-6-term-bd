@@ -1,0 +1,32 @@
+<form *ngIf="diplomWorkForm" [formGroup]="diplomWorkForm">
+  <div class="modal-header">
+    <div class="title-center-container">
+      <h4>{{'Дипломная работа' | translate}}</h4>
+    </div>
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="cancel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container  col-md-12">
+      <div class="form-diplomWork">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 align-center">
+            <mat-form-field class="example-full-width">
+              <input matInput [placeholder]="'Отметка' | translate"  formControlName="mark" [(ngModel)]="diplomWork.mark">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button *ngIf="isEdit" [disabled]="diplomWorkForm.invalid" (click)="edit()" type="submit" class="btn btn-primary full-width">{{'Редактировать'
+      | translate}}</button>
+
+    <button (click)="cancel()" type="submit" class="btn btn-danger full-width">{{'Отмена' | translate}}</button>
+
+  </div>
+</form>

@@ -1,0 +1,19 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h3 class="vertical-center-align flex-display">{{'Руководители и консультанты' | translate}}
+          <button mat-icon-button (click)="$event.stopPropagation(); openDiplomWorkLectorsForm(diplomWork)">
+            <mat-icon aria-label="Example icon-button with a heart icon">create</mat-icon>
+          </button>
+        </h3>
+      </mat-panel-title>
+      <!--<mat-panel-description>-->
+      <!--Type your name and age-->
+      <!--</mat-panel-description>-->
+    </mat-expansion-panel-header>
+    <!--<app-lector-staff [lectors]="lectors" [hasTitleCard]="false" [diplomWork]="diplomWork" [isChild]="true">-->
+    <!--</app-lector-staff>-->
+    <app-lector-list [lectors]="lectors" [diplomWork]="diplomWork"></app-lector-list>
+  </mat-expansion-panel>
+</mat-accordion>

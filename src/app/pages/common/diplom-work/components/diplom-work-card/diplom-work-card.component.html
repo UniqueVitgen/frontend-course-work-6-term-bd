@@ -1,0 +1,68 @@
+
+<mat-card *ngIf="diplomWork">
+  <div class="media">
+    <div class="media-body">
+      <h4 class="media-heading">
+        <div class="row">
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 right-text">
+            <span class="grey-text float-rigth">{{'Название' | translate}}</span>
+          </div>
+          <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+            <span>{{diplomWork.name}} </span>
+            <mat-icon (click)="openDiplomWorkForm(diplomWork)" *ngIf="isCanChange && !isDisabledChangeDiplom">
+              mode_edit
+            </mat-icon>
+          </div>
+        </div>
+      </h4>
+      <!-- <p> -->
+      <div *ngIf="diplomWork.status" class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 right-text">
+          <span class="grey-text float-rigth">{{'Статус' | translate}}</span>
+        </div>
+        <div *ngIf="isCanChangeLikeLeader && !isDisabledChangeDiplom" class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+            <span>
+              <mat-select class="status-select" [compareWith]="compareObjects" [(ngModel)]="selectedStatus"
+                          (ngModelChange)="changeStatus()" [placeholder]="'Статус' | translate">
+                <mat-option *ngFor="let status of statuses" [value]="status">
+                  {{status.name}}
+                </mat-option>
+              </mat-select>
+            </span>
+        </div>
+        <div *ngIf="!(isCanChangeLikeLeader && !isDisabledChangeDiplom)" class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+          <span>{{diplomWork.status.name}}</span>
+        </div>
+      </div>
+      <ng-container *ngIf="isHasMark">
+        <div *ngIf="diplomWork.status" class="row">
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 right-text">
+            <span class="grey-text float-rigth">{{'Отметка' | translate}}</span>
+          </div>
+          <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+
+            <!--<ejs-inplaceeditor #text mode="Popup" [popupSettings]="popupSettingsModel" [model]="textModel" type="Text"-->
+            <!--[(ngModel)]="diplomWork.mark"></ejs-inplaceeditor>-->
+            <span>{{markText}}</span>
+            <span *ngIf="isCanChangeLikeLeader && !isDisabledChangeDiplom">
+                <mat-icon (click)="editMark()">
+                  mode_edit
+                </mat-icon>
+                </span>
+          </div>
+        </div>
+      </ng-container>
+      <div *ngIf="(diplomWork.comment != null && diplomWork.comment != '')" class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 right-text">
+          <span class="grey-text float-rigth">{{'Комментарий' | translate}}</span>
+        </div>
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+          <span *ngIf="(diplomWork.comment != null && diplomWork.comment != '')">{{diplomWork.comment}}</span>
+          <span class="grey-text" *ngIf="!(diplomWork.comment != null && diplomWork.comment != '')">{{'Отсутствует' |
+            translate}}</span>
+        </div>
+      </div>
+      <!-- </p> -->
+    </div>
+  </div>
+</mat-card>

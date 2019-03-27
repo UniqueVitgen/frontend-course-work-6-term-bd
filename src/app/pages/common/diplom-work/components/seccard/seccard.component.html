@@ -1,0 +1,25 @@
+
+<mat-card>
+  <div class="media">
+    <div class="media-body">
+      <!-- <p> -->
+      <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 right-text">
+          <span class="grey-text float-rigth">{{'ГЭК' | translate}}</span>
+        </div>
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+          <a [routerLink]="'/sec/' + sec.id">{{'ГЭК' | translate}}-{{sec.number}}</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 right-text">
+          <span class="grey-text float-rigth">{{'Период проведения' | translate}}</span>
+        </div>
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+          <span>{{dateTimeWorker.getDate(sec.startDate)}} - {{dateTimeWorker.getDate(sec.endDate)}}</span>
+        </div>
+      </div>
+      <!-- </p> -->
+    </div>
+  </div>
+</mat-card>

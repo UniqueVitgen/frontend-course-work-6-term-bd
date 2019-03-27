@@ -1,0 +1,69 @@
+
+<div *ngFor="let lector of lectors">
+  <mat-card>
+    <div class="media">
+      <div class="media-left">
+        <app-user-avatar [src]="fileWorker.formatUrl(lector.imageModel)"></app-user-avatar>
+        <!--<a href="#">-->
+        <!--<img *ngIf="lector.src" src="{{lector.src}}">-->
+        <!--<img *ngIf="lector.src == null" src="assets/img/students/lector-staff/lector-avt.png">-->
+        <!--</a>-->
+      </div>
+      <div class="media-body">
+        <mat-card-title class="text-center">{{userWorker.formatFullName(lector)}}</mat-card-title>
+        <p *ngIf="lector.description" class="font-x1">{{lector.description}} </p>
+        <ul *ngIf="diplomWork" class="target-list">
+          <li *ngIf="diplomWork.leader && diplomWork.leader.idPerson === lector.idPerson">
+            {{'Руководитель проекта' | translate}}
+          </li>
+          <li *ngIf="diplomWork.teoConsultor && diplomWork.teoConsultor.idPerson === lector.idPerson">
+            {{'Консультант по техническо-экономическому обоснованию' | translate}}
+          </li>
+          <li *ngIf="diplomWork.recensor && diplomWork.recensor.idPerson === lector.idPerson">
+            {{'Рецензент' | translate}}
+          </li>
+          <li *ngIf="diplomWork.otConsultor && diplomWork.otConsultor.idPerson === lector.idPerson">
+            {{'Консультант по организационно-технической части' | translate}}
+          </li>
+          <li *ngIf="diplomWork.scienceConsultor && diplomWork.scienceConsultor.idPerson === lector.idPerson">
+            {{'Научный консультант' | translate}}
+          </li>
+          <!--<li *ngFor="let str of formatRole(lector)">{{str}}</li>-->
+        </ul>
+        <div class="tegs">
+          <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <a *ngIf="lector.post">{{lector.post.name | translate}}</a>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <a *ngIf="lector.degree">{{lector.degree.name | translate}}</a>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <a *ngIf="lector.title">{{lector.title.name | translate}}</a>
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="center-text">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <span>
+                    <span>{{'Взято дипломов' | translate}}</span>:
+                    <span>{{lector.countOfDiplom}}</span>
+                  </span>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <span>
+                    <span>{{'Максимальное количество дипломов' | translate}}</span>:
+                    <span>{{lector.maxCountOfDiplom}}</span>
+                  </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+  <br>
+</div>
